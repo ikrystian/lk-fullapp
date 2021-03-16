@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Leniwa kluska</h2>
+  <nav>
+    <a routerLink="/user-profile" *ngIf="isLoggedin">Profil</a>
+    <a *ngIf="!isLoggedin" routerLink="/signin">Zaloguj</a>
+    <a routerLink="/signup">Zarejestruj</a>
+  </nav>
+
+  <button class="btn btn-danger" (click)="logOut()" *ngIf="isLoggedin">Wyloguj</button>
+</div>
+
+<router-outlet></router-outlet>
