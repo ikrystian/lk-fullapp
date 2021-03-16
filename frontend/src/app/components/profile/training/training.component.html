@@ -1,0 +1,8 @@
+<section *ngIf="training">
+<h1>Szczegóły dotyczące treningu {{ training.name }}</h1>
+<ul>
+  <li *ngFor="let exercise of training.exercises">
+    {{ exercise.exercise_type_id }} | {{ exercise.reps }} {{ exercise.weight}}
+  </li>
+</ul>
+</section>

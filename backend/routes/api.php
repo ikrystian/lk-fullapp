@@ -29,7 +29,8 @@ Route::group([
     Route::post('/update-password', [UpdatePwdController::class, 'updatePassword']);
 
 });
-Route::group(['middleware' => 'api'], function () {
+Route::group(['middleware' => 'api'], function ($router) {
+    Route::get('/trainings/{date}', [TrainingController::class, 'getByDate']);
     Route::resource('/trainings', TrainingController::class);
 });
 

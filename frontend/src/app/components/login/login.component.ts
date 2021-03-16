@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { JwtService } from './../../shared/jwt.service';
 import { TokenAuthService } from '../../shared/token-auth.service';
 import { AuthenticationStateService } from '../../shared/authentication-state.service';
+import { JwtService } from '../../shared/jwt.service';
 
 @Component({
   selector: 'app-login',
@@ -27,27 +27,28 @@ export class LoginComponent implements OnInit {
     this.signinForm = this.fb.group({
       email: [],
       password: []
-    })
+    });
   }
 
-  ngOnInit() { }
-
-  onSubmit() {
-      this.jwtService.logIn(this.signinForm.value).subscribe(
-        res => {
-          this.tokenStorage(res);
-        },
-        error => {
-          this.err = error.error;
-        },() => {
-          this.authenticationStateService.setAuthState(true);
-          this.signinForm.reset()
-          this.router.navigate(['user-profile']);
-        }
-      );
+  ngOnInit = () => {
   }
 
-  tokenStorage(jwt){
+  onSubmit = () => {
+    this.jwtService.logIn(this.signinForm.value).subscribe(
+      res => {
+        this.tokenStorage(res);
+      },
+      error => {
+        this.err = error.error;
+      }, () => {
+        this.authenticationStateService.setAuthState(true);
+        this.signinForm.reset();
+        this.router.navigate(['user-profile/dashboard']);
+      }
+    );
+  }
+
+  tokenStorage = jwt => {
     this.tokenAuthService.setTokenStorage(jwt.access_token);
   }
 

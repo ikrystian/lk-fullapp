@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\TrainingResource;
 use App\Models\Training;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TrainingController extends Controller
 {
@@ -15,7 +16,7 @@ class TrainingController extends Controller
      */
     public function index()
     {
-        $trainings = Training::all();
+        $trainings = Training::where('user_id', Auth::id())->get();
         return TrainingResource::collection($trainings);
     }
 
@@ -38,6 +39,11 @@ class TrainingController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function getByDate($date) {
+        $trainings = Training::where('training_date', $date)->with('exercises')->get();
+        return TrainingResource::collection($trainings);
     }
 
     /**

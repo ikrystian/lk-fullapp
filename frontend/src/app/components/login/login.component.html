@@ -1,4 +1,5 @@
-<form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+<section class="page-content">
+  <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
     <h2 class="h3 mb-3">Zaloguj</h2>
 
     <div class="form-group">
@@ -23,5 +24,6 @@
       </div>
     </div>
 
-    <button type="submit" class="btn btn-success">Zaloguj</button>
+    <button mat-button mat-raised-button color="primaru" type="submit">Zaloguj</button>
   </form>
+</section>

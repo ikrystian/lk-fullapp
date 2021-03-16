@@ -20,6 +20,10 @@ import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DashboardComponent } from './components/profile/dashboard/dashboard.component';
 import { AddTrainingComponent } from './components/profile/add-training/add-training.component';
+import { TrainingComponent } from './components/profile/training/training.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,8 @@ import { AddTrainingComponent } from './components/profile/add-training/add-trai
     UpdatePasswordComponent,
     CalendarComponent,
     DashboardComponent,
-    AddTrainingComponent
+    AddTrainingComponent,
+    TrainingComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +47,10 @@ import { AddTrainingComponent } from './components/profile/add-training/add-trai
     BrowserAnimationsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     {

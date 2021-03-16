@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
@@ -9,7 +10,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 export class CalendarComponent implements OnInit {
   @Input() trainings;
   selectedDate: any;
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
@@ -17,7 +18,10 @@ export class CalendarComponent implements OnInit {
 
   onSelect = event => {
     this.selectedDate = event;
-    console.log('asd');
+    console.log(event);
+    const date = event.format('YYYY-MM-DD');
+    this.router.navigate([`/user-profile/training/${date}`]);
+    console.log(event);
   }
 
   trainingDays(d): boolean {

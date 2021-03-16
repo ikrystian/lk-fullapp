@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { TokenAuthService } from './shared/token-auth.service';
 import { AuthenticationStateService } from './shared/authentication-state.service';
 
@@ -10,19 +11,25 @@ import { AuthenticationStateService } from './shared/authentication-state.servic
 })
 
 export class AppComponent {
-  
+
   isLoggedin: boolean;
 
   constructor(
     public router: Router,
     private tokenAuthService: TokenAuthService,
-    public authenticationStateService: AuthenticationStateService
+    public authenticationStateService: AuthenticationStateService,
+    private location: Location
   ) {
+  }
+
+  back = () => {
+    this.location.back();
+
   }
 
   ngOnInit() {
     this.authenticationStateService.userAuthState.subscribe(res => {
-        this.isLoggedin = res;
+      this.isLoggedin = res;
     });
   }
 
@@ -30,6 +37,6 @@ export class AppComponent {
     this.authenticationStateService.setAuthState(false);
     this.tokenAuthService.destroyToken();
     this.router.navigate(['signin']);
-  }  
+  }
 
 }

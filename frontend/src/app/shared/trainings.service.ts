@@ -12,4 +12,8 @@ export class TrainingsService {
   getTrainings = () => {
     return this.http.get('http://localhost:8000/api/trainings');
   }
+
+  getTrainingByDate = d => {
+    return this.http.get('http://localhost:8000/api/trainings/' + d);
+  }
 }
