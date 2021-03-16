@@ -17,16 +17,11 @@ export class ProfileComponent {
 
   user: User;
   trainings: any;
-  constructor(public jwtService: JwtService, public trainingService: TrainingsService) {
+  constructor(public jwtService: JwtService) {
     this.jwtService.profile().subscribe((res: any) => {
       this.user = res;
     });
-    this.getTrainings();
   }
 
-  getTrainings = () => {
-    this.trainingService.getTrainings().subscribe((res: any) => {
-      this.trainings = res.data;
-    });
-  }
+
 }

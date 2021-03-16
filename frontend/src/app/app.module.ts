@@ -18,6 +18,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { DashboardComponent } from './components/profile/dashboard/dashboard.component';
+import { AddTrainingComponent } from './components/profile/add-training/add-training.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     ProfileComponent,
     ResetPasswordComponent,
     UpdatePasswordComponent,
-    CalendarComponent
+    CalendarComponent,
+    DashboardComponent,
+    AddTrainingComponent
   ],
   imports: [
     BrowserModule,

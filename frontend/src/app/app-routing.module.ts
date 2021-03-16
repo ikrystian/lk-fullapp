@@ -7,15 +7,16 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { DashboardComponent } from './components/profile/dashboard/dashboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/signin', pathMatch: 'full' },
-  { path: 'signin', component: LoginComponent },
-  { path: 'signup', component: RegisterComponent },
-  { path: 'user-profile', component: ProfileComponent },
-  
-  { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'update-password', component: UpdatePasswordComponent }  
+  {path: '', redirectTo: '/signin', pathMatch: 'full'},
+  {path: 'signin', component: LoginComponent},
+  {path: 'signup', component: RegisterComponent},
+  {path: 'user-profile', component: ProfileComponent},
+  {path: 'user-profile/dashboard', component: DashboardComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
+  {path: 'update-password', component: UpdatePasswordComponent}
 ];
 
 @NgModule({
@@ -23,4 +24,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
