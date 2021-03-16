@@ -27,11 +27,10 @@ Route::group([
 
     Route::post('/req-password-reset', [ResetPwdReqController::class, 'reqForgotPassword']);
     Route::post('/update-password', [UpdatePwdController::class, 'updatePassword']);
+
+});
+Route::group(['middleware' => 'api'], function () {
+    Route::resource('/trainings', TrainingController::class);
 });
 
-Route::get('/trainings', [TrainingController::class, 'index']);
-Route::get('/trainings/{id}', [TrainingController::class, 'show']);
-Route::put('/trainings/{id}', [TrainingController::class, 'update']);
-Route::delete('/posts/{id}', [TrainingController::class, 'destrou']);
-Route::post('/training', [TrainingController::class, 'store']);
 
