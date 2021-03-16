@@ -17,7 +17,10 @@ class Exercise extends Model
         'weight'
     ];
 
+    protected $with = ['type'];
+
     public function type() {
         return $this->belongsTo(ExerciseType::class, 'exercise_type_id', 'id');
     }
+
 }

@@ -13,11 +13,13 @@ class ExerciseType extends Model
         'name'
     ];
 
+    protected $with = ['bodyPart'];
+
     public function exercise() {
         return $this->hasMany(Exercise::class);
     }
 
     public function bodyPart() {
-        return $this->belongsTo(BodyPart::class, 'body_parts_id', 'id');
+        return $this->belongsTo(BodyPart::class, 'body_part_id', 'id');
     }
 }
