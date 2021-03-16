@@ -13,6 +13,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule    
+    FormsModule,
+    BrowserAnimationsModule    
   ],
   providers: [
     {
