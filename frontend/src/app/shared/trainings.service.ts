@@ -29,4 +29,9 @@ export class TrainingsService {
   getExercisesTypes = () => {
     return this.http.get(`${this.API_URL}/exercises-types`);
   }
+
+  finishTraining(id: any) {
+    const data = {id};
+    return this.http.post(`${this.API_URL}/trainings/workout/finish`, data);
+  }
 }

@@ -32,7 +32,9 @@ Route::group([
 
 });
 Route::group(['middleware' => 'api'], function ($router) {
+    Route::post('/trainings/workout/finish', [TrainingController::class, 'end']);
     Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
+
     Route::resource('/trainings', TrainingController::class);
     Route::resource('/exercises', ExerciseController::class);
     Route::resource('/exercises-types', ExerciseTypeController::class);

@@ -1,5 +1,9 @@
 <app-toolbar title="Edycja treningu"></app-toolbar>
-<section class="page-content">
+<section class="page-content" *ngIf="training">
+  <mat-form-field class="example-full-width">
+    <mat-label>Ustaw nazwę treningu</mat-label>
+    <input matInput [value]="training.name">
+  </mat-form-field>
 
   <mat-form-field appearance="fill" class="select--full">
     <mat-label>Cars</mat-label>
@@ -41,9 +45,12 @@
         </button>
       </div>
     </div>
-
+    <footer class="add-exercises__footer">
+      <button mat-stroked-button>Dodaj serię</button>
+    </footer>
   </div>
-  <footer class="add-exercises__footer">
-  <button mat-stroked-button>Dodaj serię</button>
+  <footer class="app-bottom-menu">
+    <button>Zapisz ćwiczenia</button>
+    <button (click)="finishWorkout(training.id)">Zakończ trening</button>
   </footer>
 </section>

@@ -44,6 +44,7 @@ class TrainingController extends Controller
         $training->training_date = Carbon::now()->toDateString();
         $training->name = Carbon::now()->locale('pl')->dayName;
         $training->archive_training = 0;
+        $training->start = Carbon::now();
         $training->save();
         $training->id;
 
@@ -51,7 +52,7 @@ class TrainingController extends Controller
     }
 
     public function getByDate($date) {
-        $trainings = Training::where('training_date', $date)->with('exercises')->get();
+        $trainings = Training::where('training_date', $date)->with('exercises')->orderBy('id', 'desc')->get();
         return TrainingResource::collection($trainings);
     }
 
@@ -76,6 +77,13 @@ class TrainingController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function end(Request $request) {
+        $training = Training::findOrFail($request->id);
+        $training->end = Carbon::now();
+        $training->save();
+        return $training->toJson();
     }
 
     /**

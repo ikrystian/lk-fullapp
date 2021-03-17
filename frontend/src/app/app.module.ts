@@ -30,6 +30,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { TrainingListModalComponent } from './components/profile/training-list-modal/training-list-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { TrainingListModalComponent } from './components/profile/training-list-m
     MatIconModule,
     MatProgressBarModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [
     {
