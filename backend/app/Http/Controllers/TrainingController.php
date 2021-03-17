@@ -42,7 +42,7 @@ class TrainingController extends Controller
         $training = new Training;
         $training->user_id = Auth::id();
         $training->training_date = Carbon::now()->toDateString();
-        $training->name = Carbon::now()->locale('pl')->dayName;
+        $training->name = Carbon::now()->toDateString() . ' - ' . Carbon::now()->locale('pl')->dayName;
         $training->archive_training = 0;
         $training->start = Carbon::now();
         $training->save();

@@ -1,6 +1,7 @@
 <section class="page-content">
+  <img src="/assets/images/logo.jpg" class="logo" alt="">
   <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-    <h2 class="h3 mb-3">Zaloguj</h2>
+    <h2 class="h3 mb-3 text-center">Zaloguj do <strong>LENIWEJ KLUSKI</strong></h2>
 
     <div class="form-group">
       <label>Adres email</label>
@@ -23,7 +24,9 @@
         {{ err?.error }}
       </div>
     </div>
+    <footer style="display: flex; justify-content: flex-end;">
+      <button mat-button mat-raised-button color="primaru" type="submit">Zaloguj</button>
 
-    <button mat-button mat-raised-button color="primaru" type="submit">Zaloguj</button>
+    </footer>
   </form>
 </section>

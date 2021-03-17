@@ -1,8 +1,12 @@
-<section *ngIf="training">
-<h1>Szczegóły dotyczące treningu {{ training.name }}</h1>
-<ul>
-  <li *ngFor="let exercise of training.exercises">
-    {{ exercise.type.name }} | {{ exercise.reps }} {{ exercise.weight}}
-  </li>
-</ul>
-</section>
+<ng-container *ngIf="training">
+  <app-toolbar [title]="training.name"></app-toolbar>
+
+  <section class="page-content">
+    <h1>Szczegóły dotyczące treningu {{ training.name }}</h1>
+    <ul>
+      <li *ngFor="let exercise of training.exercises">
+        {{ exercise.type.name }} | {{ exercise.reps }} {{ exercise.weight}}
+      </li>
+    </ul>
+  </section>
+</ng-container>
