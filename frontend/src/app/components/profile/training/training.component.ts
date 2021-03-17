@@ -14,9 +14,10 @@ export class TrainingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const date = this.activatedRoute.snapshot.paramMap.get('date');
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.trainingService.getTrainingByDate(date).subscribe((res: any) => {
+    this.trainingService.getTraining(id).subscribe((res: any) => {
+      console.log(res);
       this.training = res.data[0];
     });
   }

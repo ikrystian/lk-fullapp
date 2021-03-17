@@ -30,7 +30,7 @@ Route::group([
 
 });
 Route::group(['middleware' => 'api'], function ($router) {
-    Route::get('/trainings/{date}', [TrainingController::class, 'getByDate']);
+    Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
     Route::resource('/trainings', TrainingController::class);
 });
 

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
+import { TrainingsService } from '../../shared/trainings.service';
 
 @Component({
   selector: 'app-calendar',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class CalendarComponent implements OnInit {
   @Input() trainings;
   selectedDate: any;
-  constructor(private router: Router) {
+  constructor(private router: Router, public trainingService: TrainingsService) {
   }
 
   ngOnInit(): void {
@@ -18,10 +19,9 @@ export class CalendarComponent implements OnInit {
 
   onSelect = event => {
     this.selectedDate = event;
-    console.log(event);
-    const date = event.format('YYYY-MM-DD');
-    this.router.navigate([`/user-profile/training/${date}`]);
-    console.log(event);
+    this.trainingService.getTrainingByDate(event.format('YYYY-MM-DD')).subscribe((res: any) => {
+      this.router.navigate([`/user-profile/training/${res.data[0].id}`]);
+    });
   }
 
   trainingDays(d): boolean {

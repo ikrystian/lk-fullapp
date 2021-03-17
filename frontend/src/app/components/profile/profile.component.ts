@@ -14,7 +14,6 @@ export class User {
 })
 
 export class ProfileComponent {
-
   user: User;
   trainings: any;
   constructor(public jwtService: JwtService) {

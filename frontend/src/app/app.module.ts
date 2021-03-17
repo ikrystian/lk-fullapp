@@ -19,13 +19,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { DashboardComponent } from './components/profile/dashboard/dashboard.component';
-import { AddTrainingComponent } from './components/profile/add-training/add-training.component';
 import { TrainingComponent } from './components/profile/training/training.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InterceptorService } from './loader/interceptor.service';
+import { EditTrainingComponent } from './components/profile/edit-training/edit-training.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +37,8 @@ import { InterceptorService } from './loader/interceptor.service';
     UpdatePasswordComponent,
     CalendarComponent,
     DashboardComponent,
-    AddTrainingComponent,
-    TrainingComponent
+    TrainingComponent,
+    EditTrainingComponent
   ],
   imports: [
     BrowserModule,

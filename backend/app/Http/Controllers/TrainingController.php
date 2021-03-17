@@ -45,6 +45,7 @@ class TrainingController extends Controller
         $training->name = Carbon::now()->locale('pl')->dayName;
         $training->archive_training = 0;
         $training->save();
+        $training->id;
 
         return $training->toJson();
     }
@@ -62,7 +63,8 @@ class TrainingController extends Controller
      */
     public function show($id)
     {
-        //
+        $training = Training::where('id', $id);
+        return 'asd';
     }
 
     /**

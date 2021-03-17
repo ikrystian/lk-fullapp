@@ -9,6 +9,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 import { DashboardComponent } from './components/profile/dashboard/dashboard.component';
 import { TrainingComponent } from './components/profile/training/training.component';
+import { EditTrainingComponent } from './components/profile/edit-training/edit-training.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/signin', pathMatch: 'full'},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'user-profile', component: ProfileComponent},
   {path: 'user-profile/dashboard', component: DashboardComponent},
   {path: 'user-profile/training/:date', component: TrainingComponent},
+  {path: 'user-profile/training/:date/edit', component: EditTrainingComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'update-password', component: UpdatePasswordComponent}
 ];

@@ -12,8 +12,10 @@ export class TrainingsService {
 
   getTrainings = () => this.http.get(`${this.API_URL}/trainings`);
 
+  getTraining = (id) => this.http.get(`${this.API_URL}/trainings/${id}`);
+
   getTrainingByDate = d => {
-    return this.http.get(`${this.API_URL}/trainings/` + d);
+    return this.http.get(`${this.API_URL}/trainings/day/` + d);
   }
 
   addTraining = () => {
