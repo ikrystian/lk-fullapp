@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { TokenAuthService } from './shared/token-auth.service';
 import { AuthenticationStateService } from './shared/authentication-state.service';
 import { LoaderService } from './loader/loader.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { LoaderService } from './loader/loader.service';
 })
 
 export class AppComponent {
-
+  isLoading: Subject<boolean> = this.loaderService.isLoading;
   isLoggedin: boolean;
 
   constructor(
@@ -26,7 +27,6 @@ export class AppComponent {
 
   back = () => {
     this.location.back();
-
   }
 
   ngOnInit() {
