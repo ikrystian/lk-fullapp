@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ExerciseResource;
-use App\Models\Exercise;
+use App\Models\ExerciseType;
 use Illuminate\Http\Request;
 
-class ExerciseController extends Controller
+class ExerciseTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class ExerciseController extends Controller
      */
     public function index()
     {
-        $exercises = Exercise::all();
-        return ExerciseResource::collection($exercises);
+        return ExerciseType::all()->toArray();
     }
 
     /**

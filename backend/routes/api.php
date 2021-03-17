@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\ExerciseTypeController;
 use App\Http\Controllers\TrainingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +34,8 @@ Route::group([
 Route::group(['middleware' => 'api'], function ($router) {
     Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
     Route::resource('/trainings', TrainingController::class);
+    Route::resource('/exercises', ExerciseController::class);
+    Route::resource('/exercises-types', ExerciseTypeController::class);
 });
 
 
