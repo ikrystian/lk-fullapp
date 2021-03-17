@@ -14,4 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [TrainingController::class, 'index']);
+Route::get('/clear', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('config:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:cache');
+    Artisan::call('key:generate');
+    Artisan::call('storage:link');
+});
