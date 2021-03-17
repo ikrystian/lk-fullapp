@@ -27,14 +27,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: var(--primary-color);
 }
 
-
-.toolbar {
-  &__title {
-    display: flex;
-    flex: 1 1 auto;
-  }
-}
-
 .loader-bar {
   position: fixed;
   width: 100%;

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Training } from '../training';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,9 @@ export class TrainingsService {
 
   getTrainings = () => this.http.get(`${this.API_URL}/trainings`);
 
-  getTraining = (id) => this.http.get(`${this.API_URL}/trainings/${id}`);
+  getTraining(id: string) {
+    return this.http.get(`${this.API_URL}/trainings/${id}`);
+  }
 
   getTrainingByDate = d => {
     return this.http.get(`${this.API_URL}/trainings/day/` + d);

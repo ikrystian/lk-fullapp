@@ -1,0 +1,14 @@
+<mat-toolbar color="primary" class="toolbar">
+  <div class="toolbar__back">
+    <button (click)="back()" mat-icon-button aria-label="Wstecz">
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+  </div>
+  <span class="toolbar__title">{{ title }}</span>
+
+  <button (click)="logOut()" mat-icon-button aria-label="Wyloguj">
+    <mat-icon>logout</mat-icon>
+  </button>
+
+</mat-toolbar>
+

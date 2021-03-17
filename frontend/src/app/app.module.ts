@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InterceptorService } from './loader/interceptor.service';
 import { EditTrainingComponent } from './components/profile/edit-training/edit-training.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { EditTrainingComponent } from './components/profile/edit-training/edit-t
     CalendarComponent,
     DashboardComponent,
     TrainingComponent,
-    EditTrainingComponent
+    EditTrainingComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,

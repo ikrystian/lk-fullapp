@@ -1,17 +1,4 @@
 <div class="loader-bar" *ngIf="loaderService.isLoading | async">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
-
-<mat-toolbar color="primary" class="toolbar">
-  <button *ngIf="isLoggedin" (click)="back()" mat-icon-button aria-label="back">
-    <mat-icon>keyboard_backspace</mat-icon>
-  </button>
-  <span class="toolbar__title">Leniwa kluska</span>
-
-  <button (click)="logOut()" *ngIf="isLoggedin" mat-icon-button aria-label="Wyloguj">
-    <mat-icon>logout</mat-icon>
-  </button>
-
-</mat-toolbar>
-
 <router-outlet></router-outlet>
