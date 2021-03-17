@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
   providedIn: 'root'
 })
 export class TrainingsService {
-  API_URL = 'http://localhost:8000/api/';
+  API_URL = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) {
   }
@@ -13,10 +13,10 @@ export class TrainingsService {
   getTrainings = () => this.http.get(`${this.API_URL}/trainings`);
 
   getTrainingByDate = d => {
-    return this.http.get(`${this.API_URL}trainings/` + d);
+    return this.http.get(`${this.API_URL}/trainings/` + d);
   }
 
   addTraining = () => {
-    return this.http.post(`${this.API_URL}trainings/`, {});
+    return this.http.post(`${this.API_URL}/trainings/`, {});
   }
 }
