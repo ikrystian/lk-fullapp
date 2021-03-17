@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {  Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TokenAuthService } from './shared/token-auth.service';
 import { AuthenticationStateService } from './shared/authentication-state.service';
+import { LoaderService } from './loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ export class AppComponent {
     public router: Router,
     private tokenAuthService: TokenAuthService,
     public authenticationStateService: AuthenticationStateService,
-    private location: Location
+    private location: Location,
+    public loaderService: LoaderService,
   ) {
   }
 

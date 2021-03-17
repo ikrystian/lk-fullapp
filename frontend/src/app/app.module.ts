@@ -24,6 +24,8 @@ import { TrainingComponent } from './components/profile/training/training.compon
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { InterceptorService } from './loader/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatMomentDateModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressBarModule
   ],
   providers: [
     {
@@ -58,7 +61,8 @@ import { MatIconModule } from '@angular/material/icon';
       useClass: AuthHeaderInterceptor,
       multi: true
     },
-    { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' }
+    {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })
