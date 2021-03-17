@@ -1,0 +1,29 @@
+.add-exercises {
+  max-width: 100vw;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__series {
+    width: 20px;
+  }
+
+  &__reps,
+  &__weight {
+    width: 100px;
+  }
+
+
+  input[type=number] {
+    max-width: 80px;
+  }
+
+  &__footer {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

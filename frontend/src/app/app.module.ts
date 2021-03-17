@@ -27,6 +27,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InterceptorService } from './loader/interceptor.service';
 import { EditTrainingComponent } from './components/profile/edit-training/edit-training.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [
     {

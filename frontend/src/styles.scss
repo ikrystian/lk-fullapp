@@ -32,3 +32,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 100%;
   z-index: 99;
 }
+
+.select {
+  &--full {
+    display: block;
+    width: 100%;
+  }
+}
