@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtService } from '../../../shared/jwt.service';
 import { TrainingsService } from '../../../shared/trainings.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +11,8 @@ import { TrainingsService } from '../../../shared/trainings.service';
 export class DashboardComponent implements OnInit {
   trainings;
 
-  constructor(public trainingService: TrainingsService) { }
+  constructor(public trainingService: TrainingsService, public router: Router) {
+  }
 
   ngOnInit(): void {
     this.getTrainings();
@@ -22,4 +24,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  addTraining = () => {
+    const trainings = this.trainingService.addTraining().subscribe(res => {
+      this.router.navigate([`user-profile/training/${res.training_date}`]);
+    });
+  }
 }

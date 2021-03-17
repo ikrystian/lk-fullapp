@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrainingsService {
+  API_URL = 'http://localhost:8000/api/';
 
   constructor(private http: HttpClient) {
   }
 
-  getTrainings = () => {
-    return this.http.get('http://localhost:8000/api/trainings');
-  }
+  getTrainings = () => this.http.get(`${this.API_URL}/trainings`);
 
   getTrainingByDate = d => {
-    return this.http.get('http://localhost:8000/api/trainings/' + d);
+    return this.http.get(`${this.API_URL}trainings/` + d);
+  }
+
+  addTraining = () => {
+    return this.http.post(`${this.API_URL}trainings/`, {});
   }
 }
