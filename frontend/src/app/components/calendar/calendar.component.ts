@@ -11,6 +11,7 @@ import { TrainingsService } from '../../shared/trainings.service';
 export class CalendarComponent implements OnInit {
   @Input() trainings;
   selectedDate: any;
+
   constructor(private router: Router, public trainingService: TrainingsService) {
   }
 
@@ -20,7 +21,11 @@ export class CalendarComponent implements OnInit {
   onSelect = event => {
     this.selectedDate = event;
     this.trainingService.getTrainingByDate(event.format('YYYY-MM-DD')).subscribe((res: any) => {
-      this.router.navigate([`/user-profile/training/${res.data[0].id}`]);
+      if (res.data.length === 1) {
+         this.router.navigate([`/user-profile/training/${res.data[0].id}`]);
+      } else {
+        console.log(res.data.length);
+      }
     });
   }
 

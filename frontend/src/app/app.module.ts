@@ -29,6 +29,7 @@ import { EditTrainingComponent } from './components/profile/edit-training/edit-t
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { TrainingListModalComponent } from './components/profile/training-list-modal/training-list-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MatInputModule } from '@angular/material/input';
     DashboardComponent,
     TrainingComponent,
     EditTrainingComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    TrainingListModalComponent
   ],
   imports: [
     BrowserModule,
