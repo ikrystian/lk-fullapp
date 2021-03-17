@@ -11,15 +11,16 @@ export class TrainingComponent implements OnInit {
   training: any;
 
   constructor(public trainingService: TrainingsService, private activatedRoute: ActivatedRoute) {
-  }
-
-  ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.trainingService.getTraining(id).subscribe((res: any) => {
       console.log(res);
-      this.training = res.data[0];
+      this.training = res;
     });
+  }
+
+  ngOnInit(): void {
+
   }
 
 }

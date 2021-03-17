@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
       email: [''],
       password: [''],
       password_confirmation: ['']
-    })
+    });
   }
 
   ngOnInit() { }
@@ -32,16 +32,16 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.jwtService.signUp(this.signupForm.value).subscribe(
       res => {
-        console.log(res)
+        console.log(res);
       },
       error => {
         this.err = error.error;
       },
       () => {
-        this.signupForm.reset()
+        this.signupForm.reset();
         this.router.navigate(['signin']);
       }
-    )
+    );
   }
 
 }

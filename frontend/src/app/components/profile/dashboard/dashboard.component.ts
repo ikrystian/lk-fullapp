@@ -26,7 +26,6 @@ export class DashboardComponent implements OnInit {
 
   addTraining = () => {
       this.trainingService.addTraining().subscribe(res => {
-      console.log(res);
       this.router.navigate([`user-profile/training/${res.id}/edit`]);
     });
   }

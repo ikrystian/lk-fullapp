@@ -63,8 +63,8 @@ class TrainingController extends Controller
      */
     public function show($id)
     {
-        $training = Training::where('id', $id);
-        return 'asd';
+        $training = Training::find($id);
+        return $training;
     }
 
     /**

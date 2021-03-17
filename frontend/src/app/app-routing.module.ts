@@ -17,8 +17,8 @@ const routes: Routes = [
   {path: 'signup', component: RegisterComponent},
   {path: 'user-profile', component: ProfileComponent},
   {path: 'user-profile/dashboard', component: DashboardComponent},
-  {path: 'user-profile/training/:date', component: TrainingComponent},
-  {path: 'user-profile/training/:date/edit', component: EditTrainingComponent},
+  {path: 'user-profile/training/:id', component: TrainingComponent},
+  {path: 'user-profile/training/:id/edit', component: EditTrainingComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'update-password', component: UpdatePasswordComponent}
 ];
