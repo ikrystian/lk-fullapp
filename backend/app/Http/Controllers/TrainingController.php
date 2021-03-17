@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TrainingResource;
 use App\Models\Training;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,14 @@ class TrainingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $training = new Training;
+        $training->user_id = Auth::id();
+        $training->training_date = Carbon::now()->toDateString();
+        $training->name = Carbon::now()->locale('pl')->dayName;
+        $training->archive_training = 0;
+        $training->save();
+
+        return $training->toJson();
     }
 
     public function getByDate($date) {
