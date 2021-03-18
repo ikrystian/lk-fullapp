@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { JwtService } from '../../../shared/jwt.service';
 import { TrainingsService } from '../../../shared/trainings.service';
 import { Router } from '@angular/router';
-import { Training } from '../../../training';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +11,7 @@ import { Training } from '../../../training';
 export class DashboardComponent implements OnInit {
   trainings;
   training;
-  constructor(public trainingService: TrainingsService, public router: Router) {
+  constructor(public trainingService: TrainingsService, public router: Router, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -28,7 +27,14 @@ export class DashboardComponent implements OnInit {
   addTraining(): void {
     this.trainingService.addTraining().subscribe(res => {
       this.training = res;
+      this.openSnackBar('Trening został utworzony', 'ok');
       this.router.navigate([`user-profile/training/${this.training.id}/edit`]);
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 20000,
     });
   }
 }

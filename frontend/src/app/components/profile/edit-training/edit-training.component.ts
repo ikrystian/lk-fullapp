@@ -12,7 +12,12 @@ export class EditTrainingComponent implements OnInit {
   selectedValue: string;
   training: any;
 
-  constructor(public trainingService: TrainingsService, private activatedRoute: ActivatedRoute, public router: Router) {
+  exercises: [];
+
+  constructor(
+    public trainingService: TrainingsService,
+    private activatedRoute: ActivatedRoute,
+    public router: Router) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.trainingService.getTraining(id).subscribe((res: any) => {

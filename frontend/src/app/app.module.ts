@@ -31,6 +31,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { TrainingListModalComponent } from './components/profile/training-list-modal/training-list-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     TrainingComponent,
     EditTrainingComponent,
     ToolbarComponent,
-    TrainingListModalComponent
+    TrainingListModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,8 +64,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatProgressBarModule,
     MatSelectModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
+
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
