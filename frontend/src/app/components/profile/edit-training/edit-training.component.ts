@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TrainingsService } from '../../../shared/trainings.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-training',
@@ -14,13 +15,14 @@ export class EditTrainingComponent implements OnInit {
 
   exercises: any;
   series: any = [];
-
+  trainingName: string;
   exerciseForm: FormGroup;
 
   constructor(
     public trainingService: TrainingsService,
     private activatedRoute: ActivatedRoute,
     public router: Router,
+    private snackBar: MatSnackBar,
     private formBuilder: FormBuilder) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
@@ -29,11 +31,12 @@ export class EditTrainingComponent implements OnInit {
       if (this.training.end) {
         this.router.navigate([`/user-profile/training/${this.training.id}`]);
       }
-      this.createContactForm();
+      this.createSeriesForm();
+      this.trainingName = res.name;
     });
   }
 
-  createContactForm() {
+  createSeriesForm = () => {
     this.exerciseForm = this.formBuilder.group({
       exercise_type_id: [],
       reps: [],
@@ -71,8 +74,27 @@ export class EditTrainingComponent implements OnInit {
     });
   }
 
+  changeExercise(val) {
+    console.log(val);
+  }
 
-  onSync() {
+  changeTrainingName = (event: any) => {
+    console.log(event.target.value);
+    console.log(this.trainingName);
+    if (this.trainingName != event.target.value) {
+      this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {
+        this.openSnackBar('Nazwa treningu została zmieniona', 'ok');
+      });
+    }
+  }
+
+  openSnackBar = (message: string, action: string) => {
+    this.snackBar.open(message, action, {
+      duration: 20000,
+    });
+  }
+
+  onSync = () => {
     console.log(this.series);
     this.trainingService.addSeries(this.series).subscribe(res => {
       console.log(res);

@@ -37,4 +37,9 @@ export class TrainingsService {
   addSeries(series) {
     return this.http.post(`${this.API_URL}/training/series/add`, series);
   }
+
+  changeName(id: number, name: string) {
+    const data = { id, name };
+    return this.http.post(`${this.API_URL}/training/change-name`, data);
+  }
 }

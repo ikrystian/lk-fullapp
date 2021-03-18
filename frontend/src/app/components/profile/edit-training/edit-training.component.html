@@ -3,13 +3,12 @@
   <section class="page-content">
     <mat-form-field class=full-width>
       <mat-label>Ustaw nazwę treningu</mat-label>
-      <input matInput [value]="training.name">
+      <input matInput  [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">
     </mat-form-field>
-
     <form action="" [formGroup]="exerciseForm" (ngSubmit)="onSubmit(exerciseForm)">
       <mat-form-field class="select--full">
         <mat-label>Cwiczenie</mat-label>
-        <select matNativeControl required formControlName="exercise_type_id">
+        <select matNativeControl #t required formControlName="exercise_type_id" (change)="changeExercise(t.value)">
           <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
             {{exercise.name}}
           </option>

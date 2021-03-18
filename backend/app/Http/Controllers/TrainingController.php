@@ -94,6 +94,12 @@ class TrainingController extends Controller
         //
     }
 
+    public function changeName(Request $request) {
+        $training = Training::findOrFail($request->id);
+        $training->name = $request->name;
+        $training->save();
+    }
+
     public function end(Request $request)
     {
         $training = Training::findOrFail($request->id);
