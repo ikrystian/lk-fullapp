@@ -1,58 +1,78 @@
-<ng-container *ngIf="training">
+<div class="edit-training-component" *ngIf="training">
   <app-toolbar [title]="training.name"></app-toolbar>
   <section class="page-content">
-    <mat-form-field class="example-full-width">
+    <mat-form-field class=full-width>
       <mat-label>Ustaw nazwę treningu</mat-label>
       <input matInput [value]="training.name">
     </mat-form-field>
 
-    <mat-form-field appearance="fill" class="select--full">
-      <mat-label>Cwiczenie</mat-label>
-      <select matNativeControl required>
-        <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
-          {{exercise.name}}
-        </option>
-      </select>
-    </mat-form-field>
+    <form action="" [formGroup]="exerciseForm" (ngSubmit)="onSubmit(exerciseForm)">
+      <mat-form-field class="select--full">
+        <mat-label>Cwiczenie</mat-label>
+        <select matNativeControl required formControlName="exercise_type_id">
+          <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
+            {{exercise.name}}
+          </option>
+        </select>
+      </mat-form-field>
 
-    <div class="add-exercises">
-      <div class="add-exercises__row">
-        <div class="add-exercises__series"></div>
-        <div class="add-exercises__reps">
-          Powtórzenia
+      <div class="add-exercises">
+        <div class="add-exercises__row">
+          <div class="add-exercises__series"></div>
+          <div class="add-exercises__reps">
+            Powtórzenia
+          </div>
+          <div class="add-exercises__weight">
+            Ciężar
+          </div>
+          <div class="add-exercises__action">
+            Zatwierdź
+          </div>
         </div>
-        <div class="add-exercises__weight">
-          Ciężar
+        <div class="add-exercises__row">
+          <div class="add-exercises__series">
+            {{ series.length + 1 }}
+          </div>
+          <div class="add-exercises__reps">
+            <input type="number" name="reps" formControlName="reps">
+          </div>
+          <div class="add-exercises__weight">
+            <input type="number" formControlName="weight">
+          </div>
+          <div class="add-exercises__action">
+            <button mat-stroked-button [disabled]="!exerciseForm.valid">
+              <mat-icon>checked</mat-icon>
+            </button>
+          </div>
         </div>
-        <div class="add-exercises__action">
-          Zatwierdź
-        </div>
+        <ng-container>
+          <div *ngFor="let ser of series; let index = index">
+            <div class="add-exercises__row">
+              <div class="add-exercises__series">
+                {{ series.length - index  }}
+              </div>
+              <div class="add-exercises__reps">
+                {{ ser.reps }}
+              </div>
+              <div class="add-exercises__weight">
+                {{ ser.weight }}
+
+              </div>
+              <div class="add-exercises__action">
+              </div>
+            </div>
+          </div>
+        </ng-container>
+
+        <footer class="add-exercises__footer">
+
+        </footer>
       </div>
+    </form>
 
-
-      <div class="add-exercises__row">
-        <div class="add-exercises__series">
-          1
-        </div>
-        <div class="add-exercises__reps">
-          <input type="number">
-        </div>
-        <div class="add-exercises__weight">
-          <input type="number">
-        </div>
-        <div class="add-exercises__action">
-          <button mat-stroked-button>
-            <mat-icon>checked</mat-icon>
-          </button>
-        </div>
-      </div>
-      <footer class="add-exercises__footer">
-        <button mat-stroked-button>Dodaj serię</button>
-      </footer>
-    </div>
-    <footer class="app-bottom-menu">
-      <button>Zapisz ćwiczenia</button>
-      <button (click)="finishWorkout(training.id)">Zakończ trening</button>
-    </footer>
   </section>
-</ng-container>
+  <footer class="app-bottom-menu">
+    <button mat-flat-button color="primary" (click)="finishWorkout(training.id)">Zakończ trening</button>
+    <button mat-flat-button color="accent" disabled *ngIf="series" (click)="onSync()" type="submit">Synchronizuj ćwiczenia</button>
+  </footer>
+</div>

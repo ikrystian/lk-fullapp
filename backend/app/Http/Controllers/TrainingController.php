@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TrainingResource;
+use App\Models\Exercise;
 use App\Models\Training;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class TrainingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +52,21 @@ class TrainingController extends Controller
         return $training->toJson();
     }
 
-    public function getByDate($date) {
+    public function addSeries(Request $request)
+    {
+        $exercise = new Exercise;
+        $exercise->training_id = $request['training_id'];
+        $exercise->user_id = Auth::id();
+        $exercise->exercise_type_id = $request['exercise_type_id'];
+        $exercise->reps = $request['reps'];
+        $exercise->weight = $request['weight'];
+        $exercise->save();
+
+        return $exercise->toJson();
+    }
+
+    public function getByDate($date)
+    {
         $trainings = Training::where('training_date', $date)->with('exercises')->orderBy('id', 'desc')->get();
         return TrainingResource::collection($trainings);
     }
@@ -59,7 +74,7 @@ class TrainingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -71,7 +86,7 @@ class TrainingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -79,7 +94,8 @@ class TrainingController extends Controller
         //
     }
 
-    public function end(Request $request) {
+    public function end(Request $request)
+    {
         $training = Training::findOrFail($request->id);
         $training->end = Carbon::now();
         $training->save();
@@ -89,8 +105,8 @@ class TrainingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -101,7 +117,7 @@ class TrainingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

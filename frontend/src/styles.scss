@@ -44,3 +44,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 *:active {
   outline: none !important;
 }
+
+
+.app-bottom-menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+
+  button:not(:last-child) {
+    margin-right: 1rem;
+  }
+}
+// override angular material styles
+body {
+  .mat-button,
+  .mat-icon-button,
+  .mat-stroked-button,
+  .mat-flat-button {
+    border-radius: 0;
+  }
+}
+

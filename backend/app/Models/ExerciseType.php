@@ -10,7 +10,8 @@ class ExerciseType extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'multipler'
     ];
 
     protected $with = ['bodyPart'];

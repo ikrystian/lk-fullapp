@@ -33,4 +33,8 @@ export class TrainingsService {
     const data = {id};
     return this.http.post(`${this.API_URL}/trainings/workout/finish`, data);
   }
+
+  addSeries(series) {
+    return this.http.post(`${this.API_URL}/training/series/add`, series);
+  }
 }
