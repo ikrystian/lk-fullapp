@@ -74,8 +74,10 @@ export class EditTrainingComponent implements OnInit {
     });
   }
 
-  changeExercise(val) {
-    console.log(val);
+  changeExercise(val): void {
+    this.trainingService.getExercises(this.training.id, val).subscribe(res => {
+      this.series = res;
+    });
   }
 
   changeTrainingName = (event: any) => {

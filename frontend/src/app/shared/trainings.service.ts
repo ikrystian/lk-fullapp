@@ -42,4 +42,9 @@ export class TrainingsService {
     const data = { id, name };
     return this.http.post(`${this.API_URL}/training/change-name`, data);
   }
+
+  getExercises = (trainingId: number, exerciseId: number) => {
+    return this.http.get(`${this.API_URL}/training/exercises/${trainingId}/${exerciseId}`);
+  }
+
 }

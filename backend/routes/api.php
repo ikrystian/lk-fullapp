@@ -32,11 +32,11 @@ Route::group([
 
 });
 Route::group(['middleware' => 'api'], function ($router) {
+    Route::get('/training/exercises/{trainingId}/{exerciseType}', [TrainingController::class, 'getSeries']);
     Route::post('/training/change-name', [TrainingController::class, 'changeName']);
     Route::post('/training/series/add', [TrainingController::class, 'addSeries']);
     Route::post('/trainings/workout/finish', [TrainingController::class, 'end']);
     Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
-
     Route::resource('/trainings', TrainingController::class);
     Route::resource('/exercises', ExerciseController::class);
     Route::resource('/exercises-types', ExerciseTypeController::class);

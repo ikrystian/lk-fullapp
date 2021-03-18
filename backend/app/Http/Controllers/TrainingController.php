@@ -8,6 +8,7 @@ use App\Models\Training;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TrainingController extends Controller
 {
@@ -98,6 +99,11 @@ class TrainingController extends Controller
         $training = Training::findOrFail($request->id);
         $training->name = $request->name;
         $training->save();
+    }
+
+    public function getSeries($trainingId, $exerciseType) {
+        $exercises = DB::table('exercises')->where('training_id', $trainingId)->where('exercise_type_id', $exerciseType)->get();
+        return $exercises;
     }
 
     public function end(Request $request)
