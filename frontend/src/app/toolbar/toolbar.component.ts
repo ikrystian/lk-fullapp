@@ -23,7 +23,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   back(): void {
-    this.location.back();
+    this.router.navigate(['user-profile/dashboard']);
   }
 
   logOut(): void {

@@ -26,10 +26,8 @@ Route::group([
     Route::get('/user', [JwtAuthController::class, 'user']);
     Route::post('/token-refresh', [JwtAuthController::class, 'refresh']);
     Route::post('/signout', [JwtAuthController::class, 'signout']);
-
     Route::post('/req-password-reset', [ResetPwdReqController::class, 'reqForgotPassword']);
     Route::post('/update-password', [UpdatePwdController::class, 'updatePassword']);
-
 });
 Route::group(['middleware' => 'api'], function ($router) {
     Route::get('/training/exercises/{trainingId}/{exerciseType}', [TrainingController::class, 'getSeries']);
@@ -37,6 +35,7 @@ Route::group(['middleware' => 'api'], function ($router) {
     Route::post('/training/series/add', [TrainingController::class, 'addSeries']);
     Route::post('/trainings/workout/finish', [TrainingController::class, 'end']);
     Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
+    Route::get('/exercises/unique/{trainingId}', [TrainingController::class, 'getUniqueExercises']);
     Route::get('/exercises/average/{id}/{trainingId}', [ExerciseController::class, 'averageExercisesWeight']);
     Route::resource('/trainings', TrainingController::class);
     Route::resource('/exercises', ExerciseController::class);

@@ -13,7 +13,7 @@ export class TrainingsService {
 
   getTrainings = () => this.http.get(`${this.API_URL}/trainings`);
 
-  getTraining(id: string) {
+  getTraining(id: number) {
     return this.http.get(`${this.API_URL}/trainings/${id}`);
   }
 
@@ -39,7 +39,7 @@ export class TrainingsService {
   }
 
   changeName(id: number, name: string) {
-    const data = { id, name };
+    const data = {id, name};
     return this.http.post(`${this.API_URL}/training/change-name`, data);
   }
 
@@ -49,6 +49,10 @@ export class TrainingsService {
 
   getAverageWeightForExercise = (exerciseID: number, trainingId: number) => {
     return this.http.get(`${this.API_URL}/exercises/average/${exerciseID}/${trainingId}`);
+  }
+
+  getUniqueExercises = (trainingId: number) => {
+    return this.http.get(`${this.API_URL}/exercises/unique/${trainingId}`);
   }
 
 }

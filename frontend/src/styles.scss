@@ -63,5 +63,13 @@ body {
   .mat-flat-button {
     border-radius: 0;
   }
+
+  th.mat-header-cell,
+  td.mat-cell,
+  td.mat-footer-cell {
+    padding: 0.25rem;
+  }
 }
+
+
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ExerciseResource;
 use App\Http\Resources\TrainingResource;
 use App\Models\Exercise;
 use App\Models\Training;
@@ -23,6 +24,10 @@ class TrainingController extends Controller
         return TrainingResource::collection($trainings);
     }
 
+    public function getUniqueExercises($trainingId) {
+        $exercises = Exercise::where('training_id', $trainingId)->get()->unique('exercise_type_id');
+        return $exercises;
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -111,8 +116,15 @@ class TrainingController extends Controller
 
     public function end(Request $request)
     {
+        $total = 0;
+        $exercises = Exercise::all()->where('training_id', $request->id);
+        foreach ($exercises as $exercise) {
+            $total += $exercise->weight * $exercise->reps * $exercise->type->multipler;
+        }
+
         $training = Training::findOrFail($request->id);
         $training->end = Carbon::now();
+        $training->total = $total;
         $training->save();
         return $training->toJson();
     }

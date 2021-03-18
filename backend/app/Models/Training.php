@@ -19,6 +19,8 @@ class Training extends Model
         'archive_training'
     ];
 
+    protected $with = ['exercises'];
+
     public function exercises() {
         return $this->hasMany(Exercise::class);
     }
