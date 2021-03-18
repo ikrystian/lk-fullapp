@@ -42,3 +42,14 @@
   width: 100%;
   display: block;
 }
+
+
+.average {
+  strong {
+    color: red;
+
+    &.greater {
+      color: green;
+    }
+  }
+}

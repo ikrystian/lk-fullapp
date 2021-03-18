@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ExerciseResource;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExerciseController extends Controller
 {
@@ -38,6 +39,19 @@ class ExerciseController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function averageExercisesWeight($id, $trainingId) {
+        $total = 0;
+        $exercises = DB::table('exercises')
+            ->where('exercise_type_id', $id)
+            ->where('training_id', '!=', $trainingId)
+            ->get();
+        foreach($exercises as $exercise) {
+            $weight = $exercise->reps * $exercise->weight;
+            $total += $weight;
+        }
+        return round(($total)/$exercises->count());
     }
 
     /**

@@ -102,7 +102,10 @@ class TrainingController extends Controller
     }
 
     public function getSeries($trainingId, $exerciseType) {
-        $exercises = DB::table('exercises')->where('training_id', $trainingId)->where('exercise_type_id', $exerciseType)->get();
+        $exercises = DB::table('exercises')
+            ->where('training_id', $trainingId)
+            ->where('exercise_type_id', $exerciseType)
+            ->latest()->get();
         return $exercises;
     }
 

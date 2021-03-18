@@ -12,9 +12,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class EditTrainingComponent implements OnInit {
   exerciseTypes;
   training: any;
-
+  average: any;
   exercises: any;
   series: any = [];
+  averageForSeries: any;
   trainingName: string;
   exerciseForm: FormGroup;
 
@@ -54,6 +55,16 @@ export class EditTrainingComponent implements OnInit {
     }
   }
 
+  currentAverage = (series) => {
+    let r = 0;
+    series.map(el => {
+      r += (el.reps * el.weight);
+    });
+
+    this.averageForSeries = r;
+
+  }
+
   finishWorkout(id): void {
     this.trainingService.finishTraining(id).subscribe(res => {
       this.router.navigate([`/user-profile/training/${id}`]);
@@ -68,6 +79,7 @@ export class EditTrainingComponent implements OnInit {
     const series = this.exerciseForm.value;
     this.trainingService.addSeries(series).subscribe(res => {
       this.series.unshift(this.exerciseForm.value);
+      this.currentAverage(this.series);
       this.exerciseForm.get('reps').reset();
       this.exerciseForm.get('weight').reset();
       console.log(res);
@@ -75,9 +87,15 @@ export class EditTrainingComponent implements OnInit {
   }
 
   changeExercise(val): void {
+
     this.trainingService.getExercises(this.training.id, val).subscribe(res => {
       this.series = res;
+      this.currentAverage(this.series);
     });
+    this.trainingService.getAverageWeightForExercise(val, this.training.id).subscribe(res => {
+      this.average = res;
+    });
+
   }
 
   changeTrainingName = (event: any) => {

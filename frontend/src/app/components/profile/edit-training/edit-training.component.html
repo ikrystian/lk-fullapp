@@ -63,15 +63,25 @@
           </div>
         </ng-container>
 
-        <footer class="add-exercises__footer">
-
-        </footer>
+        <section class="stats" *ngIf="average">
+          <div>
+            <span class="average">Bilans treningu <strong [ngClass]="{'greater' : (average - averageForSeries) < 0 }">{{ -(average - averageForSeries) }}</strong>
+            </span>
+          </div>
+          <div>
+            Srednia dla cwiczenia: <strong>{{average}}kg</strong><br>
+          </div>
+          <div>
+            Obecny ciezar w seriach: <strong>{{averageForSeries}}kg</strong>
+          </div>
+        </section>
       </div>
     </form>
 
   </section>
   <footer class="app-bottom-menu">
     <button mat-flat-button color="primary" (click)="finishWorkout(training.id)">Zakończ trening</button>
+
     <button mat-flat-button color="accent" disabled *ngIf="series" (click)="onSync()" type="submit">Synchronizuj ćwiczenia</button>
   </footer>
 </div>

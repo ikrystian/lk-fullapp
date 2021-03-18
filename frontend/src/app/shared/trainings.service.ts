@@ -47,4 +47,8 @@ export class TrainingsService {
     return this.http.get(`${this.API_URL}/training/exercises/${trainingId}/${exerciseId}`);
   }
 
+  getAverageWeightForExercise = (exerciseID: number, trainingId: number) => {
+    return this.http.get(`${this.API_URL}/exercises/average/${exerciseID}/${trainingId}`);
+  }
+
 }
