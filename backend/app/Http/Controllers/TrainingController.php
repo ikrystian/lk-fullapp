@@ -145,6 +145,8 @@ class TrainingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Training::destroy($id);
+        return response()->json('removed', 200);
+
     }
 }

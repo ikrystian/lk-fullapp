@@ -1,6 +1,23 @@
 <ng-container *ngIf="training">
-  <app-toolbar [title]="training.name"></app-toolbar>
+  <mat-toolbar color="primary" class="toolbar">
+    <div class="toolbar__back">
+      <button routerLink="user-profile/dashboard" mat-icon-button aria-label="Wstecz">
+        <mat-icon>home</mat-icon>
+      </button>
+    </div>
+    <span class="toolbar__title">{{ training.name }}</span>
 
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="removeTraining(training.id)">
+        <mat-icon>delete</mat-icon>
+        Usuń trening
+      </button>
+    </mat-menu>
+
+  </mat-toolbar>
   <section class="page-content">
     Lacznie na tym treningu: {{ training.total }}
   </section>

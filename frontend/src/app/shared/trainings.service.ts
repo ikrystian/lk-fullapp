@@ -55,4 +55,8 @@ export class TrainingsService {
     return this.http.get(`${this.API_URL}/exercises/unique/${trainingId}`);
   }
 
+  removeTraining = (trainingId: number) => {
+    return this.http.delete(`${this.API_URL}/trainings/${trainingId}`);
+  }
+
 }

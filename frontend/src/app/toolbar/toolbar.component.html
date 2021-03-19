@@ -6,9 +6,19 @@
   </div>
   <span class="toolbar__title">{{ title }}</span>
 
-  <button (click)="logOut()" mat-icon-button aria-label="Wyloguj">
-    <mat-icon>logout</mat-icon>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>delete</mat-icon>
+      Usuń trening
+    </button>
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>logout</mat-icon>
+      Wyloguj
+    </button>
+  </mat-menu>
 
 </mat-toolbar>
 

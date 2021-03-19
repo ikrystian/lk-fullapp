@@ -34,6 +34,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { NgPipesModule } from 'ngx-pipes';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { NgPipesModule } from 'ngx-pipes';
     MatDialogModule,
     MatSnackBarModule,
     MatTableModule,
-    NgPipesModule
+    NgPipesModule,
+    MatMenuModule
   ],
 
   providers: [
