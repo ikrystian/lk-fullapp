@@ -69,15 +69,20 @@ export class ExerciseComponent implements OnInit, OnChanges {
   }
 
   onSubmit = (form) => {
+    this.exerciseForm.disable();
+
     const series = this.exerciseForm.value;
     series.exercise_type_id = this.exerciseId;
     series.training_id = this.trainingId;
-    console.log(series);
+
+    this.exerciseForm.get('reps').reset();
+    this.exerciseForm.get('weight').reset();
+
     this.trainingService.addSeries(series).subscribe(res => {
       this.series.unshift(res);
       this.currentAverage(this.series);
-      this.exerciseForm.get('reps').reset();
-      this.exerciseForm.get('weight').reset();
+      this.exerciseForm.enable();
+
     });
     this.openSnackBar('Seria została dodana', 'OK');
 

@@ -1,9 +1,6 @@
-{{ exerciseId }}
-{{ trainingId }}
 <div class="empty-series" *ngIf="series.length == 0">
   Brak serii w podanym ćwiczeniu
 </div>
-
 
 <div class="add-exercises">
   <form action="" [formGroup]="exerciseForm" (ngSubmit)="onSubmit(exerciseForm)">
@@ -13,13 +10,13 @@
         {{ series.length + 1 }}
       </div>
       <div class="add-exercises__reps">
-        <input type="number" name="reps" formControlName="reps">
+        <input type="number" name="reps" formControlName="reps" #myInput required>
       </div>
       <div class="add-exercises__weight">
-        <input type="number" formControlName="weight">
+        <input type="number"  formControlName="weight" required>
       </div>
       <div class="add-exercises__action">
-        <button mat-stroked-button [disabled]="!exerciseForm.valid">
+        <button mat-stroked-button (click)="myInput.focus()" [disabled]="!exerciseForm.valid">
           <mat-icon>checked</mat-icon>
         </button>
       </div>
