@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,8 @@ import { Injectable } from '@angular/core';
 export class TokenAuthService {
 
   private tokenIssuer = {
-    login: 'http://127.0.0.1:8000/api/auth/signin',
-    register: 'http://127.0.0.1:8000/api/auth/signup'
+    login: `${environment}/api/auth/signin`,
+    register: `${environment}/api/auth/singup`
   };
 
   constructor() {

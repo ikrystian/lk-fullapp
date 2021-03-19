@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export class User {
   name: String;
@@ -15,28 +16,29 @@ export class User {
 
 export class JwtService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   signUp(user: User): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/api/auth/signup', user);
+    return this.http.post(`${environment.API_URL}/auth/signup`, user);
   }
 
   logIn(user: User): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/auth/signin', user);
+    return this.http.post<any>(`${environment.API_URL}/auth/signin`, user);
   }
 
   profile(): Observable<any> {
-    return this.http.get('http://127.0.0.1:8000/api/auth/user');
+    return this.http.get(`${environment.API_URL}/api/auth/user`);
   }
 
   // req-password-reset
   reqPasswordReset(data) {
-    return this.http.post('http://127.0.0.1:8000/api/auth/req-password-reset', data)
-  }  
+    return this.http.post(`${environment.API_URL}/api/auth/req-password-reset`, data);
+  }
 
   // update password
   updatePassword(data) {
-    return this.http.post('http://127.0.0.1:8000/api/auth/update-password', data)
+    return this.http.post(`${environment.API_URL}/api/auth/update-password`, data);
   }
 
 }
