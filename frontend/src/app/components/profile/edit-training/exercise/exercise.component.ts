@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TrainingsService } from '../../../../shared/trainings.service';
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss']
 })
-export class ExerciseComponent implements OnInit {
+export class ExerciseComponent implements OnInit, OnChanges {
   exerciseForm: FormGroup;
   series: any = [];
   id;
@@ -32,6 +32,9 @@ export class ExerciseComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  ngOnChanges(): void {
     this.trainingService.getExercises(this.trainingId, this.exerciseId).subscribe(res => {
       this.series = res;
       this.currentAverage(this.series);
@@ -76,6 +79,8 @@ export class ExerciseComponent implements OnInit {
       this.exerciseForm.get('reps').reset();
       this.exerciseForm.get('weight').reset();
     });
+    this.openSnackBar('Seria została dodana', 'OK');
+
   }
 
   removeExercise = (seriesId: number) => {
