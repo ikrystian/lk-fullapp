@@ -1,0 +1,74 @@
+{{ exerciseId }}
+{{ trainingId }}
+<div class="empty-series" *ngIf="series.length == 0">
+  Brak serii w podanym ćwiczeniu
+</div>
+
+
+<div class="add-exercises">
+  <form action="" [formGroup]="exerciseForm" (ngSubmit)="onSubmit(exerciseForm)">
+
+    <div class="add-exercises__row">
+      <div class="add-exercises__series">
+        {{ series.length + 1 }}
+      </div>
+      <div class="add-exercises__reps">
+        <input type="number" name="reps" formControlName="reps">
+      </div>
+      <div class="add-exercises__weight">
+        <input type="number" formControlName="weight">
+      </div>
+      <div class="add-exercises__action">
+        <button mat-stroked-button [disabled]="!exerciseForm.valid">
+          <mat-icon>checked</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="add-exercises__row" *ngFor="let ser of series; let index = index">
+      <div class="add-exercises__series">
+        {{ series.length - index  }}
+      </div>
+      <div class="add-exercises__reps">
+        {{ ser.reps }}
+      </div>
+      <div class="add-exercises__weight">
+        {{ ser.weight }}
+      </div>
+      <div class="add-exercises__action">
+        <button mat-stroked-button color="warn" type="button" (click)="removeExercise(ser.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+  </form>
+</div>
+<div class="add-exercises">
+  <div class="add-exercises__row">
+    <div class="add-exercises__series"></div>
+    <div class="add-exercises__reps">
+      Powtórzenia
+    </div>
+    <div class="add-exercises__weight">
+      Ciężar
+    </div>
+    <div class="add-exercises__action">
+      Zatwierdź
+    </div>
+  </div>
+
+
+      <section class="stats" *ngIf="average">
+        <div>
+              <span class="average">Bilans treningu <strong [ngClass]="{'greater' : (average - averageForSeries) < 0 }">{{ -(average - averageForSeries) }}kg</strong>
+              </span>
+        </div>
+        <div>
+          Srednia dla cwiczenia: <strong>{{average}}kg</strong><br>
+        </div>
+        <div>
+          Obecny ciezar w seriach: <strong>{{averageForSeries}}kg</strong>
+        </div>
+      </section>
+    </div>
