@@ -36,6 +36,7 @@ import { MatTableModule } from '@angular/material/table';
 import { NgPipesModule } from 'ngx-pipes';
 import { MatMenuModule } from '@angular/material/menu';
 import { ExerciseComponent } from './components/profile/edit-training/exercise/exercise.component';
+import { StatsComponent } from './components/profile/stats/stats.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ExerciseComponent } from './components/profile/edit-training/exercise/e
     ToolbarComponent,
     TrainingListModalComponent,
     ExerciseComponent,
+    StatsComponent,
   ],
   imports: [
     BrowserModule,

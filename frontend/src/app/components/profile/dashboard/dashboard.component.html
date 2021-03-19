@@ -1,3 +1,5 @@
 <app-toolbar title="Dashboard"></app-toolbar>
 <app-calendar [trainings]="trainings"></app-calendar>
+<button class="show-stats-button" mat-fab routerLink="/stats" color="warn"><mat-icon>assessment</mat-icon></button>
+
 <button class="add-training-button" mat-fab (click)="addTraining()" color="primary"><mat-icon>add</mat-icon></button>

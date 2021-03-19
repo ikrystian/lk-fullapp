@@ -48,6 +48,7 @@ class ExerciseController extends Controller
     public function averageExercisesWeight($id, $trainingId) {
         $total = 0;
         $exercises = DB::table('exercises')
+            ->where('user_id', Auth::id())
             ->where('exercise_type_id', $id)
             ->where('training_id', '!=', $trainingId)
             ->get();

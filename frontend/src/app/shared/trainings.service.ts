@@ -66,4 +66,8 @@ export class TrainingsService {
   getBodyParts = () => {
     return this.http.get(`${this.API_URL}/get-body-parts`);
   }
+
+  getStats = () => {
+    return this.http.get(`${this.API_URL}/stats`);
+  }
 }

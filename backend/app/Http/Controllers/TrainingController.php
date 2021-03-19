@@ -69,7 +69,11 @@ class TrainingController extends Controller
 
     public function getByDate($date)
     {
-        $trainings = Training::where('training_date', $date)->with('exercises')->orderBy('id', 'desc')->get();
+        $trainings = Training::where('training_date', $date)
+            ->where('user_id', Auth::id())
+            ->with('exercises')
+            ->orderBy('id', 'desc')
+            ->get();
         return TrainingResource::collection($trainings);
     }
 
@@ -147,5 +151,13 @@ class TrainingController extends Controller
     {
         Training::destroy($id);
         return response()->json('removed', 200);
+    }
+
+    public function stats() {
+        $stats = [];
+        $stats['total'] = Training::where('user_id', Auth::id())->sum('total');
+        $stats['username'] = Auth::user();
+        $stats['trainings'] = Training::where('user_id', Auth::id())->count();
+        return $stats;
     }
 }

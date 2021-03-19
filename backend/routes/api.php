@@ -30,6 +30,7 @@ Route::group([
     Route::post('/update-password', [UpdatePwdController::class, 'updatePassword']);
 });
 Route::group(['middleware' => 'api'], function ($router) {
+    Route::get('/stats', [TrainingController::class, 'stats']);
     Route::get('/get-body-parts', [ExerciseController::class, 'getBodyParts']);
     Route::get('/training/exercises/{trainingId}/{exerciseType}', [TrainingController::class, 'getSeries']);
     Route::post('/training/change-name', [TrainingController::class, 'changeName']);

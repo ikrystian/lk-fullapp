@@ -10,9 +10,11 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
 import { DashboardComponent } from './components/profile/dashboard/dashboard.component';
 import { TrainingComponent } from './components/profile/training/training.component';
 import { EditTrainingComponent } from './components/profile/edit-training/edit-training.component';
+import { StatsComponent } from './components/profile/stats/stats.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/signin', pathMatch: 'full'},
+  {path: 'stats', component: StatsComponent},
   {path: 'signin', component: LoginComponent},
   {path: 'signup', component: RegisterComponent},
   {path: 'user-profile', component: ProfileComponent},
