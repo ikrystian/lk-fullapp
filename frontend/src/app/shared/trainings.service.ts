@@ -63,4 +63,7 @@ export class TrainingsService {
     return this.http.delete(`${this.API_URL}/exercises/${seriesId}`);
   }
 
+  getBodyParts = () => {
+    return this.http.get(`${this.API_URL}/get-body-parts`);
+  }
 }

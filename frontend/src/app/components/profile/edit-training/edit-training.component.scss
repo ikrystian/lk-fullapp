@@ -1,0 +1,15 @@
+.body-parts {
+  padding-bottom: 1rem;
+  display: flex;
+  max-width: 100%;
+  overflow: scroll;
+
+  &__container {
+    max-width: 100%;
+  }
+
+  button {
+    margin-right: 1rem;
+    padding: 0.25rem;
+  }
+}

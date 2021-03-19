@@ -23,6 +23,15 @@
       <mat-label>Ustaw nazwę treningu</mat-label>
       <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">
     </mat-form-field>
+
+    <div class="body-parts__container">
+      <div class="body-parts">
+        <ng-container *ngFor="let bodyPart of bodyParts">
+          <button mat-button (click)="filterExercises(bodyPart.id)">{{ bodyPart.name }}</button>
+        </ng-container>
+      </div>
+    </div>
+
     <mat-form-field class="select--full">
       <mat-label>Cwiczenie</mat-label>
       <select matNativeControl #t required (change)="changeExercise(t.value)">

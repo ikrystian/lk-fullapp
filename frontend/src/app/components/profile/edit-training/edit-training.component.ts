@@ -11,12 +11,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class EditTrainingComponent implements OnInit {
   exerciseTypes;
+  allExerciseTypes;
   training: any;
   average: any;
   exercises: any;
   trainingName: string;
   exerciseId = 1;
-
+  bodyParts: any;
   constructor(
     public trainingService: TrainingsService,
     private activatedRoute: ActivatedRoute,
@@ -41,6 +42,11 @@ export class EditTrainingComponent implements OnInit {
   ngOnInit(): void {
     this.trainingService.getExercisesTypes().subscribe(types => {
       this.exerciseTypes = types;
+      this.allExerciseTypes = types;
+    });
+
+    this.trainingService.getBodyParts().subscribe(bodyParts => {
+      this.bodyParts = bodyParts;
     });
   }
 
@@ -78,5 +84,9 @@ export class EditTrainingComponent implements OnInit {
     this.snackBar.open(message, action, {
       duration: 20000,
     });
+  }
+
+  filterExercises = (id) => {
+    this.exerciseTypes = this.allExerciseTypes.filter(el => el.body_part_id === id);
   }
 }
