@@ -41,6 +41,10 @@ class ExerciseController extends Controller
         //
     }
 
+    public function getBodyParts() {
+        return DB::table('body_parts')->get();
+    }
+
     public function averageExercisesWeight($id, $trainingId) {
         $total = 0;
         $exercises = DB::table('exercises')
