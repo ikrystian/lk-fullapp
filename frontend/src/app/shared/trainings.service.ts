@@ -13,7 +13,7 @@ export class TrainingsService {
 
   getTrainings = () => this.http.get(`${this.API_URL}/trainings`);
 
-  getTraining(id: number) {
+  getTraining(id: any) {
     return this.http.get(`${this.API_URL}/trainings/${id}`);
   }
 

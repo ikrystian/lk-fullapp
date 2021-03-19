@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'https://b-lk.bpc-dev.pl/api/'
+  API_URL: 'https://bpc-dev.pl/api'
 };

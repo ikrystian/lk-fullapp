@@ -10,8 +10,40 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TrainingComponent implements OnInit {
   training: any;
   displayedColumns: string[] = ['name', 'weight', 'reps', 'multipler', 'seriesTotal'];
-  dataSource;
+  dataSource ;
   unique;
+
+  tools = [{
+    id: 0,
+    title: 'Title 0',
+    desc: 'Description',
+    cat: 'Category 1'
+  },
+    {
+      id: 1,
+      title: 'Title 1',
+      desc: 'Description',
+      cat: 'Category 1'
+    },
+    {
+      id: 2,
+      title: 'Title 2',
+      desc: 'Description',
+      cat: 'Category 2'
+    },
+    {
+      id: 3,
+      title: 'Title 3',
+      desc: 'Description',
+      cat: 'Category 3'
+    },
+    {
+      id: 4,
+      title: 'Title 4',
+      desc: 'Description',
+      cat: 'Category 1'
+    }
+  ]
 
   constructor(public trainingService: TrainingsService, private activatedRoute: ActivatedRoute, private router: Router) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
@@ -19,6 +51,7 @@ export class TrainingComponent implements OnInit {
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
       this.dataSource = res.exercises;
+      console.log(this.dataSource);
       // this.dataSource = [...new Map(res.exercises.map(item => [item.exercise_type_id, item])).values()];
 
       if (!this.training.end) {

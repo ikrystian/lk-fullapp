@@ -22,11 +22,7 @@ class TrainingController extends Controller
     {
         $trainings = Training::where('user_id', Auth::id())->get();
         return TrainingResource::collection($trainings);
-    }
 
-    public function getUniqueExercises($trainingId) {
-        $exercises = Exercise::where('training_id', $trainingId)->get()->unique('exercise_type_id');
-        return $exercises;
     }
     /**
      * Show the form for creating a new resource.
