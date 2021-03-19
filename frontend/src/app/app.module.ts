@@ -35,6 +35,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { NgPipesModule } from 'ngx-pipes';
 import { MatMenuModule } from '@angular/material/menu';
+import { ExerciseComponent } from './components/profile/edit-training/exercise/exercise.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MatMenuModule } from '@angular/material/menu';
     EditTrainingComponent,
     ToolbarComponent,
     TrainingListModalComponent,
+    ExerciseComponent,
   ],
   imports: [
     BrowserModule,

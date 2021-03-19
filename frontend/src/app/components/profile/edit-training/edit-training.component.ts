@@ -14,35 +14,27 @@ export class EditTrainingComponent implements OnInit {
   training: any;
   average: any;
   exercises: any;
-  series: any = [];
-  averageForSeries: any;
   trainingName: string;
-  exerciseForm: FormGroup;
+  exerciseId = 1;
 
   constructor(
     public trainingService: TrainingsService,
     private activatedRoute: ActivatedRoute,
     public router: Router,
     private snackBar: MatSnackBar,
-    private formBuilder: FormBuilder) {
+  ) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
+    const exerciseId = this.activatedRoute.snapshot.paramMap.get('exerciseId');
+    if (exerciseId) {
+      this.exerciseId = parseInt(exerciseId, 0);
+    }
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
       if (this.training.end) {
         this.router.navigate([`/user-profile/training/${this.training.id}`]);
       }
-      this.createSeriesForm();
       this.trainingName = res.name;
-    });
-  }
-
-  createSeriesForm = () => {
-    this.exerciseForm = this.formBuilder.group({
-      exercise_type_id: [],
-      reps: [],
-      weight: [],
-      training_id: [this.training.id]
     });
   }
 
@@ -50,20 +42,8 @@ export class EditTrainingComponent implements OnInit {
     this.trainingService.getExercisesTypes().subscribe(types => {
       this.exerciseTypes = types;
     });
-    if (localStorage.getItem('series')) {
-      this.series = JSON.parse(localStorage.getItem('series'));
-    }
   }
 
-  currentAverage = (series) => {
-    let r = 0;
-    series.map(el => {
-      r += (el.reps * el.weight);
-    });
-
-    this.averageForSeries = r;
-
-  }
 
   finishWorkout(id): void {
     this.trainingService.finishTraining(id).subscribe(res => {
@@ -71,36 +51,15 @@ export class EditTrainingComponent implements OnInit {
     });
   }
 
-  change = () => {
-    console.log('asd');
-  }
-
-  onSubmit = (form: NgForm) => {
-    const series = this.exerciseForm.value;
-    this.trainingService.addSeries(series).subscribe(res => {
-      this.series.unshift(res);
-      this.currentAverage(this.series);
-      this.exerciseForm.get('reps').reset();
-      this.exerciseForm.get('weight').reset();
-      console.log(res);
-    });
-  }
 
   changeExercise(val): void {
-
-    this.trainingService.getExercises(this.training.id, val).subscribe(res => {
-      this.series = res;
-      this.currentAverage(this.series);
-    });
-    this.trainingService.getAverageWeightForExercise(val, this.training.id).subscribe(res => {
-      this.average = res;
-    });
+    this.exerciseId = val;
+    this.router.navigate([`/user-profile/training/${this.training.id}/edit/${val}`]);
 
   }
 
   changeTrainingName = (event: any) => {
-    console.log(event.target.value);
-    console.log(this.trainingName);
+    // !todo update this.training here
     if (this.trainingName != event.target.value) {
       this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {
         this.openSnackBar('Nazwa treningu została zmieniona', 'ok');
@@ -108,33 +67,9 @@ export class EditTrainingComponent implements OnInit {
     }
   }
 
-  removeTraining = (trainingId: number) => {
-    this.trainingService.removeTraining(trainingId).subscribe(res => {
-      this.router.navigate(['/user-profile/dashboard']);
-      this.openSnackBar('Trening został usunięty', 'OK');
-    });
-  }
-
-  removeExercise = (seriesId: number) => {
-    this.trainingService.removeExercise(seriesId).subscribe(res => {
-      this.openSnackBar('Seria została usunięta', 'OK');
-
-      this.series = this.series.filter((element) => {
-        return element.id !== seriesId;
-      });
-    });
-  }
-
   openSnackBar = (message: string, action: string) => {
     this.snackBar.open(message, action, {
       duration: 20000,
-    });
-  }
-
-  onSync = () => {
-    console.log(this.series);
-    this.trainingService.addSeries(this.series).subscribe(res => {
-      console.log(res);
     });
   }
 }

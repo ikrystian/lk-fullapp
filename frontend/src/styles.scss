@@ -57,6 +57,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 // override angular material styles
 body {
+  max-height: 100vh;
   .mat-button,
   .mat-icon-button,
   .mat-stroked-button,

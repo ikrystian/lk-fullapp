@@ -19,6 +19,7 @@ const routes: Routes = [
   {path: 'user-profile/dashboard', component: DashboardComponent},
   {path: 'user-profile/training/:id', component: TrainingComponent},
   {path: 'user-profile/training/:id/edit', component: EditTrainingComponent},
+  {path: 'user-profile/training/:id/edit/:exerciseId', component: EditTrainingComponent},
   {path: 'reset-password', component: ResetPasswordComponent},
   {path: 'update-password', component: UpdatePasswordComponent}
 ];
