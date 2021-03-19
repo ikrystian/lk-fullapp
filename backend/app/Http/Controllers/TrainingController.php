@@ -63,7 +63,7 @@ class TrainingController extends Controller
         $exercise->reps = $request['reps'];
         $exercise->weight = $request['weight'];
         $exercise->save();
-
+        $exercise->id;
         return $exercise->toJson();
     }
 
@@ -147,6 +147,5 @@ class TrainingController extends Controller
     {
         Training::destroy($id);
         return response()->json('removed', 200);
-
     }
 }

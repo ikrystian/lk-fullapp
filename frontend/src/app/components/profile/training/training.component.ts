@@ -33,7 +33,6 @@ export class TrainingComponent implements OnInit {
 
   removeTraining = (trainingId: number) => {
     this.trainingService.removeTraining(trainingId).subscribe(res => {
-      console.log(res);
       this.router.navigate(['/user-profile/dashboard']);
       this.openSnackBar('Trening został usunięty', 'OK');
     });

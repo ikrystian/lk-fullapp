@@ -1,5 +1,23 @@
 <div class="edit-training-component" *ngIf="training">
-  <app-toolbar [title]="training.name"></app-toolbar>
+  <mat-toolbar color="primary" class="toolbar">
+    <div class="toolbar__back">
+      <button routerLink="user-profile/dashboard" mat-icon-button aria-label="Wstecz">
+        <mat-icon>home</mat-icon>
+      </button>
+    </div>
+    <span class="toolbar__title"><span>{{ training.name }}</span></span>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="removeTraining(training.id)">
+        <mat-icon>delete</mat-icon>
+        Usuń trening
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+
   <section class="page-content">
     <mat-form-field class=full-width>
       <mat-label>Ustaw nazwę treningu</mat-label>
@@ -30,7 +48,7 @@
         </div>
         <div class="add-exercises__row">
           <div class="add-exercises__series">
-            {{ series.length + 1 }}
+<!--            {{ series.length | async + 1 }}-->
           </div>
           <div class="add-exercises__reps">
             <input type="number" name="reps" formControlName="reps">
@@ -45,9 +63,10 @@
           </div>
         </div>
         <ng-container>
-          <div *ngFor="let ser of series; let index = index">
+          <div *ngFor="let ser of series ; let index = index">
             <div class="add-exercises__row">
               <div class="add-exercises__series">
+
                 {{ series.length - index  }}
               </div>
               <div class="add-exercises__reps">
@@ -58,6 +77,9 @@
 
               </div>
               <div class="add-exercises__action">
+                <button mat-stroked-button color="warn" type="button" (click)="removeExercise(ser.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
               </div>
             </div>
           </div>

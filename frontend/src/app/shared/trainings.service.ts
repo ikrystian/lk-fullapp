@@ -59,4 +59,8 @@ export class TrainingsService {
     return this.http.delete(`${this.API_URL}/trainings/${trainingId}`);
   }
 
+  removeExercise = (seriesId: number) => {
+    return this.http.delete(`${this.API_URL}/exercises/${seriesId}`);
+  }
+
 }

@@ -96,6 +96,7 @@ class ExerciseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Exercise::destroy($id);
+        return response()->json('removed', 200);
     }
 }

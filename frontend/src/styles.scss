@@ -89,6 +89,12 @@ body {
     flex: 1 1 auto;
     font-weight: 400;
 
+    span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: calc(100vw - 100px);
+    }
   }
 }
 

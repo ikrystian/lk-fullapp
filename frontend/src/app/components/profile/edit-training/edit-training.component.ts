@@ -78,7 +78,7 @@ export class EditTrainingComponent implements OnInit {
   onSubmit = (form: NgForm) => {
     const series = this.exerciseForm.value;
     this.trainingService.addSeries(series).subscribe(res => {
-      this.series.unshift(this.exerciseForm.value);
+      this.series.unshift(res);
       this.currentAverage(this.series);
       this.exerciseForm.get('reps').reset();
       this.exerciseForm.get('weight').reset();
@@ -106,6 +106,23 @@ export class EditTrainingComponent implements OnInit {
         this.openSnackBar('Nazwa treningu została zmieniona', 'ok');
       });
     }
+  }
+
+  removeTraining = (trainingId: number) => {
+    this.trainingService.removeTraining(trainingId).subscribe(res => {
+      this.router.navigate(['/user-profile/dashboard']);
+      this.openSnackBar('Trening został usunięty', 'OK');
+    });
+  }
+
+  removeExercise = (seriesId: number) => {
+    this.trainingService.removeExercise(seriesId).subscribe(res => {
+      this.openSnackBar('Seria została usunięta', 'OK');
+
+      this.series = this.series.filter((element) => {
+        return element.id !== seriesId;
+      });
+    });
   }
 
   openSnackBar = (message: string, action: string) => {
