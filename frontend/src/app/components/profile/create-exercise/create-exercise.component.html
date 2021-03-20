@@ -1,0 +1,34 @@
+<header class="popup__header">
+  <h1 class="popup__title">Dodaj ćwiczenie</h1>
+</header>
+
+<section class="popup__content" [formGroup]="exerciseForm" (ngSubmit)="createExercise()">
+<!--  <form action="">-->
+<!--    <mat-form-field class="example-full-width">-->
+<!--      <mat-label>Nazwa ćwiczenia</mat-label>-->
+<!--      <input matInput placeholder="np. Martwy ciąg" required formControlName="name">-->
+<!--    </mat-form-field>-->
+<!--  </form>-->
+<!--    <mat-form-field>-->
+<!--      <mat-label>Mnożnik</mat-label>-->
+<!--      <select matNativeControl required >-->
+<!--        <option value="1">1</option>-->
+<!--        <option value="2">2</option>-->
+<!--      </select>-->
+<!--    </mat-form-field>-->
+
+<!--    <mat-form-field>-->
+<!--      <mat-label>Partia ciała</mat-label>-->
+<!--      <select matNativeControl required>-->
+<!--        <option *ngFor="let bodyPart of bodyParts" [value]="bodyPart.id">-->
+<!--          {{bodyPart.name}}-->
+<!--        </option>-->
+<!--      </select>-->
+<!--    </mat-form-field>-->
+
+</section>
+
+<footer class="popup__footer">
+  <button mat-dialog-close mat-button color="warn">Anuluj</button>
+  <button mat-button color="primary" type="submit">Zapisz</button>
+</footer>

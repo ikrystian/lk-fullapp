@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { TrainingsService } from '../../shared/trainings.service';
-import { MatDialog } from '@angular/material/dialog';
 import { TrainingListModalComponent } from '../profile/training-list-modal/training-list-modal.component';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-calendar',

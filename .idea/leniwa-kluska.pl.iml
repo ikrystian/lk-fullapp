@@ -64,7 +64,6 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/phpunit/php-timer" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/myclabs/deep-copy" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/filp/whoops" />
-      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/psr/simple-cache" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/swiftmailer/swiftmailer" />
@@ -115,6 +114,7 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/psy/psysh" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/fruitcake/laravel-cors" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/phpoption/phpoption" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/nesbot/carbon" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/webmozart/assert" />
     </content>
     <orderEntry type="inheritedJdk" />

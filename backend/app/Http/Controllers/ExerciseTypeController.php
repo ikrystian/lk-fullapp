@@ -35,7 +35,13 @@ class ExerciseTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $exerciseType = new ExerciseType;
+        $exerciseType->name = $request['name'];
+        $exerciseType->multipler = $request['multipler'];
+        $exerciseType->body_part_id = $request['body_part_id'];
+        $exerciseType->save();
+
+        return $exerciseType->toJson();
     }
 
     /**

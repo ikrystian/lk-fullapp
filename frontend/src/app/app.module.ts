@@ -39,6 +39,7 @@ import { ExerciseComponent } from './components/profile/edit-training/exercise/e
 import { StatsComponent } from './components/profile/stats/stats.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { CreateExerciseComponent } from './components/profile/create-exercise/create-exercise.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { environment } from '../environments/environment';
     TrainingListModalComponent,
     ExerciseComponent,
     StatsComponent,
+    CreateExerciseComponent,
   ],
   imports: [
     BrowserModule,

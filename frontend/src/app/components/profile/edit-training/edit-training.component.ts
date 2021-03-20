@@ -3,6 +3,9 @@ import { TrainingsService } from '../../../shared/trainings.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { TrainingListModalComponent } from '../training-list-modal/training-list-modal.component';
+import { CreateExerciseComponent } from '../create-exercise/create-exercise.component';
 
 @Component({
   selector: 'app-edit-training',
@@ -23,6 +26,7 @@ export class EditTrainingComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public router: Router,
     private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
@@ -88,5 +92,11 @@ export class EditTrainingComponent implements OnInit {
 
   filterExercises = (id) => {
     this.exerciseTypes = this.allExerciseTypes.filter(el => el.body_part_id === id);
+  }
+
+  openAddExerciseModal = () => {
+    this.dialog.open(CreateExerciseComponent, {
+      width: '350px',
+    });
   }
 }

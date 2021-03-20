@@ -59,7 +59,6 @@
       <path value="$PROJECT_DIR$/backend/vendor/phpunit/php-timer" />
       <path value="$PROJECT_DIR$/backend/vendor/myclabs/deep-copy" />
       <path value="$PROJECT_DIR$/backend/vendor/filp/whoops" />
-      <path value="$PROJECT_DIR$/backend/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/backend/vendor/psr/simple-cache" />
       <path value="$PROJECT_DIR$/backend/vendor/psr/http-message" />
       <path value="$PROJECT_DIR$/backend/vendor/swiftmailer/swiftmailer" />
@@ -110,6 +109,7 @@
       <path value="$PROJECT_DIR$/backend/vendor/psy/psysh" />
       <path value="$PROJECT_DIR$/backend/vendor/fruitcake/laravel-cors" />
       <path value="$PROJECT_DIR$/backend/vendor/phpoption/phpoption" />
+      <path value="$PROJECT_DIR$/backend/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/backend/vendor/webmozart/assert" />
     </include_path>
   </component>

@@ -9,8 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ngcc",
-    "predeploy": "ng build --prod --base-href=/lk-fullapp/",
-    "deploy": "npx gh-pages -d dist/frontend"
+    "predeploy": "ng build --prod --base-href=/",
+    "deploy": "npx gh-pages -d dist/"
   },
   "private": true,
   "dependencies": {

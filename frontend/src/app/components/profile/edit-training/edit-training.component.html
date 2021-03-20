@@ -11,6 +11,10 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="openAddExerciseModal()">
+        <mat-icon>add</mat-icon>
+        Dodaj ćwiczenie
+      </button>
       <button mat-menu-item (click)="removeTraining(training.id)">
         <mat-icon>delete</mat-icon>
         Usuń trening
