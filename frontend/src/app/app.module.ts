@@ -37,6 +37,8 @@ import { NgPipesModule } from 'ngx-pipes';
 import { MatMenuModule } from '@angular/material/menu';
 import { ExerciseComponent } from './components/profile/edit-training/exercise/exercise.component';
 import { StatsComponent } from './components/profile/stats/stats.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,8 @@ import { StatsComponent } from './components/profile/stats/stats.component';
     MatSnackBarModule,
     MatTableModule,
     NgPipesModule,
-    MatMenuModule
+    MatMenuModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
 
   providers: [
