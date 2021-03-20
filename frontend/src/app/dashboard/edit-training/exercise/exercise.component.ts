@@ -1,9 +1,11 @@
+import { Observable } from 'rxjs';
+
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TrainingsService } from '../../../../shared/trainings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { TrainingsService } from '../../../shared/trainings.service';
 
 @Component({
   selector: 'app-exercise',
@@ -63,7 +65,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
   removeTraining = (trainingId: number) => {
     this.trainingService.removeTraining(trainingId).subscribe(res => {
-      this.router.navigate(['/user-profile/dashboard']);
+      this.router.navigate(['/dashboard']);
       this.openSnackBar('Trening został usunięty', 'OK');
     });
   }

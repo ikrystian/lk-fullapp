@@ -1,45 +1,39 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgPipesModule } from 'ngx-pipes';
 
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
+import {
+    CreateExerciseComponent
+} from './components/profile/create-exercise/create-exercise.component';
 import { ProfileComponent } from './components/profile/profile.component';
-
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
+import { StatsComponent } from './components/profile/stats/stats.component';
+import { RegisterComponent } from './components/register/register.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { DashboardComponent } from './components/profile/dashboard/dashboard.component';
-import { TrainingComponent } from './components/profile/training/training.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ExerciseComponent } from './dashboard/edit-training/exercise/exercise.component';
 import { InterceptorService } from './loader/interceptor.service';
-import { EditTrainingComponent } from './components/profile/edit-training/edit-training.component';
-import { ToolbarComponent } from './toolbar/toolbar.component';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { TrainingListModalComponent } from './components/profile/training-list-modal/training-list-modal.component';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
-import { NgPipesModule } from 'ngx-pipes';
-import { MatMenuModule } from '@angular/material/menu';
-import { ExerciseComponent } from './components/profile/edit-training/exercise/exercise.component';
-import { StatsComponent } from './components/profile/stats/stats.component';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { CreateExerciseComponent } from './components/profile/create-exercise/create-exercise.component';
+import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
+import { NavigationModule } from './shared/navigation/navigation.module';
 
 @NgModule({
   declarations: [
@@ -49,12 +43,6 @@ import { CreateExerciseComponent } from './components/profile/create-exercise/cr
     ProfileComponent,
     ResetPasswordComponent,
     UpdatePasswordComponent,
-    CalendarComponent,
-    DashboardComponent,
-    TrainingComponent,
-    EditTrainingComponent,
-    ToolbarComponent,
-    TrainingListModalComponent,
     ExerciseComponent,
     StatsComponent,
     CreateExerciseComponent,
@@ -69,7 +57,6 @@ import { CreateExerciseComponent } from './components/profile/create-exercise/cr
     MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
-    MatToolbarModule,
     MatButtonModule,
     MatIconModule,
     MatProgressBarModule,
@@ -79,7 +66,7 @@ import { CreateExerciseComponent } from './components/profile/create-exercise/cr
     MatSnackBarModule,
     MatTableModule,
     NgPipesModule,
-    MatMenuModule,
+    NavigationModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
 
@@ -89,8 +76,8 @@ import { CreateExerciseComponent } from './components/profile/create-exercise/cr
       useClass: AuthHeaderInterceptor,
       multi: true
     },
-    {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
-    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+    { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

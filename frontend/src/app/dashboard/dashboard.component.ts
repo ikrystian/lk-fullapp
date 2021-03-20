@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TrainingsService } from '../../../shared/trainings.service';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+
+import { TrainingsService } from '../shared/trainings.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,7 +29,7 @@ export class DashboardComponent implements OnInit {
     this.trainingService.addTraining().subscribe(res => {
       this.training = res;
       this.openSnackBar('Trening został utworzony', 'ok');
-      this.router.navigate([`user-profile/training/${this.training.id}/edit`]);
+      this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
     });
   }
 

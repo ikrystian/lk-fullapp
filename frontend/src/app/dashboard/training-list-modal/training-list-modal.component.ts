@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './training-list-modal.component.html',
   styleUrls: [
     './training-list-modal.component.scss',
-    '../../../../assets/styles/components/popup.component.scss'
+    '../../../assets/styles/components/popup.component.scss'
   ],
   encapsulation: ViewEncapsulation.None
 })

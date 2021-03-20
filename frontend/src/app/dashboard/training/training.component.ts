@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { TrainingsService } from '../../../shared/trainings.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { TrainingsService } from '../../shared/trainings.service';
 
 @Component({
   selector: 'app-training',
@@ -26,14 +27,14 @@ export class TrainingComponent implements OnInit {
       this.dataSource = res.exercises;
 
       if (!this.training.end) {
-        this.router.navigate([`/user-profile/training/${this.training.id}/edit`]);
+        this.router.navigate([`/dashboard/training/${this.training.id}/edit`]);
       }
     });
   }
 
   removeTraining = (trainingId: number) => {
     this.trainingService.removeTraining(trainingId).subscribe(res => {
-      this.router.navigate(['/user-profile/dashboard']);
+      this.router.navigate(['/dashboard']);
       this.openSnackBar('Trening został usunięty', 'OK');
     });
   }
