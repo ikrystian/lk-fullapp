@@ -9,7 +9,7 @@
   <div class="popup__content">
     <ul class="training-list">
       <li *ngFor="let training of data.trainings">
-        <a mat-dialog-close routerLink="/user-profile/training/{{training.id}}">{{ training.name }} (id: {{training.id}})</a>
+        <a mat-dialog-close routerLink="/dashboard/training/{{training.id}}">{{ training.name }} (id: {{training.id}})</a>
       </li>
     </ul>
   </div>

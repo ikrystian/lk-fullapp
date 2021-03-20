@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { TrainingsService } from '../../../shared/trainings.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import {
+    CreateExerciseComponent
+} from '../../components/profile/create-exercise/create-exercise.component';
+import { TrainingsService } from '../../shared/trainings.service';
 import { TrainingListModalComponent } from '../training-list-modal/training-list-modal.component';
-import { CreateExerciseComponent } from '../create-exercise/create-exercise.component';
 
 @Component({
   selector: 'app-edit-training',
@@ -37,7 +40,7 @@ export class EditTrainingComponent implements OnInit {
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
       if (this.training.end) {
-        this.router.navigate([`/user-profile/training/${this.training.id}`]);
+        this.router.navigate([`/dashboard/training/${this.training.id}`]);
       }
       this.trainingName = res.name;
     });
@@ -57,14 +60,14 @@ export class EditTrainingComponent implements OnInit {
 
   finishWorkout(id): void {
     this.trainingService.finishTraining(id).subscribe(res => {
-      this.router.navigate([`/user-profile/training/${id}`]);
+      this.router.navigate([`/dashboard/training/${id}`]);
     });
   }
 
 
   changeExercise(val): void {
     this.exerciseId = val;
-    this.router.navigate([`/user-profile/training/${this.training.id}/edit/${val}`]);
+    this.router.navigate([`/dashboard/training/${this.training.id}/edit/${val}`]);
 
   }
 
@@ -79,7 +82,7 @@ export class EditTrainingComponent implements OnInit {
 
   removeTraining = (trainingId: number) => {
     this.trainingService.removeTraining(trainingId).subscribe(res => {
-      this.router.navigate(['/user-profile/dashboard']);
+      this.router.navigate(['/dashboard']);
       this.openSnackBar('Trening został usunięty', 'OK');
     });
   }

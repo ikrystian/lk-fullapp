@@ -1,8 +1,9 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { AuthenticationStateService } from '../shared/authentication-state.service';
-import { TokenAuthService } from '../shared/token-auth.service';
+
+import { AuthenticationStateService } from '../../authentication-state.service';
+import { TokenAuthService } from '../../token-auth.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -23,7 +24,7 @@ export class ToolbarComponent implements OnInit {
   }
 
   back(): void {
-    this.router.navigate(['user-profile/dashboard']);
+    this.router.navigate(['dashboard']);
   }
 
   logOut(): void {

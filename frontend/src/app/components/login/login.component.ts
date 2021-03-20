@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { TokenAuthService } from '../../shared/token-auth.service';
 import { AuthenticationStateService } from '../../shared/authentication-state.service';
 import { JwtService } from '../../shared/jwt.service';
+import { TokenAuthService } from '../../shared/token-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
       }, () => {
         this.authenticationStateService.setAuthState(true);
         this.signinForm.reset();
-        this.router.navigate(['user-profile/dashboard']);
+        this.router.navigate(['dashboard']);
       }
     );
   }
