@@ -1,4 +1,4 @@
-<div class="stats" *ngIf="stats">
+<a routerLink="/dashboard" class="stats" *ngIf="stats">
   <h1>Gratuacje, <strong>{{ stats.username.name }}</strong>&nbsp;!</h1>
   <h2>Udało Ci się podnieść</h2>
   <h2><strong> {{ stats.total / 1000 | round : 2 }} ton !</strong></h2>
@@ -9,4 +9,4 @@
   <button class="stats__close-button" mat-icon-button routerLink="/dashboard" aria-label="Back to dashboard">
     <mat-icon>close</mat-icon>
   </button>
-</div>
+</a>
