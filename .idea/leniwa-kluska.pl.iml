@@ -36,7 +36,6 @@
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/sebastian/object-reflector" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/theseer/tokenizer" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/facade/ignition-contracts" />
-      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/barryvdh/laravel-cors" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/facade/flare-client-php" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/facade/ignition" />
       <excludeFolder url="file://$MODULE_DIR$/backend/vendor/ramsey/collection" />
