@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ExerciseResource;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ExerciseController extends Controller
@@ -52,6 +53,7 @@ class ExerciseController extends Controller
             ->where('exercise_type_id', $id)
             ->where('training_id', '!=', $trainingId)
             ->get();
+
         foreach($exercises as $exercise) {
             $weight = $exercise->reps * $exercise->weight;
             $total += $weight;

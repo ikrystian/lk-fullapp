@@ -1,4 +1,8 @@
+<div class="auth-page">
 <section class="page-content">
+  <header class="auth-page__header">
+    <a href="" mat-stroked-button routerLink="/signup">Sing up temporary button</a>
+  </header>
   <img src="./assets/images/logo.jpg" class="logo" alt="">
   <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
     <h2 class="h3 mb-3 text-center">Zaloguj do <strong>LENIWEJ KLUSKI</strong></h2>
@@ -30,3 +34,4 @@
     </footer>
   </form>
 </section>
+</div>

@@ -1,5 +1,3 @@
-import { NgPipesModule } from 'ngx-pipes';
-
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,24 +11,19 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import {
-    CreateExerciseComponent
-} from './components/profile/create-exercise/create-exercise.component';
+import { CreateExerciseComponent } from './components/profile/create-exercise/create-exercise.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { StatsComponent } from './components/profile/stats/stats.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
-import { ExerciseComponent } from './dashboard/edit-training/exercise/exercise.component';
 import { InterceptorService } from './loader/interceptor.service';
 import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
 import { NavigationModule } from './shared/navigation/navigation.module';
@@ -43,7 +36,6 @@ import { NavigationModule } from './shared/navigation/navigation.module';
     ProfileComponent,
     ResetPasswordComponent,
     UpdatePasswordComponent,
-    ExerciseComponent,
     StatsComponent,
     CreateExerciseComponent,
   ],
@@ -64,10 +56,8 @@ import { NavigationModule } from './shared/navigation/navigation.module';
     MatInputModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatTableModule,
-    NgPipesModule,
     NavigationModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
 
   providers: [
@@ -76,9 +66,10 @@ import { NavigationModule } from './shared/navigation/navigation.module';
       useClass: AuthHeaderInterceptor,
       multi: true
     },
-    { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
-    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true }
+    {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 

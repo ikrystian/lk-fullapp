@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,7 +7,6 @@ import {
     CreateExerciseComponent
 } from '../../components/profile/create-exercise/create-exercise.component';
 import { TrainingsService } from '../../shared/trainings.service';
-import { TrainingListModalComponent } from '../training-list-modal/training-list-modal.component';
 
 @Component({
   selector: 'app-edit-training',

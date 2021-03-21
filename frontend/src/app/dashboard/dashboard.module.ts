@@ -15,6 +15,12 @@ import { DashboardComponent } from './dashboard.component';
 import { EditTrainingComponent } from './edit-training/edit-training.component';
 import { TrainingListModalComponent } from './training-list-modal/training-list-modal.component';
 import { TrainingComponent } from './training/training.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ExerciseComponent } from './edit-training/exercise/exercise.component';
+import { MatTableModule } from '@angular/material/table';
+import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,8 @@ import { TrainingComponent } from './training/training.component';
     DashboardComponent,
     TrainingComponent,
     EditTrainingComponent,
-    TrainingListModalComponent
+    TrainingListModalComponent,
+    ExerciseComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +41,14 @@ import { TrainingComponent } from './training/training.component';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
-    NavigationModule
+    NavigationModule,
+    MatToolbarModule,
+    MatMenuModule,
+    FormsModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    NgPipesModule
   ]
 })
 export class DashboardModule { }

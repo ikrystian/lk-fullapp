@@ -11,7 +11,7 @@ import { TrainingsService } from '../../shared/trainings.service';
 })
 export class TrainingComponent implements OnInit {
   training: any;
-  displayedColumns: string[] = ['name', 'weight', 'reps', 'multipler', 'seriesTotal'];
+  displayedColumns: string[] = ['name', 'weight', 'reps', 'seriesTotal'];
   dataSource;
   unique;
 
@@ -25,6 +25,7 @@ export class TrainingComponent implements OnInit {
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
       this.dataSource = res.exercises;
+      console.log(res);
 
       if (!this.training.end) {
         this.router.navigate([`/dashboard/training/${this.training.id}/edit`]);

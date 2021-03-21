@@ -1,9 +1,9 @@
 {
-  "name": "frontend",
-  "short_name": "frontend",
+  "name": "Leniwa Kluska",
+  "short_name": "LK",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
-  "display": "standalone",
+  "display": "fullscreen",
   "scope": "./",
   "start_url": "./",
   "icons": [
