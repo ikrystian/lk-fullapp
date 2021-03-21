@@ -9,7 +9,7 @@ import { TokenAuthService } from '../../shared/token-auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./auth.component.scss']
 })
 
 export class LoginComponent implements OnInit {
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
         Validators.required,
         Validators.email,
       ],
-      password: []
+      password: ['', Validators.required]
     });
   }
 

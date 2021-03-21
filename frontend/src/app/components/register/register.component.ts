@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { JwtService } from './../../shared/jwt.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { JwtService } from '../../shared/jwt.service';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['../login/auth.component.scss']
 })
 
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   signupForm: FormGroup;
   err = null;
@@ -20,16 +21,14 @@ export class RegisterComponent implements OnInit {
     public jwtService: JwtService
   ) {
     this.signupForm = this.fb.group({
-      name: [''],
-      email: [''],
-      password: [''],
-      password_confirmation: ['']
+      name: ['', Validators.required],
+      email: ['', Validators.required, Validators.email],
+      password: ['', Validators.required],
+      password_confirmation: ['', Validators.required]
     });
   }
 
-  ngOnInit() { }
-
-  onSubmit() {
+  onSubmit(): void {
     this.jwtService.signUp(this.signupForm.value).subscribe(
       res => {
         console.log(res);
@@ -38,7 +37,7 @@ export class RegisterComponent implements OnInit {
         this.err = error.error;
       },
       () => {
-          this.signupForm.reset();
+        this.signupForm.reset();
         this.router.navigate(['signin']);
       }
     );

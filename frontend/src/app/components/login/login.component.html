@@ -11,8 +11,8 @@
         </div>
 
         <mat-form-field class="auth-page__form-field">
-          <mat-label>Nazwa użytkownika</mat-label>
-          <input type="email" matInput placeholder="Login" autofocus formControlName="email">
+          <mat-label>Nazwa użytkownika (email)</mat-label>
+          <input type="email" matInput placeholder="Login (email)" autofocus formControlName="email">
           <mat-error *ngIf="err?.email">
             {{ err?.email }}
           </mat-error>
@@ -34,7 +34,7 @@
       </div>
       <footer class="auth-page__form-footer">
         <a mat-flat-button routerLink="/signup"> Zarejestruj się</a>
-        <button mat-button mat-raised-button color="primary" type="submit">Zaloguj</button>
+        <button mat-button mat-raised-button color="primary" type="submit" [disabled]="signinForm.invalid">Zaloguj</button>
       </footer>
     </form>
 

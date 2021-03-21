@@ -13,6 +13,11 @@
 
   &__title {
     margin-top: 2rem;
+    text-align: center;
+
+    strong {
+      white-space: nowrap;
+    }
   }
 
   &__form {

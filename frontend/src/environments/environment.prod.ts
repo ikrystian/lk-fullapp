@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'https://bpc-dev.pl/backend/public/api'
+  API_URL: 'https://lk.bpc-dev.pl/backend/public/api'
 };

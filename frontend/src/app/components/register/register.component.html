@@ -1,44 +1,58 @@
-<header class="auth-page__header">
-  <a href="" mat-stroked-button routerLink="/signin">Login up temporary button</a>
-</header>
-<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <h2 class="mb-3 text-center">Zarejestruj</h2>
+<div class="auth-page">
+  <section class="auth-page__content">
 
-    <div class="form-group">
-      Imię
-      <input type="text" class="form-control" formControlName="name">
+    <img class="auth-page__logo" src="./assets/images/logo.jpg" alt="Leniwa Kluska">
+    <h1 class="auth-page__title">Zarejestruj się jako <strong>LENIWA KLUSKA</strong></h1>
+    <form class="auth-page__form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 
-      <div *ngIf="err?.name" class="alert alert-danger mt-3">
-        {{ err?.name }}
+      <div class="form-group">
+        <mat-form-field class="auth-page__form-field">
+          <mat-label>Nazwa użytkownika</mat-label>
+          <input type="text" matInput placeholder="Login" autofocus formControlName="name">
+          <mat-error *ngIf="err?.name">
+            {{ err?.name }}
+          </mat-error>
+        </mat-form-field>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label>Email</label>
-      <input type="email" class="form-control" formControlName="email">
-
-      <div *ngIf="err?.email" class="alert alert-danger mt-3">
-        {{ err?.email }}
+      <div class="form-group">
+        <mat-form-field class="auth-page__form-field">
+          <mat-label>E-mail</mat-label>
+          <input type="email" matInput placeholder="Login" formControlName="email" required>
+          <mat-error *ngIf="err?.email">
+            {{ err?.email }}
+          </mat-error>
+        </mat-form-field>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label>Hasło</label>
-      <input type="password" class="form-control" formControlName="password">
-
-      <div *ngIf="err?.password" class="alert alert-danger mt-3">
-        {{ err?.password }}
+      <div class="form-group">
+        <mat-form-field class="auth-page__form-field">
+          <mat-label>Hasło</mat-label>
+          <input type="password" matInput placeholder="Login" formControlName="password" required>
+          <mat-error *ngIf="err?.password">
+            {{ err?.password }}
+          </mat-error>
+        </mat-form-field>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label>Potwierdź hasło</label>
-      <input type="password" class="form-control" formControlName="password_confirmation">
-
-      <div *ngIf="err?.password_confirmation" class="alert alert-danger mt-3">
-        {{ err?.password_confirmation }}
+      <div class="form-group">
+        <mat-form-field class="auth-page__form-field">
+          <mat-label>Powtórz hasło</mat-label>
+          <input type="password" matInput placeholder="Login" formControlName="password_confirmation" required>
+          <mat-error *ngIf="err?.password_confirmation">
+            {{ err?.password_confirmation }}
+          </mat-error>
+        </mat-form-field>
       </div>
-    </div>
 
-    <button type="submit" class="btn btn-success">Zarejestruj</button>
-  </form>
+      <footer class="auth-page__form-footer">
+        <a mat-flat-button routerLink="/signin">Zaloguj się</a>
+        <button mat-button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">Zarejestruj się</button>
+      </footer>
+    </form>
+
+    <footer class="auth-page__footer">
+      <p>Leniwa kluska - wersja bardzo developerska</p>
+    </footer>
+  </section>
+</div>
