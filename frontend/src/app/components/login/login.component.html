@@ -1,37 +1,45 @@
 <div class="auth-page">
-<section class="page-content">
-  <header class="auth-page__header">
-    <a href="" mat-stroked-button routerLink="/signup">Sing up temporary button</a>
-  </header>
-  <img src="./assets/images/logo.jpg" class="logo" alt="">
-  <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-    <h2 class="h3 mb-3 text-center">Zaloguj do <strong>LENIWEJ KLUSKI</strong></h2>
+  <section class="auth-page__content">
 
-    <div class="form-group">
-      <label>Adres email</label>
-      <input type="email" class="form-control" formControlName="email">
+    <img class="auth-page__logo" src="./assets/images/logo.jpg" alt="Leniwa Kluska">
+    <h1 class="auth-page__title">Zaloguj do <strong>LENIWEJ KLUSKI</strong></h1>
+    <form class="auth-page__form" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
 
-      <div *ngIf="err?.email" class="alert alert-danger mt-3">
-        {{ err?.email }}
+      <div class="form-group">
+        <div *ngIf="err?.error" class="alert alert-danger mt-3">
+          {{ err?.error }}
+        </div>
+
+        <mat-form-field class="auth-page__form-field">
+          <mat-label>Nazwa użytkownika</mat-label>
+          <input type="email" matInput placeholder="Login" autofocus formControlName="email">
+          <mat-error *ngIf="err?.email">
+            {{ err?.email }}
+          </mat-error>
+        </mat-form-field>
+
+
       </div>
 
-      <div *ngIf="err?.password" class="alert alert-danger mt-3">
-        {{ err?.password }}
+      <div class="form-group">
+
+        <mat-form-field class="auth-page__form-field">
+          <mat-label>Hasło</mat-label>
+          <input type="password" matInput placeholder="Hasło" formControlName="password">
+          <mat-error *ngIf="err?.password">
+            {{ err?.password }}
+          </mat-error>
+        </mat-form-field>
+
       </div>
-    </div>
+      <footer class="auth-page__form-footer">
+        <a mat-flat-button routerLink="/signup"> Zarejestruj się</a>
+        <button mat-button mat-raised-button color="primary" type="submit">Zaloguj</button>
+      </footer>
+    </form>
 
-    <div class="form-group">
-      <label>Hasło</label>
-      <input type="password" class="form-control" formControlName="password">
-
-      <div *ngIf="err?.error" class="alert alert-danger mt-3">
-        {{ err?.error }}
-      </div>
-    </div>
-    <footer style="display: flex; justify-content: flex-end;">
-      <button mat-button mat-raised-button color="primaru" type="submit">Zaloguj</button>
-
+    <footer class="auth-page__footer">
+      <p>Leniwa kluska - wersja bardzo developerska</p>
     </footer>
-  </form>
-</section>
+  </section>
 </div>

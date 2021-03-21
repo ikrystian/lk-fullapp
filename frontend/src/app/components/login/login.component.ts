@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthenticationStateService } from '../../shared/authentication-state.service';
@@ -25,7 +25,11 @@ export class LoginComponent implements OnInit {
     private authenticationStateService: AuthenticationStateService,
   ) {
     this.signinForm = this.fb.group({
-      email: [],
+      email: [
+        '',
+        Validators.required,
+        Validators.email,
+      ],
       password: []
     });
   }
