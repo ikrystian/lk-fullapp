@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,7 +31,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
   @Input() exerciseId: number;
   @Input() trainingId: number;
-
+  @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
   ngOnInit(): void {
 
   }
@@ -73,9 +73,12 @@ export class ExerciseComponent implements OnInit, OnChanges {
   onSubmit = (form) => {
     this.exerciseForm.disable();
 
+
+
     const series = this.exerciseForm.value;
     series.exercise_type_id = this.exerciseId;
     series.training_id = this.trainingId;
+    const ele = this.addSeriesForm.nativeElement['reps'];
 
     this.exerciseForm.get('reps').reset();
     this.exerciseForm.get('weight').reset();
@@ -84,7 +87,9 @@ export class ExerciseComponent implements OnInit, OnChanges {
       this.series.unshift(res);
       this.currentAverage(this.series);
       this.exerciseForm.enable();
-
+      if (ele) {
+        ele.focus();
+      }
     });
     this.openSnackBar('Seria została dodana', 'OK');
 
