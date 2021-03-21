@@ -7,6 +7,7 @@ import { StatsComponent } from './components/profile/stats/stats.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'user-profile', component: ProfileComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'update-password', component: UpdatePasswordComponent },
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) }
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthGuard] }
 ];
 
 @NgModule({

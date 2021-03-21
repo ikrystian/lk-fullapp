@@ -27,6 +27,15 @@
     display: flex;
     justify-content: flex-end;
   }
+
+  input[type=number] {
+    display: inline-block;
+    padding: 6px;
+  }
+
+  input[type=number].ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
 }
 
 .edit-training-component {

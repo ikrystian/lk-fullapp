@@ -51,4 +51,5 @@ import { NgPipesModule } from 'ngx-pipes';
     NgPipesModule
   ]
 })
-export class DashboardModule { }
+export class DashboardModule {
+}
