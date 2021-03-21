@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   signinForm: FormGroup;
   err = null;
+  showPassword = false;
 
   constructor(
     public router: Router,
@@ -54,6 +55,10 @@ export class LoginComponent implements OnInit {
 
   tokenStorage = jwt => {
     this.tokenAuthService.setTokenStorage(jwt.access_token);
+  }
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
 }

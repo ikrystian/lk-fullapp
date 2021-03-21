@@ -29,6 +29,14 @@
     width: 100%;
   }
 
+  &__toggle-password-button {
+    border: 0;
+    background-color: transparent;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
   &__form-footer {
     display: flex;
     justify-content: space-between;

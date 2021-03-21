@@ -25,7 +25,10 @@
 
         <mat-form-field class="auth-page__form-field">
           <mat-label>Hasło</mat-label>
-          <input type="password" matInput placeholder="Hasło" formControlName="password">
+          <input [type]=" showPassword ? 'text' : 'password'" matInput placeholder="Hasło" formControlName="password">
+          <button type="button" class="auth-page__toggle-password-button" (click)="togglePassword()">
+          <mat-icon matSuffix>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
           <mat-error *ngIf="err?.password">
             {{ err?.password }}
           </mat-error>
