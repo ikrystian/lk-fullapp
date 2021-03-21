@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +27,19 @@ import { UpdatePasswordComponent } from './components/update-password/update-pas
 import { InterceptorService } from './loader/interceptor.service';
 import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
 import { NavigationModule } from './shared/navigation/navigation.module';
+import { NgPipesModule } from 'ngx-pipes';
+import * as Hammer from 'hammerjs';
+import {
+  HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG
+}
+  from '@angular/platform-browser';
+
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = {
+    swipe: {direction: Hammer.DIRECTION_ALL},
+  };
+}
 
 @NgModule({
   declarations: [
@@ -57,17 +70,25 @@ import { NavigationModule } from './shared/navigation/navigation.module';
     MatDialogModule,
     MatSnackBarModule,
     NavigationModule,
+    NgPipesModule,
+    HammerModule,
+    MatDatepickerModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
 
   providers: [
+    MatDatepickerModule,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderInterceptor,
       multi: true
     },
     {provide: MAT_DATE_LOCALE, useValue: 'pl-PL'},
-    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: MyHammerConfig,
+    },
   ],
   exports: [],
   bootstrap: [AppComponent]

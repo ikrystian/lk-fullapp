@@ -2,12 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import {  MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
 import { NavigationModule } from '../shared/navigation/navigation.module';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -21,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExerciseComponent } from './edit-training/exercise/exercise.component';
 import { MatTableModule } from '@angular/material/table';
 import { NgPipesModule } from 'ngx-pipes';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,6 @@ import { NgPipesModule } from 'ngx-pipes';
     CommonModule,
     DashboardRoutingModule,
     MatIconModule,
-    MatDatepickerModule,
     MatNativeDateModule,
     MatMomentDateModule,
     MatButtonModule,
@@ -48,8 +47,18 @@ import { NgPipesModule } from 'ngx-pipes';
     MatIconModule,
     ReactiveFormsModule,
     MatTableModule,
-    NgPipesModule
+    NgPipesModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
+  providers: [
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
+
+
 })
 export class DashboardModule {
 }

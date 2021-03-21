@@ -1,3 +1,5 @@
 <section class="calendar-wrapper" *ngIf="trainings">
+  <div class="swipe" (swipe)="onSwipe($event)">
     <mat-calendar [dateFilter]="myDateFilter" [dateClass]="dateClass" (selectedChange)="onSelect($event)"></mat-calendar>
+  </div>
 </section>
