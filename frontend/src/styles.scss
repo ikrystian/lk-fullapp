@@ -27,7 +27,7 @@ body {
 }
 
 .page-content {
-  padding: 1rem;
+  padding:  48px 1rem 1rem 1rem;
 }
 
 .button {
@@ -74,11 +74,14 @@ body {
     border-radius: 0;
   }
 
-  th.mat-header-cell,
-  td.mat-cell,
-  td.mat-footer-cell {
-    padding: 0.25rem;
+
+  .mat-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
   }
+
 }
 
 .toolbar {

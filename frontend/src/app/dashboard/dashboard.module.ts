@@ -21,6 +21,8 @@ import { ExerciseComponent } from './edit-training/exercise/exercise.component';
 import { MatTableModule } from '@angular/material/table';
 import { NgPipesModule } from 'ngx-pipes';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { LogComponent } from './log/log.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     TrainingComponent,
     EditTrainingComponent,
     TrainingListModalComponent,
-    ExerciseComponent
+    ExerciseComponent,
+    LogComponent
   ],
   imports: [
     CommonModule,
@@ -51,12 +54,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatExpansionModule
   ],
-  providers: [
-    MatDatepickerModule,
-    MatNativeDateModule
-  ]
+  providers: [ ]
 
 
 })

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { JwtService } from '../../shared/jwt.service';
 
 
@@ -21,10 +21,10 @@ export class RegisterComponent {
     public jwtService: JwtService
   ) {
     this.signupForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required, Validators.email],
-      password: ['', Validators.required],
-      password_confirmation: ['', Validators.required]
+      name: [''],
+      email: [''],
+      password: [''],
+      password_confirmation: ['']
     });
   }
 
