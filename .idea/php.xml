@@ -31,7 +31,6 @@
       <path value="$PROJECT_DIR$/backend/vendor/sebastian/object-reflector" />
       <path value="$PROJECT_DIR$/backend/vendor/theseer/tokenizer" />
       <path value="$PROJECT_DIR$/backend/vendor/facade/ignition-contracts" />
-      <path value="$PROJECT_DIR$/backend/vendor/barryvdh/laravel-cors" />
       <path value="$PROJECT_DIR$/backend/vendor/facade/flare-client-php" />
       <path value="$PROJECT_DIR$/backend/vendor/facade/ignition" />
       <path value="$PROJECT_DIR$/backend/vendor/ramsey/collection" />
