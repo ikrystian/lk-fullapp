@@ -28,7 +28,7 @@
       <div class="form-group">
         <mat-form-field class="auth-page__form-field">
           <mat-label>Hasło</mat-label>
-          <input type="password" matInput placeholder="Login" formControlName="password" required>
+          <input type="password" matInput placeholder="*****" formControlName="password" required>
           <mat-error *ngIf="err?.password">
             {{ err?.password }}
           </mat-error>
@@ -38,7 +38,7 @@
       <div class="form-group">
         <mat-form-field class="auth-page__form-field">
           <mat-label>Powtórz hasło</mat-label>
-          <input type="password" matInput placeholder="Login" formControlName="password_confirmation" required>
+          <input type="password" matInput placeholder="*****" formControlName="password_confirmation" required>
           <mat-error *ngIf="err?.password_confirmation">
             {{ err?.password_confirmation }}
           </mat-error>
