@@ -8,12 +8,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UpdatePasswordComponent } from './components/update-password/update-password.component';
 import { AuthGuard } from './auth.guard';
+import { GuestGuard } from './guest.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/signin', pathMatch: 'full' },
+  { path: '', redirectTo: '/signin', pathMatch: 'full',  },
   { path: 'stats', component: StatsComponent },
-  { path: 'signin', component: LoginComponent },
-  { path: 'signup', component: RegisterComponent },
+  { path: 'signin', component: LoginComponent, canActivate: [GuestGuard] },
+  { path: 'signup', component: RegisterComponent, canActivate: [GuestGuard] },
   { path: 'user-profile', component: ProfileComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'update-password', component: UpdatePasswordComponent },

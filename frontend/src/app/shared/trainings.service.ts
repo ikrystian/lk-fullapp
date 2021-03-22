@@ -22,7 +22,7 @@ export class TrainingsService {
   }
 
   addTraining = () => {
-    return this.http.post(`${this.API_URL}/trainings/`, {});
+    return this.http.post(`${this.API_URL}/trainings`, {});
   }
 
   getExercisesTypes = () => {
