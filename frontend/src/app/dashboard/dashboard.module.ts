@@ -23,6 +23,9 @@ import { NgPipesModule } from 'ngx-pipes';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { LogComponent } from './log/log.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { TrainingListComponent } from './training-list/training-list.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     EditTrainingComponent,
     TrainingListModalComponent,
     ExerciseComponent,
-    LogComponent
+    LogComponent,
+    TrainingListComponent
   ],
   imports: [
     CommonModule,
@@ -55,7 +59,9 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule,
+    MatTooltipModule
   ],
   providers: [ ]
 

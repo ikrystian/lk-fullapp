@@ -1,8 +1,18 @@
 <app-toolbar title="Dashboard"></app-toolbar>
-<div class="page-content">
-<app-calendar [trainings]="trainings"></app-calendar>
-<app-log></app-log>
-</div>
-<button class="show-stats-button" mat-fab routerLink="/stats" color="warn"><mat-icon>assessment</mat-icon></button>
+<mat-tab-group style="padding-top: 48px;" *ngIf="trainings">
+  <mat-tab label="Lista ({{ trainings.length }})">
 
-<button class="add-training-button" mat-fab (click)="addTraining()" color="primary"><mat-icon>add</mat-icon></button>
+    <app-training-list [trainings]="trainings"></app-training-list>
+  </mat-tab>
+  <mat-tab label="Kalendarz">
+    <app-calendar [trainings]="trainings"></app-calendar>
+  </mat-tab>
+</mat-tab-group>
+
+<button class="show-stats-button" mat-fab routerLink="/stats" color="warn">
+  <mat-icon>assessment</mat-icon>
+</button>
+
+<button class="add-training-button" mat-fab (click)="addTraining()" color="primary">
+  <mat-icon>add</mat-icon>
+</button>

@@ -11,18 +11,22 @@ import { AuthGuard } from './auth.guard';
 import { GuestGuard } from './guest.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/signin', pathMatch: 'full',  },
-  { path: 'stats', component: StatsComponent },
-  { path: 'signin', component: LoginComponent, canActivate: [GuestGuard] },
-  { path: 'signup', component: RegisterComponent, canActivate: [GuestGuard] },
-  { path: 'user-profile', component: ProfileComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
-  { path: 'update-password', component: UpdatePasswordComponent },
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [AuthGuard] }
+  {path: '', redirectTo: '/signin', pathMatch: 'full'},
+  {path: 'stats', component: StatsComponent},
+  {path: 'signin', component: LoginComponent},
+  {path: 'signup', component: RegisterComponent},
+  {path: 'user-profile', component: ProfileComponent},
+  {path: 'reset-password', component: ResetPasswordComponent},
+  {path: 'update-password', component: UpdatePasswordComponent},
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { useHash: true })],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 

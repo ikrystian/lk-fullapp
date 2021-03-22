@@ -1,0 +1,14 @@
+<mat-accordion class="training-list">
+  <mat-expansion-panel *ngFor="let training of trainings">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ training.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        <span class="training-list__status" matTooltip="Trening nie został jeszcze zakończony">
+         <mat-icon class="training-list__status-icon">{{ !training.end ? 'hourglass_bottom' : '' }}</mat-icon>
+        </span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+</mat-accordion>
