@@ -14,7 +14,7 @@ class ExerciseTypeController extends Controller
      */
     public function index()
     {
-        return ExerciseType::all()->toArray();
+        return ExerciseType::orderBy('name', 'ASC')->get()->toArray();
     }
 
     /**
