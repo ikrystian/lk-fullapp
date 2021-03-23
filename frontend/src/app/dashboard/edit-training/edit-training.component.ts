@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import {
-    CreateExerciseComponent
+  CreateExerciseComponent
 } from '../../components/profile/create-exercise/create-exercise.component';
 import { TrainingsService } from '../../shared/trainings.service';
 
@@ -20,8 +20,10 @@ export class EditTrainingComponent implements OnInit {
   average: any;
   exercises: any;
   trainingName: string;
-  exerciseId = 1;
+  exerciseId = 0;
   bodyParts: any;
+  total;
+
   constructor(
     public trainingService: TrainingsService,
     private activatedRoute: ActivatedRoute,
@@ -30,7 +32,6 @@ export class EditTrainingComponent implements OnInit {
     public dialog: MatDialog
   ) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-
     const exerciseId = this.activatedRoute.snapshot.paramMap.get('exerciseId');
     if (exerciseId) {
       this.exerciseId = parseInt(exerciseId, 0);
@@ -49,6 +50,8 @@ export class EditTrainingComponent implements OnInit {
       this.exerciseTypes = types;
       this.allExerciseTypes = types;
     });
+
+
 
     this.trainingService.getBodyParts().subscribe(bodyParts => {
       this.bodyParts = bodyParts;
@@ -79,10 +82,15 @@ export class EditTrainingComponent implements OnInit {
   }
 
   removeTraining = (trainingId: number) => {
+    if (!confirm('Na pewno chcesz usunąć trening? Akcja jest nieodwracalna')) {
+      return false;
+    }
+
     this.trainingService.removeTraining(trainingId).subscribe(res => {
       this.router.navigate(['/dashboard']);
       this.openSnackBar('Trening został usunięty', 'OK');
     });
+
   }
 
   openSnackBar = (message: string, action: string) => {

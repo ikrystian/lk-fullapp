@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { TrainingsService } from '../shared/trainings.service';
 import { GeolocationService } from '@ng-web-apis/geolocation';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,7 +38,15 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  addTraining(): void {
+  addTraining(): any {
+    const today = moment().format('YYYY-MM-DD');
+    const todayTrainings = this.trainings.filter(el => el.training_date === today);
+    if (todayTrainings.length > 0) {
+      if (!confirm('Istnieje już trening z dzisiejszą datą, chcesz dodać nowy?')) {
+        return false;
+      }
+    }
+
     this.trainingService.addTraining(this.userPosition).subscribe(res => {
       this.training = res;
       this.openSnackBar('Trening został utworzony', 'ok');

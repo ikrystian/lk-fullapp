@@ -38,6 +38,10 @@ export class TrainingsService {
     return this.http.post(`${this.API_URL}/training/series/add`, series);
   }
 
+  getToralWeightByTraining(trainingId: number) {
+    return this.http.get(`${this.API_URL}/training/total/${trainingId}`);
+  }
+
   changeName(id: number, name: string) {
     const data = {id, name};
     return this.http.post(`${this.API_URL}/training/change-name`, data);

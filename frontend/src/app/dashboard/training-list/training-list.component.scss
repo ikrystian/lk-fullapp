@@ -10,6 +10,17 @@
     width: 18px;
   }
 
+  &__data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    span {
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+  }
+
   .mat-expansion-panel-header-title {
     flex: 1 1 auto;
   }

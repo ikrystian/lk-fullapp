@@ -180,3 +180,20 @@ body {
   }
 }
 
+.empty-results {
+  color: #a1a7ab;
+  font-size: 14px;
+  padding: 1rem;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  border-radius: 0.25rem;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  margin-bottom: 2rem;
+}
+
+.full-width-input {
+  display: block;
+  width: 100%;
+}

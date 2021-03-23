@@ -21,7 +21,7 @@ class TrainingController extends Controller
      */
     public function index()
     {
-        $trainings = Training::where('user_id', Auth::id())->latest()->get();
+        $trainings = Training::where('user_id', Auth::id())->orderBy('training_date', 'desc')->get();
         return TrainingResource::collection($trainings);
 
     }

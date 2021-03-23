@@ -18,6 +18,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
   id;
   average: any;
   averageForSeries: any;
+  total: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +33,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
   @Input() exerciseId: number;
   @Input() trainingId: number;
   @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
+
   ngOnInit(): void {
 
   }
@@ -39,18 +41,24 @@ export class ExerciseComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.trainingService.getExercises(this.trainingId, this.exerciseId).subscribe(res => {
       this.series = res;
-      this.currentAverage(this.series);
+      if (this.exerciseId !== 0) {
+        this.currentAverage(this.series);
+      }
     });
     this.trainingService.getAverageWeightForExercise(this.exerciseId, this.trainingId).subscribe(res => {
       this.average = res;
     });
+
+    this.getAverageWeight();
   }
+
 
   createSeriesForm = () => {
     this.exerciseForm = this.formBuilder.group({
       exercise_type_id: [this.exerciseId],
       reps: [],
       weight: [],
+      multiplier: [],
       training_id: [this.trainingId]
     });
   }
@@ -64,15 +72,25 @@ export class ExerciseComponent implements OnInit, OnChanges {
   }
 
   removeTraining = (trainingId: number) => {
+    if (!confirm('Na pewno chcesz usunąć trening? Akcja jest nieodwracalna')) {
+      return false;
+    }
+
     this.trainingService.removeTraining(trainingId).subscribe(res => {
       this.router.navigate(['/dashboard']);
       this.openSnackBar('Trening został usunięty', 'OK');
+    });
+
+  }
+
+  getAverageWeight(): void {
+    this.trainingService.getToralWeightByTraining(this.trainingId).subscribe(res => {
+      this.total = res;
     });
   }
 
   onSubmit = (form) => {
     this.exerciseForm.disable();
-
 
 
     const series = this.exerciseForm.value;
@@ -91,11 +109,16 @@ export class ExerciseComponent implements OnInit, OnChanges {
         ele.focus();
       }
     });
+    this.getAverageWeight();
     this.openSnackBar('Seria została dodana', 'OK');
 
   }
 
   removeExercise = (seriesId: number) => {
+    if (!confirm('Na pewno chcesz usunąć serię? Akcja jest nieodwracalna')) {
+      return false;
+    }
+
     this.trainingService.removeExercise(seriesId).subscribe(res => {
       this.openSnackBar('Seria została usunięta', 'OK');
 

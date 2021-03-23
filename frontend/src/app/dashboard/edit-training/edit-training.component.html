@@ -23,7 +23,7 @@
   </mat-toolbar>
 
   <section class="page-content">
-    <mat-form-field class=full-width>
+    <mat-form-field class="full-width-input">
       <mat-label>Ustaw nazwę treningu</mat-label>
       <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">
     </mat-form-field>
@@ -39,12 +39,13 @@
     <mat-form-field class="select--full">
       <mat-label>Cwiczenie</mat-label>
       <select matNativeControl #t required (change)="changeExercise(t.value)">
+        <option value=""></option>
         <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
           {{exercise.name}}
         </option>
       </select>
     </mat-form-field>
-    <app-exercise [exerciseId]="exerciseId" [trainingId]="training.id"></app-exercise>
+    <app-exercise *ngIf="exerciseId !== 0" [exerciseId]="exerciseId" [trainingId]="training.id"></app-exercise>
   </section>
   <footer class="app-bottom-menu">
 

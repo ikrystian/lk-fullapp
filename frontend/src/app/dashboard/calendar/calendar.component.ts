@@ -30,6 +30,7 @@ export class CalendarComponent implements OnInit {
   onSelect = event => {
     this.selectedDate = event;
     this.trainingService.getTrainingByDate(event.format('YYYY-MM-DD')).subscribe((res: any) => {
+      console.log(res.data);
       if (res.data.length === 1) {
         this.router.navigate([`/dashboard/training/${res.data[0].id}/edit/1`]);
       } else {

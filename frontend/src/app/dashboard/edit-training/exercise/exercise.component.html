@@ -1,4 +1,5 @@
-<div class="empty-series" *ngIf="series.length == 0">
+<div class="empty-results" *ngIf="series.length == 0">
+  <mat-icon>report_problem</mat-icon>
   Brak serii w podanym ćwiczeniu
 </div>
 
@@ -58,14 +59,13 @@
 
       <section class="stats-et" *ngIf="average">
         <div>
-              <span class="average">Bilans treningu <strong [ngClass]="{'greater' : (average - averageForSeries) < 0 }">{{ -(average - averageForSeries) }}kg</strong>
+          Obecny ciezar w seriach: <strong>{{averageForSeries}}kg</strong><br>
+          Obecny ciężar podniesiony na treningu: <strong>{{ total }}</strong><br>
+              <span class="average">Bilans treningu <strong [ngClass]="{'greater' : (average[0] - averageForSeries) < 0 }">{{ -(average[0] - averageForSeries) }}kg</strong>
               </span>
         </div>
         <div>
-          Srednia dla cwiczenia: <strong>{{average}}kg</strong><br>
-        </div>
-        <div>
-          Obecny ciezar w seriach: <strong>{{averageForSeries}}kg</strong>
+          Srednia dla cwiczenia: <strong>{{average[0]}}kg</strong><br>
         </div>
       </section>
     </div>
