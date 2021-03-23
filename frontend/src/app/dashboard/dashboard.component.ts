@@ -12,7 +12,11 @@ import { TrainingsService } from '../shared/trainings.service';
 export class DashboardComponent implements OnInit {
   trainings;
   training;
-  constructor(public trainingService: TrainingsService, public router: Router, private snackBar: MatSnackBar) {
+
+  constructor(
+    public trainingService: TrainingsService,
+    public router: Router,
+    private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {

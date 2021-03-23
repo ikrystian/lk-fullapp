@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TrainingsService } from '../../shared/trainings.service';
 import { TrainingListModalComponent } from '../training-list-modal/training-list-modal.component';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { TrainingListModalComponent } from '../training-list-modal/training-list
   styleUrls: ['./calendar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent<D> implements OnInit {
+export class CalendarComponent implements OnInit {
   @Input() trainings;
   direction = '';
   selectedDate: any;
@@ -19,6 +20,7 @@ export class CalendarComponent<D> implements OnInit {
   constructor(
     private router: Router,
     public trainingService: TrainingsService,
+    private bottomSheet: MatBottomSheet,
     public dialog: MatDialog) {
   }
 
@@ -38,10 +40,7 @@ export class CalendarComponent<D> implements OnInit {
 
 
   openTrainingListModal(res): void {
-    const dialogRef = this.dialog.open(TrainingListModalComponent, {
-      width: '350px',
-      data: {trainings: res}
-    });
+    this.bottomSheet.open(TrainingListModalComponent, {data: {trainings: res}});
   }
 
   trainingDays(d): boolean {

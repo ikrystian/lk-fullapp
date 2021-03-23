@@ -1,5 +1,7 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 @Component({
   selector: 'app-training-list-modal',
@@ -14,9 +16,16 @@ export class TrainingListModalComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<TrainingListModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data) {}
+    private bottomSheetRef: MatBottomSheetRef<CalendarComponent>,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: {trainings: any}) {}
 
   ngOnInit(): void {
+    console.log(this.data);
+  }
+
+  openLink(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
   }
 
 }

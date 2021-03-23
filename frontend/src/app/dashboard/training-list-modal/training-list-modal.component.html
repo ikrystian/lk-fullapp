@@ -1,23 +1,6 @@
-<div class="popup">
-  <header class="popup__header">
-    <h1 class="popup__title">Wybierz trening</h1>
-    <button mat-icon-button aria-label="Zamknij okno wyboru treningu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-  </header>
-
-  <div class="popup__content">
-    <ul class="training-list">
-      <li *ngFor="let training of data.trainings">
-        <a mat-dialog-close routerLink="/dashboard/training/{{training.id}}">{{ training.name }} (id: {{training.id}})</a>
-      </li>
-    </ul>
-  </div>
-
-  <footer class="popup__footer">
-    <button mat-dialog-close>zamknij</button>
-  </footer>
-
-</div>
-
-
+<mat-nav-list *ngIf="data.trainings">
+  <a *ngFor="let training of data.trainings" routerLink="/dashboard/training/{{training.id}}" mat-list-item (click)="openLink($event)">
+    <span mat-line>{{ training.name }}</span>
+    <span mat-line>{{ training.start}}</span>
+  </a>
+</mat-nav-list>

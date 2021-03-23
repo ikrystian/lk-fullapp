@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
-import {  MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { NavigationModule } from '../shared/navigation/navigation.module';
@@ -26,6 +26,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { TrainingListComponent } from './training-list/training-list.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -61,9 +63,15 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatNativeDateModule,
     MatExpansionModule,
     MatTabsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatBottomSheetModule,
+    MatListModule,
   ],
-  providers: [ ]
+  providers: [
+    {provide: MatDialogRef, useValue: {}},
+    {provide: MAT_DIALOG_DATA, useValue: {}},
+    MatDialogModule
+  ]
 
 
 })
