@@ -7,8 +7,7 @@ import { CalendarComponent } from '../calendar/calendar.component';
   selector: 'app-training-list-modal',
   templateUrl: './training-list-modal.component.html',
   styleUrls: [
-    './training-list-modal.component.scss',
-    '../../../assets/styles/components/popup.component.scss'
+    './training-list-modal.component.scss'
   ],
   encapsulation: ViewEncapsulation.None
 })
@@ -20,12 +19,11 @@ export class TrainingListModalComponent implements OnInit {
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: {trainings: any}) {}
 
   ngOnInit(): void {
-    console.log(this.data);
+
   }
 
-  openLink(event: MouseEvent): void {
+  openLink(): void {
     this.bottomSheetRef.dismiss();
-    event.preventDefault();
   }
 
 }
