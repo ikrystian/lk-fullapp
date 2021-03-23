@@ -156,6 +156,7 @@ class TrainingController extends Controller
     public function destroy($id)
     {
         Training::destroy($id);
+        Exercise::where('training_id', $id)->delete();
         return response()->json('removed', 200);
     }
 

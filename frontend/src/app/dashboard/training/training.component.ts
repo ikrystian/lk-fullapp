@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { Location } from '@angular/common';
 import { TrainingsService } from '../../shared/trainings.service';
 
 @Component({
@@ -20,18 +20,18 @@ export class TrainingComponent implements OnInit {
     public trainingService: TrainingsService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private location: Location,
     private snackBar: MatSnackBar) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
 
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
       this.dataSource = res.exercises;
-      console.log(res);
-
-      if (!this.training.end) {
-        this.router.navigate([`/dashboard/training/${this.training.id}/edit`]);
-      }
     });
+  }
+
+  back(): void {
+    this.location.back();
   }
 
   removeTraining = (trainingId: number) => {

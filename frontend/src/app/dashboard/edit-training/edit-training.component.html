@@ -1,8 +1,8 @@
 <div class="edit-training-component" *ngIf="training">
   <mat-toolbar color="primary" class="toolbar">
     <div class="toolbar__back">
-      <button routerLink="/dashboard" mat-icon-button aria-label="Wstecz">
-        <mat-icon>home</mat-icon>
+      <button (click)="back()" mat-icon-button aria-label="Wstecz">
+        <mat-icon>keyboard_backspace</mat-icon>
       </button>
     </div>
     <span class="toolbar__title"><span>{{ training.name }}</span></span>
@@ -11,6 +11,10 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button class="mat-menu-item" routerLink="/dashboard/training/{{ training.id }}">
+        <mat-icon>assignment</mat-icon>
+        Podsumowanie treningu
+      </button>
       <button mat-menu-item (click)="openAddExerciseModal()">
         <mat-icon>add</mat-icon>
         Dodaj ćwiczenie
@@ -38,7 +42,7 @@
 
     <mat-form-field class="select--full">
       <mat-label>Cwiczenie</mat-label>
-      <select matNativeControl #t required (change)="changeExercise(t.value)">
+      <select matNativeControl #t required (change)="changeExercise(t.value)" [(ngModel)]="selectedOption">
         <option value=""></option>
         <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
           {{exercise.name}}
@@ -49,7 +53,7 @@
   </section>
   <footer class="app-bottom-menu">
 
-    <button mat-flat-button color="primary" (click)="finishWorkout(training.id)">Zakończ trening</button>
+    <button mat-flat-button color="primary" (click)="finishWorkout(training.id)">Zapisz zmiany</button>
   </footer>
 </div>
 

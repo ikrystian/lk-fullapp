@@ -1,8 +1,8 @@
 <ng-container *ngIf="training">
   <mat-toolbar color="primary" class="toolbar">
     <div class="toolbar__back">
-      <button routerLink="/dashboard" mat-icon-button aria-label="Wstecz">
-        <mat-icon>home</mat-icon>
+      <button (click)="back()" mat-icon-button aria-label="Wstecz">
+        <mat-icon>keyboard_backspace</mat-icon>
       </button>
     </div>
     <span class="toolbar__title"><span>{{ training.name }}</span></span>
@@ -11,6 +11,10 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button class="mat-menu-item" routerLink="/dashboard/training/{{ training.id }}/edit">
+        <mat-icon>edit</mat-icon>
+        Edycja treningu
+      </button>
       <button mat-menu-item (click)="removeTraining(training.id)">
         <mat-icon>delete</mat-icon>
         Usuń trening

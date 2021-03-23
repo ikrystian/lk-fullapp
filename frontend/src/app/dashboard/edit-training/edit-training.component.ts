@@ -1,7 +1,8 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 import {
   CreateExerciseComponent
@@ -23,11 +24,13 @@ export class EditTrainingComponent implements OnInit {
   exerciseId = 0;
   bodyParts: any;
   total;
+  selectedOption;
 
   constructor(
     public trainingService: TrainingsService,
     private activatedRoute: ActivatedRoute,
     public router: Router,
+    private location: Location,
     private snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
@@ -35,12 +38,10 @@ export class EditTrainingComponent implements OnInit {
     const exerciseId = this.activatedRoute.snapshot.paramMap.get('exerciseId');
     if (exerciseId) {
       this.exerciseId = parseInt(exerciseId, 0);
+      this.selectedOption = this.exerciseId;
     }
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
-      if (this.training.end) {
-        this.router.navigate([`/dashboard/training/${this.training.id}`]);
-      }
       this.trainingName = res.name;
     });
   }
@@ -58,6 +59,9 @@ export class EditTrainingComponent implements OnInit {
     });
   }
 
+  back(): void {
+    this.location.back();
+  }
 
   finishWorkout(id): void {
     this.trainingService.finishTraining(id).subscribe(res => {

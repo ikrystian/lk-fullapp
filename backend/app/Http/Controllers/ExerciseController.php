@@ -82,6 +82,7 @@ class ExerciseController extends Controller
             }
             $averageInOneSeries = round($total /  $ex2);
             $averageInTraining = round($total / $trainings);
+
             return [$averageInOneSeries, $averageInTraining];
         }
     }

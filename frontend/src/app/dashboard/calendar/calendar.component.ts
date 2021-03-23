@@ -32,7 +32,7 @@ export class CalendarComponent implements OnInit {
     this.trainingService.getTrainingByDate(event.format('YYYY-MM-DD')).subscribe((res: any) => {
       console.log(res.data);
       if (res.data.length === 1) {
-        this.router.navigate([`/dashboard/training/${res.data[0].id}/edit/1`]);
+        this.router.navigate([`/dashboard/training/${res.data[0].id}`]);
       } else {
         this.openTrainingListModal(res.data);
       }
