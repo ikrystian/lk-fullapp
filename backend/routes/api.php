@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ExerciseTypeController;
+use App\Http\Controllers\MetaController;
 use App\Http\Controllers\TrainingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,8 @@ Route::group([
     Route::post('/req-password-reset', [ResetPwdReqController::class, 'reqForgotPassword']);
     Route::post('/update-password', [UpdatePwdController::class, 'updatePassword']);
 });
-
+// temporary meta table
+Route::post('/meta/add', [MetaController::class, 'store']);
 Route::get('/stats', [TrainingController::class, 'stats']);
 Route::get('/get-body-parts', [ExerciseController::class, 'getBodyParts']);
 Route::get('/training/exercises/{trainingId}/{exerciseType}', [TrainingController::class, 'getSeries']);

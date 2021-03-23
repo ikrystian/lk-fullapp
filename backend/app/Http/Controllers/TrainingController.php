@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\ExerciseResource;
 use App\Http\Resources\TrainingResource;
 use App\Models\Exercise;
+use App\Models\Meta;
 use App\Models\Training;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -49,8 +50,13 @@ class TrainingController extends Controller
         $training->archive_training = 0;
         $training->start = Carbon::now();
         $training->save();
+        $meta = new Meta();
+        $meta->connection_name = 'training';
+        $meta->connection_value = $training->id;
+        $meta->meta_name = 'location';
+        $meta->meta_value = json_encode($request['data']);
+        $meta->save();
         $training->id;
-
         return $training->toJson();
     }
 

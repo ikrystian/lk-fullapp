@@ -21,8 +21,8 @@ export class TrainingsService {
     return this.http.get(`${this.API_URL}/trainings/day/` + d);
   }
 
-  addTraining = () => {
-    return this.http.post(`${this.API_URL}/trainings`, {});
+  addTraining = (data) => {
+    return this.http.post(`${this.API_URL}/trainings`, {data});
   }
 
   getExercisesTypes = () => {
