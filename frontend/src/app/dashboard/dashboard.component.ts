@@ -40,9 +40,8 @@ export class DashboardComponent implements OnInit {
   addTraining(): void {
     this.trainingService.addTraining(this.userPosition).subscribe(res => {
       this.training = res;
-      console.log(res);
       this.openSnackBar('Trening został utworzony', 'ok');
-      // this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
+      this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
     });
   }
 
