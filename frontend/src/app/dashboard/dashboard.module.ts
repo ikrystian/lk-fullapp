@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
@@ -29,6 +29,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatListModule } from '@angular/material/list';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
+import { JwtService } from '../shared/jwt.service';
+import { appInitializer } from '../_helpers/app.initializer';
 
 @NgModule({
   declarations: [
@@ -71,6 +73,7 @@ import { CreateExerciseComponent } from './create-exercise/create-exercise.compo
   ],
   providers: [
     {provide: MatDialogRef, useValue: {}},
+    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [JwtService] },
     {provide: MAT_DIALOG_DATA, useValue: {}},
     MatDialogModule
   ]

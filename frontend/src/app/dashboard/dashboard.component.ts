@@ -7,6 +7,7 @@ import { GeolocationService } from '@ng-web-apis/geolocation';
 import * as moment from 'moment';
 import { AuthenticationStateService } from '../shared/authentication-state.service';
 import { TokenAuthService } from '../shared/token-auth.service';
+import { JwtService } from '../shared/jwt.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
     private geolocation: GeolocationService,
     private authenticationStateService: AuthenticationStateService,
     private tokenAuthService: TokenAuthService,
+    private jwtService: JwtService,
     private snackBar: MatSnackBar) {
   }
 

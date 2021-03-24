@@ -27,6 +27,9 @@ export class JwtService {
   logIn(user: User): Observable<any> {
     return this.http.post<any>(`${environment.API_URL}/auth/signin`, user);
   }
+  refreshToken(): Observable<any> {
+    return this.http.post<any>(`${environment.API_URL}/auth/token-refresh`, {});
+  }
 
   profile(): Observable<any> {
     return this.http.get(`${environment.API_URL}/api/auth/user`);
