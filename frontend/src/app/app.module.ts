@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { Injectable, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injectable, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,6 +32,8 @@ import {
   HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG
 }
   from '@angular/platform-browser';
+import { appInitializer } from './_helpers/app.initializer';
+import { JwtService } from './shared/jwt.service';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -76,6 +78,8 @@ export class MyHammerConfig extends HammerGestureConfig {
 
   providers: [
     MatDatepickerModule,
+    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [JwtService] },
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderInterceptor,
