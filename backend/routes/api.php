@@ -41,7 +41,6 @@ Route::post('/training/series/add', [TrainingController::class, 'addSeries']);
 Route::post('/trainings/workout/finish', [TrainingController::class, 'end']);
 Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
 Route::get('/exercises/unique/{trainingId}', [TrainingController::class, 'getUniqueExercises']);
-Route::get('/exercises/average/{id}/{trainingId}', [ExerciseController::class, 'averageExercisesWeight']);
 Route::resource('/trainings', TrainingController::class);
 Route::resource('/exercises', ExerciseController::class);
 Route::resource('/exercises-types', ExerciseTypeController::class);

@@ -38,21 +38,17 @@ export class TrainingsService {
     return this.http.post(`${this.API_URL}/training/series/add`, series);
   }
 
-  getToralWeightByTraining(trainingId: number) {
+  getToralWeightByTraining(trainingId: number): any {
     return this.http.get(`${this.API_URL}/training/total/${trainingId}`);
   }
 
-  changeName(id: number, name: string) {
+  changeName(id: number, name: string): any {
     const data = {id, name};
     return this.http.post(`${this.API_URL}/training/change-name`, data);
   }
 
   getExercises = (trainingId: number, exerciseId: number) => {
     return this.http.get(`${this.API_URL}/training/exercises/${trainingId}/${exerciseId}`);
-  }
-
-  getAverageWeightForExercise = (exerciseID: number, trainingId: number) => {
-    return this.http.get(`${this.API_URL}/exercises/average/${exerciseID}/${trainingId}`);
   }
 
   getUniqueExercises = (trainingId: number) => {

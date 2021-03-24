@@ -1,5 +1,3 @@
-import { Observable } from 'rxjs';
-
 import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -16,9 +14,6 @@ export class ExerciseComponent implements OnInit, OnChanges {
   exerciseForm: FormGroup;
   series: any = [];
   id;
-  average: any;
-  averageForSeries: any;
-  total: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,15 +36,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.trainingService.getExercises(this.trainingId, this.exerciseId).subscribe(res => {
       this.series = res;
-      if (this.exerciseId !== 0) {
-        this.currentAverage(this.series);
-      }
     });
-    this.trainingService.getAverageWeightForExercise(this.exerciseId, this.trainingId).subscribe(res => {
-      this.average = res;
-    });
-
-    this.getAverageWeight();
   }
 
 
@@ -61,14 +48,6 @@ export class ExerciseComponent implements OnInit, OnChanges {
       multiplier: [],
       training_id: [this.trainingId]
     });
-  }
-
-  currentAverage = (series) => {
-    let r = 0;
-    series.map(el => {
-      r += (el.reps * el.weight);
-    });
-    this.averageForSeries = r;
   }
 
   removeTraining = (trainingId: number) => {
@@ -83,11 +62,6 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
   }
 
-  getAverageWeight(): void {
-    this.trainingService.getToralWeightByTraining(this.trainingId).subscribe(res => {
-      this.total = res;
-    });
-  }
 
   onSubmit = (form) => {
     this.exerciseForm.disable();
@@ -103,13 +77,11 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
     this.trainingService.addSeries(series).subscribe(res => {
       this.series.unshift(res);
-      this.currentAverage(this.series);
       this.exerciseForm.enable();
       if (ele) {
         ele.focus();
       }
     });
-    this.getAverageWeight();
     this.openSnackBar('Seria została dodana', 'OK');
 
   }

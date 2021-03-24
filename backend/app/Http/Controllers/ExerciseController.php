@@ -57,36 +57,6 @@ class ExerciseController extends Controller
         return DB::table('body_parts')->get();
     }
 
-    public function averageExercisesWeight($id, $trainingId)
-    {
-        if($id == 0) return null;
-
-        $trainings = Training::where('archive_training', 0)->get()->count();
-
-        $total = 0;
-        $exercises = DB::table('exercises')
-            ->where('user_id', Auth::id())
-            ->where('exercise_type_id', $id)
-            ->where('training_id', '!=', $trainingId)
-            ->get();
-
-        $ex2 = $exercises->unique('training_id')->count();
-
-
-        if (!$exercises) {
-            return false;
-        } else {
-            foreach ($exercises as $exercise) {
-                $weight = $exercise->reps * $exercise->weight;
-                $total += $weight;
-            }
-            $averageInOneSeries = round($total /  $ex2);
-            $averageInTraining = round($total / $trainings);
-
-            return [$averageInOneSeries, $averageInTraining];
-        }
-    }
-
     /**
      * Display the specified resource.
      *

@@ -55,22 +55,3 @@
   Brak dodanych serii
 </div>
 
-<div class="add-exercises">
-
-
-      <section class="stats-et" *ngIf="average">
-        <div>
-          Obecny ciezar w wybranym ćwiczeniu: <strong>{{averageForSeries}}kg</strong><br>
-          <span class="average">
-            Bilans treningu dla obecnego ćwiczenia
-            <strong [ngClass]="{'greater' : (average[0] - averageForSeries) < 0 }">{{ -(average[0] - averageForSeries) }}kg</strong>
-          </span><br>
-
-          Srednia dla cwiczenia: <strong>{{average[0]}}kg</strong><br>
-        </div>
-        <hr>
-        <div class="total">
-          Obecny ciężar podniesiony na treningu: <strong>{{ total }}</strong><br>
-        </div>
-      </section>
-    </div>
