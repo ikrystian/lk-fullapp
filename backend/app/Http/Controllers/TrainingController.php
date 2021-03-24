@@ -35,6 +35,10 @@ class TrainingController extends Controller
         //
     }
 
+    public function storeImage() {
+
+    }
+
     /**
      * Store a newly created resource in storage.
      *
