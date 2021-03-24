@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { TrainingsService } from '../shared/trainings.service';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import * as moment from 'moment';
+import { AuthenticationStateService } from '../shared/authentication-state.service';
+import { TokenAuthService } from '../shared/token-auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +22,8 @@ export class DashboardComponent implements OnInit {
     public trainingService: TrainingsService,
     public router: Router,
     private geolocation: GeolocationService,
+    private authenticationStateService: AuthenticationStateService,
+    private tokenAuthService: TokenAuthService,
     private snackBar: MatSnackBar) {
   }
 
@@ -55,9 +59,15 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string): void {
     this.snackBar.open(message, action, {
       duration: 20000,
     });
+  }
+
+  logOut(): void {
+    this.authenticationStateService.setAuthState(false);
+    this.tokenAuthService.destroyToken();
+    this.router.navigate(['signin']);
   }
 }

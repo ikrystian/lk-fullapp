@@ -19,6 +19,8 @@ export class TokenAuthService {
     localStorage.setItem('auth_token', token);
   }
 
+  isLoggedIn = () => !!this.getJwtToken();
+
   getJwtToken = () => localStorage.getItem('auth_token');
 
   validateToken = () => {

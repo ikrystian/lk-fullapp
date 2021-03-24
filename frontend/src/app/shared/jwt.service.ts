@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 export class User {
   name: String;
@@ -25,11 +26,6 @@ export class JwtService {
 
   logIn(user: User): Observable<any> {
     return this.http.post<any>(`${environment.API_URL}/auth/signin`, user);
-  }
-
-  refreshToken(): Observable<any> {
-    return this.http.post<any>(`${environment.API_URL}/auth/token-refresh`, {});
-
   }
 
   profile(): Observable<any> {

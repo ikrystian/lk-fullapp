@@ -13,7 +13,7 @@ import { GuestGuard } from './guest.guard';
 const routes: Routes = [
   {path: '', redirectTo: '/signin', pathMatch: 'full'},
   {path: 'stats', component: StatsComponent},
-  {path: 'signin', component: LoginComponent},
+  {path: 'signin', component: LoginComponent, canActivate: [GuestGuard]},
   {path: 'signup', component: RegisterComponent},
   {path: 'user-profile', component: ProfileComponent},
   {path: 'reset-password', component: ResetPasswordComponent},

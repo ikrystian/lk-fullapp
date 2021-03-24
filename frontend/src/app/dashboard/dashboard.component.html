@@ -1,4 +1,26 @@
-<app-toolbar title="Dashboard"></app-toolbar>
+
+
+<mat-toolbar color="primary" class="toolbar">
+  <div class="toolbar__back">
+    <button mat-icon-button aria-label="Wstecz">
+      <mat-icon>home</mat-icon>
+    </button>
+  </div>
+  <span class="toolbar__title">Pulpit</span>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>logout</mat-icon>
+      Wyloguj
+    </button>
+  </mat-menu>
+
+</mat-toolbar>
+
+
 <mat-tab-group style="padding-top: 48px;" *ngIf="trainings">
   <mat-tab label="Lista ({{ trainings.length }})">
     <app-training-list [trainings]="trainings"></app-training-list>
