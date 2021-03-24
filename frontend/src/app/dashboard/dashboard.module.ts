@@ -28,6 +28,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatListModule } from '@angular/material/list';
+import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MatListModule } from '@angular/material/list';
     TrainingListModalComponent,
     ExerciseComponent,
     LogComponent,
-    TrainingListComponent
+    TrainingListComponent,
+    CreateExerciseComponent
   ],
   imports: [
     CommonModule,

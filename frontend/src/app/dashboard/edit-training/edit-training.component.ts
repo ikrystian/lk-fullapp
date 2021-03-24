@@ -4,10 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import {
-  CreateExerciseComponent
-} from '../../components/profile/create-exercise/create-exercise.component';
 import { TrainingsService } from '../../shared/trainings.service';
+import { CreateExerciseComponent } from '../create-exercise/create-exercise.component';
 
 @Component({
   selector: 'app-edit-training',

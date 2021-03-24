@@ -18,7 +18,6 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { CreateExerciseComponent } from './components/profile/create-exercise/create-exercise.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { StatsComponent } from './components/profile/stats/stats.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -50,7 +49,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     ResetPasswordComponent,
     UpdatePasswordComponent,
     StatsComponent,
-    CreateExerciseComponent,
   ],
   imports: [
     BrowserModule,
