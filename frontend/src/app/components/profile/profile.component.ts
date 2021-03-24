@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TrainingsService } from '../../shared/trainings.service';
 import { JwtService } from '../../shared/jwt.service';
 
 export class User {

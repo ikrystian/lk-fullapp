@@ -42,6 +42,8 @@ export class EditTrainingComponent implements OnInit {
       this.training = res;
       this.trainingName = res.name;
     });
+
+    this.openAddExerciseModal();
   }
 
   ngOnInit(): void {
