@@ -1,0 +1,28 @@
+<button class="quick-menu" mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/stats">
+    <mat-icon>analytics</mat-icon>
+    <span>Statystyki profilu</span>
+  </button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    <span>Wyloguj</span>
+  </button>
+</mat-menu>
+<mat-tab-group *ngIf="trainings">
+  <mat-tab label="Lista ({{ trainings.length }})">
+    <div style="padding: 0.25rem">
+      <app-training-list [trainings]="trainings"></app-training-list>
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Kalendarz">
+    <div style="padding: 0.25rem">
+      <app-calendar [trainings]="trainings"></app-calendar>
+    </div>
+  </mat-tab>
+
+</mat-tab-group>

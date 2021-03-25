@@ -34,6 +34,8 @@ import { appInitializer } from '../_helpers/app.initializer';
 import { TrainingImageComponent } from './edit-training/training-image/training-image.component';
 import { BottomNavComponent } from '../shared/bottom-nav/bottom-nav.component';
 import { ExerciseProgressComponent } from './edit-training/exercise-progress/exercise-progress.component';
+import { TrainingsComponent } from './trainings/trainings.component';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { ExerciseProgressComponent } from './edit-training/exercise-progress/exe
     TrainingImageComponent,
     BottomNavComponent,
     ExerciseProgressComponent,
+    TrainingsComponent,
   ],
   imports: [
     CommonModule,
@@ -77,6 +80,7 @@ import { ExerciseProgressComponent } from './edit-training/exercise-progress/exe
     MatBottomSheetModule,
     MatListModule,
     MatRippleModule,
+    MatDividerModule
   ],
   providers: [
     {provide: MatDialogRef, useValue: {}},
