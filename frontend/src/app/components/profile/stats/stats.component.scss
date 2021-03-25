@@ -1,0 +1,59 @@
+.stats {
+  padding: 2rem;
+  min-height: 100vh;
+  color: #fff;
+  background: url('/assets/images/stats-bg.jpg') center no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 2;
+  }
+
+  * {
+    position: relative;
+    z-index: 3;
+  }
+
+  h1 {
+    font-size: 2.5em;
+    line-height: 1.2;
+  }
+
+  h2 {
+    margin-bottom: 0;
+    font-size: 2.2rem;
+    line-height: 1.4;
+    font-weight: 300;
+
+    strong {
+      font-weight: 600;
+    }
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    line-height: 1.2;
+  }
+
+  &__close-button {
+    position: fixed !important;
+    top: 1rem;
+    right: 1rem;
+  }
+}
