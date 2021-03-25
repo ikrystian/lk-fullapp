@@ -7,6 +7,12 @@
   align-items: center;
   border-radius: 0.25rem;
   flex-direction: column;
-  background-color: #f2f2f2;
+  background-color: #3a3b3c;
   margin-bottom: 2rem;
+}
+
+.add-training-image-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

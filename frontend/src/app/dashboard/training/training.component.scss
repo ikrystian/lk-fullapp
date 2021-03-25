@@ -58,11 +58,25 @@ tr.example-element-row:not(.example-expanded-row):active {
 .user-image-container {
   img {
     max-width: 100%;
+    max-height: calc(50vh - 100px);
     display: block;
     margin: auto;
   }
 }
 
-.edit-training {
+.training-component {
   padding: calc(48px + 0.5rem) 0.5rem 0.5rem;
+
+  &__description {
+    padding: 1rem 0;
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+  }
+}
+
+.training-description {
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
 }

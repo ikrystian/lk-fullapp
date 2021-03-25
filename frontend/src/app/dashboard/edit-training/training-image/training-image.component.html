@@ -1,6 +1,4 @@
-<ng-container>
-<form action="" enctype="multipart/form-data" [formGroup]="form" (ngSubmit)="postForm()">
-  <input type="file"  formControlName="file" (change)="onFileChange($event)" >
-  <button type="submit">Ustaw zdjęcie treningowe</button>
+<form class="add-training-image-form" action="" enctype="multipart/form-data" [formGroup]="form" (ngSubmit)="postForm()">
+  <input type="file"  formControlName="file" accept="image/*" (change)="onFileChange($event)" >
+  <button type="submit" mat-button>Zapisz</button>
 </form>
-</ng-container>

@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TrainingsService } from '../../../shared/trainings.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-training-image',
@@ -21,6 +22,7 @@ export class TrainingImageComponent implements OnInit {
     private trainingsService: TrainingsService,
     private fb: FormBuilder,
     private http: HttpClient,
+    private router: Router,
     private snackBar: MatSnackBar) {
   }
 
@@ -31,17 +33,19 @@ export class TrainingImageComponent implements OnInit {
   postForm(): void {
     const formData = new FormData();
     formData.append('file', this.file);
-    const params = new HttpParams();
 
-    const options = {
-      params,
-      reportProgress: false,
-    };
 
-    const req = new HttpRequest('POST', `http://localhost:8000/api/trainings/add-image/${this.training.id}`, formData, options);
-    this.http.request(req).subscribe(res => {
-      this.snackBar.open('Zdjęcie zostało zaktualizowane.', 'zajebiście');
-    });
+    this.http.post(`http://localhost:8000/api/trainings/add-image/${this.training.id}`, formData).subscribe(
+      res => {
+        const snackBar = this.snackBar.open('Zdjęcie zostało zaktualizowane.', 'zobacz');
+        snackBar.onAction().subscribe(() => {
+          this.router.navigate([`/dashboard/training/${this.training.id}`]);
+        });
+      },
+      error => {
+        this.snackBar.open('Coś poszło nie tak :(', 'shit...');
+      }
+    );
   }
 
   onFileChange(event): void {
@@ -50,11 +54,4 @@ export class TrainingImageComponent implements OnInit {
       this.file = file;
     }
   }
-
-  openSnackBar = (message: string, action: string) => {
-    this.snackBar.open(message, action, {
-      duration: 20000,
-    });
-  }
-
 }

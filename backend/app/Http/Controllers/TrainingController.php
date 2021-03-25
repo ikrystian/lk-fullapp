@@ -37,7 +37,6 @@ class TrainingController extends Controller
     }
 
     public function storeImage($trainingId, Request $request) {
-
         if ($files = $request->file('file')) {
             $file = $request->file->store('public');
             $document = Training::findOrFail($trainingId);
