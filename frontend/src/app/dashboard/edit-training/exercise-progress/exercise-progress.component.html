@@ -1,8 +1,11 @@
 <ng-container *ngIf="this.totalForSeries && showProgressBar">
   <div class="progress">
-    <div class="progress__bar" style="width: {{ (this.totalForSeries['currentTraining'] / this.totalForSeries['lastTraining']) * 100 | round: 2 }}%">
+    <div class="progress__bar" [ngClass]="{'progress__bar--finished' : percentage > 99 }"
+         style="width: {{percentage}}%">
     </div>
-    <span class="progress__title">{{ (this.totalForSeries['currentTraining'] / this.totalForSeries['lastTraining']) * 100 | round: 2 }}% ostatniego treningu</span>
+    <span
+      class="progress__title">{{ (this.totalForSeries['currentTraining'] / this.totalForSeries['lastTraining']) * 100 | round: 2 }}
+      % ostatniego treningu</span>
   </div>
   <div class="progress__values">
     <span class="progress__start-value">0</span>

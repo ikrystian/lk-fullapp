@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ExerciseProgressComponent implements OnInit {
   totalForSeries: number;
   showProgressBar = true;
-
+  percentage;
   constructor(private trainingsService: TrainingsService, private activatedRoute: ActivatedRoute) {
   }
 
@@ -21,9 +21,12 @@ export class ExerciseProgressComponent implements OnInit {
         exerciseId: x.exerciseId,
         trainingId: x.trainingId
       };
+
       if (!data.exerciseId || !data.trainingId) return;
       this.trainingsService.getLastExerciseSum(data).subscribe(res => {
         this.totalForSeries = res;
+        console.log(res);
+        this.percentage = (res.currentTraining / res.lastTraining) * 100;
       });
     });
   }
