@@ -6,6 +6,8 @@ import { Location } from '@angular/common';
 
 import { TrainingsService } from '../../shared/trainings.service';
 import { CreateExerciseComponent } from '../create-exercise/create-exercise.component';
+import { AuthenticationStateService } from '../../shared/authentication-state.service';
+import { TokenAuthService } from '../../shared/token-auth.service';
 
 @Component({
   selector: 'app-edit-training',
@@ -23,11 +25,14 @@ export class EditTrainingComponent implements OnInit {
   bodyParts: any;
   total;
   selectedOption;
+  showUploadImageForm = false;
 
   constructor(
     public trainingService: TrainingsService,
     private activatedRoute: ActivatedRoute,
     public router: Router,
+    private authenticationStateService: AuthenticationStateService,
+    private tokenAuthService: TokenAuthService,
     private location: Location,
     private snackBar: MatSnackBar,
     public dialog: MatDialog
@@ -50,15 +55,23 @@ export class EditTrainingComponent implements OnInit {
       this.allExerciseTypes = types;
     });
 
-
-
     this.trainingService.getBodyParts().subscribe(bodyParts => {
       this.bodyParts = bodyParts;
     });
   }
 
+  toggleImageForm(): void {
+    this.showUploadImageForm = !this.showUploadImageForm;
+  }
+
   back(): void {
     this.location.back();
+  }
+
+  logOut(): void {
+    this.authenticationStateService.setAuthState(false);
+    this.tokenAuthService.destroyToken();
+    this.router.navigate(['signin']);
   }
 
   finishWorkout(id): void {

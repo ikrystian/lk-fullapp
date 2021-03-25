@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class TrainingController extends Controller
 {
@@ -35,8 +36,21 @@ class TrainingController extends Controller
         //
     }
 
-    public function storeImage() {
+    public function storeImage($trainingId, Request $request) {
 
+        if ($files = $request->file('file')) {
+            $file = $request->file->store('public');
+            $document = Training::findOrFail($trainingId);
+            $document->user_image = explode('/', $file)[1];
+            $document->save();
+
+            return response()->json([
+                "success" => true,
+                "message" => "File successfully uploaded",
+                "file" => $file
+            ]);
+
+        }
     }
 
     /**

@@ -55,3 +55,9 @@ tr.example-element-row:not(.example-expanded-row):active {
   padding: 0 0.5rem !important;
 }
 
+.user-image-container {
+  img {
+    max-width: 100%;
+    display: block;
+  }
+}

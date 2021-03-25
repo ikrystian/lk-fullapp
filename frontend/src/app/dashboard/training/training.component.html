@@ -22,11 +22,16 @@
     </mat-menu>
 
   </mat-toolbar>
+
+  <div class="user-image-container" *ngIf="training.user_image">
+    <img [src]="ASSETS_URL + training.user_image" alt="">
+  </div>
+
   <section class="page-content">
-    Lacznie na tym treningu: {{ training.total }}
+    Lacznie na tym treningu: {{ training.total }}kg
   </section>
 
-  <table mat-table [dataSource]="dataSource " class="block-table table-striped">
+  <table mat-table [dataSource]="dataSource" class="block-table table-striped">
 
     <ng-container matColumnDef="name">
       <td mat-footer-cell *matFooterCellDef></td>

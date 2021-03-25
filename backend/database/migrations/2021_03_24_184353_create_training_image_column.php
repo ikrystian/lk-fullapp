@@ -14,7 +14,7 @@ class CreateTrainingImageColumn extends Migration
     public function up()
     {
         Schema::table('trainings', function (Blueprint $table) {
-            $table->integer('user_image')->default('');
+            $table->string('user_image')->nullable();
         });
     }
 

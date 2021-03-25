@@ -21,7 +21,7 @@
 </mat-toolbar>
 
 
-<mat-tab-group style="padding-top: 48px;" *ngIf="trainings">
+<mat-tab-group *ngIf="trainings">
   <mat-tab label="Lista ({{ trainings.length }})">
     <app-training-list [trainings]="trainings"></app-training-list>
   </mat-tab>

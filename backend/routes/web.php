@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TrainingController;
+use Faker\Provider\Image;
 use Illuminate\Support\Facades\Route;
 
 /*

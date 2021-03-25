@@ -11,6 +11,10 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
+      <button class="mat-menu-item" (click)="toggleImageForm()">
+        <mat-icon>image</mat-icon>
+        Dodaj zdjęcie do treningu
+      </button>
       <button class="mat-menu-item" routerLink="/dashboard/training/{{ training.id }}">
         <mat-icon>assignment</mat-icon>
         Podsumowanie treningu
@@ -23,10 +27,16 @@
         <mat-icon>delete</mat-icon>
         Usuń trening
       </button>
+      <button mat-menu-item (click)="logOut()">
+        <mat-icon>logout</mat-icon>
+        Wyloguj
+      </button>
     </mat-menu>
   </mat-toolbar>
 
   <section class="page-content">
+    <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
+
     <mat-form-field class="full-width-input">
       <mat-label>Ustaw nazwę treningu</mat-label>
       <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">

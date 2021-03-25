@@ -31,6 +31,8 @@ import { MatListModule } from '@angular/material/list';
 import { CreateExerciseComponent } from './create-exercise/create-exercise.component';
 import { JwtService } from '../shared/jwt.service';
 import { appInitializer } from '../_helpers/app.initializer';
+import { TrainingImageComponent } from './edit-training/training-image/training-image.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { appInitializer } from '../_helpers/app.initializer';
     ExerciseComponent,
     LogComponent,
     TrainingListComponent,
-    CreateExerciseComponent
+    CreateExerciseComponent,
+    TrainingImageComponent
   ],
   imports: [
     CommonModule,
@@ -70,12 +73,12 @@ import { appInitializer } from '../_helpers/app.initializer';
     MatTooltipModule,
     MatBottomSheetModule,
     MatListModule,
-  ],
+    FileUploadModule],
   providers: [
     {provide: MatDialogRef, useValue: {}},
     { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [JwtService] },
     {provide: MAT_DIALOG_DATA, useValue: {}},
-    MatDialogModule
+    MatDialogModule,
   ]
 
 

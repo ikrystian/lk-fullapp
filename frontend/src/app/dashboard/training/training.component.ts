@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TrainingsService } from '../../shared/trainings.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-training',
@@ -15,6 +16,7 @@ export class TrainingComponent implements OnInit {
   displayedColumns: string[] = ['name', 'weight', 'reps', 'seriesTotal'];
   dataSource;
   unique;
+  ASSETS_URL = environment.UPLOADED_ASSETS_URL;
 
   constructor(
     public trainingService: TrainingsService,
@@ -26,6 +28,7 @@ export class TrainingComponent implements OnInit {
 
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
+      console.log(res);
       this.dataSource = res.exercises;
     });
   }

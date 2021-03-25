@@ -1,0 +1,6 @@
+<ng-container>
+<form action="" enctype="multipart/form-data" [formGroup]="form" (ngSubmit)="postForm()">
+  <input type="file"  formControlName="file" (change)="onFileChange($event)" >
+  <button type="submit">Ustaw zdjęcie treningowe</button>
+</form>
+</ng-container>

@@ -25,6 +25,11 @@ export class TrainingsService {
     return this.http.post(`${this.API_URL}/trainings`, {data});
   }
 
+  addImageToTraining = (data) => {
+    console.log(data);
+    return this.http.post(`${this.API_URL}/trainings/add-image`, {data});
+  }
+
   getExercisesTypes = () => {
     return this.http.get(`${this.API_URL}/exercises-types`);
   }
@@ -33,7 +38,7 @@ export class TrainingsService {
     return this.http.post(`${this.API_URL}/exercises-types`, {data});
   }
 
-  finishTraining(id: any) {
+  finishTraining(id: any): any {
     const data = {id};
     return this.http.post(`${this.API_URL}/trainings/workout/finish`, data);
   }
