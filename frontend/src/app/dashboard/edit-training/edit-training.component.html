@@ -1,5 +1,5 @@
 <div class="edit-training-component" *ngIf="training">
-  <mat-toolbar color="primary" class="toolbar">
+  <mat-toolbar class="toolbar">
     <div class="toolbar__back">
       <button (click)="back()" mat-icon-button aria-label="Wstecz">
         <mat-icon>keyboard_backspace</mat-icon>
@@ -34,7 +34,7 @@
     </mat-menu>
   </mat-toolbar>
 
-  <section class="page-content">
+  <section class="edit-training">
     <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
 
     <mat-form-field class="full-width-input">
@@ -67,3 +67,4 @@
   </footer>
 </div>
 
+<app-bottom-nav></app-bottom-nav>

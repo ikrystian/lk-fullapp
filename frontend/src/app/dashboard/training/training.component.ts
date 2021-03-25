@@ -9,7 +9,6 @@ import { environment } from '../../../environments/environment';
   selector: 'app-training',
   templateUrl: './training.component.html',
   styleUrls: ['./training.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class TrainingComponent implements OnInit {
   training: any;

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
-import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,7 +32,7 @@ import { CreateExerciseComponent } from './create-exercise/create-exercise.compo
 import { JwtService } from '../shared/jwt.service';
 import { appInitializer } from '../_helpers/app.initializer';
 import { TrainingImageComponent } from './edit-training/training-image/training-image.component';
-import { FileUploadModule } from 'ng2-file-upload';
+import { BottomNavComponent } from '../shared/bottom-nav/bottom-nav.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     LogComponent,
     TrainingListComponent,
     CreateExerciseComponent,
-    TrainingImageComponent
+    TrainingImageComponent,
+    BottomNavComponent,
   ],
   imports: [
     CommonModule,
@@ -73,10 +74,11 @@ import { FileUploadModule } from 'ng2-file-upload';
     MatTooltipModule,
     MatBottomSheetModule,
     MatListModule,
-    FileUploadModule],
+    MatRippleModule,
+  ],
   providers: [
     {provide: MatDialogRef, useValue: {}},
-    { provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [JwtService] },
+    {provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [JwtService]},
     {provide: MAT_DIALOG_DATA, useValue: {}},
     MatDialogModule,
   ]

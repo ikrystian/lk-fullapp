@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="toolbar">
+<mat-toolbar class="toolbar">
   <div class="toolbar__back">
     <button mat-icon-button aria-label="Wstecz">
       <mat-icon>home</mat-icon>
@@ -19,29 +19,20 @@
 </mat-toolbar>
 
 
-<mat-tab-group *ngIf="trainings">
+
+<mat-tab-group *ngIf="trainings" style="padding-top: 48px;">
   <mat-tab label="Lista ({{ trainings.length }})">
-    <app-training-list [trainings]="trainings"></app-training-list>
+    <div style="padding: 0.25rem">
+      <app-training-list [trainings]="trainings"></app-training-list>
+    </div>
   </mat-tab>
 
   <mat-tab label="Kalendarz">
-    <app-calendar [trainings]="trainings"></app-calendar>
+    <div style="padding: 0.25rem">
+      <app-calendar [trainings]="trainings"></app-calendar>
+    </div>
   </mat-tab>
 
 </mat-tab-group>
 
-<nav class="dashboard__footer-nav">
-
-  <button routerLink="/dashboard" matRipple>
-    <mat-icon>home</mat-icon>
-  </button>
-
-  <button routerLink="/stats">
-    <mat-icon>assessment</mat-icon>
-  </button>
-
-  <button (click)="addTraining()">
-    <mat-icon>add</mat-icon>
-  </button>
-
-</nav>
+<app-bottom-nav></app-bottom-nav>
