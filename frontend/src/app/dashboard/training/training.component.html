@@ -1,13 +1,5 @@
 <ng-container *ngIf="training">
-  <mat-toolbar class="toolbar">
-    <div class="toolbar__back">
-      <button (click)="back()" mat-icon-button aria-label="Wstecz">
-        <mat-icon>keyboard_backspace</mat-icon>
-      </button>
-    </div>
-    <span class="toolbar__title"><span>{{ training.name }}</span></span>
-
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <button class="quick-menu" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
@@ -21,8 +13,8 @@
       </button>
     </mat-menu>
 
-  </mat-toolbar>
-  <div class="training-component">
+
+  <div class="standard-page">
     <div class="user-image-container" *ngIf="training.user_image">
       <img [src]="ASSETS_URL + training.user_image" alt="">
     </div>

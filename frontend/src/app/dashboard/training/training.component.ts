@@ -8,7 +8,10 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
-  styleUrls: ['./training.component.scss'],
+  styleUrls: [
+    './training.component.scss',
+     '../../../assets/styles/components/quick-menu.component.scss'
+  ],
 })
 export class TrainingComponent implements OnInit {
   training: any;
