@@ -1,42 +1,39 @@
-<div class="edit-training-component" *ngIf="training">
-  <mat-toolbar class="toolbar">
-    <div class="toolbar__back">
-      <button (click)="back()" mat-icon-button aria-label="Wstecz">
-        <mat-icon>keyboard_backspace</mat-icon>
-      </button>
-    </div>
-    <span class="toolbar__title"><span>{{ training.name }}</span></span>
+<ng-container *ngIf="training">
 
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
+  <button mat-icon-button class="quick-menu" [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="finishWorkout(training.id)">
+      <mat-icon>insert_emoticon</mat-icon>
+      Zakończ trening
     </button>
-    <mat-menu #menu="matMenu">
-      <button class="mat-menu-item" (click)="toggleImageForm()">
-        <mat-icon>image</mat-icon>
-        Dodaj zdjęcie do treningu
-      </button>
-      <button class="mat-menu-item" routerLink="/dashboard/training/{{ training.id }}">
-        <mat-icon>assignment</mat-icon>
-        Podsumowanie treningu
-      </button>
-      <button mat-menu-item (click)="openAddExerciseModal()">
-        <mat-icon>add</mat-icon>
-        Dodaj ćwiczenie
-      </button>
-      <button mat-menu-item (click)="removeTraining(training.id)">
-        <mat-icon>delete</mat-icon>
-        Usuń trening
-      </button>
-      <button mat-menu-item (click)="logOut()">
-        <mat-icon>logout</mat-icon>
-        Wyloguj
-      </button>
-    </mat-menu>
-  </mat-toolbar>
-  <section class="edit-training">
+    <mat-divider></mat-divider>
+    <button class="mat-menu-item" (click)="toggleImageForm()">
+      <mat-icon>image</mat-icon>
+      Dodaj zdjęcie do treningu
+    </button>
+    <button class="mat-menu-item" routerLink="/dashboard/training/{{ training.id }}">
+      <mat-icon>assignment</mat-icon>
+      Podsumowanie treningu
+    </button>
+    <button mat-menu-item (click)="openAddExerciseModal()">
+      <mat-icon>add</mat-icon>
+      Dodaj ćwiczenie
+    </button>
+    <button mat-menu-item class="warn" (click)="removeTraining(training.id)">
+      <mat-icon>delete</mat-icon>
+      Usuń trening
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="logOut()">
+      <mat-icon>logout</mat-icon>
+      Wyloguj
+    </button>
+  </mat-menu>
   <app-exercise-progress></app-exercise-progress>
+  <div class="standard-page">
     <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
-
     <mat-form-field class="full-width-input">
       <mat-label>Ustaw nazwę treningu</mat-label>
       <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">
@@ -60,11 +57,5 @@
       </select>
     </mat-form-field>
     <app-exercise *ngIf="exerciseId !== 0" [exerciseId]="exerciseId" [trainingId]="training.id"></app-exercise>
-  </section>
-  <footer class="app-bottom-menu">
-
-    <button mat-flat-button color="primary" (click)="finishWorkout(training.id)">Zapisz zmiany</button>
-  </footer>
-</div>
-
-<app-bottom-nav></app-bottom-nav>
+  </div>
+</ng-container>

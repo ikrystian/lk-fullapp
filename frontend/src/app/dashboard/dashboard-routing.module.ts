@@ -10,10 +10,10 @@ const routes: Routes = [
   { path: '', component: DashboardComponent, children: [
       { path: '', redirectTo: 'training-list', pathMatch: 'full' },
       { path: 'training-list', component: TrainingsComponent },
+      { path: 'training/:id', component: TrainingComponent },
+      { path: 'training/:id/edit', component: EditTrainingComponent },
+      { path: 'training/:id/edit/:exerciseId', component: EditTrainingComponent }
     ]},
-  { path: 'training/:id', component: TrainingComponent },
-  { path: 'training/:id/edit', component: EditTrainingComponent },
-  { path: 'training/:id/edit/:exerciseId', component: EditTrainingComponent }
 ];
 
 @NgModule({

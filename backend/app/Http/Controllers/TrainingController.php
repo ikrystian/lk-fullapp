@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ExerciseResource;
 use App\Http\Resources\TrainingResource;
 use App\Models\Exercise;
 use App\Models\Meta;
@@ -11,7 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 
 class TrainingController extends Controller
 {
@@ -33,8 +31,10 @@ class TrainingController extends Controller
             ->where('training_id', '!=', $currentTrainingId)
             ->where('user_id', Auth::id())
             ->latest()->
-            first('training_id')->training_id;
+            firstOrFail('training_id')->training_id;
+
         $exercises = Exercise::where('training_id', $trainingId)->where('exercise_type_id', $exerciseId)->get();
+
         $lastTraining = $exercises->map(function ($item) {
             $data = $item;
             $data['total'] = $item->weight * $item->reps * $item->type->multipler;
@@ -42,6 +42,7 @@ class TrainingController extends Controller
         });
 
         $exercises = Exercise::where('training_id', $currentTrainingId)->where('exercise_type_id', $exerciseId)->get();
+
         $currentTraining = $exercises->map(function ($item) {
             $data = $item;
             $data['total'] = $item->weight * $item->reps * $item->type->multipler;

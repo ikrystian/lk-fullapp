@@ -1,31 +1,17 @@
 <div class="add-exercises">
-  <form action="" [formGroup]="exerciseForm" (ngSubmit)="onSubmit(exerciseForm)" #addSeriesForm>
-    <div class="add-exercises__row">
-      <div class="add-exercises__series"></div>
-      <div class="add-exercises__reps">
-        Powtórzenia
-      </div>
-      <div class="add-exercises__weight">
-        Ciężar
-      </div>
-      <div class="add-exercises__action">
-        Zatwierdź
-      </div>
-    </div>
-
-
+  <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit(exerciseForm)" #addSeriesForm>
     <div class="add-exercises__row">
       <div class="add-exercises__series">
         {{ series.length + 1 }}
       </div>
       <div class="add-exercises__reps">
-        <input type="number" name="reps" formControlName="reps" #myInput required autofocus>
+        <input type="number" name="reps" formControlName="reps" placeholder="Powtórzenia" #myInput required autofocus>
       </div>
       <div class="add-exercises__weight">
-        <input type="number"  formControlName="weight" required>
+        <input type="number"  placeholder="Ciężar" formControlName="weight" required>
       </div>
       <div class="add-exercises__action">
-        <button mat-stroked-button (click)="myInput.focus()" [disabled]="!exerciseForm.valid">
+        <button mat-button (click)="myInput.focus()" [disabled]="!exerciseForm.valid">
           <mat-icon>checked</mat-icon>
         </button>
       </div>
@@ -42,7 +28,7 @@
         {{ ser.weight }}
       </div>
       <div class="add-exercises__action">
-        <button mat-stroked-button color="warn" type="button" (click)="removeExercise(ser.id)">
+        <button mat-button color="warn" type="button" (click)="removeExercise(ser.id)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>

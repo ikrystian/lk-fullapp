@@ -19,6 +19,11 @@ $angular-default-theme: mat-dark-theme(
   --primary-color: #292c31;
   --accent-color: #ff9800;
 }
+
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   height: 100%;
@@ -37,18 +42,20 @@ body {
   font-weight: 100;
 }
 
-.page-content {
-  padding: 48px 0.5rem 0.5rem 0.5rem;
-}
+.standard-page {
+  padding: 1rem 1rem calc(42px + 0.5rem) 1rem;
+  height: 100%;
 
-.button {
-  color: var(--primary-color);
 }
 
 .loader-bar {
   position: fixed;
   width: 100%;
   z-index: 99;
+}
+
+.warn {
+  color: red;
 }
 
 .select {

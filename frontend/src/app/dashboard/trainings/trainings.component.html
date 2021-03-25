@@ -12,15 +12,15 @@
     <span>Wyloguj</span>
   </button>
 </mat-menu>
-<mat-tab-group *ngIf="trainings">
+<mat-tab-group *ngIf="trainings" class="training-list-tabs">
   <mat-tab label="Lista ({{ trainings.length }})">
-    <div style="padding: 0.25rem">
+    <div class="training-list-tabs__tab-content">
       <app-training-list [trainings]="trainings"></app-training-list>
     </div>
   </mat-tab>
 
   <mat-tab label="Kalendarz">
-    <div style="padding: 0.25rem">
+    <div class="training-list-tabs__tab-content">
       <app-calendar [trainings]="trainings"></app-calendar>
     </div>
   </mat-tab>

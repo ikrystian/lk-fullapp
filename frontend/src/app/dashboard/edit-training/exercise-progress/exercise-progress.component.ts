@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TrainingsService } from '../../../shared/trainings.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-exercise-progress',
@@ -11,12 +10,13 @@ export class ExerciseProgressComponent implements OnInit {
   totalForSeries: number;
   showProgressBar = true;
   percentage;
-  constructor(private trainingsService: TrainingsService, private activatedRoute: ActivatedRoute) {
+  constructor(private trainingsService: TrainingsService) {
   }
 
   ngOnInit(): void {
 
     this.trainingsService.share.subscribe(x => {
+      console.log('asd', x);
       const data = {
         exerciseId: x.exerciseId,
         trainingId: x.trainingId
@@ -27,6 +27,7 @@ export class ExerciseProgressComponent implements OnInit {
         this.totalForSeries = res;
         console.log(res);
         this.percentage = (res.currentTraining / res.lastTraining) * 100;
+        this.percentage = ( this.percentage < 100 ) ? this.percentage : 100;
       });
     });
   }
