@@ -14,7 +14,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
   exerciseForm: FormGroup;
   series: any = [];
   id;
-
+  text = '';
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -37,6 +37,8 @@ export class ExerciseComponent implements OnInit, OnChanges {
     this.trainingService.getExercises(this.trainingId, this.exerciseId).subscribe(res => {
       this.series = res;
     });
+    this.trainingService.updateData(this.exerciseId, this.trainingId);
+
   }
 
 
@@ -81,6 +83,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
       if (ele) {
         ele.focus();
       }
+      this.trainingService.updateData(this.exerciseId, this.trainingId);
     });
     this.openSnackBar('Seria została dodana', 'OK');
 
@@ -93,6 +96,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
     this.trainingService.removeExercise(seriesId).subscribe(res => {
       this.openSnackBar('Seria została usunięta', 'OK');
+      this.trainingService.updateData(this.exerciseId, this.trainingId);
 
       this.series = this.series.filter((element) => {
         return element.id !== seriesId;

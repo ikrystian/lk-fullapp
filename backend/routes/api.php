@@ -31,6 +31,7 @@ Route::group([
     Route::post('/update-password', [UpdatePwdController::class, 'updatePassword']);
 });
 // temporary meta table
+Route::get('/exercises/getTotalInSeries/{exerciseId}/{currentTrainingId}', [TrainingController::class, 'getLastExerciseSum']);
 Route::post('/trainings/add-image/{trainingId}', [TrainingController::class, 'storeImage']);
 Route::get('/training/total/{trainingId}', [ExerciseController::class, 'total']);
 Route::post('/meta/add', [MetaController::class, 'store']);

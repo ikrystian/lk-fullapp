@@ -1,14 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrainingsService {
   API_URL = environment.API_URL;
+  private content = new BehaviorSubject<any>({});
+  public share = this.content.asObservable();
 
   constructor(private http: HttpClient) {
+  }
+
+  updateData(exerciseId, trainingId): void {
+    const data = {trainingId, exerciseId};
+    this.content.next(data);
   }
 
   getTrainings = () => this.http.get(`${this.API_URL}/trainings`);
@@ -27,6 +35,10 @@ export class TrainingsService {
 
   getExercisesTypes = () => {
     return this.http.get(`${this.API_URL}/exercises-types`);
+  }
+
+  getLastExerciseSum(data): any {
+      return this.http.get(`${this.API_URL}/exercises/getTotalInSeries/${data.exerciseId}/${data.trainingId}`);
   }
 
   createExerciseType = (data) => {

@@ -26,6 +26,31 @@ class TrainingController extends Controller
         return TrainingResource::collection($trainings);
 
     }
+
+    public function getLastExerciseSum($exerciseId, $currentTrainingId)
+    {
+        $trainingId = Exercise::where('exercise_type_id', $exerciseId)
+            ->where('training_id', '!=', $currentTrainingId)
+            ->where('user_id', Auth::id())
+            ->latest()->
+            first('training_id')->training_id;
+        $exercises = Exercise::where('training_id', $trainingId)->where('exercise_type_id', $exerciseId)->get();
+        $lastTraining = $exercises->map(function ($item) {
+            $data = $item;
+            $data['total'] = $item->weight * $item->reps * $item->type->multipler;
+            return $data;
+        });
+
+        $exercises = Exercise::where('training_id', $currentTrainingId)->where('exercise_type_id', $exerciseId)->get();
+        $currentTraining = $exercises->map(function ($item) {
+            $data = $item;
+            $data['total'] = $item->weight * $item->reps * $item->type->multipler;
+            return $data;
+        });
+
+        return ['lastTraining' => $lastTraining->sum('total'), 'currentTraining' => $currentTraining->sum('total')];
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -36,7 +61,8 @@ class TrainingController extends Controller
         //
     }
 
-    public function storeImage($trainingId, Request $request) {
+    public function storeImage($trainingId, Request $request)
+    {
         if ($files = $request->file('file')) {
             $file = $request->file->store('public');
             $document = Training::findOrFail($trainingId);
@@ -123,13 +149,15 @@ class TrainingController extends Controller
         //
     }
 
-    public function changeName(Request $request) {
+    public function changeName(Request $request)
+    {
         $training = Training::findOrFail($request->id);
         $training->name = $request->name;
         $training->save();
     }
 
-    public function getSeries($trainingId, $exerciseType) {
+    public function getSeries($trainingId, $exerciseType)
+    {
         $exercises = DB::table('exercises')
             ->where('training_id', $trainingId)
             ->where('exercise_type_id', $exerciseType)
@@ -177,7 +205,8 @@ class TrainingController extends Controller
         return response()->json('removed', 200);
     }
 
-    public function stats() {
+    public function stats()
+    {
         $stats = [];
         $stats['total'] = Training::where('user_id', Auth::id())->sum('total');
         $stats['username'] = Auth::user();

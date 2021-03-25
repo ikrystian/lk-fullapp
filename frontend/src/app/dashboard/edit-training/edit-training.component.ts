@@ -26,7 +26,7 @@ export class EditTrainingComponent implements OnInit {
   total;
   selectedOption;
   showUploadImageForm = false;
-
+  showProgress = false;
   constructor(
     public trainingService: TrainingsService,
     private activatedRoute: ActivatedRoute,

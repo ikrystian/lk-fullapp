@@ -33,6 +33,7 @@ import { JwtService } from '../shared/jwt.service';
 import { appInitializer } from '../_helpers/app.initializer';
 import { TrainingImageComponent } from './edit-training/training-image/training-image.component';
 import { BottomNavComponent } from '../shared/bottom-nav/bottom-nav.component';
+import { ExerciseProgressComponent } from './edit-training/exercise-progress/exercise-progress.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { BottomNavComponent } from '../shared/bottom-nav/bottom-nav.component';
     CreateExerciseComponent,
     TrainingImageComponent,
     BottomNavComponent,
+    ExerciseProgressComponent,
   ],
   imports: [
     CommonModule,

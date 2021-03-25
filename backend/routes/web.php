@@ -23,3 +23,5 @@ Route::get('/clear', function() {
     Artisan::call('key:generate');
     Artisan::call('storage:link');
 });
+
+Route::get('test', [TrainingController::class, 'getLastExerciseSum']);
