@@ -5,7 +5,7 @@
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="finishWorkout(training.id)">
-      <mat-icon>insert_emoticon</mat-icon>
+      <mat-icon>save</mat-icon>
       <span>Zapisz trening</span>
     </button>
     <mat-divider></mat-divider>
@@ -32,33 +32,42 @@
       <span>Wyloguj</span>
     </button>
   </mat-menu>
-  <app-exercise-progress></app-exercise-progress>
-  <div class="standard-page">
-    <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
-<!--    <mat-form-field class="full-width-input">-->
-<!--      <mat-label>Ustaw nazwę treningu</mat-label>-->
-<!--      <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">-->
-<!--    </mat-form-field>-->
+  <app-exercise-progress *ngIf="exerciseId !== 0"></app-exercise-progress>
+  <div class="standard-page edit-training" [class.edit-training--exercises]="exerciseId !== 0">
+    <div>
+      <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
+      <!--    <mat-form-field class="full-width-input">-->
+      <!--      <mat-label>Ustaw nazwę treningu</mat-label>-->
+      <!--      <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">-->
+      <!--    </mat-form-field>-->
 
-    <div class="choose-exercise">
-      <button [matMenuTriggerFor]="exerciseMenu">
-        <mat-icon>format_list_bulleted</mat-icon>
-      </button>
-      <mat-menu #exerciseMenu="matMenu">
-        <ng-container *ngFor="let bodyPart of bodyParts">
-          <button mat-menu-item (click)="filterExercises(bodyPart.id)">{{ bodyPart.name }}</button>
-        </ng-container>
-      </mat-menu>
-      <mat-form-field class="select--full">
-        <select matNativeControl #t required placeholder="Wybierz ćwiczenie" (change)="changeExercise(t.value)" [(ngModel)]="selectedOption">
-          <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
-            {{exercise.name}}
-          </option>
-        </select>
-      </mat-form-field>
+      <div class="choose-exercise">
+        <button [matMenuTriggerFor]="exerciseMenu">
+          <mat-icon>format_list_bulleted</mat-icon>
+        </button>
+        <mat-menu #exerciseMenu="matMenu">
+          <button mat-menu-item (click)="clearFilters()">Wszystkie partie</button>
+
+          <ng-container *ngFor="let bodyPart of bodyParts">
+            <button mat-menu-item (click)="filterExercises(bodyPart.id)">{{ bodyPart.name }}</button>
+          </ng-container>
+        </mat-menu>
+        <mat-form-field class="select--full">
+          <select matNativeControl #t required placeholder="Wybierz ćwiczenie" (change)="changeExercise(t.value)"
+                  [(ngModel)]="selectedOption">
+            <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
+              {{exercise.name}}
+            </option>
+          </select>
+        </mat-form-field>
+      </div>
+      <app-exercise *ngIf="exerciseId !== 0" [exerciseId]="exerciseId" [trainingId]="training.id"></app-exercise>
     </div>
-    <app-exercise *ngIf="exerciseId !== 0" [exerciseId]="exerciseId" [trainingId]="training.id"></app-exercise>
 
+    <div *ngIf="!training.end" class="finish-workout" (click)="finishWorkout(training.id)">
+      Trening nie został jeszcze zakończony
+      <button>Zakończ trening</button>
+    </div>
 
   </div>
 </ng-container>

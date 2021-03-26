@@ -4,7 +4,13 @@
 }
 
 .edit-training {
-  padding: calc(48px + 0.5rem) 0.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &--exercises {
+    height: calc(100% - 68px);
+  }
 }
 
 .choose-exercise {
@@ -18,4 +24,9 @@
     border: 0;
     text-transform: capitalize;
   }
+}
+
+.finish-workout {
+  display: flex;
+  opacity: 0.5;
 }

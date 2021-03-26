@@ -42,6 +42,7 @@ Route::get('/get-body-parts', [ExerciseController::class, 'getBodyParts']);
 Route::get('/training/exercises/{trainingId}/{exerciseType}', [TrainingController::class, 'getSeries']);
 Route::post('/training/change-name', [TrainingController::class, 'changeName']);
 Route::post('/training/series/add', [TrainingController::class, 'addSeries']);
+Route::post('/trainings/workout/save', [TrainingController::class, 'save']);
 Route::post('/trainings/workout/finish', [TrainingController::class, 'end']);
 Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
 Route::get('/exercises/unique/{trainingId}', [TrainingController::class, 'getUniqueExercises']);

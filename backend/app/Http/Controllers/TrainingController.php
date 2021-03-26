@@ -212,6 +212,19 @@ class TrainingController extends Controller
         return $training->toJson();
     }
 
+    public function save(Request $request)
+    {
+        $total = 0;
+        $exercises = Exercise::all()->where('training_id', $request->id);
+        foreach ($exercises as $exercise) {
+            $total += $exercise->weight * $exercise->reps * $exercise->type->multipler;
+        }
+        $training = Training::findOrFail($request->id);
+        $training->total = $total;
+        $training->save();
+        return $training->toJson();
+    }
+
     /**
      * Update the specified resource in storage.
      *

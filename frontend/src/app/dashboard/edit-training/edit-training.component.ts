@@ -61,6 +61,10 @@ export class EditTrainingComponent implements OnInit {
         });
     }
 
+    clearFilters(): void {
+        this.exerciseTypes = this.allExerciseTypes;
+    }
+
     toggleImageForm(): void {
         this.showUploadImageForm = !this.showUploadImageForm;
     }
@@ -73,6 +77,12 @@ export class EditTrainingComponent implements OnInit {
         this.authenticationStateService.setAuthState(false);
         this.tokenAuthService.destroyToken();
         this.router.navigate(['signin']);
+    }
+
+    saveTraining(id): void {
+        this.trainingService.saveTraining(id).subscribe(res => {
+            this.router.navigate([`/dashboard/training/${id}`]);
+        });
     }
 
     finishWorkout(id): void {

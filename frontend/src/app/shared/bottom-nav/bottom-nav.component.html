@@ -1,12 +1,12 @@
 <nav >
-  <button routerLink="profile/{{ user?.id }}" matRipple>
+  <button routerLink="/dashboard/profile/{{ user?.id }}" matRipple>
     <img [src]="USER_IMAGE" alt="">
   </button>
   <button routerLink="/dashboard" matRipple>
     <mat-icon>home</mat-icon>
   </button>
 
-  <button routerLink="stats/{{ user?.id }}" matRipple>
+  <button routerLink="/dashboard/stats/{{ user?.id }}" matRipple>
     <mat-icon>assessment</mat-icon>
   </button>
 
