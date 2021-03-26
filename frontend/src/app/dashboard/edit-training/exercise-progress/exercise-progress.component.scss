@@ -37,5 +37,13 @@
 
   &__total {
     text-align: center;
+    padding: 0.5rem;
+    background-color: var(--primary-color);
+    display: inline-block;
+    position: fixed;
+    left: 0;
+    font-size: 12px;
+    bottom: 58px;
+    min-width: calc(42px + 2rem);
   }
 }

@@ -35,28 +35,30 @@
   <app-exercise-progress></app-exercise-progress>
   <div class="standard-page">
     <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
-    <mat-form-field class="full-width-input">
-      <mat-label>Ustaw nazwę treningu</mat-label>
-      <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">
-    </mat-form-field>
+<!--    <mat-form-field class="full-width-input">-->
+<!--      <mat-label>Ustaw nazwę treningu</mat-label>-->
+<!--      <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">-->
+<!--    </mat-form-field>-->
 
-    <div class="body-parts__container">
-      <div class="body-parts">
+    <div class="choose-exercise">
+      <button [matMenuTriggerFor]="exerciseMenu">
+        <mat-icon>format_list_bulleted</mat-icon>
+      </button>
+      <mat-menu #exerciseMenu="matMenu">
         <ng-container *ngFor="let bodyPart of bodyParts">
-          <button mat-button (click)="filterExercises(bodyPart.id)">{{ bodyPart.name }}</button>
+          <button mat-menu-item (click)="filterExercises(bodyPart.id)">{{ bodyPart.name }}</button>
         </ng-container>
-      </div>
+      </mat-menu>
+      <mat-form-field class="select--full">
+        <select matNativeControl #t required placeholder="Wybierz ćwiczenie" (change)="changeExercise(t.value)" [(ngModel)]="selectedOption">
+          <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
+            {{exercise.name}}
+          </option>
+        </select>
+      </mat-form-field>
     </div>
-
-    <mat-form-field class="select--full">
-      <mat-label>Cwiczenie</mat-label>
-      <select matNativeControl #t required (change)="changeExercise(t.value)" [(ngModel)]="selectedOption">
-        <option value=""></option>
-        <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
-          {{exercise.name}}
-        </option>
-      </select>
-    </mat-form-field>
     <app-exercise *ngIf="exerciseId !== 0" [exerciseId]="exerciseId" [trainingId]="training.id"></app-exercise>
+
+
   </div>
 </ng-container>

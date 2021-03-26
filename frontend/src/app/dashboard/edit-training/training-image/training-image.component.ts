@@ -14,6 +14,7 @@ export class TrainingImageComponent implements OnInit {
   @Input() training: any;
   selectedFile: File = null;
   file;
+  labelText = 'Kliknij aby wybrać zdjęcie';
   form = this.fb.group({
     file: [null, Validators.required]
   });
@@ -52,6 +53,7 @@ export class TrainingImageComponent implements OnInit {
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       this.file = file;
+      this.labelText = file.name;
     }
   }
 }

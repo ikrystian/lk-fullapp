@@ -23,6 +23,15 @@ class TrainingController extends Controller
     public function index()
     {
         $trainings = Training::where('user_id', Auth::id())->orderBy('training_date', 'desc')->get();
+        $trainings->map(function ($training) {
+
+            if ($training->end) {
+                $to = Carbon::createFromFormat('Y-m-d H:i:s', $training->start);
+                $from = Carbon::createFromFormat('Y-m-d H:i:s',$training->end);
+                $diff_in_minutes = $to->diffInMinutes($from);
+                $training['time'] = $diff_in_minutes;
+            }
+        });
         return TrainingResource::collection($trainings);
 
     }
@@ -233,11 +242,11 @@ class TrainingController extends Controller
 
         $user = User::find($userId);
         $stats = [];
-        $stats['total'] = Training::where('user_id',$userId)->sum('total');
+        $stats['total'] = Training::where('user_id', $userId)->sum('total');
 
         $stats['username'] = $user->name;
-        $stats['trainings'] = Training::where('user_id',$userId)->count();
-        if(Auth::id() == 1) {
+        $stats['trainings'] = Training::where('user_id', $userId)->count();
+        if (Auth::id() == 1) {
             $stats['total'] += 550000;
             $stats['trainings'] += 28;
 

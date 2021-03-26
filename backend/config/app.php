@@ -14,7 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    'ttl' => env('JWT_TTL', 525600),
     /*
     |--------------------------------------------------------------------------
     | Application Environment

@@ -25,15 +25,16 @@ $angular-light-theme: mat-light-theme(
 
 .theme-dark {
   @include angular-material-theme($angular-dark-theme);
-
   --body-background-color: #18191a;
-  --font-color: #fff;
+  --font-color: rgb(228, 230, 235);
+  --popup-background-color: #292c31;
+
 }
 .theme-light {
   @include angular-material-theme($angular-light-theme);
-
   --body-background-color: #fff;
-  --font-color: 18191a;
+  --font-color: #18191a;
+  --popup-background-color: #dedede;
 }
 
 
@@ -61,6 +62,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-weight: 100;
+  color: var(--font-color);
 }
 
 .standard-page {
@@ -106,6 +108,7 @@ body {
 body {
   max-height: 100vh;
 
+  .mat-menu-item,
   .mat-button,
   .mat-icon-button,
   .mat-stroked-button,
@@ -113,8 +116,16 @@ body {
     border-radius: 0;
 
     &::first-letter {
-      text-transform: uppercase;
+      text-transform: uppercase !important;
     }
+  }
+
+  .mat-input-element {
+    color: var(--font-color);
+  }
+
+  .mat-button span.mat-button-wrapper {
+
   }
 
   .mat-toolbar {

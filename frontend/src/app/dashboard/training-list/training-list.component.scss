@@ -21,6 +21,19 @@
     }
   }
 
+  &__stats {
+    flex: 1 1 auto;
+  }
+
+  &__data-item {
+    display: inline-flex;
+    align-items: center;
+
+    .mat-icon {
+      margin-right: 0.25rem;
+    }
+  }
+
   .mat-expansion-panel-header-title {
     flex: 1 1 auto;
   }

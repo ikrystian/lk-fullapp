@@ -9,10 +9,16 @@
   flex-direction: column;
   background-color: #3a3b3c;
   margin-bottom: 2rem;
+  margin-right:  calc(48px - 1rem);
 }
 
 .add-training-image-form {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
+
+  &__input {
+    display: none;
+  }
 }

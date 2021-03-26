@@ -54,7 +54,7 @@ class ExerciseController extends Controller
 
     public function getBodyParts()
     {
-        return DB::table('body_parts')->get();
+        return DB::table('body_parts')->orderBy('name', 'ASC')->get();
     }
 
     /**
