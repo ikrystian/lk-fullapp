@@ -19,7 +19,7 @@
       <img [src]="ASSETS_URL + training.user_image" alt="">
     </div>
 
-    <section class="short-summary">
+    <section class="short-summary" *ngIf="training.end">
       Lacznie na tym treningu: {{ training.total }}kg
     </section>
 

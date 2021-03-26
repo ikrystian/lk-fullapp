@@ -4,11 +4,15 @@
          style="width: {{percentage}}%">
     </div>
     <span
-      class="progress__title">{{ (this.totalForSeries['currentTraining'] / this.totalForSeries['lastTraining']) * 100 | round: 2 }}% ostatniego treningu</span>
+      class="progress__title">{{ (this.totalForSeries['currentTraining'] / this.totalForSeries['lastTraining']) * 100 | round: 2 }}
+      % ostatniego treningu</span>
   </div>
   <div class="progress__values">
     <span class="progress__start-value">0</span>
     <span class="progress__current-value">{{ this.totalForSeries['currentTraining'] }}kg</span>
     <span class="progress__end-value">{{ this.totalForSeries['lastTraining'] }}kg</span>
+  </div>
+  <div class="progress__total">
+    <span>Lacznie na tym treningu: <strong>{{this.totalForSeries['currentTotalTraining'] / 1000 | round: 2}}ton</strong> ({{ this.totalForSeries['currentTotalTraining']}})</span>
   </div>
 </ng-container>

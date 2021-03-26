@@ -6,29 +6,30 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="finishWorkout(training.id)">
       <mat-icon>insert_emoticon</mat-icon>
-      Zakończ trening
+      <span>Zapisz trening</span>
     </button>
     <mat-divider></mat-divider>
     <button class="mat-menu-item" (click)="toggleImageForm()">
       <mat-icon>image</mat-icon>
-      Dodaj zdjęcie do treningu
+      <span>Dodaj zdjęcie do treningu</span>
     </button>
     <button class="mat-menu-item" routerLink="/dashboard/training/{{ training.id }}">
       <mat-icon>assignment</mat-icon>
-      Podsumowanie treningu
+      <span>Podsumowanie treningu</span>
     </button>
     <button mat-menu-item (click)="openAddExerciseModal()">
       <mat-icon>add</mat-icon>
-      Dodaj ćwiczenie
+      <span>Dodaj ćwiczenie</span>
     </button>
+    <mat-divider></mat-divider>
     <button mat-menu-item class="warn" (click)="removeTraining(training.id)">
       <mat-icon>delete</mat-icon>
-      Usuń trening
+      <span>Usuń trening</span>
     </button>
     <mat-divider></mat-divider>
     <button mat-menu-item (click)="logOut()">
       <mat-icon>logout</mat-icon>
-      Wyloguj
+      <span>Wyloguj</span>
     </button>
   </mat-menu>
   <app-exercise-progress></app-exercise-progress>

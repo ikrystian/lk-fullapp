@@ -2,6 +2,7 @@
 
 .mat-dialog-container {
   padding: 0;
+  border-radius: 0;
 }
 
 .popup {
@@ -19,7 +20,7 @@
 
   &__content {
     max-height: 50vh;
-    background-color: #dedede;
+    background-color: #292c31;
     overflow: auto;
     padding: 1rem;
   }

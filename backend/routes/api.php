@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ExerciseTypeController;
 use App\Http\Controllers\MetaController;
@@ -31,11 +32,12 @@ Route::group([
     Route::post('/update-password', [UpdatePwdController::class, 'updatePassword']);
 });
 // temporary meta table
+Route::get('/activities/{userId}', [ActivityController::class, 'getByUserId']);
 Route::get('/exercises/getTotalInSeries/{exerciseId}/{currentTrainingId}', [TrainingController::class, 'getLastExerciseSum']);
 Route::post('/trainings/add-image/{trainingId}', [TrainingController::class, 'storeImage']);
 Route::get('/training/total/{trainingId}', [ExerciseController::class, 'total']);
 Route::post('/meta/add', [MetaController::class, 'store']);
-Route::get('/stats', [TrainingController::class, 'stats']);
+Route::get('/stats/{userId}', [TrainingController::class, 'stats']);
 Route::get('/get-body-parts', [ExerciseController::class, 'getBodyParts']);
 Route::get('/training/exercises/{trainingId}/{exerciseType}', [TrainingController::class, 'getSeries']);
 Route::post('/training/change-name', [TrainingController::class, 'changeName']);

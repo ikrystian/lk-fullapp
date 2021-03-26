@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\JwtAuthController;
 use App\Http\Controllers\TrainingController;
 use Faker\Provider\Image;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/clear', function() {
+Route::get('/clear', function () {
     Artisan::call('cache:clear');
     Artisan::call('config:clear');
     Artisan::call('config:cache');
@@ -23,5 +25,6 @@ Route::get('/clear', function() {
     Artisan::call('key:generate');
     Artisan::call('storage:link');
 });
-
+Route::get('/user', [JwtAuthController::class, 'user']);
+Route::get('/activities/{userId}', [ActivityController::class, 'getByUserId']);
 Route::get('test', [TrainingController::class, 'getLastExerciseSum']);

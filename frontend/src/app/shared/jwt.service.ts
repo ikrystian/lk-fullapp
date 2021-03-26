@@ -32,17 +32,17 @@ export class JwtService {
   }
 
   profile(): Observable<any> {
-    return this.http.get(`${environment.API_URL}/api/auth/user`);
+    return this.http.get(`${environment.API_URL}/auth/user`);
   }
 
   // req-password-reset
-  reqPasswordReset(data) {
-    return this.http.post(`${environment.API_URL}/api/auth/req-password-reset`, data);
+  reqPasswordReset(data): Observable<any> {
+    return this.http.post(`${environment.API_URL}/auth/req-password-reset`, data);
   }
 
   // update password
-  updatePassword(data) {
-    return this.http.post(`${environment.API_URL}/api/auth/update-password`, data);
+  updatePassword(data): Observable<any> {
+    return this.http.post(`${environment.API_URL}/auth/update-password`, data);
   }
 
 }

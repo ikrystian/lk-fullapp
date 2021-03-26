@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TrainingResource;
+use App\Models\Activity;
 use App\Models\Exercise;
 use App\Models\Meta;
 use App\Models\Training;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +51,19 @@ class TrainingController extends Controller
             return $data;
         });
 
-        return ['lastTraining' => $lastTraining->sum('total'), 'currentTraining' => $currentTraining->sum('total')];
+        $exercises = Exercise::where('training_id', $currentTrainingId)->get();
+
+        $currentTotalTraining = $exercises->map(function ($item) {
+            $data = $item;
+            $data['total'] = $item->weight * $item->reps * $item->type->multipler;
+            return $data;
+        });
+
+        return [
+            'lastTraining' => $lastTraining->sum('total'),
+            'currentTraining' => $currentTraining->sum('total'),
+            'currentTotalTraining' => $currentTotalTraining->sum('total'),
+        ];
     }
 
     /**
@@ -101,8 +115,16 @@ class TrainingController extends Controller
         $meta->meta_value = json_encode($request['data']);
         $meta->save();
         $training->id;
+
+        $activity = new Activity;
+        $activity->user_id = Auth::id();
+        $activity->message = 'Krystian dodał trening o id ' . $training->id;
+        $activity->created = Carbon::now();
+        $activity->save();
+
         return $training->toJson();
     }
+
 
     public function addSeries(Request $request)
     {
@@ -206,12 +228,20 @@ class TrainingController extends Controller
         return response()->json('removed', 200);
     }
 
-    public function stats()
+    public function stats($userId)
     {
+
+        $user = User::find($userId);
         $stats = [];
-        $stats['total'] = Training::where('user_id', Auth::id())->sum('total');
-        $stats['username'] = Auth::user();
-        $stats['trainings'] = Training::where('user_id', Auth::id())->count();
+        $stats['total'] = Training::where('user_id',$userId)->sum('total');
+
+        $stats['username'] = $user->name;
+        $stats['trainings'] = Training::where('user_id',$userId)->count();
+        if(Auth::id() == 1) {
+            $stats['total'] += 550000;
+            $stats['trainings'] += 28;
+
+        }
         return $stats;
     }
 }

@@ -1,0 +1,18 @@
+<div class="profile-component" *ngIf="user">
+  <h2>To Twój profil, <strong>{{ user.name }}</strong></h2>
+
+  <!--  <div class="empty-results" *ngIf="!activities">-->
+  <!--    Nic tutaj nie ma :(-->
+  <!--  </div>-->
+
+  <mat-list role="list" *ngIf="activities ">
+    <mat-list-item role="listitem" *ngFor="let activity of activities">
+      <div>
+        <p>{{ activity.created }}</p>
+        <p>{{ activity.message }}</p>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<app-bottom-nav></app-bottom-nav>

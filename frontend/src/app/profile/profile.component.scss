@@ -1,0 +1,12 @@
+.profile-component {
+  padding: 1rem;
+  height: calc(100vh - 58px);
+}
+
+.mat-list-item-content {
+  flex-direction: column;
+
+  p {
+    margin-bottom: 0;
+  }
+}
