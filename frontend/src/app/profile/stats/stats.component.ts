@@ -15,7 +15,6 @@ export class StatsComponent implements OnInit {
 
     this.trainingService.getStats(id).subscribe(res => {
       this.stats = res;
-      console.log(this.stats);
     });
   }
 

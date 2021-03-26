@@ -4,7 +4,7 @@
 $angular-primary: mat-palette($mat-orange, 500, 100, 900);
 $angular-accent: mat-palette($mat-teal, A200, A100, A400);
 $angular-warn: mat-palette($mat-red);
-$angular-default-theme: mat-dark-theme(
+$angular-dark-theme: mat-dark-theme(
     (
       color: (
         primary: $angular-primary,
@@ -13,7 +13,29 @@ $angular-default-theme: mat-dark-theme(
       ),
     )
 );
-@include angular-material-theme($angular-default-theme);
+$angular-light-theme: mat-light-theme(
+    (
+      color: (
+        primary: $angular-primary,
+        accent: $angular-accent,
+        warn: $angular-warn,
+      ),
+    )
+);
+
+.theme-dark {
+  @include angular-material-theme($angular-dark-theme);
+
+  --body-background-color: #18191a;
+  --font-color: #fff;
+}
+.theme-light {
+  @include angular-material-theme($angular-light-theme);
+
+  --body-background-color: #fff;
+  --font-color: 18191a;
+}
+
 
 :root {
   --primary-color: #292c31;
@@ -27,7 +49,7 @@ $angular-default-theme: mat-dark-theme(
 html,
 body {
   height: 100%;
-  background-color: #18191a;
+  background-color: var(--body-background-color);
 }
 
 a {
@@ -38,7 +60,6 @@ a {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: #fff;
   font-weight: 100;
 }
 

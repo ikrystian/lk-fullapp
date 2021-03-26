@@ -38,6 +38,8 @@ import { TrainingsComponent } from './trainings/trainings.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { ProfileComponent } from '../profile/profile.component';
 import { StatsComponent } from '../profile/stats/stats.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -85,6 +87,9 @@ import { StatsComponent } from '../profile/stats/stats.component';
     MatListModule,
     MatRippleModule,
     MatDividerModule,
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     {provide: MatDialogRef, useValue: {}},

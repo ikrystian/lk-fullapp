@@ -1,18 +1,25 @@
-<nav *ngIf="user">
-  <button routerLink="profile/{{ user.id }}" matRipple>
+<nav >
+  <button routerLink="profile/{{ user?.id }}" matRipple>
     <img [src]="USER_IMAGE" alt="">
   </button>
   <button routerLink="/dashboard" matRipple>
     <mat-icon>home</mat-icon>
   </button>
 
-  <button routerLink="stats/{{ user.id }}" matRipple>
+  <button routerLink="stats/{{ user?.id }}" matRipple>
     <mat-icon>assessment</mat-icon>
   </button>
 
   <button (click)="addTraining()" matRipple>
     <mat-icon>add_box</mat-icon>
   </button>
+
+    <mat-slide-toggle
+      color="primary"
+      [checked]="isDarkMode"
+      (change)="onDarkModeSwitched($event)"
+    ></mat-slide-toggle
+    >
 
   <button (click)="back()" matRipple>
     <mat-icon>chevron_left</mat-icon>

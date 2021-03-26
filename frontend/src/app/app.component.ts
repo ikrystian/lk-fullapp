@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   isLoading: Subject<boolean> = this.loaderService.isLoading;
   isLoggedin: boolean;
 
@@ -21,10 +21,12 @@ export class AppComponent implements OnInit{
   ) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authenticationStateService.userAuthState.subscribe(res => {
       this.isLoggedin = res;
     });
+
   }
+
 
 }

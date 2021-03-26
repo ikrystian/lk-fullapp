@@ -1,8 +1,3 @@
-:host {
-  --primary-color: #292c31;
-  --accent-color: #ff9800;
-}
-
 nav {
   background-color: var(--primary-color);
   position: fixed;
@@ -11,6 +6,7 @@ nav {
   right: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0.5rem 1rem;
 
   button {

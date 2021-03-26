@@ -1,7 +1,4 @@
-:host {
-  --primary-color: #292c31;
-  --accent-color: #ff582d;
-}
+@import '~@angular/material/theming';
 
 .toolbar {
   background-color: var(--primary-color);

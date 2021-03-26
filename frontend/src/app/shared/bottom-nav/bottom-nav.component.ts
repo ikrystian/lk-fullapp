@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { TrainingsService } from '../trainings.service';
 import { JwtService } from '../jwt.service';
@@ -7,13 +7,18 @@ import { Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { Location } from '@angular/common';
 import { User } from '../../profile/profile.component';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-bottom-nav',
   templateUrl: './bottom-nav.component.html',
-  styleUrls: ['./bottom-nav.component.scss']
+  styleUrls: ['./bottom-nav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BottomNavComponent implements OnInit {
+  @Input() isDarkMode = true;
+  @Output() readonly darkModeSwitched = new EventEmitter<boolean>();
+
   userPosition;
   length;
   training;
@@ -40,6 +45,10 @@ export class BottomNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onDarkModeSwitched({ checked }: MatSlideToggleChange): void {
+    this.darkModeSwitched.emit(checked);
   }
 
   addTraining(): any {
