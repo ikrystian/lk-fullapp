@@ -30,7 +30,6 @@ export class TrainingComponent implements OnInit {
 
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
-      console.log(res);
       this.dataSource = res.exercises;
     });
   }

@@ -29,4 +29,9 @@
 .finish-workout {
   display: flex;
   opacity: 0.5;
+
+  p {
+    margin: 0;
+    font-size: 14px;
+  }
 }

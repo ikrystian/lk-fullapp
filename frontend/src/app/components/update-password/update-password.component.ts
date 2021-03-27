@@ -37,7 +37,6 @@ export class UpdatePasswordComponent implements OnInit {
     this.authService.updatePassword(this.updatePwd.value).subscribe(
       result => {
         alert('Password updated successfully');
-        console.log(this.updatePwd.value)
         this.updatePwd.reset();
       },
       error => {

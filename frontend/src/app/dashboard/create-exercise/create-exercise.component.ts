@@ -38,13 +38,11 @@ export class CreateExerciseComponent implements OnInit {
 
   createExercise = () => {
     this.trainingService.createExerciseType(this.exerciseForm.value).subscribe(exercise => {
-      console.log(exercise);
       if (exercise) {
         this.openSnackBar('Cwiczenie zostało utworzone', 'ok');
         this.dialogRef.close();
       }
     });
-    console.log(this.exerciseForm.value);
   }
 
   openSnackBar = (message: string, action: string) => {

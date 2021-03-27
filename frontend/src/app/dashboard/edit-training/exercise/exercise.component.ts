@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -10,12 +10,12 @@ import { animate, query, stagger, style, transition, trigger } from '@angular/an
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
     query(':enter',
-      [style({ opacity: 0, height: 0 }), stagger('60ms', animate('600ms ease-out', style({ opacity: 1, height: 37 })))],
-      { optional: true }
+      [style({opacity: 0, height: 0}), stagger('60ms', animate('600ms ease-out', style({opacity: 1, height: 37})))],
+      {optional: true}
     ),
     query(':leave',
-      animate('200ms', style({ opacity: 0, height: 0})),
-      { optional: true}
+      animate('200ms', style({opacity: 0, height: 0})),
+      {optional: true}
     )
   ])
 ]);
@@ -112,13 +112,15 @@ export class ExerciseComponent implements OnInit, OnChanges {
   }
 
   sortSeries(series): void {
-    const sorted = [...series].sort((a, b) => {
-      return (b.weight * b.reps) - (a.weight * a.reps);
-    });
+    if (series) {
+      const sorted = [...series].sort((a, b) => {
+        return (b.weight * b.reps) - (a.weight * a.reps);
+      });
 
-    series.map(el => {
-      el.class = (el === sorted[0]) ? 'best' : '';
-    });
+      series.map(el => {
+        el.class = (el === sorted[0]) ? 'best' : '';
+      });
+    }
   }
 
   removeExercise = (seriesId: number) => {

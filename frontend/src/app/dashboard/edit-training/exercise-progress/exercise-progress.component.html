@@ -1,4 +1,4 @@
-<ng-container *ngIf="this.totalForSeries && showProgressBar">
+<ng-container>
   <div class="progress">
     <div class="progress__bar" [ngClass]="{'progress__bar--finished' : percentage >= 100 }"
          style="width: {{percentage}}%">

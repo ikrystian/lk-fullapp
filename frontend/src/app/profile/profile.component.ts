@@ -34,7 +34,6 @@ export class ProfileComponent implements OnInit {
       this.user = res;
       this.profileService.getActivitiesByUserId(this.user.id).subscribe(data => {
         this.activities = data.data;
-        console.log(this.activities);
       });
 
     });

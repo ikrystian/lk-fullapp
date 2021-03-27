@@ -32,8 +32,8 @@
       <span>Wyloguj</span>
     </button>
   </mat-menu>
-  <app-exercise-progress *ngIf="exerciseId !== 0"></app-exercise-progress>
-  <div class="standard-page edit-training" [class.edit-training--exercises]="exerciseId !== 0">
+  <app-exercise-progress></app-exercise-progress>
+  <div class="standard-page edit-training edit-training--exercises">
     <div>
       <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
       <!--    <mat-form-field class="full-width-input">-->
@@ -53,9 +53,9 @@
           </ng-container>
         </mat-menu>
         <mat-form-field class="select--full">
-          <select matNativeControl #t required  (change)="changeExercise(t.value)"
+          <select matNativeControl #t required placeholder="Wybierz ćwiczenie z listy poniżej" (change)="changeExercise(t.value)"
                   [(ngModel)]="selectedOption">
-            <option value="0" disabled>Wybierz ćwiczenie z listy</option>
+            <option value="0" disabled>nie wybrałeś opcji</option>
             <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
               {{exercise.name}}
             </option>
@@ -66,7 +66,7 @@
     </div>
 
     <div *ngIf="!training.end" class="finish-workout" (click)="finishWorkout(training.id)">
-      Trening nie został jeszcze zakończony
+      <p>Trening nie został jeszcze zakończony</p>
       <button>Zakończ trening</button>
     </div>
 
