@@ -155,9 +155,6 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy  {
   }
 
   openSnackBar = (message: string, action: string) => {
-    this.snackBar.open(message, action, {
-      duration: 20000,
-    });
+    this.snackBar.open(message, action);
   }
-
 }

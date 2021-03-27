@@ -15,7 +15,7 @@ import { environment } from '../../../environments/environment';
 })
 export class TrainingComponent implements OnInit {
   training: any;
-  displayedColumns: string[] = ['name', 'weight', 'reps', 'seriesTotal'];
+  displayedColumns: string[] = ['name', 'weight', 'reps'];
   dataSource;
   unique;
   ASSETS_URL = environment.UPLOADED_ASSETS_URL;
@@ -52,9 +52,6 @@ export class TrainingComponent implements OnInit {
   }
 
   openSnackBar(message: string, action: string): void {
-    this.snackBar.open(message, action, {
-      duration: 20000,
-    });
+    this.snackBar.open(message, action);
   }
-
 }

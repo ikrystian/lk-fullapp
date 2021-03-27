@@ -1,6 +1,11 @@
 <mat-drawer-container class="dashboard-container" hasBackdrop="true">
   <mat-drawer #drawer mode="slide">
-    nav ❤️
+    <nav class="slide-nav">
+      <button mat-ripple>
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Wyloguj</span>
+      </button>
+    </nav>
   </mat-drawer>
   <mat-drawer-content>
     <router-outlet></router-outlet>

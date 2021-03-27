@@ -23,22 +23,23 @@ $angular-light-theme: mat-light-theme(
     )
 );
 
-.theme-dark {
-  @include angular-material-theme($angular-dark-theme);
-  --body-background-color: #18191a;
-  --font-color: rgb(228, 230, 235);
-  --popup-background-color: #292c31;
-  --overlay-background-color: rgba(0, 0, 0, 0.6);
+body {
+  &, &.theme-dark {
+    @include angular-material-theme($angular-dark-theme);
+    --body-background-color: #18191a;
+    --font-color: rgb(228, 230, 235);
+    --popup-background-color: #292c31;
+    --overlay-background-color: rgba(0, 0, 0, 0.6);
+  }
 
+  &.theme-light {
+    @include angular-material-theme($angular-light-theme);
+    --body-background-color: #fff;
+    --font-color: #18191a;
+    --popup-background-color: #dedede;
+    --overlay-background-color: rgba(0, 0, 0, 0.6);
+  }
 }
-.theme-light {
-  @include angular-material-theme($angular-light-theme);
-  --body-background-color: #fff;
-  --font-color: #18191a;
-  --popup-background-color: #dedede;
-  --overlay-background-color: rgba(0, 0, 0, 0.6);
-}
-
 
 :root {
   --primary-color: #292c31;
