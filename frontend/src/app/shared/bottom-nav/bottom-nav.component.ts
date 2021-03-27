@@ -4,8 +4,7 @@ import {
   Input,
   OnInit,
   Output,
-  EventEmitter,
-  ViewEncapsulation
+  EventEmitter
 } from '@angular/core';
 import * as moment from 'moment';
 import { TrainingsService } from '../trainings.service';
@@ -55,7 +54,7 @@ export class BottomNavComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDarkModeSwitched({ checked }: MatSlideToggleChange): void {
+  onDarkModeSwitched({checked}: MatSlideToggleChange): void {
     this.darkModeSwitched.emit(checked);
   }
 
@@ -64,7 +63,7 @@ export class BottomNavComponent implements OnInit {
       this.length = res.data.length;
 
       if (this.length > 0 && !confirm('Istnieje już trening z dzisiejszą datą, chcesz dodać nowy?')) {
-          return false;
+        return false;
       }
       this.createTraining();
     });

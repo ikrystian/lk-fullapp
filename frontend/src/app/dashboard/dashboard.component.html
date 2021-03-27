@@ -1,10 +1,14 @@
 <mat-drawer-container class="dashboard-container" hasBackdrop="true">
-  <mat-drawer #drawer mode="slide">
+  <mat-drawer #drawer mode="push">
     <nav class="slide-nav">
-      <button mat-ripple>
+      <button mat-ripple (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Wyloguj</span>
       </button>
+      <button mat-ripple>
+        <img [src]="USER_IMAGE" alt="">
+      </button>
+
     </nav>
   </mat-drawer>
   <mat-drawer-content>
