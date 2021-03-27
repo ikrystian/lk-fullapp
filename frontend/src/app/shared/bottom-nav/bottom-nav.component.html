@@ -1,12 +1,12 @@
-<nav>
-  <button routerLink="/dashboard/profile/{{ user?.id }}" matRipple>
+<nav *ngIf="user | async">
+  <button routerLink="/dashboard/profile/{{ user.id }}" matRipple>
     <img [src]="USER_IMAGE" alt="">
   </button>
-  <button routerLink="/dashboard/dashboard" matRipple>
+  <button routerLink="/" matRipple>
     <mat-icon>home</mat-icon>
   </button>
 
-  <button routerLink="/dashboard/stats{{ user?.id }}" matRipple>
+  <button routerLink="/dashboard/stats/{{ user.id }}" matRipple>
     <mat-icon>assessment</mat-icon>
   </button>
 
