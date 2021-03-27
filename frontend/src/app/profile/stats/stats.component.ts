@@ -10,10 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 export class StatsComponent implements OnInit {
   stats;
 
-  constructor(public trainingService: TrainingsService, public activatedRoute: ActivatedRoute) {
-    const id = this.activatedRoute.snapshot.paramMap.get('id');
-
-    this.trainingService.getStats(id).subscribe(res => {
+  constructor(public trainingService: TrainingsService) {
+    this.trainingService.getStats().subscribe(res => {
       this.stats = res;
     });
   }

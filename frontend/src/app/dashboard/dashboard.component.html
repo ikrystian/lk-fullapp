@@ -16,7 +16,7 @@
     <app-bottom-nav
       (darkModeSwitched)="switchMode($event)"
       [isDarkMode]="isDarkMode">
-      <button class="dashboard__menu-button"  (click)="drawer.toggle()" matRipple>
+      <button class="dashboard__menu-button" (click)="drawer.toggle()" matRipple>
         <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
         <mat-icon *ngIf="drawer.opened">close</mat-icon>
       </button>

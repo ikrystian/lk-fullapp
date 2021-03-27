@@ -18,8 +18,8 @@ const routes: Routes = [
       {path: 'training/:id/edit/:exerciseId', component: EditTrainingComponent}
     ]
   },
-  {path: 'profile/:id', component: ProfileComponent},
-  {path: 'stats/:id', component: StatsComponent},
+  {path: 'profile', component: ProfileComponent},
+  {path: 'stats', component: StatsComponent},
 ];
 
 @NgModule({

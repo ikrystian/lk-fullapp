@@ -10,7 +10,7 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
-  getActivitiesByUserId(userId: number): any {
-    return this.http.get(`${this.API_URL}/activities/${userId}`);
+  getActivitiesByUserId(): any {
+    return this.http.get(`${this.API_URL}/activities`);
   }
 }

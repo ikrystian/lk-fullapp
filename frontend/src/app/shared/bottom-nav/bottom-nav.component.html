@@ -1,12 +1,12 @@
-<nav *ngIf="user | async">
-  <button routerLink="/dashboard/profile/{{ user.id }}" matRipple>
+<nav>
+  <button routerLink="/dashboard/profile" matRipple>
     <img [src]="USER_IMAGE" alt="">
   </button>
   <button routerLink="/" matRipple>
     <mat-icon>home</mat-icon>
   </button>
 
-  <button routerLink="/dashboard/stats/{{ user.id }}" matRipple>
+  <button routerLink="/dashboard/stats" matRipple>
     <mat-icon>assessment</mat-icon>
   </button>
 
@@ -18,7 +18,6 @@
       color="primary"
       [checked]="isDarkMode"
       (change)="onDarkModeSwitched($event)"
-    ></mat-slide-toggle
-    >
+    ></mat-slide-toggle>
   <ng-content></ng-content>
 </nav>

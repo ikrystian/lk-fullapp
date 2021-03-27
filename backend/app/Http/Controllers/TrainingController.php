@@ -251,15 +251,14 @@ class TrainingController extends Controller
         return response()->json('removed', 200);
     }
 
-    public function stats($userId)
-    {
+    public function stats() {
 
-        $user = User::find($userId);
+        $user = User::find(Auth::id());
         $stats = [];
-        $stats['total'] = Training::where('user_id', $userId)->sum('total');
+        $stats['total'] = Training::where('user_id', Auth::id())->sum('total');
 
         $stats['username'] = $user->name;
-        $stats['trainings'] = Training::where('user_id', $userId)->count();
+        $stats['trainings'] = Training::where('user_id', Auth::id())->count();
         if (Auth::id() == 1) {
             $stats['total'] += 550000;
             $stats['trainings'] += 28;

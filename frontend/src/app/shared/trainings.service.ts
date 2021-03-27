@@ -90,7 +90,7 @@ export class TrainingsService {
     return this.http.get(`${this.API_URL}/get-body-parts`);
   }
 
-  getStats(userId: any): any {
-    return this.http.get(`${this.API_URL}/stats/${userId}`);
+  getStats(): any {
+    return this.http.get(`${this.API_URL}/stats`);
   }
 }

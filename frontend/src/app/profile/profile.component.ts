@@ -29,13 +29,9 @@ export class ProfileComponent implements OnInit {
   trainings: any;
   activities: Activity[];
 
-  constructor(public jwtService: JwtService, public profileService: ProfileService) {
-    this.jwtService.profile().subscribe((res: any) => {
-      this.user = res;
-      this.profileService.getActivitiesByUserId(this.user.id).subscribe(data => {
-        this.activities = data.data;
-      });
-
+  constructor(public profileService: ProfileService) {
+    this.profileService.getActivitiesByUserId().subscribe(data => {
+      this.activities = data.data;
     });
   }
 
