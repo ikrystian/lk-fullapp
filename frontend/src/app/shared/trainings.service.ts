@@ -15,13 +15,15 @@ export class TrainingsService {
   constructor(private http: HttpClient) {
   }
 
-  changeMessage() {
+  changeMessage(): void  {
     this.messageSource.next(true);
   }
 
-  getTrainings = () => this.http.get(`${this.API_URL}/trainings`);
+  getTrainings(): any {
+    return this.http.get(`${this.API_URL}/trainings`);
+  }
 
-  getTraining(id: any) {
+  getTraining(id: any): any {
     return this.http.get(`${this.API_URL}/trainings/${id}`);
   }
 

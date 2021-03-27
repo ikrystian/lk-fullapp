@@ -124,8 +124,9 @@ export class EditTrainingComponent implements OnInit {
 
   filterExercises = (id) => {
     this.exerciseTypes = this.allExerciseTypes.filter(el => el.body_part_id === id);
-    this.selectedOption = 0;
-    this.bodyPartId = id;
+    console.log(this.exerciseTypes[0].id);
+    this.selectedOption = this.exerciseTypes[0].id;
+    this.exerciseId =  this.exerciseTypes[0].id;
   }
 
   openAddExerciseModal = () => {

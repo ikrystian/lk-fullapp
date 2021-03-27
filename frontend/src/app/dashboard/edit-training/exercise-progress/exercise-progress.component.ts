@@ -16,13 +16,13 @@ export class Progress {
   styleUrls: ['./exercise-progress.component.scss']
 })
 
-export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy  {
+export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
   @Input() data: any;
   subscription: Subscription;
 
   message: string;
 
-  totalForSeries: Progress = {
+  defaultData: Progress = {
     currentTotalTraining: 0,
     currentTraining: 0,
     lastTraining: 0,
@@ -30,7 +30,10 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy  
     message: 'brak danych 😒'
   };
 
-  constructor(public trainingsService: TrainingsService) { }
+  totalForSeries: Progress =  this.defaultData;
+
+  constructor(public trainingsService: TrainingsService) {
+  }
 
   ngOnInit(): void {
     this.subscription = this.trainingsService.currentMessage.subscribe(() => {
@@ -47,9 +50,15 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy  
   }
 
   updateProgressBar(): void {
+    if (this.data.exerciseId === 0) {
+      return;
+    }
+
     this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
       this.totalForSeries = res;
       this.totalForSeries.percentage = (res.currentTraining / res.lastTraining) * 100;
+    }, () => {
+      this.totalForSeries = this.defaultData;
     });
   }
 }

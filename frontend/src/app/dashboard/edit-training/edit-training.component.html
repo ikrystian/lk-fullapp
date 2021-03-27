@@ -55,7 +55,6 @@
             <select matNativeControl #t required placeholder="Wybierz ćwiczenie z listy poniżej"
                     (change)="changeExercise(t.value)"
                     [(ngModel)]="selectedOption">
-              <option value="0" disabled>nie wybrałeś opcji</option>
               <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
                 {{exercise.name}}
               </option>
