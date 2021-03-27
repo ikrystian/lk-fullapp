@@ -1,10 +1,21 @@
-import { Component, ElementRef, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+  EventEmitter,
+  OnDestroy
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { TrainingsService } from '../../../shared/trainings.service';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { Subscription } from 'rxjs';
 
 
 const listAnimation = trigger('listAnimation', [
@@ -28,11 +39,15 @@ const listAnimation = trigger('listAnimation', [
 
 })
 
-export class ExerciseComponent implements OnInit, OnChanges {
+export class ExerciseComponent implements OnInit, OnChanges, OnDestroy  {
+  @Output() newItemEvent = new EventEmitter<any>();
   exerciseForm: FormGroup;
   series: any = [];
   id;
   text = '';
+
+  message: string;
+  subscription: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,7 +65,6 @@ export class ExerciseComponent implements OnInit, OnChanges {
   @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
 
   ngOnInit(): void {
-
   }
 
   ngOnChanges(): void {
@@ -58,7 +72,6 @@ export class ExerciseComponent implements OnInit, OnChanges {
       this.series = res;
       this.sortSeries(this.series);
     });
-    this.trainingService.updateData(this.exerciseId, this.trainingId);
   }
 
 
@@ -84,16 +97,20 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
   }
 
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   onSubmit = (form) => {
     this.exerciseForm.disable();
-
-
+    this.newItemEvent.emit({exerciseId: this.exerciseId, trainingId: this.trainingId});
     const series = this.exerciseForm.value;
     series.exercise_type_id = this.exerciseId;
     series.training_id = this.trainingId;
     series.bodyPartId = this.bodyPartId;
     const ele = this.addSeriesForm.nativeElement['reps'];
+
+    this.trainingService.changeMessage();
 
     this.exerciseForm.get('reps').reset();
     this.exerciseForm.get('weight').reset();
@@ -105,7 +122,6 @@ export class ExerciseComponent implements OnInit, OnChanges {
       if (ele) {
         ele.focus();
       }
-      this.trainingService.updateData(this.exerciseId, this.trainingId);
     });
     this.openSnackBar('Seria została dodana', 'OK');
 
@@ -129,9 +145,8 @@ export class ExerciseComponent implements OnInit, OnChanges {
     }
 
     this.trainingService.removeExercise(seriesId).subscribe(() => {
+      this.trainingService.changeMessage();
       this.openSnackBar('Seria została usunięta', 'OK');
-      this.trainingService.updateData(this.exerciseId, this.trainingId);
-
       this.series = this.series.filter((element) => {
         return element.id !== seriesId;
       });

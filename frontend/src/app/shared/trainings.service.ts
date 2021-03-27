@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrainingsService {
   API_URL = environment.API_URL;
-  private content = new BehaviorSubject<any>({});
-  public share = this.content.asObservable();
+
+  private messageSource = new BehaviorSubject(true);
+  currentMessage = this.messageSource.asObservable();
 
   constructor(private http: HttpClient) {
   }
 
-  updateData(exerciseId, trainingId): void {
-    const data = {trainingId, exerciseId};
-    this.content.next(data);
+  changeMessage() {
+    this.messageSource.next(true);
   }
 
   getTrainings = () => this.http.get(`${this.API_URL}/trainings`);
