@@ -28,6 +28,7 @@ $angular-light-theme: mat-light-theme(
   --body-background-color: #18191a;
   --font-color: rgb(228, 230, 235);
   --popup-background-color: #292c31;
+  --overlay-background-color: rgba(0, 0, 0, 0.6);
 
 }
 .theme-light {
@@ -35,6 +36,7 @@ $angular-light-theme: mat-light-theme(
   --body-background-color: #fff;
   --font-color: #18191a;
   --popup-background-color: #dedede;
+  --overlay-background-color: rgba(0, 0, 0, 0.6);
 }
 
 
@@ -107,6 +109,10 @@ body {
 // override angular material styles
 body {
   max-height: 100vh;
+
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: var(--overlay-background-color) !important;
+  }
 
   .mat-menu-item,
   .mat-button,

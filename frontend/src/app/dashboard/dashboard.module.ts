@@ -40,6 +40,7 @@ import { ProfileComponent } from '../profile/profile.component';
 import { StatsComponent } from '../profile/stats/stats.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatDividerModule,
     MatSlideToggleModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule,
   ],
   providers: [
     {provide: MatDialogRef, useValue: {}},

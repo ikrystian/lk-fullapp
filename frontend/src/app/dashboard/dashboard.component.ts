@@ -1,9 +1,10 @@
-import { Component, Inject, Renderer2, OnInit } from '@angular/core';
+import { Component, Inject, Renderer2, OnInit, ViewEncapsulation } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DashboardComponent implements OnInit {
   get isDarkMode(): boolean {

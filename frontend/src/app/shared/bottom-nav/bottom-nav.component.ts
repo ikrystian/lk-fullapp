@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewEncapsulation
+} from '@angular/core';
 import * as moment from 'moment';
 import { TrainingsService } from '../trainings.service';
 import { JwtService } from '../jwt.service';
