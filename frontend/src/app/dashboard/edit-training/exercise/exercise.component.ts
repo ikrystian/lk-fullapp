@@ -21,7 +21,7 @@ import { Subscription } from 'rxjs';
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
     query(':enter',
-      [style({opacity: 0, height: 0}), stagger('60ms', animate('600ms ease-out', style({opacity: 1, height: 37})))],
+      [style({opacity: 0, height: 0}), stagger('60ms', animate('600ms ease-out', style({opacity: 1, height: 36})))],
       {optional: true}
     ),
     query(':leave',
@@ -36,15 +36,12 @@ const listAnimation = trigger('listAnimation', [
   templateUrl: './exercise.component.html',
   styleUrls: ['./exercise.component.scss'],
   animations: [listAnimation]
-
 })
 
-export class ExerciseComponent implements OnInit, OnChanges, OnDestroy  {
+export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   @Output() newItemEvent = new EventEmitter<any>();
   exerciseForm: FormGroup;
   series: any = [];
-  id;
-  text = '';
 
   message: string;
   subscription: Subscription;
@@ -108,7 +105,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy  {
     series.exercise_type_id = this.exerciseId;
     series.training_id = this.trainingId;
     series.bodyPartId = this.bodyPartId;
-    const ele = this.addSeriesForm.nativeElement['reps'];
+    const respField = this.addSeriesForm.nativeElement.reps;
 
     this.trainingService.changeMessage();
 
@@ -118,12 +115,12 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy  {
     this.trainingService.addSeries(series).subscribe(res => {
       this.series.unshift(res);
       this.sortSeries(this.series);
+      this.openSnackBar('Seria została dodana', 'OK');
       this.exerciseForm.enable();
-      if (ele) {
-        ele.focus();
+      if (respField) {
+        respField.focus();
       }
     });
-    this.openSnackBar('Seria została dodana', 'OK');
 
   }
 

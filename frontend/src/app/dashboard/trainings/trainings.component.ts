@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
     '../../../assets/styles/components/quick-menu.component.scss'
   ]
 })
+
 export class TrainingsComponent implements OnInit {
   trainings;
 
