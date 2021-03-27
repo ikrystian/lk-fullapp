@@ -41,8 +41,8 @@ class TrainingController extends Controller
         $trainingId = Exercise::where('exercise_type_id', $exerciseId)
             ->where('training_id', '!=', $currentTrainingId)
             ->where('user_id', Auth::id())
-            ->latest()->
-            firstOrFail('training_id')->training_id;
+            ->latest()
+            ->firstOrFail('training_id')->training_id;
 
         $exercises = Exercise::where('training_id', $trainingId)->where('exercise_type_id', $exerciseId)->get();
 
@@ -141,6 +141,7 @@ class TrainingController extends Controller
         $exercise->training_id = $request['training_id'];
         $exercise->user_id = Auth::id();
         $exercise->exercise_type_id = $request['exercise_type_id'];
+        $exercise->body_part_id = $request['bodyPartId'];
         $exercise->reps = $request['reps'];
         $exercise->weight = $request['weight'];
         $exercise->save();

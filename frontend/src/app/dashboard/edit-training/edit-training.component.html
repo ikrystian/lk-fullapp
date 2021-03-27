@@ -4,7 +4,7 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="finishWorkout(training.id)">
+    <button mat-menu-item (click)="saveWorkout(training.id)">
       <mat-icon>save</mat-icon>
       <span>Zapisz trening</span>
     </button>
@@ -53,15 +53,16 @@
           </ng-container>
         </mat-menu>
         <mat-form-field class="select--full">
-          <select matNativeControl #t required placeholder="Wybierz ćwiczenie" (change)="changeExercise(t.value)"
+          <select matNativeControl #t required  (change)="changeExercise(t.value)"
                   [(ngModel)]="selectedOption">
+            <option value="0" disabled>Wybierz ćwiczenie z listy</option>
             <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
               {{exercise.name}}
             </option>
           </select>
         </mat-form-field>
       </div>
-      <app-exercise *ngIf="exerciseId !== 0" [exerciseId]="exerciseId" [trainingId]="training.id"></app-exercise>
+      <app-exercise *ngIf="exerciseId !== 0" [bodyPartId]="bodyPartId" [exerciseId]="exerciseId" [trainingId]="training.id"></app-exercise>
     </div>
 
     <div *ngIf="!training.end" class="finish-workout" (click)="finishWorkout(training.id)">

@@ -27,7 +27,7 @@ export class EditTrainingComponent implements OnInit {
     selectedOption;
     showUploadImageForm = false;
     showProgress = false;
-
+    bodyPartId = 0;
     constructor(
         public trainingService: TrainingsService,
         private activatedRoute: ActivatedRoute,
@@ -79,9 +79,9 @@ export class EditTrainingComponent implements OnInit {
         this.router.navigate(['signin']);
     }
 
-    saveTraining(id): void {
+    saveWorkout(id): void {
         this.trainingService.saveTraining(id).subscribe(res => {
-            this.router.navigate([`/dashboard/training/${id}`]);
+            this.openSnackBar('Trening został zapisany', 'ok');
         });
     }
 
@@ -127,6 +127,8 @@ export class EditTrainingComponent implements OnInit {
 
     filterExercises = (id) => {
         this.exerciseTypes = this.allExerciseTypes.filter(el => el.body_part_id === id);
+        this.selectedOption = 0;
+        this.bodyPartId = id;
     }
 
     openAddExerciseModal = () => {

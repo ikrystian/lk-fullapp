@@ -55,7 +55,7 @@ export class TrainingsService {
     return this.http.post(`${this.API_URL}/trainings/workout/finish`, data);
   }
 
-  addSeries(series) {
+  addSeries(series): any {
     return this.http.post(`${this.API_URL}/training/series/add`, series);
   }
 

@@ -25,6 +25,10 @@
     flex: 1 1 auto;
   }
 
+  &__buttons {
+    display: flex;
+  }
+
   &__data-item {
     display: inline-flex;
     align-items: center;

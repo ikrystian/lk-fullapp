@@ -15,6 +15,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
   series: any = [];
   id;
   text = '';
+
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -27,6 +28,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
   @Input() exerciseId: number;
   @Input() trainingId: number;
+  @Input() bodyPartId: number;
   @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
 
   ngOnInit(): void {
@@ -36,9 +38,9 @@ export class ExerciseComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     this.trainingService.getExercises(this.trainingId, this.exerciseId).subscribe(res => {
       this.series = res;
+      this.sortSeries(this.series);
     });
     this.trainingService.updateData(this.exerciseId, this.trainingId);
-
   }
 
 
@@ -72,6 +74,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
     const series = this.exerciseForm.value;
     series.exercise_type_id = this.exerciseId;
     series.training_id = this.trainingId;
+    series.bodyPartId = this.bodyPartId;
     const ele = this.addSeriesForm.nativeElement['reps'];
 
     this.exerciseForm.get('reps').reset();
@@ -79,6 +82,7 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
     this.trainingService.addSeries(series).subscribe(res => {
       this.series.unshift(res);
+      this.sortSeries(this.series);
       this.exerciseForm.enable();
       if (ele) {
         ele.focus();
@@ -89,18 +93,29 @@ export class ExerciseComponent implements OnInit, OnChanges {
 
   }
 
+  sortSeries(series): void {
+    const sorted = [...series].sort((a, b) => {
+      return (b.weight * b.reps) - (a.weight * a.reps);
+    });
+
+    series.map(el => {
+      el.class = (el === sorted[0]) ? 'best' : '';
+    });
+  }
+
   removeExercise = (seriesId: number) => {
     if (!confirm('Na pewno chcesz usunąć serię? Akcja jest nieodwracalna')) {
       return false;
     }
 
-    this.trainingService.removeExercise(seriesId).subscribe(res => {
+    this.trainingService.removeExercise(seriesId).subscribe(() => {
       this.openSnackBar('Seria została usunięta', 'OK');
       this.trainingService.updateData(this.exerciseId, this.trainingId);
 
       this.series = this.series.filter((element) => {
         return element.id !== seriesId;
       });
+      this.sortSeries(this.series);
     });
   }
 
