@@ -21,11 +21,10 @@
         <option value="2">2</option>
       </select>
     </mat-form-field>
-
   </section>
 
   <footer class="popup__footer">
     <button mat-dialog-close mat-button color="warn">Anuluj</button>
-    <button mat-button color="primary" type="submit" [disabled]="!exerciseForm.valid">Zapisz</button>
+    <button mat-button color="primary" cdkFocusInitial type="submit" [disabled]="!exerciseForm.valid">Zapisz</button>
   </footer>
 </form>

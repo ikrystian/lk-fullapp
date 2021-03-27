@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -28,6 +28,9 @@ export class EditTrainingComponent implements OnInit {
   showUploadImageForm = false;
   showProgress = false;
   bodyPartId = 0;
+
+  animal: string;
+  name: string;
 
   constructor(
     public trainingService: TrainingsService,
@@ -97,14 +100,14 @@ export class EditTrainingComponent implements OnInit {
     this.exerciseId = parseInt(val, 0);
   }
 
-  changeTrainingName = (event: any) => {
-    // !todo update this.training here
-    if (this.trainingName != event.target.value) {
-      this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {
-        this.openSnackBar('Nazwa treningu została zmieniona', 'ok');
-      });
-    }
-  }
+  // changeTrainingName(event: any): void  {
+  //   // !todo update this.training here
+  //   if (this.trainingName != event.target.value) {
+  //     this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {
+  //       this.openSnackBar('Nazwa treningu została zmieniona', 'ok');
+  //     });
+  //   }
+  // }
 
   removeTraining = (trainingId: number) => {
     if (!confirm('Na pewno chcesz usunąć trening? Akcja jest nieodwracalna')) {
@@ -130,8 +133,13 @@ export class EditTrainingComponent implements OnInit {
   }
 
   openAddExerciseModal = () => {
-    this.dialog.open(CreateExerciseComponent, {
+    const dialogRef  = this.dialog.open(CreateExerciseComponent, {
       width: '350px',
+      data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.allExerciseTypes.push(result);
     });
   }
 
