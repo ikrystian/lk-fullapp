@@ -4,12 +4,30 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { TrainingsService } from '../../../shared/trainings.service';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+
+
+const listAnimation = trigger('listAnimation', [
+  transition('* <=> *', [
+    query(':enter',
+      [style({ opacity: 0, height: 0 }), stagger('60ms', animate('600ms ease-out', style({ opacity: 1, height: 37 })))],
+      { optional: true }
+    ),
+    query(':leave',
+      animate('200ms', style({ opacity: 0, height: 0})),
+      { optional: true}
+    )
+  ])
+]);
 
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
-  styleUrls: ['./exercise.component.scss']
+  styleUrls: ['./exercise.component.scss'],
+  animations: [listAnimation]
+
 })
+
 export class ExerciseComponent implements OnInit, OnChanges {
   exerciseForm: FormGroup;
   series: any = [];
