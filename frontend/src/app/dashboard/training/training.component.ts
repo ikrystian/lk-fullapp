@@ -40,6 +40,9 @@ export class TrainingComponent implements OnInit {
   }
 
   removeTraining = (trainingId: number) => {
+    if (!confirm('Na pewno chcesz usunąć trening? Akcja jest nieodwracalna')) {
+      return false;
+    }
     this.trainingService.removeTraining(trainingId).subscribe(res => {
       this.router.navigate(['/dashboard']);
       this.openSnackBar('Trening został usunięty', 'OK');
