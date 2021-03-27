@@ -22,7 +22,8 @@ export class CreateExerciseComponent implements OnInit {
     public trainingService: TrainingsService,
     private snackBar: MatSnackBar,
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<CreateExerciseComponent>
+    public dialogRef: MatDialogRef<CreateExerciseComponent>,
+    @Inject(MAT_DIALOG_DATA) public data
   ) {
 
     this.exerciseForm = this.formBuilder.group({
@@ -33,9 +34,7 @@ export class CreateExerciseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.trainingService.getBodyParts().subscribe(bodyParts => {
-      this.bodyParts = bodyParts;
-    });
+    this.bodyParts = this.data;
   }
 
   createExercise = () => {

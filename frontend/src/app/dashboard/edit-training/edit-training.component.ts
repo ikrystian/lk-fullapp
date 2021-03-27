@@ -127,19 +127,21 @@ export class EditTrainingComponent implements OnInit {
 
   filterExercises = (id) => {
     this.exerciseTypes = this.allExerciseTypes.filter(el => el.body_part_id === id);
-    console.log(this.exerciseTypes[0].id);
     this.selectedOption = this.exerciseTypes[0].id;
-    this.exerciseId =  this.exerciseTypes[0].id;
+    this.exerciseId = this.exerciseTypes[0].id;
   }
 
   openAddExerciseModal = () => {
-    const dialogRef  = this.dialog.open(CreateExerciseComponent, {
+    const dialogRef = this.dialog.open(CreateExerciseComponent, {
       width: '350px',
-      data: {name: this.name, animal: this.animal}
+      data: this.bodyParts
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.allExerciseTypes.push(result);
+      if (result) {
+        this.allExerciseTypes.push(result);
+        this.exerciseTypes = this.allExerciseTypes;
+      }
     });
   }
 
