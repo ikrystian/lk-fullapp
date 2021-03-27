@@ -68,9 +68,4 @@ export class BottomNavComponent implements OnInit {
       this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
     });
   }
-
-  back(): void {
-    this.location.back();
-  }
-
 }

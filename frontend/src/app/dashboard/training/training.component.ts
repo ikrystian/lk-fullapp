@@ -52,7 +52,7 @@ export class TrainingComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string): void {
     this.snackBar.open(message, action, {
       duration: 20000,
     });
