@@ -144,5 +144,4 @@ export class EditTrainingComponent implements OnInit {
       }
     });
   }
-
 }

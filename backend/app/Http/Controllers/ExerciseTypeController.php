@@ -37,7 +37,7 @@ class ExerciseTypeController extends Controller
     {
         $exerciseType = new ExerciseType;
         $exerciseType->name = $request->data['name'];
-        $exerciseType->multipler = $request->data['multiplier'];
+        $exerciseType->multipler = $request->data['multipler'];
         $exerciseType->body_part_id = $request->data['body_part'];
         $exerciseType->save();
 

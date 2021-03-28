@@ -1,41 +1,63 @@
 <div class="add-exercises">
-  <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit(exerciseForm)" #addSeriesForm>
-    <div class="add-exercises__row">
+  <div class="swipe" (swipe)="onSwipe($event)">
+    <form *ngIf="!oneField" class="add-exercises__row" [formGroup]="exerciseForm" (ngSubmit)="onSubmit(exerciseForm)"
+          #addSeriesForm>
       <div class="add-exercises__series">
         {{ series.length + 1 }}
       </div>
+
       <div class="add-exercises__reps">
-        <input type="number" name="reps" formControlName="reps" placeholder="Powtórzenia" #myInput required autofocus>
+        <input type="number" name="reps" formControlName="reps" placeholder="Powtórzenia" required autofocus>
       </div>
       <div class="add-exercises__weight">
         <input type="number" placeholder="Ciężar" formControlName="weight" required>
       </div>
       <div class="add-exercises__action">
-        <button mat-button (click)="myInput.focus()" [disabled]="!exerciseForm.valid">
+        <button mat-button [disabled]="!exerciseForm.valid">
           <mat-icon>checked</mat-icon>
         </button>
       </div>
-    </div>
-    <div *ngIf="series" [@listAnimation]="series.length">
-      <div class="add-exercises__row add-exercises__row--past" [class.add-exercises__row--best]="ser.class"
-           *ngFor="let ser of series; let index = index">
-        <div class="add-exercises__series">
-          {{ series.length - index  }}
-        </div>
-        <div class="add-exercises__reps">
-          {{ ser.reps }}
-        </div>
-        <div class="add-exercises__weight">
-          {{ ser.weight }}
-        </div>
-        <div class="add-exercises__action">
-          <button mat-button color="warn" type="button" (click)="removeExercise(ser.id)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
+    </form>
+
+    <form *ngIf="oneField" class="add-exercises__row" [formGroup]="addSeriesFormOneField"
+          (ngSubmit)="onSubmitOneField(addSeriesFormOneField)" #addSeriesFormOne>
+      <div class="add-exercises__series">
+        {{ series.length + 1 }}
+      </div>
+
+      <div class="add-exercises__one-field">
+        <input type="text" placeholder="Powtórzenia SPACJA ciężar" name="oneField" id="oneField"
+               formControlName="oneField" required  autofocus>
+      </div>
+
+      <div class="add-exercises__action">
+        <button mat-button [disabled]="!addSeriesFormOneField.valid">
+          <mat-icon>checked</mat-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="series" [@listAnimation]="series.length">
+    <div class="add-exercises__row add-exercises__row--past" [class.add-exercises__row--best]="ser.class"
+         *ngFor="let ser of series; let index = index">
+      <div class="add-exercises__series">
+        {{ series.length - index  }}
+      </div>
+      <div class="add-exercises__reps">
+        {{ ser.reps }}
+      </div>
+      <div class="add-exercises__weight">
+        {{ ser.weight }}
+      </div>
+      <div class="add-exercises__action">
+        <button mat-button color="warn" type="button" (click)="removeExercise(ser.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
-  </form>
+  </div>
+
 </div>
 <div class="empty-results" *ngIf="series.length == 0">
   <mat-icon>report_problem</mat-icon>

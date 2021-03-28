@@ -44,6 +44,7 @@ class TrainingController extends Controller
             ->latest()
             ->firstOrFail('training_id')->training_id;
 
+
         $exercises = Exercise::where('training_id', $trainingId)->where('exercise_type_id', $exerciseId)->get();
 
         $lastTraining = $exercises->map(function ($item) {
@@ -53,6 +54,7 @@ class TrainingController extends Controller
         });
 
         $exercises = Exercise::where('training_id', $currentTrainingId)->where('exercise_type_id', $exerciseId)->get();
+
 
         $currentTraining = $exercises->map(function ($item) {
             $data = $item;
@@ -67,6 +69,7 @@ class TrainingController extends Controller
             $data['total'] = $item->weight * $item->reps * $item->type->multipler;
             return $data;
         });
+
 
         return [
             'lastTraining' => $lastTraining->sum('total'),

@@ -11,6 +11,7 @@
     margin-bottom: 0.75rem;
     background-color: rgba(255, 255, 255, 0.05);
     position: relative;
+    overflow: hidden;
 
     &--best {
       &::after {
@@ -71,10 +72,16 @@
   }
 
 
-  input[type=number] {
+  input[type=number],
+  input[type=text] {
     width: 100%;
-    padding: 0.5rem;
     border: 1px solid #000;
+    display: inline-block;
+    padding: 6px;
+  }
+
+  input[type=text] {
+    width: 196px;
   }
 
   &__footer {
@@ -83,12 +90,8 @@
     justify-content: flex-end;
   }
 
-  input[type=number] {
-    display: inline-block;
-    padding: 6px;
-  }
-
-  input[type=number].ng-invalid.ng-touched {
+  input[type=number].ng-invalid.ng-touched,
+  input[type=text].ng-invalid.ng-touched {
     border: 1px solid red;
   }
 }

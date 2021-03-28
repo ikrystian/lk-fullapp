@@ -4,9 +4,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output,
   ViewChild,
-  EventEmitter,
   OnDestroy
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -39,13 +37,13 @@ const listAnimation = trigger('listAnimation', [
 })
 
 export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
-  @Output() newItemEvent = new EventEmitter<any>();
   exerciseForm: FormGroup;
+  addSeriesFormOneField: FormGroup;
   series: any = [];
 
   message: string;
   subscription: Subscription;
-
+  oneField =  localStorage.getItem('oneField') || false;
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -60,6 +58,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   @Input() trainingId: number;
   @Input() bodyPartId: number;
   @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
+  @ViewChild('addSeriesFormOne') addSeriesFormOne: ElementRef;
 
   ngOnInit(): void {
   }
@@ -77,9 +76,17 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
       exercise_type_id: [this.exerciseId],
       reps: [],
       weight: [],
-      multiplier: [],
+      multipler: [],
       training_id: [this.trainingId]
     });
+
+    this.addSeriesFormOneField = this.formBuilder.group({
+      exercise_type_id: [this.exerciseId],
+      oneField: [],
+      training_id: [this.trainingId]
+    });
+
+
   }
 
   removeTraining = (trainingId: number) => {
@@ -100,28 +107,53 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
 
   onSubmit = (form) => {
     this.exerciseForm.disable();
-    this.newItemEvent.emit({exerciseId: this.exerciseId, trainingId: this.trainingId});
     const series = this.exerciseForm.value;
-    series.exercise_type_id = this.exerciseId;
-    series.training_id = this.trainingId;
-    series.bodyPartId = this.bodyPartId;
     const respField = this.addSeriesForm.nativeElement.reps;
-
-    this.trainingService.changeMessage();
 
     this.exerciseForm.get('reps').reset();
     this.exerciseForm.get('weight').reset();
 
+    this.saveT(this.exerciseForm, series, respField);
+  }
+
+  onSubmitOneField(form): any {
+    this.addSeriesFormOneField.disable();
+    const series = this.addSeriesFormOneField.value;
+    const values = series.oneField.trim().split(' ');
+    if(values.length !== 2) {
+      this.openSnackBar('Nieprawidłowy format', 'OK');
+      this.addSeriesFormOneField.enable();
+      return false;
+    }
+    if(isNaN(values[0]) || isNaN(values[1])) {
+      this.openSnackBar('Podane wartośc nie są liczbami', 'OK');
+      this.addSeriesFormOneField.enable();
+      return false;
+    }
+    series.reps = values[0];
+    series.weight = values[1];
+
+    this.addSeriesFormOneField.get('oneField').reset();
+    const respField = this.addSeriesFormOne.nativeElement.oneField;
+    this.saveT(this.addSeriesFormOneField, series, respField);
+  }
+
+  saveT(form, series, respField): void {
+    series.exercise_type_id = this.exerciseId;
+    series.training_id = this.trainingId;
+    series.bodyPartId = this.bodyPartId;
+    console.log(series);
     this.trainingService.addSeries(series).subscribe(res => {
+      this.trainingService.changeMessage();
+
       this.series.unshift(res);
       this.sortSeries(this.series);
       this.openSnackBar('Seria została dodana', 'OK');
-      this.exerciseForm.enable();
+      form.enable();
       if (respField) {
         respField.focus();
       }
     });
-
   }
 
   sortSeries(series): void {
@@ -154,4 +186,13 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   openSnackBar = (message: string, action: string) => {
     this.snackBar.open(message, action);
   }
+
+  onSwipe(event): void {
+    Math.abs(event.deltaX) > 40 ? this.changeInputType() : '';
+  }
+  changeInputType(): void {
+    this.oneField = !this.oneField;
+    localStorage.setItem('oneField', this.oneField.toString());
+  }
+
 }
