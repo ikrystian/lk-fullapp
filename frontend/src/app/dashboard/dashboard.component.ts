@@ -20,9 +20,9 @@ export class DashboardComponent implements OnInit {
   }
 
   private currentTheme = 'theme-dark';
-
+  lang = true;
   constructor(
-    translate: TranslateService,
+    public translate: TranslateService,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     public authenticationStateService: AuthenticationStateService,
@@ -30,13 +30,17 @@ export class DashboardComponent implements OnInit {
     public router: Router,
     public snackBar: MatSnackBar
   ) {
-    translate.setDefaultLang('en');
-    translate.use('en');
+    translate.addLangs(['pl', 'en']);
+    translate.setDefaultLang('pl');
   }
 
   ngOnInit(): void {
     this.currentTheme = localStorage.getItem('activeTheme') || 'theme-dark';
     this.renderer.setAttribute(this.document.body, 'class', this.currentTheme);
+  }
+
+  changeLang(lang: string): void {
+    this.translate.use(lang);
   }
 
   switchMode(isDarkMode: boolean): void {

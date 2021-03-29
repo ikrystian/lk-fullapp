@@ -5,11 +5,11 @@
   <mat-divider></mat-divider>
   <button mat-menu-item (click)="logout()">
     <mat-icon>logout</mat-icon>
-    <span>Wyloguj</span>
+    <span>{{ 'LOGOUT' | translate }}</span>
   </button>
 </mat-menu>
 <mat-tab-group *ngIf="trainings" class="training-list-tabs">
-  <mat-tab label="Lista ({{ trainings.length }})">
+  <mat-tab label="{{ 'LIST' | translate }} ({{ trainings.length }})">
     <div class="training-list-tabs__tab-content">
       <app-training-list [trainings]="trainings"></app-training-list>
     </div>

@@ -3,7 +3,7 @@
     <nav class="slide-nav">
       <button mat-ripple (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
-        <span>Wyloguj</span>
+        <span>{{ 'LOGOUT' | translate }}</span>
       </button>
       <button mat-ripple>
         <img [src]="USER_IMAGE" alt="">
@@ -12,15 +12,27 @@
     </nav>
   </mat-drawer>
   <mat-drawer-content>
-    <div>{{ 'HELLO' | translate }}</div>
     <router-outlet></router-outlet>
     <app-bottom-nav
       (darkModeSwitched)="switchMode($event)"
       [isDarkMode]="isDarkMode">
+      <button class="dashboard__menu-button" [matMenuTriggerFor]="menu" matRipple>
+        <mat-icon>language</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-container *ngFor="let lang of translate.getLangs()">
+          <button mat-menu-item (click)="changeLang(lang)"
+                  [ngClass]="{'dashboard__menu-button--current' : lang === translate.currentLang}">
+            <span>{{ lang }}</span>
+          </button>
+        </ng-container>
+      </mat-menu>
+
       <button class="dashboard__menu-button" (click)="drawer.toggle()" matRipple>
         <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
         <mat-icon *ngIf="drawer.opened">close</mat-icon>
       </button>
+
     </app-bottom-nav>
 
   </mat-drawer-content>
