@@ -40,7 +40,7 @@ export class TrainingsService {
   }
 
   getLastExerciseSum(data): any {
-      return this.http.get(`${this.API_URL}/exercises/getTotalInSeries/${data.exerciseId}/${data.trainingId}`);
+      return this.http.get(`${this.API_URL}/exercises/getTotalInSeries/${data.exerciseId}/${data.trainingId}/${data.bodyPartId}`);
   }
 
   createExerciseType = (data) => {

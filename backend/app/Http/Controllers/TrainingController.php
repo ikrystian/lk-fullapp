@@ -36,15 +36,14 @@ class TrainingController extends Controller
 
     }
 
-    public function getLastExerciseSum($exerciseId, $currentTrainingId)
+    public function getLastExerciseSum($exerciseId, $currentTrainingId, $bodyPartID)
     {
         $trainingId = Exercise::where('exercise_type_id', $exerciseId)
             ->where('training_id', '!=', $currentTrainingId)
             ->where('user_id', Auth::id())
-            ->firstOrFail('training_id')->training_id;
+            ->first('training_id');
 
-
-        $exercises = Exercise::where('training_id', $trainingId)->where('exercise_type_id', $exerciseId)->get();
+        $exercises = Exercise::where('training_id', $trainingId->training_id)->where('exercise_type_id', $exerciseId)->get();
         $lastTraining = $exercises->map(function ($item) {
             $data = $item;
             $data['total'] = $item->weight * $item->reps * $item->type->multipler;
@@ -68,11 +67,19 @@ class TrainingController extends Controller
             return $data;
         });
 
+        $exercises = Exercise::where('training_id', $currentTrainingId)->where('body_part_id', $bodyPartID)->get();
+
+        $currentInSeriesTotal = $exercises->map(function ($item) {
+            $data = $item;
+            $data['total'] = $item->weight * $item->reps * $item->type->multipler;
+            return $data;
+        });
 
         return [
             'lastTraining' => $lastTraining->sum('total'),
             'currentTraining' => $currentTraining->sum('total'),
             'currentTotalTraining' => $currentTotalTraining->sum('total'),
+            'currentInSeriesTotal' => $currentInSeriesTotal->sum('total'),
         ];
     }
 

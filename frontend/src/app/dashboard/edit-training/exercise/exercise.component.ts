@@ -44,6 +44,11 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   message: string;
   subscription: Subscription;
   oneField =  localStorage.getItem('oneField') || false;
+  trainingId;
+  @Input() exercise: any;
+  @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
+  @ViewChild('addSeriesFormOne') addSeriesFormOne: ElementRef;
+
   constructor(
     private formBuilder: FormBuilder,
     public router: Router,
@@ -51,22 +56,18 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     public trainingService: TrainingsService,
     private snackBar: MatSnackBar
   ) {
+    this.trainingId = this.activatedRoute.snapshot.paramMap.get('id');
+
     this.createSeriesForm();
   }
-
-  @Input() exercise: any;
-  @Input() exerciseId: number;
-  @Input() trainingId: number;
-  @Input() bodyPartId: number;
-  @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
-  @ViewChild('addSeriesFormOne') addSeriesFormOne: ElementRef;
 
   ngOnInit(): void {
   }
 
   ngOnChanges(): void {
-    console.log(this.exercise);
-    this.trainingService.getExercises(this.trainingId, this.exerciseId).subscribe(res => {
+    this.series = [];
+    console.log( this.exercise.body_part_id);
+    this.trainingService.getExercises(this.trainingId, this.exercise.id).subscribe(res => {
       this.series = res;
       this.sortSeries(this.series);
     });
@@ -75,7 +76,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
 
   createSeriesForm = () => {
     this.exerciseForm = this.formBuilder.group({
-      exercise_type_id: [this.exerciseId],
+      exercise_type_id: [this.exercise?.id],
       reps: [],
       weight: [],
       multipler: [],
@@ -83,7 +84,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     });
 
     this.addSeriesFormOneField = this.formBuilder.group({
-      exercise_type_id: [this.exerciseId],
+      exercise_type_id: [this.exercise?.id],
       oneField: [],
       training_id: [this.trainingId]
     });
@@ -104,8 +105,9 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+
   }
+
 
   onSubmit = (form) => {
     this.exerciseForm.disable();
@@ -141,10 +143,9 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   saveT(form, series, respField): void {
-    series.exercise_type_id = this.exerciseId;
+    series.exercise_type_id = this.exercise.id;
     series.training_id = this.trainingId;
-    series.bodyPartId = this.bodyPartId;
-    console.log(series);
+    series.bodyPartId = this.exercise.body_part_id;
     this.trainingService.addSeries(series).subscribe(res => {
       this.trainingService.changeMessage();
 

@@ -32,8 +32,13 @@
       <span>Wyloguj</span>
     </button>
   </mat-menu>
-  <app-exercise-progress [data]="{exerciseId: exerciseId, trainingId: training.id}"></app-exercise-progress>
+  <app-exercise-progress [data]="{exerciseId: selectedOption?.id, trainingId: training.id, bodyPartId: selectedOption?.body_part_id}"></app-exercise-progress>
   <div class="standard-page edit-training edit-training--exercises">
+    <div style="display: flex; justify-content: space-between;">
+      <p>Start:<br><span>{{training.start | slice: 11}}</span></p>
+      <p *ngIf="training.end">Koniec:<br><span >{{training.end | slice: 11}}</span></p>
+      <button *ngIf="!training.end" class="finish-workout" (click)="finishWorkout(training.id)">Zakończ trening</button>
+    </div>
     <div>
       <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
       <!--    <mat-form-field class="full-width-input">-->
@@ -61,14 +66,10 @@
             </select>
           </mat-form-field>
         </div>
-      <app-exercise *ngIf="selectedOption" [exercise]="selectedOption" [bodyPartId]="selectedOption.body_part_id" [exerciseId]="selectedOption.id"
-                    [trainingId]="training.id"></app-exercise>
+      <app-exercise *ngIf="selectedOption" [exercise]="selectedOption"></app-exercise>
     </div>
 
-    <div *ngIf="!training.end" class="finish-workout" (click)="finishWorkout(training.id)">
-      <p>Trening nie został jeszcze zakończony</p>
-      <button>Zakończ trening</button>
-    </div>
+
 
   </div>
 </ng-container>

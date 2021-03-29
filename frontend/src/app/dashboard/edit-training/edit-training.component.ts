@@ -22,14 +22,11 @@ export class EditTrainingComponent implements OnInit {
   allExerciseTypes;
   training: any;
   trainingName: string;
-  exerciseId = 0;
   bodyParts: any;
   selectedOption;
   showUploadImageForm = false;
-  showProgress = false;
   bodyPartId = 0;
 
-  animal: string;
   name: string;
 
   constructor(
@@ -43,11 +40,6 @@ export class EditTrainingComponent implements OnInit {
     public dialog: MatDialog
   ) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-    const exerciseId = this.activatedRoute.snapshot.paramMap.get('exerciseId');
-    if (exerciseId) {
-      this.exerciseId = parseInt(exerciseId, 0);
-      this.selectedOption = this.exerciseId;
-    }
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
       this.trainingName = res.name;
@@ -97,8 +89,6 @@ export class EditTrainingComponent implements OnInit {
 
 
   changeExercise(val): void {
-    console.log(this.selectedOption);
-    this.exerciseId = this.selectedOption.id;
     this.bodyPartId = this.selectedOption.body_part_id;
   }
 
@@ -129,8 +119,7 @@ export class EditTrainingComponent implements OnInit {
 
   filterExercises = (id) => {
     this.exerciseTypes = this.allExerciseTypes.filter(el => el.body_part_id === id);
-    this.selectedOption = this.exerciseTypes[0].id;
-    this.exerciseId = this.exerciseTypes[0].id;
+    this.selectedOption = this.exerciseTypes[0];
   }
 
   openAddExerciseModal = () => {

@@ -35,7 +35,8 @@
     top: -5px;
   }
 
-  &__total {
+  &__total,
+  &__total-2{
     text-align: center;
     padding: 0.5rem;
     background-color: var(--primary-color);
@@ -45,5 +46,12 @@
     font-size: 12px;
     bottom: 58px;
     min-width: calc(42px + 2rem);
+    border: 0;
+    color: var(--text-color);
+  }
+
+  &__total-2 {
+    left: unset;
+    right: 0;
   }
 }
