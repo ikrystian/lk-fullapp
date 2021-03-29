@@ -13,6 +13,10 @@
     position: relative;
     overflow: hidden;
 
+    button {
+      background-color: rgba(0, 0, 0, 0.05) !important;
+    }
+
     &--best {
       &::after {
         content: '';
@@ -69,6 +73,10 @@
     font-size: 14px;
     text-align: center;
     width: 90px;
+  }
+
+  &__one-field {
+    width: 192px;
   }
 
 

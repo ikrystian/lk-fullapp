@@ -32,17 +32,20 @@
       <span>Wyloguj</span>
     </button>
   </mat-menu>
+
   <app-exercise-progress
     [data]="{exerciseId: selectedOption?.id, trainingId: training.id, bodyPartId: selectedOption?.body_part_id}"></app-exercise-progress>
   <div class="standard-page edit-training edit-training--exercises">
-    <div style="">
-      <p>Start:<br><span>{{training.start | slice: 11}}</span></p>
-      <p *ngIf="training.end">Koniec:<br><span>{{training.end | slice: 11}}</span></p>
-      <div>
-        <button *ngIf="!training.end" class="finish-workout" (click)="finishWorkout(training.id)">Zakończ trening
+
+    <div class="training-time">
+      <p><mat-icon>query_builder</mat-icon>Start: <span>{{training.start | slice: 11}}</span></p>
+      <p *ngIf="training.end"><mat-icon>query_builder</mat-icon>Koniec: <span>{{training.end | slice: 11}}</span></p>
+      <div *ngIf="!training.end">
+        <button  class="finish-workout" (click)="finishWorkout(training.id)">Zakończ trening
         </button>
       </div>
     </div>
+
     <div>
       <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
       <!--    <mat-form-field class="full-width-input">-->
