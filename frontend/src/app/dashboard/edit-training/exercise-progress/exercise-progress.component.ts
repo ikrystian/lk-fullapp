@@ -55,6 +55,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
+      console.log(res);
       this.totalForSeries = res;
       this.totalForSeries.percentage = (res.currentTraining / res.lastTraining) * 100;
     }, () => {

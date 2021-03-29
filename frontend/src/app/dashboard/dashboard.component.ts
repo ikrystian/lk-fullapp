@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
     return this.currentTheme === 'theme-dark';
   }
 
-  private currentTheme = 'theme-light';
+  private currentTheme = 'theme-dark';
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentTheme = localStorage.getItem('activeTheme') || 'theme-light';
+    this.currentTheme = localStorage.getItem('activeTheme') || 'theme-dark';
     this.renderer.setAttribute(this.document.body, 'class', this.currentTheme);
   }
 

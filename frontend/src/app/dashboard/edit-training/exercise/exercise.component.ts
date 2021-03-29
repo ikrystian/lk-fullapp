@@ -54,6 +54,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     this.createSeriesForm();
   }
 
+  @Input() exercise: any;
   @Input() exerciseId: number;
   @Input() trainingId: number;
   @Input() bodyPartId: number;
@@ -64,6 +65,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
+    console.log(this.exercise);
     this.trainingService.getExercises(this.trainingId, this.exerciseId).subscribe(res => {
       this.series = res;
       this.sortSeries(this.series);

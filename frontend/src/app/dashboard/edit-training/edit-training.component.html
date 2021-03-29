@@ -55,13 +55,13 @@
             <select matNativeControl #t required placeholder="Wybierz ćwiczenie z listy poniżej"
                     (change)="changeExercise(t.value)"
                     [(ngModel)]="selectedOption">
-              <option *ngFor="let exercise of exerciseTypes" [value]="exercise.id">
+              <option *ngFor="let exercise of exerciseTypes" [ngValue]="exercise">
                 {{exercise.name}}
               </option>
             </select>
           </mat-form-field>
         </div>
-      <app-exercise *ngIf="exerciseId !== 0" [bodyPartId]="bodyPartId" [exerciseId]="exerciseId"
+      <app-exercise *ngIf="selectedOption" [exercise]="selectedOption" [bodyPartId]="selectedOption.body_part_id" [exerciseId]="selectedOption.id"
                     [trainingId]="training.id"></app-exercise>
     </div>
 

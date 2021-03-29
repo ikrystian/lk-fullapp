@@ -97,7 +97,9 @@ export class EditTrainingComponent implements OnInit {
 
 
   changeExercise(val): void {
-    this.exerciseId = parseInt(val, 0);
+    console.log(this.selectedOption);
+    this.exerciseId = this.selectedOption.id;
+    this.bodyPartId = this.selectedOption.body_part_id;
   }
 
   // changeTrainingName(event: any): void  {

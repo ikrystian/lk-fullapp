@@ -41,12 +41,10 @@ class TrainingController extends Controller
         $trainingId = Exercise::where('exercise_type_id', $exerciseId)
             ->where('training_id', '!=', $currentTrainingId)
             ->where('user_id', Auth::id())
-            ->latest()
             ->firstOrFail('training_id')->training_id;
 
 
         $exercises = Exercise::where('training_id', $trainingId)->where('exercise_type_id', $exerciseId)->get();
-
         $lastTraining = $exercises->map(function ($item) {
             $data = $item;
             $data['total'] = $item->weight * $item->reps * $item->type->multipler;
