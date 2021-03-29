@@ -42,9 +42,12 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   series: any = [];
 
   message: string;
-  subscription: Subscription;
-  oneField =  localStorage.getItem('oneField') || false;
+  oneField = localStorage.getItem('oneField') || false;
   trainingId;
+  reps;
+  weight;
+  isFormInvalid = true;
+
   @Input() exercise: any;
   @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
   @ViewChild('addSeriesFormOne') addSeriesFormOne: ElementRef;
@@ -66,7 +69,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(): void {
     this.series = [];
-    console.log( this.exercise.body_part_id);
+    console.log(this.exercise.body_part_id);
     this.trainingService.getExercises(this.trainingId, this.exercise.id).subscribe(res => {
       this.series = res;
       this.sortSeries(this.series);
@@ -79,20 +82,14 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
       exercise_type_id: [this.exercise?.id],
       reps: [],
       weight: [],
+      oneField: [],
       multipler: [],
       training_id: [this.trainingId]
     });
 
-    this.addSeriesFormOneField = this.formBuilder.group({
-      exercise_type_id: [this.exercise?.id],
-      oneField: [],
-      training_id: [this.trainingId]
-    });
-
-
   }
 
-  removeTraining = (trainingId: number) => {
+  removeTraining(trainingId: number): any {
     if (!confirm('Na pewno chcesz usunąć trening? Akcja jest nieodwracalna')) {
       return false;
     }
@@ -108,54 +105,43 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
 
   }
 
+  oneFieldInputChanged(textValue: string): void {
+    console.log(this.exerciseForm.value);
+    const values = textValue.split('.');
+    if (values.length !== 2) {
+      return;
+    }
+
+    this.reps = values[0];
+    this.weight = values[1];
+    this.isFormInvalid = false;
+
+  }
 
   onSubmit = (form) => {
     this.exerciseForm.disable();
     const series = this.exerciseForm.value;
     const respField = this.addSeriesForm.nativeElement.reps;
+    const oneField = this.addSeriesForm.nativeElement.oneField;
 
+    this.exerciseForm.get('oneField').reset();
     this.exerciseForm.get('reps').reset();
     this.exerciseForm.get('weight').reset();
 
-    this.saveT(this.exerciseForm, series, respField);
-  }
-
-  onSubmitOneField(form): any {
-    this.addSeriesFormOneField.disable();
-    const series = this.addSeriesFormOneField.value;
-    const values = series.oneField.trim().split(' ');
-    if(values.length !== 2) {
-      this.openSnackBar('Nieprawidłowy format', 'OK');
-      this.addSeriesFormOneField.enable();
-      return false;
-    }
-    if(isNaN(values[0]) || isNaN(values[1])) {
-      this.openSnackBar('Podane wartośc nie są liczbami', 'OK');
-      this.addSeriesFormOneField.enable();
-      return false;
-    }
-    series.reps = values[0];
-    series.weight = values[1];
-
-    this.addSeriesFormOneField.get('oneField').reset();
-    const respField = this.addSeriesFormOne.nativeElement.oneField;
-    this.saveT(this.addSeriesFormOneField, series, respField);
-  }
-
-  saveT(form, series, respField): void {
+    series.reps = series.reps || this.reps;
+    series.weight = series.weight || this.weight;
     series.exercise_type_id = this.exercise.id;
     series.training_id = this.trainingId;
     series.bodyPartId = this.exercise.body_part_id;
+
     this.trainingService.addSeries(series).subscribe(res => {
       this.trainingService.changeMessage();
-
       this.series.unshift(res);
       this.sortSeries(this.series);
       this.openSnackBar('Seria została dodana', 'OK');
-      form.enable();
-      if (respField) {
-        respField.focus();
-      }
+      this.exerciseForm.enable();
+      this.isFormInvalid = false;
+      (this.oneField) ? oneField.focus() : respField.focus();
     });
   }
 
@@ -193,6 +179,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   onSwipe(event): void {
     Math.abs(event.deltaX) > 40 ? this.changeInputType() : '';
   }
+
   changeInputType(): void {
     this.oneField = !this.oneField;
     localStorage.setItem('oneField', this.oneField.toString());

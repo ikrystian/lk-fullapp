@@ -88,7 +88,7 @@ export class EditTrainingComponent implements OnInit {
   }
 
 
-  changeExercise(val): void {
+  changeExercise(): void {
     this.bodyPartId = this.selectedOption.body_part_id;
   }
 
