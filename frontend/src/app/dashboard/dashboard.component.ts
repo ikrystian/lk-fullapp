@@ -4,6 +4,8 @@ import { AuthenticationStateService } from '../shared/authentication-state.servi
 import { Router } from '@angular/router';
 import { TokenAuthService } from '../shared/token-auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {TranslateService} from '@ngx-translate/core';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -20,13 +22,17 @@ export class DashboardComponent implements OnInit {
   private currentTheme = 'theme-dark';
 
   constructor(
+    translate: TranslateService,
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
     public authenticationStateService: AuthenticationStateService,
     private tokenAuthService: TokenAuthService,
     public router: Router,
     public snackBar: MatSnackBar
-  ) {}
+  ) {
+    translate.setDefaultLang('en');
+    translate.use('en');
+  }
 
   ngOnInit(): void {
     this.currentTheme = localStorage.getItem('activeTheme') || 'theme-dark';

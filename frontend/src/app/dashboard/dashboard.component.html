@@ -12,6 +12,7 @@
     </nav>
   </mat-drawer>
   <mat-drawer-content>
+    <div>{{ 'HELLO' | translate }}</div>
     <router-outlet></router-outlet>
     <app-bottom-nav
       (darkModeSwitched)="switchMode($event)"

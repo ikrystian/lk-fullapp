@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -30,6 +30,17 @@ import {
   HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG
 }
   from '@angular/platform-browser';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+
+export function HttpLoaderFactory(http: HttpClient): any {
+  return new TranslateHttpLoader(http);
+}
+
+export function createTranslateLoader(http: HttpClient): any {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -67,6 +78,14 @@ export class MyHammerConfig extends HammerGestureConfig {
     NgPipesModule,
     HammerModule,
     MatDatepickerModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'pl',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient],
+      }
+    }),
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
   ],
 
@@ -85,7 +104,7 @@ export class MyHammerConfig extends HammerGestureConfig {
       useClass: MyHammerConfig,
     },
   ],
-  exports: [],
+  exports: [TranslateModule],
   bootstrap: [AppComponent]
 })
 
