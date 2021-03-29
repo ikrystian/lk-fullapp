@@ -26,7 +26,7 @@ export class EditTrainingComponent implements OnInit {
   selectedOption;
   showUploadImageForm = false;
   bodyPartId = 0;
-
+  showChangeNameForm = false;
   name: string;
 
   constructor(
@@ -92,14 +92,13 @@ export class EditTrainingComponent implements OnInit {
     this.bodyPartId = this.selectedOption.body_part_id;
   }
 
-  // changeTrainingName(event: any): void  {
-  //   // !todo update this.training here
-  //   if (this.trainingName != event.target.value) {
-  //     this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {
-  //       this.openSnackBar('Nazwa treningu została zmieniona', 'ok');
-  //     });
-  //   }
-  // }
+  changeTrainingName(event: any): void  {
+    if (this.trainingName != event.target.value) {
+      this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {
+        this.openSnackBar('Nazwa treningu została zmieniona', 'ok');
+      });
+    }
+  }
 
   removeTraining = (trainingId: number) => {
     if (!confirm('Na pewno chcesz usunąć trening? Akcja jest nieodwracalna')) {

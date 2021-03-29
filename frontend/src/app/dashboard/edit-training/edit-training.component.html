@@ -9,6 +9,10 @@
       <span>Zapisz trening</span>
     </button>
     <mat-divider></mat-divider>
+    <button class="mat-menu-item" (click)="showChangeNameForm = !showChangeNameForm">
+      <mat-icon>edit</mat-icon>
+      <span>Zmień nazwę treningu</span>
+    </button>
     <button class="mat-menu-item" (click)="toggleImageForm()">
       <mat-icon>image</mat-icon>
       <span>Dodaj zdjęcie do treningu</span>
@@ -37,10 +41,9 @@
     [data]="{exerciseId: selectedOption?.id, trainingId: training.id, bodyPartId: selectedOption?.body_part_id}"></app-exercise-progress>
   <div class="standard-page edit-training edit-training--exercises">
 
-    <div class="training-time">
+    <div class="training-time" *ngIf="!training.end">
       <p><mat-icon>query_builder</mat-icon>Start: <span>{{training.start | slice: 11}}</span></p>
-      <p *ngIf="training.end"><mat-icon>query_builder</mat-icon>Koniec: <span>{{training.end | slice: 11}}</span></p>
-      <div *ngIf="!training.end">
+      <div >
         <button  class="finish-workout" (click)="finishWorkout(training.id)">Zakończ trening
         </button>
       </div>
@@ -48,10 +51,10 @@
 
     <div>
       <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
-      <!--    <mat-form-field class="full-width-input">-->
-      <!--      <mat-label>Ustaw nazwę treningu</mat-label>-->
-      <!--      <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">-->
-      <!--    </mat-form-field>-->
+          <mat-form-field class="full-width-input" *ngIf="showChangeNameForm">
+            <mat-label>Ustaw nazwę treningu</mat-label>
+            <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">
+          </mat-form-field>
       <div class="choose-exercise">
         <button [matMenuTriggerFor]="exerciseMenu">
           <mat-icon>format_list_bulleted</mat-icon>
