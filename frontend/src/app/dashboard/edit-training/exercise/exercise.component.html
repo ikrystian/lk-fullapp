@@ -7,16 +7,16 @@
       </div>
 
       <div class="add-exercises__reps" [hidden]="oneField">
-        <input type="number" name="reps" formControlName="reps" [value]="reps" placeholder="Powtórzenia" required
+        <input type="number" name="reps" formControlName="reps" [value]="reps" [placeholder]="'REPS' | translate" required
                autofocus>
       </div>
 
       <div class="add-exercises__weight" [hidden]="oneField">
-        <input type="number" placeholder="Ciężar" [value]="weight" formControlName="weight" required>
+        <input type="number" [placeholder]="'WEIGHT' | translate" [value]="weight" formControlName="weight" required>
       </div>
 
       <div class="add-exercises__one-field" [hidden]="!oneField">
-        <input type="number" (input)="oneFieldInputChanged($event.target.value)" placeholder="Powtórzenia KROPKA ciężar"
+        <input type="number" (input)="oneFieldInputChanged($event.target.value)" [placeholder]="'REPS_DOT_WEIGHT' | translate"
                name="oneField" id="oneField"
                formControlName="oneField"
                autofocus>
@@ -54,6 +54,6 @@
 </div>
 <div class="empty-results" *ngIf="series.length == 0">
   <mat-icon>report_problem</mat-icon>
-  Brak dodanych serii
+  {{ 'NO_SERIES' | translate }}
 </div>
 

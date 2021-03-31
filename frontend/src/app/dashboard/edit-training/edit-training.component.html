@@ -6,34 +6,34 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="saveWorkout(training.id)">
       <mat-icon>save</mat-icon>
-      <span>Zapisz trening</span>
+      <span>{{ 'SAVE_TRAINING' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button class="mat-menu-item" (click)="showChangeNameForm = !showChangeNameForm">
       <mat-icon>edit</mat-icon>
-      <span>Zmień nazwę treningu</span>
+      <span>{{ "CHANGE_TRAININGS_NAME" | translate }}</span>
     </button>
     <button class="mat-menu-item" (click)="toggleImageForm()">
       <mat-icon>image</mat-icon>
-      <span>Dodaj zdjęcie do treningu</span>
+      <span>{{ 'ADD_PHOTO_TO_TRAINING' | translate }}</span>
     </button>
     <button class="mat-menu-item" routerLink="/dashboard/training/{{ training.id }}">
       <mat-icon>assignment</mat-icon>
-      <span>Podsumowanie treningu</span>
+      <span>{{ 'TRAINING_SUMMARY' | translate }}</span>
     </button>
     <button mat-menu-item (click)="openAddExerciseModal()">
       <mat-icon>add</mat-icon>
-      <span>Dodaj ćwiczenie</span>
+      <span>{{ 'ADD_EXERCISE' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button mat-menu-item class="warn" (click)="removeTraining(training.id)">
       <mat-icon>delete</mat-icon>
-      <span>Usuń trening</span>
+      <span>{{ 'REMOVE_TRAINING' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button mat-menu-item (click)="logOut()">
       <mat-icon>logout</mat-icon>
-      <span>Wyloguj</span>
+      <span>{{ 'LOGOUT' | translate }}</span>
     </button>
   </mat-menu>
 
@@ -44,15 +44,14 @@
     <div class="training-time" *ngIf="!training.end">
       <p><mat-icon>query_builder</mat-icon>Start: <span>{{training.start | slice: 11}}</span></p>
       <div >
-        <button  class="finish-workout" (click)="finishWorkout(training.id)">Zakończ trening
-        </button>
+        <button  class="finish-workout" (click)="finishWorkout(training.id)">{{ 'FINISH_TRAINING' | translate }}</button>
       </div>
     </div>
 
     <div>
       <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
           <mat-form-field class="full-width-input" *ngIf="showChangeNameForm">
-            <mat-label>Ustaw nazwę treningu</mat-label>
+            <mat-label>{{ 'CHANGE_TRAININGS_NAME' | translate }}</mat-label>
             <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">
           </mat-form-field>
       <div class="choose-exercise">
@@ -60,14 +59,14 @@
           <mat-icon>format_list_bulleted</mat-icon>
         </button>
         <mat-menu #exerciseMenu="matMenu">
-          <button mat-menu-item (click)="clearFilters()">Wszystkie partie</button>
+          <button mat-menu-item (click)="clearFilters()">{{ 'ALL_BODY_PARTS' | translate }}</button>
 
           <ng-container *ngFor="let bodyPart of bodyParts">
             <button mat-menu-item (click)="filterExercises(bodyPart.id)">{{ bodyPart.name }}</button>
           </ng-container>
         </mat-menu>
         <mat-form-field class="select--full">
-          <select matNativeControl required placeholder="Wybierz ćwiczenie z listy poniżej"
+          <select matNativeControl required [placeholder]="'CHOOSE_EXERCISE_FROM_LIST_BELOW' | translate"
                   (change)="changeExercise()"
                   [(ngModel)]="selectedOption">
             <option *ngFor="let exercise of exerciseTypes" [ngValue]="exercise">

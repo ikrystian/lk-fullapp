@@ -1,5 +1,7 @@
-<form class="add-training-image-form" action="" enctype="multipart/form-data" [formGroup]="form" (ngSubmit)="postForm()">
-  <input type="file" class="add-training-image-form__input" id="file" formControlName="file" accept="image/*" (change)="onFileChange($event)" >
+<form class="add-training-image-form" action="" enctype="multipart/form-data" [formGroup]="form"
+      (ngSubmit)="postForm()">
+  <input type="file" class="add-training-image-form__input" id="file" formControlName="file" accept="image/*"
+         (change)="onFileChange($event)">
   <label for="file">{{ labelText }}</label>
-  <button type="submit" mat-button>Zapisz</button>
+  <button type="submit" mat-button>{{ 'SAVE' | translate }}</button>
 </form>

@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation } 
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TrainingsService } from '../../shared/trainings.service';
-import { TrainingListModalComponent } from '../training-list-modal/training-list-modal.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { TrainingListModalComponent } from '../training-list-modal/training-list-modal.component';
 
 
 @Component({

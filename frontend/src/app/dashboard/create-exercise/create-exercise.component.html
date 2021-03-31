@@ -1,12 +1,12 @@
 <form action="" [formGroup]="exerciseForm" (ngSubmit)="createExercise()">
   <section class="popup__content">
     <mat-form-field class="full-width-input">
-      <mat-label>Nazwa ćwiczenia</mat-label>
+      <mat-label>{{ 'EXERCISE_NAME' | translate }}</mat-label>
       <input matInput placeholder="np. Martwy ciąg" required formControlName="name">
     </mat-form-field>
 
     <mat-form-field class="full-width-input">
-      <mat-label>Partia ciała</mat-label>
+      <mat-label>{{ 'BODY_PART' | translate }}</mat-label>
       <select matNativeControl required formControlName="body_part">
         <option *ngFor="let bodyPart of bodyParts" [value]="bodyPart.id">
           {{bodyPart.name}}
@@ -15,7 +15,7 @@
     </mat-form-field>
 
     <mat-form-field class="full-width-input">
-      <mat-label>Mnożnik</mat-label>
+      <mat-label>{{ 'MULTIPLIER' | translate }}</mat-label>
       <select matNativeControl required formControlName="multipler">
         <option value="1">1</option>
         <option value="2">2</option>
@@ -24,7 +24,7 @@
   </section>
 
   <footer class="popup__footer">
-    <button mat-dialog-close mat-button color="warn">Anuluj</button>
-    <button mat-button color="primary" cdkFocusInitial type="submit" [disabled]="!exerciseForm.valid">Zapisz</button>
+    <button mat-dialog-close mat-button color="warn">{{ 'CANCEL' | translate }}</button>
+    <button mat-button color="primary" cdkFocusInitial type="submit" [disabled]="!exerciseForm.valid">{{ 'SAVE' | translate }}</button>
   </footer>
 </form>

@@ -15,7 +15,7 @@
     </div>
   </mat-tab>
 
-  <mat-tab label="Kalendarz">
+  <mat-tab [label]="'CALENDAR' | translate">
     <div class="training-list-tabs__tab-content">
       <app-calendar [trainings]="trainings"></app-calendar>
     </div>

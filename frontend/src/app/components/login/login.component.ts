@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthenticationStateService } from '../../shared/authentication-state.service';
 import { JwtService } from '../../shared/jwt.service';
 import { TokenAuthService } from '../../shared/token-auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -24,10 +25,11 @@ export class LoginComponent implements OnInit {
     public jwtService: JwtService,
     private tokenAuthService: TokenAuthService,
     private authenticationStateService: AuthenticationStateService,
+    public snackBar: MatSnackBar
   ) {
     this.signinForm = this.fb.group({
-      email: [''],
-      password: ['']
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
@@ -41,6 +43,7 @@ export class LoginComponent implements OnInit {
       },
       error => {
         this.err = error.error;
+        this.snackBar.open(error.message, '🤷‍');
       }, () => {
         this.authenticationStateService.setAuthState(true);
         this.signinForm.reset();

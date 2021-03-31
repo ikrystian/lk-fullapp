@@ -1,5 +1,5 @@
 <mat-nav-list *ngIf="data.trainings">
-  <a *ngFor="let training of data.trainings" routerLink="/dashboard/training/{{training.id}}" mat-list-item (click)="openLink($event)">
+  <a *ngFor="let training of data.trainings" routerLink="/dashboard/training/{{training.id}}" mat-list-item (click)="openLink()">
     <span mat-line>{{ training.name }}</span>
     <span mat-line>{{ training.start}}</span>
   </a>

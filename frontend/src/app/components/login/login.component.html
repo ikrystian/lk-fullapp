@@ -2,7 +2,7 @@
   <section class="auth-page__content">
 
     <img class="auth-page__logo" src="./assets/images/logo.png" alt="Leniwa Kluska">
-    <h1 class="auth-page__title">Zaloguj do <strong>LENIWEJ KLUSKI</strong></h1>
+    <h1 class="auth-page__title">{{ 'LOG_IN_TO' | translate }}<strong>LENIWEJ KLUSKI</strong></h1>
     <form class="auth-page__form" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
 
       <div class="form-group">
@@ -11,7 +11,7 @@
         </div>
 
         <mat-form-field class="auth-page__form-field">
-          <mat-label>Nazwa użytkownika (email)</mat-label>
+          <mat-label>{{ 'USERNAME' | translate }} (email)</mat-label>
           <input type="email" matInput placeholder="Login (email)" autofocus formControlName="email">
           <mat-error *ngIf="err?.email">
             {{ err?.email }}
@@ -24,8 +24,8 @@
       <div class="form-group">
 
         <mat-form-field class="auth-page__form-field">
-          <mat-label>Hasło</mat-label>
-          <input [type]=" showPassword ? 'text' : 'password'" matInput placeholder="Hasło" formControlName="password">
+          <mat-label>{{ 'PASSWORD' | translate }}</mat-label>
+          <input [type]=" showPassword ? 'text' : 'password'" matInput [placeholder]="'PASSWORD' | translate" formControlName="password">
           <button type="button" class="auth-page__toggle-password-button" (click)="togglePassword()">
           <mat-icon matSuffix>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
@@ -36,8 +36,8 @@
 
       </div>
       <footer class="auth-page__form-footer">
-        <a mat-flat-button routerLink="/signup"> Zarejestruj się</a>
-        <button mat-button mat-raised-button color="primary" type="submit" [disabled]="signinForm.invalid">Zaloguj</button>
+        <a mat-flat-button routerLink="/signup">{{ 'REGISTER' | translate }}</a>
+        <button mat-button mat-raised-button color="primary" type="submit" [disabled]="signinForm.invalid">{{ 'LOG_IN' | translate }}</button>
       </footer>
     </form>
 

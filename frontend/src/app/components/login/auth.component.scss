@@ -3,19 +3,21 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   color: #fff;
 
   &__logo {
     display: block;
     max-width: 270px;
     max-height: 30vh;
-    margin: 0 auto 1rem;
+    margin: 1rem auto;
   }
 
   &__title {
     margin-top: 2rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
 
     strong {
       white-space: nowrap;
