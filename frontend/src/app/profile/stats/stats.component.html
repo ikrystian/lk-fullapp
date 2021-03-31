@@ -1,12 +1,8 @@
-<a routerLink="/dashboard" class="stats" *ngIf="stats">
+<div class="stats" *ngIf="stats">
   <h1>Gratuacje, <strong>{{ stats.username }}</strong>&nbsp;!</h1>
   <h2>Udało Ci się podnieść</h2>
   <h2><strong> {{ stats.total / 1000 | round : 2 }} ton !</strong></h2>
   <h3>(to tyle co {{ stats.total / 1000 / 35 | round }} czołgów T55 💪)</h3>
   <h2>w trakcie</h2>
-  <h2><strong>{{ stats.trainings }}</strong> treningów</h2>
-
-  <button class="stats__close-button" mat-icon-button routerLink="/dashboard" aria-label="Back to dashboard">
-    <mat-icon>close</mat-icon>
-  </button>
-</a>
+  <h4><strong>{{ stats.trainings }}</strong> treningów od {{stats.training_days}} dni</h4>
+</div>

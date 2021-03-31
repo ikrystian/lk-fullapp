@@ -270,7 +270,7 @@ class TrainingController extends Controller
         if (Auth::id() == 1) {
             $stats['total'] += 550000;
             $stats['trainings'] += 28;
-            $stats['training_days'] += 29;
+            $stats['training_days'] = $stats['trainings'] + 1;
 
         }
         return $stats;
