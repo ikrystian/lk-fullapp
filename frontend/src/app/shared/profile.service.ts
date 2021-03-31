@@ -13,4 +13,8 @@ export class ProfileService {
   getActivitiesByUserId(): any {
     return this.http.get(`${this.API_URL}/activities`);
   }
+
+  getUserAvatar(): string {
+    return 'https://bpc-dev.pl/images/BPCKrystian.png';
+  }
 }

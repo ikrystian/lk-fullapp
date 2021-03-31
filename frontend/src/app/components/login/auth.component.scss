@@ -2,30 +2,58 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0 1.5rem;
   color: #fff;
-
-  &__logo {
-    display: block;
-    max-width: 270px;
-    max-height: 30vh;
-    margin: 1rem auto;
-  }
+  background-color: #19181e;
 
   &__title {
-    margin-top: 2rem;
+    margin-top: 0;
     text-align: center;
     display: flex;
     flex-direction: column;
+    margin-bottom: 3rem;
+    font-weight: 400 !important;
 
     strong {
       white-space: nowrap;
+      font-weight: 500 !important;
+    }
+  }
+
+  picture {
+    height: 40vh;
+    display: block;
+    background: url('/assets/images/auth-bg.jpeg') center no-repeat;
+    background-size: cover;
+
+    img {
+      display: block;
+      object-fit: cover;
+
+    }
+  }
+
+  &__register-slogan {
+    padding: 0 1rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+
+    a {
+      text-decoration: underline;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
     }
   }
 
   &__form {
-    margin-top: 3rem;
+    background-color: #19181e;
+    border-radius: 2rem 2rem 0 0;
+    position: relative;
+    padding: 2rem;
+    margin-top: -5rem;
+    overflow: hidden;
   }
 
   &__form-field {
@@ -44,7 +72,12 @@
 
   &__form-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+
+    button {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
   }
 
   &__footer {

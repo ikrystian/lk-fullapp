@@ -1,9 +1,9 @@
 <div class="auth-page">
   <section class="auth-page__content">
+    <picture></picture>
 
-    <img class="auth-page__logo" src="./assets/images/logo.png" alt="Leniwa Kluska">
-    <h1 class="auth-page__title">{{ 'LOG_IN_TO' | translate }}<strong>LENIWEJ KLUSKI</strong></h1>
     <form class="auth-page__form" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+      <h1 class="auth-page__title">{{ 'LOG_IN_TO' | translate }}<strong>LENIWEJ KLUSKI</strong></h1>
 
       <div class="form-group">
         <div *ngIf="err?.error" class="alert alert-danger mt-3">
@@ -36,13 +36,14 @@
 
       </div>
       <footer class="auth-page__form-footer">
-        <a mat-flat-button routerLink="/signup">{{ 'REGISTER' | translate }}</a>
         <button mat-button mat-raised-button color="primary" type="submit" [disabled]="signinForm.invalid">{{ 'LOG_IN' | translate }}</button>
       </footer>
     </form>
 
+    <p class="auth-page__register-slogan">Nie chcesz być dalej leniwą kluską? <a routerLink="/signup">Zarejestruj się!</a></p>
+
     <footer class="auth-page__footer">
-      <p>Leniwa kluska - wersja bardzo developerska</p>
+      <p>wersja bardzo developerska</p>
     </footer>
   </section>
 </div>

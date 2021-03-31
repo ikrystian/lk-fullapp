@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainingsService } from '../../shared/trainings.service';
 import { ActivatedRoute } from '@angular/router';
+import { ProfileService } from '../../shared/profile.service';
 
 @Component({
   selector: 'app-stats',
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 export class StatsComponent implements OnInit {
   stats;
 
-  constructor(public trainingService: TrainingsService) {
+  constructor(public trainingService: TrainingsService, public profileService: ProfileService) {
     this.trainingService.getStats().subscribe(res => {
       this.stats = res;
     });

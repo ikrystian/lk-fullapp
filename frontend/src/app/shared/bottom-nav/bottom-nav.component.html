@@ -1,6 +1,6 @@
 <nav>
   <button routerLink="/dashboard/profile" matRipple>
-    <img [src]="USER_IMAGE" alt="">
+    <img [src]="profileService.getUserAvatar()" alt="">
   </button>
   <button routerLink="/" matRipple>
     <mat-icon>home</mat-icon>

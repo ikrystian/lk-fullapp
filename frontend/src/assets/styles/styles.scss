@@ -26,11 +26,12 @@ $angular-light-theme: mat-light-theme(
 body {
   &, &.theme-dark {
     @include angular-material-theme($angular-dark-theme);
-    --body-background-color: #18191a;
-    --font-color: rgb(228, 230, 235);
+    --body-background-color: #222433;
+    //--font-color: rgb(228, 230, 235);
+    --font-color: rgba(255, 255, 255, 0.7);
     --popup-background-color: #292c31;
     --overlay-background-color: rgba(0, 0, 0, 0.6);
-    --primary-color: #292c31;
+    --primary-color: #1A1B1F;
     --accent-color: #ff9800;
   }
 
@@ -221,4 +222,13 @@ body {
     position: relative;
     top: 2px;
   }
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: #fff !important;
 }

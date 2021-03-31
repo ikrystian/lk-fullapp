@@ -47,16 +47,35 @@
     z-index: 3;
   }
 
-  h1 {
-    font-size: 2.5em;
-    line-height: 1.2;
+  &__header {
+    display: flex;
+    align-items: center;
+
+    h1 {
+      margin: 0;
+      font-weight: 500;
+      font-size: 2.2em;
+      line-height: 1.1;
+
+      strong {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__user-image {
+    width: 84px;
+    height: 84px;
+    margin-right: 2rem;
+    border-radius: 50%;
   }
 
   h2 {
     margin-bottom: 0;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     line-height: 1.4;
     font-weight: 300;
+    text-align: center;
 
     strong {
       font-weight: 600;

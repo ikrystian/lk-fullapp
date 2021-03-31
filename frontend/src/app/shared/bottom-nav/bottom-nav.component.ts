@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { Location } from '@angular/common';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ProfileService } from '../profile.service';
 
 @Component({
   selector: 'app-bottom-nav',
@@ -28,7 +29,6 @@ export class BottomNavComponent implements OnInit {
   length;
   training;
   trainings: any;
-  USER_IMAGE = 'https://bpc-dev.pl/images/BPCKrystian.png';
 
   constructor(
     public trainingService: TrainingsService,
@@ -36,6 +36,7 @@ export class BottomNavComponent implements OnInit {
     private snackBar: MatSnackBar,
     public router: Router,
     private geolocation: GeolocationService,
+    public profileService: ProfileService,
   ) {
     this.geolocation.subscribe(position => {
       this.userPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};

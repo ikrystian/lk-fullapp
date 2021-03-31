@@ -1,9 +1,8 @@
 <div class="auth-page">
   <section class="auth-page__content">
-
-    <img class="auth-page__logo" src="./assets/images/logo.png" alt="Leniwa Kluska">
-    <h1 class="auth-page__title">Zarejestruj się jako <strong>LENIWA KLUSKA</strong></h1>
+    <picture></picture>
     <form class="auth-page__form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <h1 class="auth-page__title">Zarejestruj się jako <strong>LENIWA KLUSKA</strong></h1>
 
       <div class="form-group">
         <mat-form-field class="auth-page__form-field">
@@ -46,13 +45,13 @@
       </div>
 
       <footer class="auth-page__form-footer">
-        <a mat-flat-button routerLink="/signin">Zaloguj się</a>
         <button mat-button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">Zarejestruj się</button>
       </footer>
     </form>
+    <p class="auth-page__register-slogan">Masz już konto? <a routerLink="/signin">Zaloguj się!</a></p>
 
     <footer class="auth-page__footer">
-      <p>Leniwa kluska - wersja bardzo developerska</p>
+      <p>Wersja bardzo developerska</p>
     </footer>
   </section>
 </div>
