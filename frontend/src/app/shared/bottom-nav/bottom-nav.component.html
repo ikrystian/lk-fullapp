@@ -1,19 +1,16 @@
 <nav>
-  <button routerLink="/dashboard/profile" matRipple>
-    <img [src]="profileService.getUserAvatar()" alt="">
-  </button>
-  <button routerLink="/" matRipple>
-    <mat-icon>home</mat-icon>
-  </button>
+<!--  <button routerLink="/dashboard/profile" matRipple>-->
+<!--    <img [src]="profileService.getUserAvatar()" alt="">-->
+<!--  </button>-->
+  <div>
+    <button routerLink="/" matRipple>
+      <mat-icon>home</mat-icon>
+    </button>
 
-  <button (click)="addTraining()" matRipple>
-    <mat-icon>add_box</mat-icon>
-  </button>
+    <button (click)="addTraining()" matRipple>
+      <mat-icon>add_box</mat-icon>
+    </button>
 
-    <mat-slide-toggle
-      color="primary"
-      [checked]="isDarkMode"
-      (change)="onDarkModeSwitched($event)"
-    ></mat-slide-toggle>
   <ng-content></ng-content>
+  </div>
 </nav>

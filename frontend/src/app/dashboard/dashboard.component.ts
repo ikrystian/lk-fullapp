@@ -1,10 +1,11 @@
-import { Component, Inject, Renderer2, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Renderer2, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AuthenticationStateService } from '../shared/authentication-state.service';
 import { Router } from '@angular/router';
 import { TokenAuthService } from '../shared/token-auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {TranslateService} from '@ngx-translate/core';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,10 +45,14 @@ export class DashboardComponent implements OnInit {
     this.translate.use(lang);
   }
 
-  switchMode(isDarkMode: boolean): void {
-    this.currentTheme = isDarkMode ? 'theme-dark' : 'theme-light';
+  onDarkModeSwitched({checked}: MatSlideToggleChange): void {
+    this.currentTheme = checked ? 'theme-dark' : 'theme-light';
     this.renderer.setAttribute(this.document.body, 'class', this.currentTheme);
     localStorage.setItem('activeTheme', this.currentTheme);
+  }
+
+  switchMode(isDarkMode: boolean): void {
+
   }
 
   logout(): void {

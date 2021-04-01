@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -92,7 +92,7 @@ export class EditTrainingComponent implements OnInit {
     this.bodyPartId = this.selectedOption.body_part_id;
   }
 
-  changeTrainingName(event: any): void  {
+  changeTrainingName(event: any): void {
     if (this.trainingName != event.target.value) {
       this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {
         this.openSnackBar('Nazwa treningu została zmieniona', 'ok');

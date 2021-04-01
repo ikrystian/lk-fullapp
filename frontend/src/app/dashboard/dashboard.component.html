@@ -1,28 +1,24 @@
 <mat-drawer-container class="dashboard-container" hasBackdrop="true">
-  <mat-drawer #drawer mode="push">
+  <mat-drawer #drawer mode="push" position="end">
     <nav class="slide-nav">
-      <button mat-ripple (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        <span>{{ 'LOGOUT' | translate }}</span>
+
+      <button (click)="showStats = !showStats; drawer.close()" matRipple>
+        <mat-icon>assessment</mat-icon>
+        <span>Statystyki</span>
       </button>
-      <button mat-ripple>
-        <img [src]="USER_IMAGE" alt="">
+      <div class="slide-nav__toggle">
+        <mat-slide-toggle
+          color="primary"
+          [checked]="isDarkMode"
+          (change)="onDarkModeSwitched($event)"
+        ></mat-slide-toggle>
+        <span>Motyw</span>
+      </div>
+      <button [matMenuTriggerFor]="menu" matRipple>
+        <mat-icon>language</mat-icon>
+        <span>Język</span>
       </button>
 
-    </nav>
-  </mat-drawer>
-  <mat-drawer-content>
-    <app-stats [ngClass]="{'displayed' : showStats }"></app-stats>
-    <router-outlet></router-outlet>
-    <app-bottom-nav
-      (darkModeSwitched)="switchMode($event)"
-      [isDarkMode]="isDarkMode">
-      <button (click)="showStats = !showStats" matRipple>
-        <mat-icon>assessment</mat-icon>
-      </button>
-      <button class="dashboard__menu-button" [matMenuTriggerFor]="menu" matRipple>
-        <mat-icon>language</mat-icon>
-      </button>
       <mat-menu #menu="matMenu">
         <ng-container *ngFor="let lang of translate.getLangs()">
           <button mat-menu-item (click)="changeLang(lang)"
@@ -32,9 +28,23 @@
         </ng-container>
       </mat-menu>
 
+      <button mat-ripple (click)="logout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>{{ 'LOGOUT' | translate }}</span>
+      </button>
+      <button (click)="drawer.toggle()" matRipple>
+        <mat-icon>close</mat-icon>
+      </button>
+
+    </nav>
+  </mat-drawer>
+  <mat-drawer-content>
+    <app-stats [ngClass]="{'displayed' : showStats }"></app-stats>
+    <router-outlet></router-outlet>
+    <app-bottom-nav>
+
       <button class="dashboard__menu-button" (click)="drawer.toggle()" matRipple>
-        <mat-icon *ngIf="!drawer.opened">menu</mat-icon>
-        <mat-icon *ngIf="drawer.opened">close</mat-icon>
+        <mat-icon>menu</mat-icon>
       </button>
 
     </app-bottom-nav>

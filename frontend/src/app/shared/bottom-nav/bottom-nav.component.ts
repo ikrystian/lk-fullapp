@@ -12,7 +12,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { Location } from '@angular/common';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ProfileService } from '../profile.service';
 
 @Component({
@@ -22,8 +21,7 @@ import { ProfileService } from '../profile.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BottomNavComponent implements OnInit {
-  @Input() isDarkMode = true;
-  @Output() readonly darkModeSwitched = new EventEmitter<boolean>();
+
 
   userPosition;
   length;
@@ -47,9 +45,7 @@ export class BottomNavComponent implements OnInit {
 
   }
 
-  onDarkModeSwitched({checked}: MatSlideToggleChange): void {
-    this.darkModeSwitched.emit(checked);
-  }
+
 
   addTraining(): any {
     this.trainingService.getTrainingByDate(moment().format('YYYY-MM-DD')).subscribe((res: any) => {
