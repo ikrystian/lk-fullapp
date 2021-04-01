@@ -5,7 +5,7 @@
       <div class="add-exercises__series">
         {{ series.length + 1 }}
       </div>
-
+      <div class="add-exercises__exercise-data-input-component">
       <div class="add-exercises__reps" [hidden]="oneField">
         <input type="number" name="reps" formControlName="reps" [value]="reps" [placeholder]="'REPS' | translate" required
                autofocus>
@@ -21,7 +21,10 @@
                formControlName="oneField"
                autofocus>
       </div>
-
+        <button type="button" class="add-exercises__weight-type" (click)="isLBS = !isLBS">
+          {{ isLBS ? 'LBS' : 'KG' }}
+        </button>
+      </div>
       <div class="add-exercises__action">
         <button mat-button [disabled]="isFormInvalid && !exerciseForm.valid">
           <mat-icon>checked</mat-icon>
@@ -41,7 +44,7 @@
         {{ ser.reps }}
       </div>
       <div class="add-exercises__weight">
-        {{ ser.weight }}
+        {{ ser.weight | round: 1 }}
       </div>
       <div class="add-exercises__action">
         <button mat-button color="warn" type="button" (click)="removeExercise(ser.id)">

@@ -13,7 +13,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { TrainingsService } from '../../../shared/trainings.service';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
-import { Subscription } from 'rxjs';
 
 
 const listAnimation = trigger('listAnimation', [
@@ -38,7 +37,6 @@ const listAnimation = trigger('listAnimation', [
 
 export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   exerciseForm: FormGroup;
-  addSeriesFormOneField: FormGroup;
   series: any = [];
 
   message: string;
@@ -47,6 +45,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   reps;
   weight;
   isFormInvalid = true;
+  isLBS = false;
 
   @Input() exercise: any;
   @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
@@ -130,6 +129,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
 
     series.reps = series.reps || this.reps;
     series.weight = series.weight || this.weight;
+    series.weight = (this.isLBS) ?  series.weight * 2.2046 : series.weight;
     series.exercise_type_id = this.exercise.id;
     series.training_id = this.trainingId;
     series.bodyPartId = this.exercise.body_part_id;

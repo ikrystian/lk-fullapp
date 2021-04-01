@@ -2,12 +2,35 @@
 .add-exercises {
   max-width: 100%;
 
+  &__exercise-data-input-component {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 192px;
+  }
+
+  &__weight-type {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 29px;
+    opacity: 0.3;
+    transform: translateX(100%);
+    border: 0;
+    background-color: transparent;
+    color: var(--font-color);
+    text-transform: lowercase
+  }
+
   &__row {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-evenly;
+    padding-left: 1rem;
+    justify-content: space-between;
     margin-bottom: 0.75rem;
     background-color: rgba(255, 255, 255, 0.05);
     position: relative;
