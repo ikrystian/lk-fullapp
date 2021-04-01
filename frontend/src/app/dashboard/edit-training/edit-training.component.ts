@@ -8,6 +8,7 @@ import { TrainingsService } from '../../shared/trainings.service';
 import { CreateExerciseComponent } from '../create-exercise/create-exercise.component';
 import { AuthenticationStateService } from '../../shared/authentication-state.service';
 import { TokenAuthService } from '../../shared/token-auth.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-edit-training',
@@ -28,6 +29,7 @@ export class EditTrainingComponent implements OnInit {
   bodyPartId = 0;
   showChangeNameForm = false;
   name: string;
+  timer;
 
   constructor(
     public trainingService: TrainingsService,
@@ -43,7 +45,22 @@ export class EditTrainingComponent implements OnInit {
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
       this.trainingName = res.name;
+      this.updateTime(this.training.start);
     });
+  }
+
+  updateTime(from): void {
+    const start = moment(new Date(from));
+    setInterval(() => {
+      const elapsedTime = moment(new Date()).diff(start);
+      const time = moment.duration(elapsedTime);
+
+      const hrs = ('0' + time.hours()).slice(-2);
+      const mins = ('0' + time.minutes()).slice(-2);
+      const secs = ('0' + time.seconds()).slice(-2);
+
+      this.timer = `${hrs}:${mins}:${secs}`;
+    }, 1000);
   }
 
   ngOnInit(): void {

@@ -37,7 +37,8 @@
   <div class="standard-page edit-training edit-training--exercises">
 
     <div class="training-time" *ngIf="!training.end">
-      <p><mat-icon>query_builder</mat-icon>Start: <span>{{training.start | slice: 11}}</span></p>
+      <p><mat-icon>query_builder</mat-icon>
+        {{ timer }}</p>
       <div >
         <button  class="finish-workout" (click)="finishWorkout(training.id)">{{ 'FINISH_TRAINING' | translate }}</button>
       </div>
