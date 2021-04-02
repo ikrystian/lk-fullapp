@@ -42,6 +42,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TranslateModule } from '@ngx-translate/core';
 import { TrainingListModalComponent } from './training-list-modal/training-list-modal.component';
+import { ExercisePreviewComponent } from './exercise-preview/exercise-preview.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { TrainingListModalComponent } from './training-list-modal/training-list-
     TrainingsComponent,
     ProfileComponent,
     StatsComponent,
+    ExercisePreviewComponent,
   ],
     imports: [
         CommonModule,

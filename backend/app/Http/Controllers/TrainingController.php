@@ -18,7 +18,7 @@ class TrainingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
@@ -32,8 +32,8 @@ class TrainingController extends Controller
                 $training['time'] = $diff_in_minutes;
             }
         });
-        return TrainingResource::collection($trainings);
 
+        return TrainingResource::collection($trainings);
     }
 
     public function getLastExerciseSum($exerciseId, $currentTrainingId, $bodyPartID)

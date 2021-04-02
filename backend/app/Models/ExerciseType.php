@@ -12,7 +12,8 @@ class ExerciseType extends Model
     protected $fillable = [
         'name',
         'multipler',
-        'body_part_id'
+        'body_part_id',
+        'imageurl'
     ];
 
     protected $with = ['bodyPart'];

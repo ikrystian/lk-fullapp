@@ -7,7 +7,7 @@ import { JwtService } from '../../shared/jwt.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['../login/auth.component.scss']
+  styleUrls: ['../auth/auth.component.scss']
 })
 
 export class RegisterComponent {

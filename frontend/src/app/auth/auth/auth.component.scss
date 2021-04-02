@@ -68,22 +68,22 @@
     right: 0;
     top: 0;
     color: #fff;
+    transform: scale(0.7);
+  }
+
+  &__forgot-password {
+    margin-top: 2rem;
   }
 
   &__form-footer {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    text-align: center;
 
     button {
+      width: 100%;
       padding-left: 2rem;
       padding-right: 2rem;
     }
-  }
-
-  &__footer {
-    font-size: 12px;
-    text-align: center;
-    padding: 0 1rem;
-    margin-top: 4rem;
   }
 }

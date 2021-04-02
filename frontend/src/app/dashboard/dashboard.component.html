@@ -1,11 +1,7 @@
 <mat-drawer-container class="dashboard-container" hasBackdrop="true">
   <mat-drawer #drawer mode="push" position="end">
     <nav class="slide-nav">
-
-      <button (click)="showStats = !showStats; drawer.close()" matRipple>
-        <mat-icon>assessment</mat-icon>
-        <span>Statystyki</span>
-      </button>
+      
       <div class="slide-nav__toggle">
         <mat-slide-toggle
           color="primary"
@@ -42,7 +38,9 @@
     <app-stats [ngClass]="{'displayed' : showStats }"></app-stats>
     <router-outlet></router-outlet>
     <app-bottom-nav>
-
+      <button (click)="showStats = !showStats; drawer.close()" matRipple>
+        <mat-icon>assessment</mat-icon>
+      </button>
       <button class="dashboard__menu-button" (click)="drawer.toggle()" matRipple>
         <mat-icon>menu</mat-icon>
       </button>

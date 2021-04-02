@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TokenAuthService } from '../shared/token-auth.service';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { TokenAuthService } from './token-auth.service';
 
 @Injectable({
   providedIn: 'root'

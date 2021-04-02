@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,8 @@ import { CreateExerciseComponent } from '../create-exercise/create-exercise.comp
 import { AuthenticationStateService } from '../../shared/authentication-state.service';
 import { TokenAuthService } from '../../shared/token-auth.service';
 import * as moment from 'moment';
+import { Training } from '../../training';
+import { ExercisePreviewComponent } from '../exercise-preview/exercise-preview.component';
 
 @Component({
   selector: 'app-edit-training',
@@ -18,10 +20,11 @@ import * as moment from 'moment';
     '../../../assets/styles/components/quick-menu.component.scss'
   ]
 })
+
 export class EditTrainingComponent implements OnInit {
   exerciseTypes;
   allExerciseTypes;
-  training: any;
+  training: Training;
   trainingName: string;
   bodyParts: any;
   selectedOption;
@@ -74,6 +77,13 @@ export class EditTrainingComponent implements OnInit {
     });
   }
 
+  showExercise(type): void {
+    this.dialog.open(ExercisePreviewComponent, {
+      width: '350px',
+      data: type
+    });
+  }
+
   clearFilters(): void {
     this.exerciseTypes = this.allExerciseTypes;
   }
@@ -82,19 +92,9 @@ export class EditTrainingComponent implements OnInit {
     this.showUploadImageForm = !this.showUploadImageForm;
   }
 
-  back(): void {
-    this.location.back();
-  }
-
-  logOut(): void {
-    this.authenticationStateService.setAuthState(false);
-    this.tokenAuthService.destroyToken();
-    this.router.navigate(['signin']);
-  }
-
   saveWorkout(id): void {
     this.trainingService.saveTraining(id).subscribe(res => {
-      this.openSnackBar('Trening został zapisany', 'ok');
+      this.snackBar.open('Trening został zapisany', 'ok');
     });
   }
 
@@ -104,15 +104,14 @@ export class EditTrainingComponent implements OnInit {
     });
   }
 
-
   changeExercise(): void {
     this.bodyPartId = this.selectedOption.body_part_id;
   }
 
   changeTrainingName(event: any): void {
-    if (this.trainingName != event.target.value) {
+    if (this.trainingName !== event.target.value) {
       this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {
-        this.openSnackBar('Nazwa treningu została zmieniona', 'ok');
+        this.snackBar.open('Nazwa treningu została zmieniona', 'ok');
       });
     }
   }
@@ -124,16 +123,12 @@ export class EditTrainingComponent implements OnInit {
 
     this.trainingService.removeTraining(trainingId).subscribe(res => {
       this.router.navigate(['/dashboard']);
-      this.openSnackBar('Trening został usunięty', 'OK');
+      this.snackBar.open('Trening został usunięty', 'OK');
     });
 
   }
 
-  openSnackBar = (message: string, action: string) => {
-    this.snackBar.open(message, action);
-  }
-
-  filterExercises = (id) => {
+  filterExercises(id): void {
     this.exerciseTypes = this.allExerciseTypes.filter(el => el.body_part_id === id);
     this.selectedOption = this.exerciseTypes[0];
   }

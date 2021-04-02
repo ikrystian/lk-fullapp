@@ -56,7 +56,6 @@
         </button>
         <mat-menu #exerciseMenu="matMenu">
           <button mat-menu-item (click)="clearFilters()">{{ 'ALL_BODY_PARTS' | translate }}</button>
-
           <ng-container *ngFor="let bodyPart of bodyParts">
             <button mat-menu-item (click)="filterExercises(bodyPart.id)">{{ bodyPart.name }}</button>
           </ng-container>
@@ -70,7 +69,7 @@
             </option>
           </select>
         </mat-form-field>
-        <button>
+        <button (click)="showExercise(selectedOption)" *ngIf="selectedOption?.imageurl">
           <mat-icon>visibility</mat-icon>
         </button>
       </div>

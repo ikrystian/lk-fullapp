@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
   logout(): void {
     this.authenticationStateService.setAuthState(false);
     this.tokenAuthService.destroyToken();
-    this.router.navigate(['signin']);
+    this.router.navigate(['/auth/login']);
     this.openSnackBar('Zostałeś wylogowany', '😥');
   }
 

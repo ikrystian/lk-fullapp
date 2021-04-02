@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { JwtService } from '../../shared/jwt.service';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+  styleUrls: ['../auth/auth.component.scss']
 })
 
 export class ResetPasswordComponent implements OnInit {
@@ -20,18 +20,19 @@ export class ResetPasswordComponent implements OnInit {
   ) {
     this.myForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]]
-    })
+    });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
-  onSubmit(){
+  onSubmit(): void {
     this.jwtService.reqPasswordReset(this.myForm.value).subscribe(
       (res) => {
         this.msg = res;
-      },(error) => {
+      }, (error) => {
         this.err = error.error.message;
-      })
+      });
   }
 
 }

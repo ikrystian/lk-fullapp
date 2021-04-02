@@ -20,7 +20,6 @@ export class TokenAuthService {
   }
 
   isLoggedIn = () => !!this.getJwtToken();
-
   getJwtToken = () => localStorage.getItem('auth_token');
 
   validateToken = () => {

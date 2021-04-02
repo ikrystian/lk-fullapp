@@ -1,6 +1,3 @@
-<div class="auth-page">
-  <section class="auth-page__content">
-    <picture></picture>
 
     <form class="auth-page__form" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
       <h1 class="auth-page__title">{{ 'LOG_IN_TO' | translate }}<strong>LENIWEJ KLUSKI</strong></h1>
@@ -37,13 +34,10 @@
       </div>
       <footer class="auth-page__form-footer">
         <button mat-button mat-raised-button color="primary" type="submit" [disabled]="signinForm.invalid">{{ 'LOG_IN' | translate }}</button>
+        <a class="auth-page__forgot-password" routerLink="/auth/forgot-password">Przypomnij hasło</a>
+
       </footer>
     </form>
 
-    <p class="auth-page__register-slogan">Nie chcesz być dalej leniwą kluską? <a routerLink="/signup">Zarejestruj się!</a></p>
+    <p class="auth-page__register-slogan">Nie chcesz być dalej leniwą kluską? <a routerLink="/auth/register">Zarejestruj się!</a></p>
 
-    <footer class="auth-page__footer">
-      <p>wersja bardzo developerska</p>
-    </footer>
-  </section>
-</div>
