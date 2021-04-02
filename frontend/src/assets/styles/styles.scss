@@ -24,6 +24,11 @@ $angular-light-theme: mat-light-theme(
 );
 
 body {
+  max-width: 400px;
+  overflow: hidden;
+  width: 100%;
+  margin: auto;
+
   &, &.theme-dark {
     @include angular-material-theme($angular-dark-theme);
     --body-background-color: #222433;
