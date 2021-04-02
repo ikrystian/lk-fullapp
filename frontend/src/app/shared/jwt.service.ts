@@ -35,7 +35,6 @@ export class JwtService {
 
   // req-password-reset
   reqPasswordReset(data): Observable<any> {
-    console.log(data);
     return this.http.post(`${environment.API_URL}/auth/req-password-reset`, data);
   }
 
