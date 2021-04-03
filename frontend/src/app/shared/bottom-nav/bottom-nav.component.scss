@@ -32,6 +32,10 @@
     background-color: transparent;
     color: var(--accent-color);
 
+    &.profile-button {
+      margin-right: 1rem;
+    }
+
     img {
       object-fit: cover;
       width: 42px;

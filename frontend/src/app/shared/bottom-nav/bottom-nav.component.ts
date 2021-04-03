@@ -35,6 +35,7 @@ export class BottomNavComponent implements OnInit {
     private snackBar: MatSnackBar,
     public router: Router,
     private geolocation: GeolocationService,
+    public profileService: ProfileService
   ) {
     this.geolocation.subscribe(position => {
       this.userPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};

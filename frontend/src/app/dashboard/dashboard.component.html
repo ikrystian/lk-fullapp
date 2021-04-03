@@ -35,13 +35,14 @@
     </nav>
   </mat-drawer>
   <mat-drawer-content>
-    <app-stats [ngClass]="{'displayed' : showStats }"></app-stats>
-    <router-outlet></router-outlet>
+    <div class="main-content" (swipe)="onSwipe($event)">
+      <app-stats [ngClass]="{'displayed' : showStats }"></app-stats>
+      <router-outlet></router-outlet>
+    </div>
     <app-bottom-nav (notify)="toggleStatsSection($event)">
       <button class="dashboard__menu-button" (click)="drawer.toggle()" matRipple>
         <mat-icon>menu</mat-icon>
       </button>
-
     </app-bottom-nav>
 
   </mat-drawer-content>

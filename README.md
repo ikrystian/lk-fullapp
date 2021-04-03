@@ -1,1 +1,0 @@
-# lk.bpc-dev.pl
