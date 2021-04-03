@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -15,11 +15,10 @@ import { Label } from 'ng2-charts';
      '../../../assets/styles/components/quick-menu.component.scss'
   ],
 })
-export class TrainingComponent implements OnInit {
+export class TrainingComponent {
   training: any;
   displayedColumns: string[] = ['name', 'weight', 'reps'];
   dataSource;
-  unique;
   ASSETS_URL = environment.UPLOADED_ASSETS_URL;
 
   public barChartOptions: ChartOptions = {
@@ -31,8 +30,8 @@ export class TrainingComponent implements OnInit {
   public barChartLegend = true;
 
   public barChartData: ChartDataSets[] = [
-    { data: [65], label: 'Obecny trening' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Poprzedni trening' }
+    { data: [65, 59, 80, 81, 56, 55], label: 'Poprzedni trening' },
+    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Obecny trening' }
   ];
 
   constructor(
@@ -57,16 +56,5 @@ export class TrainingComponent implements OnInit {
       this.router.navigate(['/dashboard']);
       this.snackBar.open('Trening został usunięty', 'OK');
     });
-  }
-
-  ngOnInit(): void {
-  }
-
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
-  }
-
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
-    console.log(event, active);
   }
 }
