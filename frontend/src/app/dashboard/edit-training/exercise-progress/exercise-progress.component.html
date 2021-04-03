@@ -7,8 +7,8 @@
   </div>
   <div class="progress__values">
     <span class="progress__start-value">0</span>
-    <span class="progress__current-value">{{ totalForSeries['currentTraining'] }}kg</span>
-    <span class="progress__end-value">{{ totalForSeries['lastTraining'] }}kg</span>
+    <span class="progress__current-value">{{ totalForSeries['currentTraining'] | round: 2 }}kg</span>
+    <span class="progress__end-value">{{ totalForSeries['lastTraining'] | round: 2 }}kg</span>
   </div>
   <button class="progress__total"
           #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltipPosition="above"

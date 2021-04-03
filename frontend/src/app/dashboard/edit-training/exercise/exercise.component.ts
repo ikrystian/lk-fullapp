@@ -129,7 +129,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
 
     series.reps = series.reps || this.reps;
     series.weight = series.weight || this.weight;
-    series.weight = (this.isLBS) ?  series.weight * 2.2046 : series.weight;
+    series.weight = (this.isLBS) ?  series.weight * 0.45359237 : series.weight;
     series.exercise_type_id = this.exercise.id;
     series.training_id = this.trainingId;
     series.bodyPartId = this.exercise.body_part_id;

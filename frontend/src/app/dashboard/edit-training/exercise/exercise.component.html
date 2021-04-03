@@ -45,6 +45,7 @@
       </div>
       <div class="add-exercises__weight">
         {{ ser.weight | round: 1 }}
+        <span class="add-exercises__type-weight">kg</span>
       </div>
       <div class="add-exercises__action">
         <button mat-button color="warn" type="button" (click)="removeExercise(ser.id)">

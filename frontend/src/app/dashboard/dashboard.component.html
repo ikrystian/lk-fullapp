@@ -1,14 +1,14 @@
 <mat-drawer-container class="dashboard-container" hasBackdrop="true">
   <mat-drawer #drawer mode="push" position="end">
     <nav class="slide-nav">
-      
+
       <div class="slide-nav__toggle">
         <mat-slide-toggle
           color="primary"
           [checked]="isDarkMode"
           (change)="onDarkModeSwitched($event)"
         ></mat-slide-toggle>
-        <span>Motyw</span>
+        <span>Tryb ciemny</span>
       </div>
       <button [matMenuTriggerFor]="menu" matRipple>
         <mat-icon>language</mat-icon>
@@ -37,10 +37,7 @@
   <mat-drawer-content>
     <app-stats [ngClass]="{'displayed' : showStats }"></app-stats>
     <router-outlet></router-outlet>
-    <app-bottom-nav>
-      <button (click)="showStats = !showStats; drawer.close()" matRipple>
-        <mat-icon>assessment</mat-icon>
-      </button>
+    <app-bottom-nav (notify)="toggleStatsSection($event)">
       <button class="dashboard__menu-button" (click)="drawer.toggle()" matRipple>
         <mat-icon>menu</mat-icon>
       </button>

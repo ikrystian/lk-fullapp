@@ -21,12 +21,13 @@ import { ProfileService } from '../profile.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BottomNavComponent implements OnInit {
-
+  @Output() notify = new EventEmitter<any>();
 
   userPosition;
   length;
   training;
   trainings: any;
+  showStats = false;
 
   constructor(
     public trainingService: TrainingsService,
@@ -34,7 +35,6 @@ export class BottomNavComponent implements OnInit {
     private snackBar: MatSnackBar,
     public router: Router,
     private geolocation: GeolocationService,
-    public profileService: ProfileService,
   ) {
     this.geolocation.subscribe(position => {
       this.userPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
@@ -45,7 +45,10 @@ export class BottomNavComponent implements OnInit {
 
   }
 
-
+  toggleStats(): void {
+    this.showStats = !this.showStats;
+    this.notify.emit(this.showStats);
+  }
 
   addTraining(): any {
     this.trainingService.getTrainingByDate(moment().format('YYYY-MM-DD')).subscribe((res: any) => {

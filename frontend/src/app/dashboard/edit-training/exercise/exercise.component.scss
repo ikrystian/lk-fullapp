@@ -9,6 +9,10 @@
     width: 192px;
   }
 
+  &__type-weight {
+    font-size: 0.8em;
+  }
+
   &__weight-type {
     position: absolute;
     right: 0;
@@ -81,14 +85,12 @@
         background-color: rgba(255, 255, 255, 0.005);
         color: rgba(255, 255, 255, 0.5);
       }
-
     }
-
-
   }
 
   &__series {
     width: 20px;
+    font-size: 0.8em;
   }
 
   &__reps,
@@ -96,6 +98,7 @@
     font-size: 14px;
     text-align: center;
     width: 90px;
+    position: relative;
   }
 
   &__one-field {

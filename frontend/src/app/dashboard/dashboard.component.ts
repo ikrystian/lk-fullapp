@@ -15,7 +15,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 })
 export class DashboardComponent implements OnInit {
   USER_IMAGE = 'https://scontent-frt3-1.xx.fbcdn.net/v/t1.0-1/p200x200/105966252_10216830499211784_1193981541556713056_n.jpg?_nc_cat=106&ccb=1-3&_nc_sid=7206a8&_nc_ohc=3nQs7TVM02IAX8754nu&_nc_ht=scontent-frt3-1.xx&tp=6&oh=f38da299e4057b6485d123c3645dc1e0&oe=6081A1AE';
-  showStats = false;
+  showStats:boolean;
 
   get isDarkMode(): boolean {
     return this.currentTheme === 'theme-dark';
@@ -36,6 +36,10 @@ export class DashboardComponent implements OnInit {
     translate.setDefaultLang('pl');
   }
 
+  toggleStatsSection(showStatsOutput: boolean): void {
+    this.showStats = showStatsOutput;
+  }
+
   ngOnInit(): void {
     this.currentTheme = localStorage.getItem('activeTheme') || 'theme-dark';
     this.renderer.setAttribute(this.document.body, 'class', this.currentTheme);
@@ -51,19 +55,10 @@ export class DashboardComponent implements OnInit {
     localStorage.setItem('activeTheme', this.currentTheme);
   }
 
-  switchMode(isDarkMode: boolean): void {
-
-  }
-
   logout(): void {
     this.authenticationStateService.setAuthState(false);
     this.tokenAuthService.destroyToken();
     this.router.navigate(['/auth/login']);
-    this.openSnackBar('Zostałeś wylogowany', '😥');
+    this.snackBar.open('Zostałeś wylogowany', '😥');
   }
-
-  openSnackBar = (message: string, action: string) => {
-    this.snackBar.open(message, action);
-  }
-
 }
