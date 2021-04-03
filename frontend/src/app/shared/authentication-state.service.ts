@@ -15,7 +15,7 @@ export class AuthenticationStateService {
     public tokenAuthService: TokenAuthService
   ) { }
 
-  setAuthState(value: boolean) {
+  setAuthState(value: boolean): void {
     this.userCurrentState.next(value);
   }
 
