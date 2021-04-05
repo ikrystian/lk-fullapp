@@ -210,3 +210,28 @@ input:-webkit-autofill:active  {
   transition: background-color 5000s;
   -webkit-text-fill-color: #fff !important;
 }
+
+.record-modal {
+  &.cdk-overlay-pane {
+    .mat-dialog-container {
+      border-radius: 0;
+      padding: 0;
+      background-color: #20243f;
+    }
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__image {
+    display: block;
+    max-width: 100%;
+  }
+
+  &__footer {
+    display: flex;
+    padding: 0.5rem;
+    justify-content: center;
+  }
+}

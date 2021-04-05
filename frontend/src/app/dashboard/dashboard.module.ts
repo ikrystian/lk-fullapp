@@ -101,8 +101,6 @@ import { ChartsModule } from 'ng2-charts';
     {provide: MAT_DIALOG_DATA, useValue: {}},
     MatDialogModule,
   ]
-
-
 })
 export class DashboardModule {
 }

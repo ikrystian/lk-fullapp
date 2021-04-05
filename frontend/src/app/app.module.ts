@@ -32,6 +32,7 @@ import {
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ChartsModule } from 'ng2-charts';
+import { RecordComponent } from './shared/record/record.component';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -51,6 +52,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     RegisterComponent,
     ResetPasswordComponent,
     UpdatePasswordComponent,
+    RecordComponent,
   ],
   imports: [
     BrowserModule,

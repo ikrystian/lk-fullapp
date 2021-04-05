@@ -1,15 +1,10 @@
-import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
-import {TrainingsService} from '../../../shared/trainings.service';
-import {Subscription} from 'rxjs';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { TrainingsService } from '../../../shared/trainings.service';
+import { Subscription } from 'rxjs';
+import { Progress } from '../../../models/progress';
+import { MatDialog } from '@angular/material/dialog';
+import { RecordComponent } from '../../../shared/record/record.component';
 
-export class Progress {
-  currentTotalTraining: number;
-  currentTraining: number;
-  lastTraining: number;
-  percentage: number;
-  currentInSeriesTotal: number;
-  message: string;
-}
 
 @Component({
   selector: 'app-exercise-progress',
@@ -26,7 +21,6 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
   bodyPartTotal: number;
   exercise = 0;
   progress = 0;
-
   defaultData: Progress = {
     currentTotalTraining: 0,
     currentTraining: 0,
@@ -38,7 +32,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
 
   totalForSeries: Progress = this.defaultData;
 
-  constructor(public trainingsService: TrainingsService) {
+  constructor(public trainingsService: TrainingsService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -92,15 +86,29 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
       this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
         this.totalForSeries = res;
         this.progress = (this.currentTotal / res.lastTraining) * 100;
+
       }, (error) => {
         console.log(error);
         this.totalForSeries = this.defaultData;
       });
-
       this.exercise = this.data.exerciseId;
     } else {
       this.progress = (this.currentTotal / this.totalForSeries.lastTraining) * 100;
     }
+    if (this.progress > 100 && this.totalForSeries.lastTraining) {
+      this.openRecordModal(this.exercise);
+    }
+  }
+
+  openRecordModal(exerciseId: string | number): any {
+    const currentRecordExercises = JSON.parse(localStorage.getItem('records')) || [];
+    if (currentRecordExercises.includes(exerciseId)) {
+      return false;
+    }
+    this.dialog.open(RecordComponent, {panelClass: 'record-modal'});
+    currentRecordExercises.push(exerciseId);
+    localStorage.setItem('records', JSON.stringify(currentRecordExercises));
+    console.log(currentRecordExercises);
   }
 }
 

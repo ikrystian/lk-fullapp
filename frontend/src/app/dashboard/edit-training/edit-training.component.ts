@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
-import {TrainingsService} from '../../shared/trainings.service';
-import {CreateExerciseComponent} from '../create-exercise/create-exercise.component';
-import {AuthenticationStateService} from '../../shared/authentication-state.service';
-import {TokenAuthService} from '../../shared/token-auth.service';
+import { TrainingsService } from '../../shared/trainings.service';
+import { CreateExerciseComponent } from '../create-exercise/create-exercise.component';
+import { AuthenticationStateService } from '../../shared/authentication-state.service';
+import { TokenAuthService } from '../../shared/token-auth.service';
 import * as moment from 'moment';
-import {Training} from '../../training';
-import {ExercisePreviewComponent} from '../exercise-preview/exercise-preview.component';
+import { Training } from '../../training';
+import { ExercisePreviewComponent } from '../exercise-preview/exercise-preview.component';
+import { RecordComponent } from '../../shared/record/record.component';
 
 @Component({
   selector: 'app-edit-training',
