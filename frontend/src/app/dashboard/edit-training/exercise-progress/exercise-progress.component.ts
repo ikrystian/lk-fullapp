@@ -66,26 +66,27 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     const series = (localStorage.getItem('series')) ? JSON.parse(localStorage.getItem('series')) : [];
-    if (series.length === 0) {
-      return;
+
+    if (series.length !== 0) {
+
+      const currentBodyPartSeries = series.filter(el => el.bodyPartId === this.data.bodyPartId);
+      currentBodyPartSeries.forEach(el => {
+        this.bodyPartTotal += el.weight * el.reps * el.multiplier;
+      });
+
+      series.forEach(el => {
+        this.trainingTotal += el.weight * el.reps * el.multiplier;
+      });
+
+      const currentExercise = series.filter(el => el.exercise_type_id === this.data.exerciseId);
+      if (currentExercise.length === 0) {
+        this.progress = 0;
+      }
+
+      currentExercise.forEach(el => {
+        this.currentTotal += el.weight * el.reps * el.multiplier;
+      });
     }
-    const currentBodyPartSeries = series.filter(el => el.bodyPartId === this.data.bodyPartId);
-    currentBodyPartSeries.forEach(el => {
-      this.bodyPartTotal += el.weight * el.reps * el.multiplier;
-    });
-
-    series.forEach(el => {
-      this.trainingTotal += el.weight * el.reps * el.multiplier;
-    });
-
-    const currentExercise = series.filter(el => el.exercise_type_id === this.data.exerciseId);
-    if (currentExercise.length === 0) {
-      this.progress = 0;
-    }
-
-    currentExercise.forEach(el => {
-      this.currentTotal += el.weight * el.reps * el.multiplier;
-    });
 
     if (this.data.exerciseId !== this.exercise) {
       this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
@@ -98,7 +99,6 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
 
       this.exercise = this.data.exerciseId;
     } else {
-
       this.progress = (this.currentTotal / this.totalForSeries.lastTraining) * 100;
     }
   }
