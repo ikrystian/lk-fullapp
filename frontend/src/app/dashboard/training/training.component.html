@@ -3,7 +3,7 @@
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button class="mat-menu-item" routerLink="/dashboard/training/{{ training.id }}/edit">
+      <button *ngIf="!training.end" class="mat-menu-item" routerLink="/dashboard/training/{{ training.id }}/edit">
         <mat-icon>edit</mat-icon>
         Edycja treningu
       </button>

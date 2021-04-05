@@ -1,5 +1,5 @@
 <div class="add-exercises">
-  <div class="swipe" (swipe)="onSwipe($event)">
+  <div class="swipe" (tap)="onTap($event)">
     <form class="add-exercises__row" [formGroup]="exerciseForm" (ngSubmit)="onSubmit(exerciseForm)"
           #addSeriesForm>
       <div class="add-exercises__series">

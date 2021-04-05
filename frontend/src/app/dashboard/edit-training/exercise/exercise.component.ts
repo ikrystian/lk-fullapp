@@ -179,8 +179,10 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     this.snackBar.open(message, action);
   }
 
-  onSwipe(event): void {
-    Math.abs(event.deltaX) > 40 ? this.changeInputType() : '';
+  onTap(event): void {
+    if (event.tapCount === 4) {
+      this.changeInputType();
+    }
   }
 
   changeInputType(): void {
