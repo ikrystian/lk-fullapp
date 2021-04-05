@@ -32,8 +32,6 @@
     </button>
   </mat-menu>
 
-  <app-exercise-progress
-    [data]="{exerciseId: selectedOption?.id, trainingId: training.id, bodyPartId: selectedOption?.body_part_id}"></app-exercise-progress>
   <div class="standard-page edit-training edit-training--exercises">
 
     <div class="training-time" *ngIf="!training.end">
@@ -77,6 +75,8 @@
       <app-exercise *ngIf="selectedOption" [exercise]="selectedOption"></app-exercise>
     </div>
 
-
   </div>
+
+  <app-exercise-progress
+    [data]="{exerciseId: selectedOption?.id, trainingId: training.id, bodyPartId: selectedOption?.body_part_id}"></app-exercise-progress>
 </ng-container>

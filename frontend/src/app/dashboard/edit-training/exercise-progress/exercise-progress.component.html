@@ -1,23 +1,25 @@
 <ng-container>
-  <div class="progress">
-    <div class="progress__bar" [ngClass]="{'progress__bar--finished' : progress >= 100 }"
-         [style.width.%]="progress">
-    </div>
-    <span class="progress__title">{{ progress | round: 2 }}% {{ 'OF_LAST_TRAINING' | translate }}</span>
+  <div class="progress__totals">
+    <button class="progress__total"
+            #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltipPosition="above"
+            matTooltip="łączny ciężar na treningu">
+      <span>Trening: {{trainingTotal / 1000 | round: 2}}ton</span>
+    </button>
+    <button class="progress__total-2"
+            #tooltip2="matTooltip" (click)="tooltip2.toggle()" matTooltipPosition="above"
+            matTooltip="ciężar na obecnie ćwiczoną partię">
+      <span>Partia mięśniowa: {{bodyPartTotal | round: 0}}kg</span>
+    </button>
   </div>
+
   <div class="progress__values">
     <span class="progress__start-value">0</span>
     <span class="progress__current-value">{{ currentTotal | round: 2 }}kg</span>
     <span class="progress__end-value">{{ totalForSeries['lastTraining'] | round: 2 }}kg</span>
   </div>
-  <button class="progress__total"
-          #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltipPosition="above"
-          matTooltip="łączny ciężar na treningu">
-    <span>{{trainingTotal / 1000 | round: 2}}ton</span>
-  </button>
-  <button class="progress__total-2"
-          #tooltip2="matTooltip" (click)="tooltip2.toggle()" matTooltipPosition="above"
-          matTooltip="ciężar na obecnie ćwiczoną partię">
-    <span>{{bodyPartTotal | round: 0}}kg</span>
-  </button>
+  <div class="progress">
+    <div class="progress__bar" [ngClass]="{'progress__bar--finished' : progress >= 100 }"
+         [style.width.%]="progress">
+    </div>
+  </div>
 </ng-container>

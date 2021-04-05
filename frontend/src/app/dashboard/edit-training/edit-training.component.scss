@@ -8,8 +8,9 @@
   flex-direction: column;
 
   &--exercises {
-    height: calc(100% - 136px);
+    height: calc(100% - 86px);
     overflow: auto;
+    padding-top: calc(48px + 2rem);
   }
 }
 

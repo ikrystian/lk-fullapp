@@ -137,7 +137,6 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     this.series.unshift(series);
     LSSeries.unshift(series);
     this.sortSeries(this.series);
-    this.openSnackBar('Seria została dodana', 'OK');
     localStorage.setItem('series', JSON.stringify(LSSeries));
     this.isFormInvalid = false;
     (this.oneField) ? oneField.focus() : respField.focus();
