@@ -3,7 +3,7 @@
     <div class="progress__bar" [ngClass]="{'progress__bar--finished' : progress >= 100 }"
          [style.width.%]="progress">
     </div>
-    <span class="progress__title">{{ (progress /totalForSeries['lastTraining']) * 100  | round: 2 }}% {{ 'OF_LAST_TRAINING' | translate }}</span>
+    <span class="progress__title">{{ progress | round: 2 }}% {{ 'OF_LAST_TRAINING' | translate }}</span>
   </div>
   <div class="progress__values">
     <span class="progress__start-value">0</span>

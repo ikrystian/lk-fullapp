@@ -1,17 +1,17 @@
 <nav>
-  <button class="profile-button" routerLink="/profile/1" matRipple>
+  <button class="profile-button" routerLink="/profile/1" matRipple title="profile">
     <img [src]="profileService.getUserAvatar()" alt="">
   </button>
   <div>
-    <button routerLink="/" matRipple>
+    <button routerLink="/" matRipple title="home">
       <mat-icon>home</mat-icon>
     </button>
 
-    <button (click)="toggleStats()" matRipple>
+    <button (click)="toggleStats()"  [ngClass]="{'active' : showStats  }" matRipple title="stats">
       <mat-icon>assessment</mat-icon>
     </button>
 
-    <button (click)="addTraining()" matRipple>
+    <button (click)="addTraining()" matRipple title="add training">
       <mat-icon>add_box</mat-icon>
     </button>
 
