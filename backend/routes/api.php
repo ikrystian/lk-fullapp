@@ -49,6 +49,7 @@ Route::group([
     Route::post('/trainings/workout/finish', [TrainingController::class, 'end']);
     Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
     Route::get('/exercises/unique/{trainingId}', [TrainingController::class, 'getUniqueExercises']);
+    Route::get('/check-opened-training', [TrainingController::class, 'checkOpenedTraining']);
     Route::resource('/trainings', TrainingController::class);
     Route::resource('/exercises', ExerciseController::class);
     Route::resource('/exercises-types', ExerciseTypeController::class);

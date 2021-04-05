@@ -7,12 +7,12 @@ import {
   EventEmitter
 } from '@angular/core';
 import * as moment from 'moment';
-import { TrainingsService } from '../trainings.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { GeolocationService } from '@ng-web-apis/geolocation';
-import { Location } from '@angular/common';
-import { ProfileService } from '../profile.service';
+import {TrainingsService} from '../trainings.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {GeolocationService} from '@ng-web-apis/geolocation';
+import {Location} from '@angular/common';
+import {ProfileService} from '../profile.service';
 
 @Component({
   selector: 'app-bottom-nav',
@@ -52,10 +52,9 @@ export class BottomNavComponent implements OnInit {
   }
 
   addTraining(): any {
-    this.trainingService.getTrainingByDate(moment().format('YYYY-MM-DD')).subscribe((res: any) => {
-      this.length = res.data.length;
-
-      if (this.length > 0 && !confirm('Istnieje już trening z dzisiejszą datą, chcesz dodać nowy?')) {
+    this.trainingService.checkOpenedTraining().subscribe((res) => {
+      if (res > 0) {
+        alert('Można mieć tylko jeden niezakończony trening');
         return false;
       }
       this.createTraining();

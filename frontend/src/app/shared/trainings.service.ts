@@ -27,6 +27,10 @@ export class TrainingsService {
     return this.http.get(`${this.API_URL}/trainings/${id}`);
   }
 
+  checkOpenedTraining(): any {
+    return this.http.get(`${this.API_URL}/check-opened-training`);
+  }
+
   getTrainingByDate = d => {
     return this.http.get(`${this.API_URL}/trainings/day/` + d);
   }

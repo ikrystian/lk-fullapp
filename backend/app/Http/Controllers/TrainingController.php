@@ -36,6 +36,10 @@ class TrainingController extends Controller
         return TrainingResource::collection($trainings);
     }
 
+    public function checkOpenedTraining() {
+        return Training::where('end', null)->where('user_id', Auth::id())->count();
+    }
+
     public function sync(Request $request) {
         $series =  $request->data;
 
