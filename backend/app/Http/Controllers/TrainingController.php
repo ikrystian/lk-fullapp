@@ -71,36 +71,8 @@ class TrainingController extends Controller
             return $data;
         });
 
-        $exercises = Exercise::where('training_id', $currentTrainingId)->where('exercise_type_id', $exerciseId)->get();
-
-
-        $currentTraining = $exercises->map(function ($item) {
-            $data = $item;
-            $data['total'] = $item->weight * $item->reps * $item->type->multipler;
-            return $data;
-        });
-
-        $exercises = Exercise::where('training_id', $currentTrainingId)->get();
-
-        $currentTotalTraining = $exercises->map(function ($item) {
-            $data = $item;
-            $data['total'] = $item->weight * $item->reps * $item->type->multipler;
-            return $data;
-        });
-
-        $exercises = Exercise::where('training_id', $currentTrainingId)->where('body_part_id', $bodyPartID)->get();
-
-        $currentInSeriesTotal = $exercises->map(function ($item) {
-            $data = $item;
-            $data['total'] = $item->weight * $item->reps * $item->type->multipler;
-            return $data;
-        });
-
         return [
-            'lastTraining' => $lastTraining->sum('total'),
-            'currentTraining' => $currentTraining->sum('total'),
-            'currentTotalTraining' => $currentTotalTraining->sum('total'),
-            'currentInSeriesTotal' => $currentInSeriesTotal->sum('total'),
+            'lastTraining' => $lastTraining->sum('total')
         ];
     }
 

@@ -105,7 +105,6 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   oneFieldInputChanged(textValue: string): void {
-    console.log(this.exerciseForm.value);
     const values = textValue.split('.');
     if (values.length !== 2) {
       return;
@@ -135,16 +134,14 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     series.multiplier = this.exercise.multipler;
     series.bodyPartId = this.exercise.body_part_id;
     series.id = Date.now();
-    this.trainingService.changeMessage();
     this.series.unshift(series);
     LSSeries.unshift(series);
-    console.log(series);
     this.sortSeries(this.series);
     this.openSnackBar('Seria została dodana', 'OK');
     localStorage.setItem('series', JSON.stringify(LSSeries));
     this.isFormInvalid = false;
     (this.oneField) ? oneField.focus() : respField.focus();
-
+    this.trainingService.changeMessage();
   }
 
   sortSeries(series): void {
@@ -165,7 +162,6 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
       return false;
     }
 
-    this.trainingService.changeMessage();
     this.openSnackBar('Seria została usunięta', 'OK');
     this.series = this.series.filter((element) => {
       return element !== series;
@@ -174,9 +170,9 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     LSSeries = LSSeries.filter((element) => {
       return element.id !== series.id;
     });
-    console.log(LSSeries);
     localStorage.setItem('series', JSON.stringify(LSSeries));
     this.sortSeries(this.series);
+    this.trainingService.changeMessage();
   }
 
   openSnackBar = (message: string, action: string) => {

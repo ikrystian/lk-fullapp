@@ -118,11 +118,6 @@ export class EditTrainingComponent implements OnInit {
     this.bodyPartId = this.selectedOption.body_part_id;
   }
 
-
-  sync(): void {
-
-  }
-
   changeTrainingName(event: any): void {
     if (this.trainingName !== event.target.value) {
       this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {

@@ -7,17 +7,17 @@
   </div>
   <div class="progress__values">
     <span class="progress__start-value">0</span>
-    <span class="progress__current-value">{{ totalForSeries['currentTraining'] | round: 2 }}kg</span>
+    <span class="progress__current-value">{{ currentTotal | round: 2 }}kg</span>
     <span class="progress__end-value">{{ totalForSeries['lastTraining'] | round: 2 }}kg</span>
   </div>
   <button class="progress__total"
           #tooltip="matTooltip" (click)="tooltip.toggle()" matTooltipPosition="above"
           matTooltip="łączny ciężar na treningu">
-    <span>{{totalForSeries['currentTotalTraining'] / 1000 | round: 2}}ton</span>
+    <span>{{trainingTotal / 1000 | round: 2}}ton</span>
   </button>
   <button class="progress__total-2"
           #tooltip2="matTooltip" (click)="tooltip2.toggle()" matTooltipPosition="above"
           matTooltip="ciężar na obecnie ćwiczoną partię">
-    <span>{{totalForSeries['currentInSeriesTotal'] | round: 0}}kg</span>
+    <span>{{bodyPartTotal | round: 0}}kg</span>
   </button>
 </ng-container>

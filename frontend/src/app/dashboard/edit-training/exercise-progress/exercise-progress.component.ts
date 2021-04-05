@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
-import { TrainingsService } from '../../../shared/trainings.service';
-import { Subscription } from 'rxjs';
+import {Component, Input, OnChanges, OnDestroy, OnInit} from '@angular/core';
+import {TrainingsService} from '../../../shared/trainings.service';
+import {Subscription} from 'rxjs';
 
 export class Progress {
   currentTotalTraining: number;
@@ -20,8 +20,10 @@ export class Progress {
 export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
   @Input() data: any;
   subscription: Subscription;
-
   message: string;
+  currentTotal: number;
+  trainingTotal: number;
+  bodyPartTotal: number;
 
   defaultData: Progress = {
     currentTotalTraining: 0,
@@ -32,10 +34,9 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     message: 'brak danych 😒'
   };
 
-  totalForSeries: Progress =  this.defaultData;
+  totalForSeries: Progress = this.defaultData;
 
   constructor(public trainingsService: TrainingsService) {
-
   }
 
   ngOnInit(): void {
@@ -50,16 +51,41 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnChanges(): void {
     this.updateProgressBar();
+
   }
 
   updateProgressBar(): void {
+    this.currentTotal = 0;
+    this.trainingTotal = 0;
+    this.bodyPartTotal = 0;
+
     if (!this.data.exerciseId || this.data.exerciseId === 0) {
       return;
     }
+
+    const series = (localStorage.getItem('series')) ? JSON.parse(localStorage.getItem('series')) : [];
+    if (series.length === 0) {
+      return;
+    }
+    const currentBodyPartSeries = series.filter(el => el.bodyPartId = this.data.bodyPartId);
+    currentBodyPartSeries.forEach(el => {
+      this.bodyPartTotal += el.weight * el.reps * el.multiplier;
+    });
+
+    series.forEach(el => {
+      this.trainingTotal += el.weight * el.reps * el.multiplier;
+    });
+
+    const currentExercise = series.filter(el => el.exercise_type_id === this.data.exerciseId);
+    currentExercise.forEach(el => {
+      this.currentTotal += el.weight * el.reps * el.multiplier;
+    });
+
     this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
       this.totalForSeries = res;
-      this.totalForSeries.percentage = (res.currentTraining / res.lastTraining) * 100;
-    }, () => {
+      this.totalForSeries.percentage = (this.currentTotal / res.lastTraining) * 100;
+    }, (error) => {
+      console.log(error);
       this.totalForSeries = this.defaultData;
     });
   }
