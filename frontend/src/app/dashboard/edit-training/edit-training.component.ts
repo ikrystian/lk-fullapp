@@ -116,6 +116,7 @@ export class EditTrainingComponent implements OnInit {
 
   changeExercise(): void {
     this.bodyPartId = this.selectedOption.body_part_id;
+    this.trainingService.changeMessage();
   }
 
   changeTrainingName(event: any): void {

@@ -24,6 +24,8 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
   currentTotal: number;
   trainingTotal: number;
   bodyPartTotal: number;
+  exercise = 0;
+  progress = 0;
 
   defaultData: Progress = {
     currentTotalTraining: 0,
@@ -67,7 +69,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     if (series.length === 0) {
       return;
     }
-    const currentBodyPartSeries = series.filter(el => el.bodyPartId = this.data.bodyPartId);
+    const currentBodyPartSeries = series.filter(el => el.bodyPartId === this.data.bodyPartId);
     currentBodyPartSeries.forEach(el => {
       this.bodyPartTotal += el.weight * el.reps * el.multiplier;
     });
@@ -77,17 +79,28 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     });
 
     const currentExercise = series.filter(el => el.exercise_type_id === this.data.exerciseId);
+    if(currentExercise.length === 0) {
+      this.progress = 0;
+    }
+
     currentExercise.forEach(el => {
       this.currentTotal += el.weight * el.reps * el.multiplier;
     });
 
-    this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
-      this.totalForSeries = res;
-      this.totalForSeries.percentage = (this.currentTotal / res.lastTraining) * 100;
-    }, (error) => {
-      console.log(error);
-      this.totalForSeries = this.defaultData;
-    });
+    if (this.data.exerciseId !== this.exercise) {
+      this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
+        this.totalForSeries = res;
+        this.progress = (this.currentTotal / res.lastTraining) * 100;
+      }, (error) => {
+        console.log(error);
+        this.totalForSeries = this.defaultData;
+      });
+
+      this.exercise = this.data.exerciseId;
+    } else {
+
+      this.progress = (this.currentTotal / this.totalForSeries.lastTraining) * 100;
+    }
   }
 }
 
