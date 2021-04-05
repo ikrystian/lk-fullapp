@@ -47,6 +47,10 @@ export class TrainingsService {
     return this.http.post(`${this.API_URL}/exercises-types`, {data});
   }
 
+  sync(data: []): any {
+    return this.http.post(`${this.API_URL}/sync`, {data});
+  }
+
   saveTraining(id: any): any {
     const data = {id};
     return this.http.post(`${this.API_URL}/trainings/workout/save`, data);

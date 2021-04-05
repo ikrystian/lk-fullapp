@@ -36,6 +36,23 @@ class TrainingController extends Controller
         return TrainingResource::collection($trainings);
     }
 
+    public function sync(Request $request) {
+        $series =  $request->data;
+
+        foreach($series as $singleSeries) {
+            $exercise = new Exercise;
+            $exercise->training_id = $singleSeries['training_id'];
+            $exercise->user_id = Auth::id();
+            $exercise->exercise_type_id = $singleSeries['exercise_type_id'];
+            $exercise->reps = $singleSeries['reps'];
+            $exercise->weight = $singleSeries['weight'];
+            $exercise->body_part_id = $singleSeries['bodyPartId'];
+            $exercise->save();
+        }
+
+        return response()->json('added', 200);
+    }
+
     public function getLastExerciseSum($exerciseId, $currentTrainingId, $bodyPartID)
     {
         $trainingId = Exercise::where('exercise_type_id', $exerciseId)

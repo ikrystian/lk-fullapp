@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
-import { TrainingsService } from '../../shared/trainings.service';
-import { CreateExerciseComponent } from '../create-exercise/create-exercise.component';
-import { AuthenticationStateService } from '../../shared/authentication-state.service';
-import { TokenAuthService } from '../../shared/token-auth.service';
+import {TrainingsService} from '../../shared/trainings.service';
+import {CreateExerciseComponent} from '../create-exercise/create-exercise.component';
+import {AuthenticationStateService} from '../../shared/authentication-state.service';
+import {TokenAuthService} from '../../shared/token-auth.service';
 import * as moment from 'moment';
-import { Training } from '../../training';
-import { ExercisePreviewComponent } from '../exercise-preview/exercise-preview.component';
+import {Training} from '../../training';
+import {ExercisePreviewComponent} from '../exercise-preview/exercise-preview.component';
 
 @Component({
   selector: 'app-edit-training',
@@ -96,16 +96,31 @@ export class EditTrainingComponent implements OnInit {
     this.trainingService.saveTraining(id).subscribe(res => {
       this.snackBar.open('Trening został zapisany', 'ok');
     });
+    const data = JSON.parse(localStorage.getItem('series'));
+    this.trainingService.sync(data).subscribe(res => {
+      this.snackBar.open('Dane zostały wysłane', 'ok');
+      localStorage.removeItem('series');
+    });
   }
 
   finishWorkout(id): void {
-    this.trainingService.finishTraining(id).subscribe(res => {
-      this.router.navigate([`/dashboard/training/${id}`]);
+
+    const data = JSON.parse(localStorage.getItem('series'));
+    this.trainingService.sync(data).subscribe(res => {
+      this.trainingService.finishTraining(id).subscribe(() => {
+        localStorage.removeItem('series');
+        this.router.navigate([`/dashboard/training/${id}`]);
+      });
     });
   }
 
   changeExercise(): void {
     this.bodyPartId = this.selectedOption.body_part_id;
+  }
+
+
+  sync(): void {
+
   }
 
   changeTrainingName(event: any): void {
@@ -123,6 +138,7 @@ export class EditTrainingComponent implements OnInit {
 
     this.trainingService.removeTraining(trainingId).subscribe(res => {
       this.router.navigate(['/dashboard']);
+      localStorage.removeItem('series');
       this.snackBar.open('Trening został usunięty', 'OK');
     });
 
@@ -145,5 +161,6 @@ export class EditTrainingComponent implements OnInit {
         this.exerciseTypes = this.allExerciseTypes;
       }
     });
+
   }
 }

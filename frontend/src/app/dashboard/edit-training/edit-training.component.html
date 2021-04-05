@@ -4,10 +4,10 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="saveWorkout(training.id)">
-      <mat-icon>save</mat-icon>
-      <span>{{ 'SAVE_TRAINING' | translate }}</span>
-    </button>
+<!--    <button mat-menu-item (click)="saveWorkout(training.id)">-->
+<!--      <mat-icon>save</mat-icon>-->
+<!--      <span>{{ 'SAVE_TRAINING' | translate }}</span>-->
+<!--    </button>-->
     <mat-divider></mat-divider>
     <button class="mat-menu-item" (click)="showChangeNameForm = !showChangeNameForm">
       <mat-icon>edit</mat-icon>
@@ -73,6 +73,7 @@
           <mat-icon>visibility</mat-icon>
         </button>
       </div>
+
       <app-exercise *ngIf="selectedOption" [exercise]="selectedOption"></app-exercise>
     </div>
 

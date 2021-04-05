@@ -7,12 +7,12 @@ import {
   ViewChild,
   OnDestroy
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ActivatedRoute, Router} from '@angular/router';
 
-import { TrainingsService } from '../../../shared/trainings.service';
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import {TrainingsService} from '../../../shared/trainings.service';
+import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
 
 
 const listAnimation = trigger('listAnimation', [
@@ -58,7 +58,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     public trainingService: TrainingsService,
     private snackBar: MatSnackBar
   ) {
-    this.trainingId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.trainingId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 0);
 
     this.createSeriesForm();
   }
@@ -67,12 +67,12 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
-    this.series = [];
-    console.log(this.exercise.body_part_id);
-    this.trainingService.getExercises(this.trainingId, this.exercise.id).subscribe(res => {
-      this.series = res;
-      this.sortSeries(this.series);
-    });
+    this.series = (localStorage.getItem('series')) ? JSON.parse(localStorage.getItem('series')) : [];
+    this.series = this.series.filter(el => el.exercise_type_id === this.exercise.id);
+    // this.trainingService.getExercises(this.trainingId, this.exercise.id).subscribe(res => {
+    //   this.series = res;
+    //   this.sortSeries(this.series);
+    // });
   }
 
 
@@ -82,7 +82,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
       reps: [],
       weight: [],
       oneField: [],
-      multipler: [],
+      multiplier: [],
       training_id: [this.trainingId]
     });
 
@@ -118,7 +118,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   onSubmit = (form) => {
-    this.exerciseForm.disable();
+    const LSSeries = (localStorage.getItem('series')) ? JSON.parse(localStorage.getItem('series')) : [];
     const series = this.exerciseForm.value;
     const respField = this.addSeriesForm.nativeElement.reps;
     const oneField = this.addSeriesForm.nativeElement.oneField;
@@ -129,20 +129,22 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
 
     series.reps = series.reps || this.reps;
     series.weight = series.weight || this.weight;
-    series.weight = (this.isLBS) ?  series.weight * 0.45359237 : series.weight;
+    series.weight = (this.isLBS) ? series.weight * 0.45359237 : series.weight;
     series.exercise_type_id = this.exercise.id;
     series.training_id = this.trainingId;
+    series.multiplier = this.exercise.multipler;
     series.bodyPartId = this.exercise.body_part_id;
+    series.id = Date.now();
+    this.trainingService.changeMessage();
+    this.series.unshift(series);
+    LSSeries.unshift(series);
+    console.log(series);
+    this.sortSeries(this.series);
+    this.openSnackBar('Seria została dodana', 'OK');
+    localStorage.setItem('series', JSON.stringify(LSSeries));
+    this.isFormInvalid = false;
+    (this.oneField) ? oneField.focus() : respField.focus();
 
-    this.trainingService.addSeries(series).subscribe(res => {
-      this.trainingService.changeMessage();
-      this.series.unshift(res);
-      this.sortSeries(this.series);
-      this.openSnackBar('Seria została dodana', 'OK');
-      this.exerciseForm.enable();
-      this.isFormInvalid = false;
-      (this.oneField) ? oneField.focus() : respField.focus();
-    });
   }
 
   sortSeries(series): void {
@@ -157,19 +159,24 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  removeExercise = (seriesId: number) => {
+  removeExercise = (series: any) => {
+    let LSSeries = (localStorage.getItem('series')) ? JSON.parse(localStorage.getItem('series')) : [];
     if (!confirm('Na pewno chcesz usunąć serię? Akcja jest nieodwracalna')) {
       return false;
     }
 
-    this.trainingService.removeExercise(seriesId).subscribe(() => {
-      this.trainingService.changeMessage();
-      this.openSnackBar('Seria została usunięta', 'OK');
-      this.series = this.series.filter((element) => {
-        return element.id !== seriesId;
-      });
-      this.sortSeries(this.series);
+    this.trainingService.changeMessage();
+    this.openSnackBar('Seria została usunięta', 'OK');
+    this.series = this.series.filter((element) => {
+      return element !== series;
     });
+
+    LSSeries = LSSeries.filter((element) => {
+      return element.id !== series.id;
+    });
+    console.log(LSSeries);
+    localStorage.setItem('series', JSON.stringify(LSSeries));
+    this.sortSeries(this.series);
   }
 
   openSnackBar = (message: string, action: string) => {

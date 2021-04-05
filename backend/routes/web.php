@@ -18,14 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/clear', function () {
-//    Artisan::call('cache:clear');
-//    Artisan::call('config:clear');
-//    Artisan::call('config:cache');
-//    Artisan::call('view:cache');
-//    Artisan::call('key:generate');
-//    Artisan::call('storage:link');
-//});
+Route::get('/clear', function () {
+   Artisan::call('cache:clear');
+   Artisan::call('config:clear');
+   Artisan::call('config:cache');
+   Artisan::call('view:cache');
+   Artisan::call('key:generate');
+   Artisan::call('storage:link');
+});
 //Route::get('/user', [JwtAuthController::class, 'user']);
 //Route::get('/activities/{userId}', [ActivityController::class, 'getByUserId']);
 //Route::get('test', [TrainingController::class, 'getLastExerciseSum']);
