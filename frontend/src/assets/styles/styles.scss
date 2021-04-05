@@ -1,4 +1,6 @@
 @import "~@angular/material/theming";
+@import 'helpers';
+@import 'material';
 
 @include mat-core();
 $angular-primary: mat-palette($mat-blue, 500, 100, 900);
@@ -24,11 +26,6 @@ $angular-light-theme: mat-light-theme(
 );
 
 body {
-  max-width: 400px;
-  overflow: hidden;
-  width: 100%;
-  margin: auto;
-
   &, &.theme-dark {
     @include angular-material-theme($angular-dark-theme);
     --body-background-color: #222433;
@@ -49,10 +46,6 @@ body {
     --primary-color: #f1f1f1;
     --accent-color: #0083fe;
   }
-}
-
-.mat-drawer:not(.mat-drawer-side) {
-  box-shadow: none !important;
 }
 
 * {
@@ -90,7 +83,7 @@ body {
 }
 
 .warn {
-  color: red;
+  color: #ff8a80;
 }
 
 .select {
@@ -116,48 +109,8 @@ body {
   }
 }
 
-// override angular material styles
 body {
-  max-height: 100vh;
 
-  .mat-drawer-backdrop.mat-drawer-shown {
-    background-color: transparent !important;
-  }
-
-  .mat-menu-item,
-  .mat-button,
-  .mat-icon-button,
-  .mat-stroked-button,
-  .mat-flat-button {
-    border-radius: 0;
-
-    &::first-letter {
-      text-transform: uppercase !important;
-    }
-  }
-
-  .mat-menu-item.warn {
-    color: red;
-    .mat-icon {
-      color: red;
-    }
-  }
-
-  .mat-input-element {
-    color: var(--font-color);
-  }
-
-  .mat-button span.mat-button-wrapper {
-
-  }
-
-  .mat-toolbar {
-    position: fixed;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
 
   .toolbar {
     padding-left: 0 !important;

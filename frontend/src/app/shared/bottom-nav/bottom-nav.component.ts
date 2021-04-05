@@ -6,7 +6,6 @@ import {
   Output,
   EventEmitter
 } from '@angular/core';
-import * as moment from 'moment';
 import {TrainingsService} from '../trainings.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';

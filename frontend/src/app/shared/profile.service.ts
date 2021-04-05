@@ -15,6 +15,6 @@ export class ProfileService {
   }
 
   getUserAvatar(): string {
-    return 'https://bpc-dev.pl/images/BPCKrystian.png';
+    return '/assets/images/default-avatar.png';
   }
 }

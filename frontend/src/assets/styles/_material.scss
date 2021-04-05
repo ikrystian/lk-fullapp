@@ -1,0 +1,42 @@
+// override angular material styles
+body {
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: transparent !important;
+  }
+
+  .mat-drawer:not(.mat-drawer-side) {
+    box-shadow: none !important;
+  }
+
+  .mat-menu-item,
+  .mat-button,
+  .mat-icon-button,
+  .mat-stroked-button,
+  .mat-flat-button {
+    border-radius: 0;
+
+    &::first-letter {
+      text-transform: uppercase !important;
+    }
+  }
+
+  .mat-menu-item.warn {
+    color: #ff8a80;
+
+    .mat-icon {
+      color: #ff8a80;
+    }
+  }
+
+  .mat-input-element {
+    color: var(--font-color);
+  }
+
+  .mat-toolbar {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+}

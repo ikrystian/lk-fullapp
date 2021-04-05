@@ -7,13 +7,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { NavigationModule } from '../shared/navigation/navigation.module';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { EditTrainingComponent } from './edit-training/edit-training.component';
 import { TrainingComponent } from './training/training.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ExerciseComponent } from './edit-training/exercise/exercise.component';
@@ -73,8 +71,6 @@ import { ChartsModule } from 'ng2-charts';
     MatButtonModule,
     MatInputModule,
     MatDialogModule,
-    NavigationModule,
-    MatToolbarModule,
     MatMenuModule,
     FormsModule,
     MatIconModule,

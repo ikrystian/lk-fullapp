@@ -23,7 +23,6 @@ import { ResetPasswordComponent } from './auth/reset-password/reset-password.com
 import { UpdatePasswordComponent } from './auth/update-password/update-password.component';
 import { InterceptorService } from './loader/interceptor.service';
 import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
-import { NavigationModule } from './shared/navigation/navigation.module';
 import { NgPipesModule } from 'ngx-pipes';
 import * as Hammer from 'hammerjs';
 import {
@@ -70,7 +69,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatInputModule,
     MatDialogModule,
     MatSnackBarModule,
-    NavigationModule,
     NgPipesModule,
     HammerModule,
     MatDatepickerModule,

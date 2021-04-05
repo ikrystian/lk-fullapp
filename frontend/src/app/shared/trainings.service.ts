@@ -15,7 +15,7 @@ export class TrainingsService {
   constructor(private http: HttpClient) {
   }
 
-  changeMessage(): void  {
+  updateProgress(): void  {
     this.messageSource.next(true);
   }
 
