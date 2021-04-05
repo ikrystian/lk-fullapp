@@ -38,10 +38,7 @@
 
   <div class="standard-page edit-training edit-training--exercises">
 
-    <div [ngClass]="{'training-time--active' : showTrainingFinishButton}" (click)="showTrainingFinishButton = !showTrainingFinishButton" class="training-time" *ngIf="!training.end">
-      <div>
-        <button class="finish-workout" (click)="finishWorkout(training.id)">{{ 'FINISH_TRAINING' | translate }}</button>
-      </div>
+    <div class="training-time" *ngIf="!training.end">
       <span> {{ timer }}</span>
     </div>
 

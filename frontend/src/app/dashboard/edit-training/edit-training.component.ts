@@ -33,7 +33,6 @@ export class EditTrainingComponent implements OnInit {
   showChangeNameForm = false;
   name: string;
   timer;
-  showTrainingFinishButton = false;
 
   constructor(
     public trainingService: TrainingsService,

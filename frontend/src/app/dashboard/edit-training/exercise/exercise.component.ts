@@ -18,11 +18,11 @@ import {animate, query, stagger, style, transition, trigger} from '@angular/anim
 const listAnimation = trigger('listAnimation', [
   transition('* <=> *', [
     query(':enter',
-      [style({opacity: 0, height: 0}), stagger('60ms', animate('600ms ease-out', style({opacity: 1, height: 36})))],
+      [style({height: 0}), stagger('60ms', animate('600ms ease-out', style({height: 36})))],
       {optional: true}
     ),
     query(':leave',
-      animate('200ms', style({opacity: 0, height: 0})),
+      animate('200ms', style({height: 0})),
       {optional: true}
     )
   ])
@@ -69,6 +69,7 @@ export class ExerciseComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(): void {
     this.series = (localStorage.getItem('series')) ? JSON.parse(localStorage.getItem('series')) : [];
     this.series = this.series.filter(el => el.exercise_type_id === this.exercise.id);
+    this.sortSeries(this.series);
     // this.trainingService.getExercises(this.trainingId, this.exercise.id).subscribe(res => {
     //   this.series = res;
     //   this.sortSeries(this.series);

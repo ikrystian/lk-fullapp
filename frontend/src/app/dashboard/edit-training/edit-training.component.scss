@@ -10,7 +10,8 @@
   &--exercises {
     height: calc(100% - 84px);
     overflow: auto;
-    padding-top: calc(48px + 2rem);
+    padding-top: calc(48px + 1rem);
+    padding-bottom: 0;
   }
 }
 
