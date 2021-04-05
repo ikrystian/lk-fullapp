@@ -19,7 +19,7 @@
       <img [src]="ASSETS_URL + training.user_image" alt="">
     </div>
 
-    <div class="training-time">
+    <div>
       <p><mat-icon>query_builder</mat-icon>Start: <span>{{training.start | slice: 11}}</span></p>
       <p *ngIf="training.end"><mat-icon>query_builder</mat-icon>Koniec: <span>{{training.end | slice: 11}}</span></p>
     </div>

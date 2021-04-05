@@ -4,10 +4,14 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-<!--    <button mat-menu-item (click)="saveWorkout(training.id)">-->
-<!--      <mat-icon>save</mat-icon>-->
-<!--      <span>{{ 'SAVE_TRAINING' | translate }}</span>-->
-<!--    </button>-->
+    <!--    <button mat-menu-item (click)="saveWorkout(training.id)">-->
+    <!--      <mat-icon>save</mat-icon>-->
+    <!--      <span>{{ 'SAVE_TRAINING' | translate }}</span>-->
+    <!--    </button>-->
+        <button mat-menu-item (click)="finishWorkout(training.id)">
+          <mat-icon>save</mat-icon>
+          <span>{{ 'FINISH_TRAINING' | translate }}</span>
+        </button>
     <mat-divider></mat-divider>
     <button class="mat-menu-item" (click)="showChangeNameForm = !showChangeNameForm">
       <mat-icon>edit</mat-icon>
@@ -34,20 +38,19 @@
 
   <div class="standard-page edit-training edit-training--exercises">
 
-    <div class="training-time" *ngIf="!training.end">
-      <p><mat-icon>query_builder</mat-icon>
-        {{ timer }}</p>
-      <div >
-        <button  class="finish-workout" (click)="finishWorkout(training.id)">{{ 'FINISH_TRAINING' | translate }}</button>
+    <div [ngClass]="{'training-time--active' : showTrainingFinishButton}" (click)="showTrainingFinishButton = !showTrainingFinishButton" class="training-time" *ngIf="!training.end">
+      <div>
+        <button class="finish-workout" (click)="finishWorkout(training.id)">{{ 'FINISH_TRAINING' | translate }}</button>
       </div>
+      <span> {{ timer }}</span>
     </div>
 
     <div>
       <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
-          <mat-form-field class="full-width-input" *ngIf="showChangeNameForm">
-            <mat-label>{{ 'CHANGE_TRAININGS_NAME' | translate }}</mat-label>
-            <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">
-          </mat-form-field>
+      <mat-form-field class="full-width-input" *ngIf="showChangeNameForm">
+        <mat-label>{{ 'CHANGE_TRAININGS_NAME' | translate }}</mat-label>
+        <input matInput [(ngModel)]="training.name" (focusout)="changeTrainingName($event)">
+      </mat-form-field>
       <div class="choose-exercise">
         <button [matMenuTriggerFor]="exerciseMenu">
           <mat-icon>format_list_bulleted</mat-icon>

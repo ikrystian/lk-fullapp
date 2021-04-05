@@ -33,6 +33,7 @@ export class EditTrainingComponent implements OnInit {
   showChangeNameForm = false;
   name: string;
   timer;
+  showTrainingFinishButton = false;
 
   constructor(
     public trainingService: TrainingsService,
@@ -103,8 +104,10 @@ export class EditTrainingComponent implements OnInit {
     });
   }
 
-  finishWorkout(id): void {
-
+  finishWorkout(id): boolean {
+    if (!confirm('Na pewno chcesz zakończyć trening? Jego edycja później będzie niemożliwa')) {
+      return false;
+    }
     const data = JSON.parse(localStorage.getItem('series'));
     this.trainingService.sync(data).subscribe(res => {
       this.trainingService.finishTraining(id).subscribe(() => {
