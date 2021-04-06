@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { Series } from '../models/series';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +52,7 @@ export class TrainingsService {
     return this.http.post(`${this.API_URL}/exercises-types`, {data});
   }
 
-  sync(data: []): any {
+  sync(data: Series[]): any {
     return this.http.post(`${this.API_URL}/sync`, {data});
   }
 

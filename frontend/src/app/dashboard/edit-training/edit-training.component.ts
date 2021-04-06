@@ -11,7 +11,10 @@ import { TokenAuthService } from '../../shared/token-auth.service';
 import * as moment from 'moment';
 import { Training } from '../../training';
 import { ExercisePreviewComponent } from '../exercise-preview/exercise-preview.component';
-import { RecordComponent } from '../../shared/record/record.component';
+import { ExerciseService } from '../../shared/exercise-service.service';
+
+// !todo - handle errors from servers
+// !todo - change setinterval to rxsj
 
 @Component({
   selector: 'app-edit-training',
@@ -26,7 +29,6 @@ export class EditTrainingComponent implements OnInit {
   exerciseTypes;
   allExerciseTypes;
   training: Training;
-  trainingName: string;
   bodyParts: any;
   selectedOption;
   showUploadImageForm = false;
@@ -43,12 +45,12 @@ export class EditTrainingComponent implements OnInit {
     private tokenAuthService: TokenAuthService,
     private location: Location,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private exerciseService: ExerciseService
   ) {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
-      this.trainingName = res.name;
       this.updateTime(this.training.start);
     });
   }
@@ -59,11 +61,11 @@ export class EditTrainingComponent implements OnInit {
       const elapsedTime = moment(new Date()).diff(start);
       const time = moment.duration(elapsedTime);
 
-      const hrs = ('0' + time.hours()).slice(-2);
-      const mins = ('0' + time.minutes()).slice(-2);
+      // minus 2 hours it's a fix for backend time issue,it will be changed after moved to .net core
+      const hrs = ('0' + (time.hours() - 2)).slice(-2);
+      const min = ('0' + time.minutes()).slice(-2);
       const secs = ('0' + time.seconds()).slice(-2);
-
-      this.timer = `${hrs}:${mins}:${secs}`;
+      this.timer = `${hrs}:${min}:${secs}`;
     }, 1000);
   }
 
@@ -94,13 +96,13 @@ export class EditTrainingComponent implements OnInit {
   }
 
   saveWorkout(id): void {
-    this.trainingService.saveTraining(id).subscribe(res => {
+    this.trainingService.saveTraining(id).subscribe(() => {
       this.snackBar.open('Trening został zapisany', 'ok');
     });
-    const data = JSON.parse(localStorage.getItem('series'));
-    this.trainingService.sync(data).subscribe(res => {
+    const data = this.exerciseService.setLocalSeries();
+    this.trainingService.sync(data).subscribe(() => {
       this.snackBar.open('Dane zostały wysłane', 'ok');
-      localStorage.removeItem('series');
+      this.exerciseService.clearLocalSeries();
     });
   }
 
@@ -108,10 +110,10 @@ export class EditTrainingComponent implements OnInit {
     if (!confirm('Na pewno chcesz zakończyć trening? Jego edycja później będzie niemożliwa')) {
       return false;
     }
-    const data = JSON.parse(localStorage.getItem('series'));
-    this.trainingService.sync(data).subscribe(res => {
+    const data = this.exerciseService.setLocalSeries();
+    this.trainingService.sync(data).subscribe(() => {
       this.trainingService.finishTraining(id).subscribe(() => {
-        localStorage.removeItem('series');
+        this.exerciseService.clearLocalSeries();
         this.router.navigate([`/dashboard/training/${id}`]);
       });
     });
@@ -123,32 +125,32 @@ export class EditTrainingComponent implements OnInit {
   }
 
   changeTrainingName(event: any): void {
-    if (this.trainingName !== event.target.value) {
-      this.trainingService.changeName(this.training.id, event.target.value).subscribe(res => {
+    if (event.target.classList.contains('ng-dirty')) {
+      this.trainingService.changeName(this.training.id, event.target.value).subscribe(() => {
         this.snackBar.open('Nazwa treningu została zmieniona', 'ok');
       });
     }
   }
 
-  removeTraining = (trainingId: number) => {
+  removeTraining(trainingId: number): boolean {
     if (!confirm('Na pewno chcesz usunąć trening? Akcja jest nieodwracalna')) {
       return false;
     }
 
-    this.trainingService.removeTraining(trainingId).subscribe(res => {
+    this.trainingService.removeTraining(trainingId).subscribe(() => {
       this.router.navigate(['/dashboard']);
-      localStorage.removeItem('series');
+      this.exerciseService.clearLocalSeries();
       this.snackBar.open('Trening został usunięty', 'OK');
     });
 
   }
 
-  filterExercises(id): void {
+  filterExercises(id: number): void {
     this.exerciseTypes = this.allExerciseTypes.filter(el => el.body_part_id === id);
     this.selectedOption = this.exerciseTypes[0];
   }
 
-  openAddExerciseModal = () => {
+  openAddExerciseModal(): void {
     const dialogRef = this.dialog.open(CreateExerciseComponent, {
       width: '350px',
       data: this.bodyParts

@@ -14,6 +14,10 @@ export class ExerciseService {
     localStorage.setItem('series', JSON.stringify(LSSeries));
   }
 
+  clearLocalSeries(): void {
+    localStorage.removeItem('series');
+  }
+
   setLocalSeries(): Series[] {
     return  (localStorage.getItem('series')) ? JSON.parse(localStorage.getItem('series')) : [];
   }
