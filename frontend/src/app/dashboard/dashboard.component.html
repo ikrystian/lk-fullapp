@@ -2,6 +2,10 @@
   <mat-drawer #drawer mode="push" position="end">
     <nav class="slide-nav">
 
+      <button matRipple (click)="drawer.close()" routerLink="settings">
+        <mat-icon>settings</mat-icon>
+        <span>Ustawienia</span>
+      </button>
       <div class="slide-nav__toggle">
         <mat-slide-toggle
           color="primary"

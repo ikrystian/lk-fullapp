@@ -7,6 +7,7 @@ import { TrainingComponent } from './training/training.component';
 import { TrainingsComponent } from './trainings/trainings.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { StatsComponent } from '../profile/stats/stats.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -15,11 +16,12 @@ const routes: Routes = [
       {path: 'training-list', component: TrainingsComponent},
       {path: 'training/:id', component: TrainingComponent},
       {path: 'training/:id/edit', component: EditTrainingComponent},
-      {path: 'training/:id/edit/:exerciseId', component: EditTrainingComponent}
+      {path: 'training/:id/edit/:exerciseId', component: EditTrainingComponent},
+      {path: 'settings', component: SettingsComponent},
+      {path: 'stats', component: StatsComponent},
     ]
   },
   {path: 'profile', component: ProfileComponent},
-  {path: 'stats', component: StatsComponent},
 ];
 
 @NgModule({

@@ -86,12 +86,34 @@ class TrainingController extends Controller
         //
     }
 
+    public function getUserAvatar() {
+        $avatar = User::find(Auth::id())->profileimage;
+        return response()->json(['avatar' => $avatar]);
+    }
+
     public function storeImage($trainingId, Request $request)
     {
         if ($files = $request->file('file')) {
             $file = $request->file->store('public');
             $document = Training::findOrFail($trainingId);
             $document->user_image = explode('/', $file)[1];
+            $document->save();
+
+            return response()->json([
+                "success" => true,
+                "message" => "File successfully uploaded",
+                "file" => $file
+            ]);
+
+        }
+    }
+
+    public function userImage(Request $request) {
+
+        if ($files = $request->file('file')) {
+            $file = $request->file->store('public');
+            $document = User::find(1);
+            $document->profileimage = explode('/', $file)[1];
             $document->save();
 
             return response()->json([

@@ -4,14 +4,16 @@ import {
   Input,
   OnInit,
   Output,
-  EventEmitter
+  EventEmitter, OnChanges, OnDestroy
 } from '@angular/core';
-import {TrainingsService} from '../trainings.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {Router} from '@angular/router';
-import {GeolocationService} from '@ng-web-apis/geolocation';
-import {Location} from '@angular/common';
-import {ProfileService} from '../profile.service';
+import { TrainingsService } from '../trainings.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { GeolocationService } from '@ng-web-apis/geolocation';
+import { Location } from '@angular/common';
+import { ProfileService } from '../profile.service';
+import { environment } from '../../../environments/environment';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bottom-nav',
@@ -19,14 +21,16 @@ import {ProfileService} from '../profile.service';
   styleUrls: ['./bottom-nav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BottomNavComponent implements OnInit {
+export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   @Output() notify = new EventEmitter<any>();
-
+  subscription: Subscription;
   userPosition;
   length;
   training;
   trainings: any;
   showStats = false;
+  useravatar: any;
+  ASSETS_URL = environment.UPLOADED_ASSETS_URL;
 
   constructor(
     public trainingService: TrainingsService,
@@ -41,8 +45,24 @@ export class BottomNavComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void{
+    this.subscription = this.profileService.currentMessage.subscribe(() => {
+      this.getAvatar();
+    });
+  }
 
+  ngOnChanges(): void {
+    this.getAvatar();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  getAvatar(): void {
+    this.profileService.getUserAvatar().subscribe(res => {
+      this.useravatar = res;
+    });
   }
 
   toggleStats(): void {

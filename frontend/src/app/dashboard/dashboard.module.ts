@@ -42,6 +42,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TrainingListModalComponent } from './training-list-modal/training-list-modal.component';
 import { ExercisePreviewComponent } from './exercise-preview/exercise-preview.component';
 import { ChartsModule } from 'ng2-charts';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ChartsModule } from 'ng2-charts';
     ProfileComponent,
     StatsComponent,
     ExercisePreviewComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,

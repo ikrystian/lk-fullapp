@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +9,21 @@ import { HttpClient } from '@angular/common/http';
 export class ProfileService {
   API_URL = environment.API_URL;
 
-  constructor(private http: HttpClient) { }
+  private messageSource = new BehaviorSubject(true);
+  currentMessage = this.messageSource.asObservable();
+
+  constructor(private http: HttpClient) {
+  }
+
+  updateProgress(): void  {
+    this.messageSource.next(true);
+  }
 
   getActivitiesByUserId(): any {
     return this.http.get(`${this.API_URL}/activities`);
   }
 
-  getUserAvatar(): string {
-    return 'https://bpc-dev.pl/images/krystian.png';
+  getUserAvatar(): any {
+    return this.http.get(`${this.API_URL}/getuseravatar`);
   }
 }
