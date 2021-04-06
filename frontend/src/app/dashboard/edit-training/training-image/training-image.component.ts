@@ -1,8 +1,8 @@
-import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { TrainingsService } from '../../../shared/trainings.service';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './training-image.component.html',
   styleUrls: ['./training-image.component.scss']
 })
-export class TrainingImageComponent implements OnInit {
+export class TrainingImageComponent {
   @Input() training: any;
   selectedFile: File = null;
   file;
@@ -27,14 +27,9 @@ export class TrainingImageComponent implements OnInit {
     private snackBar: MatSnackBar) {
   }
 
-  ngOnInit(): void {
-  }
-
-
   postForm(): void {
     const formData = new FormData();
     formData.append('file', this.file);
-
 
     this.http.post(`http://localhost:8000/api/trainings/add-image/${this.training.id}`, formData).subscribe(
       res => {
