@@ -23,6 +23,8 @@
 
   &__stats {
     flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
   }
 
   &__buttons {
@@ -32,6 +34,10 @@
   &__data-item {
     display: inline-flex;
     align-items: center;
+
+    &:not(:last-of-type) {
+      margin-bottom: 0.25rem;
+    }
 
     .mat-icon {
       margin-right: 0.25rem;

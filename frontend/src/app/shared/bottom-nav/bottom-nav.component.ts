@@ -1,7 +1,5 @@
 import {
-  ChangeDetectionStrategy,
   Component,
-  Input,
   OnInit,
   Output,
   EventEmitter, OnChanges, OnDestroy
@@ -12,7 +10,6 @@ import { Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { Location } from '@angular/common';
 import { ProfileService } from '../profile.service';
-import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
 import { JwtService } from '../jwt.service';
 
@@ -29,8 +26,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   training;
   trainings: any;
   showStats = false;
-  useravatar: any;
-  ASSETS_URL = environment.UPLOADED_ASSETS_URL;
+  avatar: any;
   profile;
   constructor(
     public trainingService: TrainingsService,
@@ -63,7 +59,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
 
   getAvatar(): void {
     this.profileService.getUserAvatar().subscribe(res => {
-      this.useravatar = '/backend/public/' + res.avatar;
+      this.avatar = '/backend/public/' + res.avatar;
     });
   }
 

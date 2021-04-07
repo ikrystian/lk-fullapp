@@ -18,7 +18,6 @@
           <mat-icon>stacked_bar_chart</mat-icon>
           <span>{{ training.total / 1000 | round: 2 }}&nbsp;{{ 'TONS' | translate}}</span>
         </span>
-        <br>
         <span class="training-list__data-item" *ngIf="training.time">
           <mat-icon>av_timer</mat-icon>
           <span>{{training.time}}min.</span>

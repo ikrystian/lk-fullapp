@@ -11,9 +11,8 @@ import { Subscription } from 'rxjs';
 })
 export class StatsComponent implements OnInit {
   stats;
-  useravatar: any;
+  avatar: any;
   subscription: Subscription;
-  ASSETS_URL = environment.UPLOADED_ASSETS_URL;
 
   constructor(public trainingService: TrainingsService, public profileService: ProfileService) {
     this.trainingService.getStats().subscribe(res => {
@@ -30,7 +29,7 @@ export class StatsComponent implements OnInit {
 
   getAvatar(): void {
     this.profileService.getUserAvatar().subscribe(res => {
-      this.useravatar = '/backend/public/' + res.avatar;
+      this.avatar = '/backend/public/' + res.avatar;
     });
   }
 

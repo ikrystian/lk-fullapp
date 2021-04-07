@@ -10,6 +10,7 @@ export class RecordComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    // users will be not happy about that, but who cares
+    new Audio('/assets/sounds/keanu.mp3').play();
   }
-
 }
