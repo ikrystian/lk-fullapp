@@ -30,7 +30,7 @@ export class StatsComponent implements OnInit {
 
   getAvatar(): void {
     this.profileService.getUserAvatar().subscribe(res => {
-      this.useravatar = res.avatar;
+      this.useravatar = '/backend/public/' + res.avatar;
     });
   }
 
