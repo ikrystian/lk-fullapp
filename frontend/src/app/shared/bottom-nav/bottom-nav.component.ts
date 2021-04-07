@@ -14,12 +14,12 @@ import { Location } from '@angular/common';
 import { ProfileService } from '../profile.service';
 import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
+import { JwtService } from '../jwt.service';
 
 @Component({
   selector: 'app-bottom-nav',
   templateUrl: './bottom-nav.component.html',
   styleUrls: ['./bottom-nav.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   @Output() notify = new EventEmitter<any>();
@@ -31,14 +31,15 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   showStats = false;
   useravatar: any;
   ASSETS_URL = environment.UPLOADED_ASSETS_URL;
-
+  profile;
   constructor(
     public trainingService: TrainingsService,
     private location: Location,
     private snackBar: MatSnackBar,
     public router: Router,
     private geolocation: GeolocationService,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    public jwtService: JwtService
   ) {
     this.geolocation.subscribe(position => {
       this.userPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
@@ -46,6 +47,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit(): void{
+    this.getAvatar();
     this.subscription = this.profileService.currentMessage.subscribe(() => {
       this.getAvatar();
     });
@@ -61,7 +63,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
 
   getAvatar(): void {
     this.profileService.getUserAvatar().subscribe(res => {
-      this.useravatar = res;
+      this.useravatar = res.avatar;
     });
   }
 

@@ -1,6 +1,6 @@
 <nav>
-  <button class="profile-button" matRipple title="profile - work in progress">
-    <img [src]="ASSETS_URL + useravatar.avatar" alt="">
+  <button *ngIf="useravatar" class="profile-button" matRipple title="profile - work in progress">
+    <img [src]="useravatar " alt="">
   </button>
   <div>
     <button routerLink="/" matRipple title="home">

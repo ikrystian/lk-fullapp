@@ -25,8 +25,5 @@ export class AppComponent implements OnInit {
     this.authenticationStateService.userAuthState.subscribe(res => {
       this.isLoggedin = res;
     });
-
   }
-
-
 }
