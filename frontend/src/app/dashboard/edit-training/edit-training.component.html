@@ -8,10 +8,10 @@
     <!--      <mat-icon>save</mat-icon>-->
     <!--      <span>{{ 'SAVE_TRAINING' | translate }}</span>-->
     <!--    </button>-->
-        <button mat-menu-item (click)="finishWorkout(training.id)">
-          <mat-icon>save</mat-icon>
-          <span>{{ 'FINISH_TRAINING' | translate }}</span>
-        </button>
+    <button mat-menu-item (click)="finishWorkout(training.id)">
+      <mat-icon>save</mat-icon>
+      <span>{{ 'FINISH_TRAINING' | translate }}</span>
+    </button>
     <mat-divider></mat-divider>
     <button class="mat-menu-item" (click)="showChangeNameForm = !showChangeNameForm">
       <mat-icon>edit</mat-icon>
@@ -71,8 +71,27 @@
           <mat-icon>visibility</mat-icon>
         </button>
       </div>
+      <div *ngIf="selectedOption">
+        <ng-container [ngSwitch]="selectedOption.exercise_type_id">
+          <ng-container *ngSwitchCase="1">
+            <app-exercise [exercise]="selectedOption"></app-exercise>
+          </ng-container>
 
-      <app-exercise *ngIf="selectedOption" [exercise]="selectedOption"></app-exercise>
+          <ng-container *ngSwitchCase="2">
+            Ćwiczenie wytrzymałościowe (na powtórzenia)
+          </ng-container>
+
+          <ng-container *ngSwitchCase="3">
+            Ćwiczenie wytrzymałościowe (na czas)
+          </ng-container>
+
+          <ng-container *ngSwitchCase="4">
+            Interwały
+          </ng-container>
+
+          <ng-container *ngSwitchDefault>Brak widoku dla podanego typu ćwiczenia - zgłoś błąd</ng-container>
+        </ng-container>
+      </div>
     </div>
 
   </div>

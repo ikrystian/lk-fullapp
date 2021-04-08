@@ -62,15 +62,13 @@ export class ExerciseComponent implements OnChanges {
     this.createSeriesForm();
   }
 
-
   ngOnChanges(): void {
     this.series = this.exerciseService.setLocalSeries();
     this.series = this.series.filter(el => el.series_type_id === this.exercise.id);
     this.sortSeries(this.series);
   }
 
-
-  createSeriesForm = () => {
+  createSeriesForm(): void {
     this.exerciseForm = this.formBuilder.group({
       series_type_id: [this.exercise?.id],
       reps: [],
