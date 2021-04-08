@@ -72,7 +72,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
         this.trainingTotal += el.weight * el.reps * el.multiplier;
       });
 
-      const currentExercise = series.filter(el => el.exercise_type_id === this.data.exerciseId);
+      const currentExercise = series.filter(el => el.series_type_id === this.data.exerciseId);
       if (currentExercise.length === 0) {
         this.progress = 0;
       }

@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ExerciseType extends Model
+class SeriesType extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'name',
-        'multipler',
+        'multiplier',
         'body_part_id',
         'imageurl'
     ];
@@ -25,4 +24,5 @@ class ExerciseType extends Model
     public function bodyPart() {
         return $this->belongsTo(BodyPart::class, 'body_part_id', 'id');
     }
+
 }

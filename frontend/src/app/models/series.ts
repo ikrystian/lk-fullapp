@@ -1,7 +1,7 @@
 export interface Series {
   bodyPartId: number;
   class: string;
-  exercise_type_id: number;
+  series_type_id: number;
   id: number;
   multiplier: number;
   oneField: number;

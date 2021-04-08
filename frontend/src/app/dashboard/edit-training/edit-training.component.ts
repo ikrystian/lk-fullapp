@@ -112,6 +112,7 @@ export class EditTrainingComponent implements OnInit {
     }
     const data = this.exerciseService.setLocalSeries();
     this.trainingService.sync(data).subscribe(() => {
+      console.log(data);
       this.trainingService.finishTraining(id).subscribe(() => {
         this.exerciseService.clearLocalSeries();
         this.router.navigate([`/dashboard/training/${id}`]);

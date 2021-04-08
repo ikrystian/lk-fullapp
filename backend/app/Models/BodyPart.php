@@ -15,6 +15,6 @@ class BodyPart extends Model
     ];
 
     public function exercisesTypes() {
-        return $this->hasMany(ExerciseType::class);
+        return $this->hasMany(SeriesType::class);
     }
 }

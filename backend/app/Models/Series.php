@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Exercise extends Model
+class Series extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'training_id',
         'user_id',
-        'exercise_type_id',
+        'series_type_id',
         'reps',
         'weight'
     ];
@@ -20,7 +20,6 @@ class Exercise extends Model
     protected $with = ['type'];
 
     public function type() {
-        return $this->belongsTo(ExerciseType::class, 'exercise_type_id', 'id');
+        return $this->belongsTo(SeriesType::class, 'series_type_id', 'id');
     }
-
 }

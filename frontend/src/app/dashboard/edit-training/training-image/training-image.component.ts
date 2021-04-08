@@ -33,13 +33,13 @@ export class TrainingImageComponent {
     formData.append('file', this.file);
 
     this.http.post(`${environment.API_URL}/trainings/add-image/${this.training.id}`, formData).subscribe(
-      res => {
+      () => {
         const snackBar = this.snackBar.open('Zdjęcie zostało zaktualizowane.', 'zobacz');
         snackBar.onAction().subscribe(() => {
           this.router.navigate([`/dashboard/training/${this.training.id}`]);
         });
       },
-      error => {
+      () => {
         this.snackBar.open('Coś poszło nie tak :(', 'shit...');
       }
     );

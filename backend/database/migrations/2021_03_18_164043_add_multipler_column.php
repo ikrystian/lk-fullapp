@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMultiplerColumn extends Migration
+class AddmultiplierColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddMultiplerColumn extends Migration
     public function up()
     {
         Schema::table('exercise_types', function (Blueprint $table) {
-            $table->integer('multipler')->default(1);
+            $table->integer('multiplier')->default(1);
         });
     }
 
@@ -25,6 +25,6 @@ class AddMultiplerColumn extends Migration
      */
     public function down()
     {
-        Schema::dropColumn('multipler');
+        Schema::dropColumn('multiplier');
     }
 }

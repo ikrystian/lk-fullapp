@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ExerciseType;
+use App\Models\SeriesType;
 use Illuminate\Http\Request;
 
 class ExerciseTypeController extends Controller
@@ -14,7 +14,7 @@ class ExerciseTypeController extends Controller
      */
     public function index()
     {
-        return ExerciseType::orderBy('name', 'ASC')->get()->toArray();
+        return SeriesType::orderBy('name', 'ASC')->get()->toArray();
     }
 
     /**
@@ -35,9 +35,9 @@ class ExerciseTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $exerciseType = new ExerciseType;
+        $exerciseType = new SeriesType;
         $exerciseType->name = $request->data['name'];
-        $exerciseType->multipler = $request->data['multipler'];
+        $exerciseType->multiplier = $request->data['multiplier'];
         $exerciseType->body_part_id = $request->data['body_part'];
         $exerciseType->save();
 

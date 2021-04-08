@@ -65,14 +65,14 @@ export class ExerciseComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.series = this.exerciseService.setLocalSeries();
-    this.series = this.series.filter(el => el.exercise_type_id === this.exercise.id);
+    this.series = this.series.filter(el => el.series_type_id === this.exercise.id);
     this.sortSeries(this.series);
   }
 
 
   createSeriesForm = () => {
     this.exerciseForm = this.formBuilder.group({
-      exercise_type_id: [this.exercise?.id],
+      series_type_id: [this.exercise?.id],
       reps: [],
       weight: [],
       oneField: [],
@@ -113,9 +113,9 @@ export class ExerciseComponent implements OnChanges {
     series.weight = series.weight || this.weight;
     series.weight = (this.isLBS) ? series.weight * 0.45359237 : series.weight;
 
-    series.exercise_type_id = this.exercise.id;
+    series.series_type_id = this.exercise.id;
     series.training_id = this.trainingId;
-    series.multiplier = this.exercise.multipler;
+    series.multiplier = this.exercise.multiplier;
     series.bodyPartId = this.exercise.body_part_id;
     series.id = Date.now();
 

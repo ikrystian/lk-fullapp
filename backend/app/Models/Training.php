@@ -22,7 +22,7 @@ class Training extends Model
     protected $with = ['exercises'];
 
     public function exercises() {
-        return $this->hasMany(Exercise::class);
+        return $this->hasMany(Series::class);
     }
 
 }

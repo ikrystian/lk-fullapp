@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TrainingResource;
 use App\Models\Activity;
-use App\Models\Exercise;
 use App\Models\Meta;
+use App\Models\Series;
 use App\Models\Training;
 use App\Models\User;
 use Carbon\Carbon;
@@ -42,32 +42,31 @@ class TrainingController extends Controller
 
     public function sync(Request $request) {
         $series =  $request->data;
-
         foreach($series as $singleSeries) {
-            $exercise = new Exercise;
+            $exercise = new Series;
             $exercise->training_id = $singleSeries['training_id'];
             $exercise->user_id = Auth::id();
-            $exercise->exercise_type_id = $singleSeries['exercise_type_id'];
+            $exercise->series_type_id = '1';
             $exercise->reps = $singleSeries['reps'];
             $exercise->weight = $singleSeries['weight'];
             $exercise->body_part_id = $singleSeries['bodyPartId'];
             $exercise->save();
         }
 
-        return response()->json('added', 200);
+        return response()->json('added');
     }
 
     public function getLastExerciseSum($exerciseId, $currentTrainingId, $bodyPartID)
     {
-        $trainingId = Exercise::where('exercise_type_id', $exerciseId)
+        $trainingId = Series::where('series_type_id', $exerciseId)
             ->where('training_id', '!=', $currentTrainingId)
             ->where('user_id', Auth::id())
             ->first('training_id');
 
-        $exercises = Exercise::where('training_id', $trainingId->training_id)->where('exercise_type_id', $exerciseId)->get();
+        $exercises = Series::where('training_id', $trainingId->training_id)->where('series_type_id', $exerciseId)->get();
         $lastTraining = $exercises->map(function ($item) {
             $data = $item;
-            $data['total'] = $item->weight * $item->reps * $item->type->multipler;
+            $data['total'] = $item->weight * $item->reps * $item->type->multiplier;
             return $data;
         });
 
@@ -137,6 +136,7 @@ class TrainingController extends Controller
         $training->user_id = Auth::id();
         $training->training_date = Carbon::now()->toDateString();
         $training->name = Carbon::now()->toDateString() . ' - ' . Carbon::now()->locale('pl')->dayName;
+        // !todo remove archive training - it will be unused soon
         $training->archive_training = 0;
         $training->start = Carbon::now();
         $training->save();
@@ -160,10 +160,10 @@ class TrainingController extends Controller
 
     public function addSeries(Request $request)
     {
-        $exercise = new Exercise;
+        $exercise = new Series;
         $exercise->training_id = $request['training_id'];
         $exercise->user_id = Auth::id();
-        $exercise->exercise_type_id = $request['exercise_type_id'];
+        $exercise->series_type_id = $request['series_type_id'];
         $exercise->body_part_id = $request['bodyPartId'];
         $exercise->reps = $request['reps'];
         $exercise->weight = $request['weight'];
@@ -176,7 +176,7 @@ class TrainingController extends Controller
     {
         $trainings = Training::where('training_date', $date)
             ->where('user_id', Auth::id())
-            ->with('exercises')
+            ->with('series')
             ->orderBy('id', 'desc')
             ->get();
         return TrainingResource::collection($trainings);
@@ -214,9 +214,9 @@ class TrainingController extends Controller
 
     public function getSeries($trainingId, $exerciseType)
     {
-        $exercises = DB::table('exercises')
+        $exercises = DB::table('series')
             ->where('training_id', $trainingId)
-            ->where('exercise_type_id', $exerciseType)
+            ->where('series_type_id', $exerciseType)
             ->latest()->get();
         return $exercises;
     }
@@ -224,9 +224,9 @@ class TrainingController extends Controller
     public function end(Request $request)
     {
         $total = 0;
-        $exercises = Exercise::all()->where('training_id', $request->id);
+        $exercises = Series::all()->where('training_id', $request->id);
         foreach ($exercises as $exercise) {
-            $total += $exercise->weight * $exercise->reps * $exercise->type->multipler;
+            $total += $exercise->weight * $exercise->reps * $exercise->type->multiplier;
         }
 
         $training = Training::findOrFail($request->id);
@@ -239,9 +239,9 @@ class TrainingController extends Controller
     public function save(Request $request)
     {
         $total = 0;
-        $exercises = Exercise::all()->where('training_id', $request->id);
+        $exercises = Series::all()->where('training_id', $request->id);
         foreach ($exercises as $exercise) {
-            $total += $exercise->weight * $exercise->reps * $exercise->type->multipler;
+            $total += $exercise->weight * $exercise->reps * $exercise->type->multiplier;
         }
         $training = Training::findOrFail($request->id);
         $training->total = $total;
@@ -270,7 +270,7 @@ class TrainingController extends Controller
     public function destroy($id)
     {
         Training::destroy($id);
-        Exercise::where('training_id', $id)->delete();
+        Series::where('training_id', $id)->delete();
         return response()->json('removed', 200);
     }
 
@@ -282,12 +282,7 @@ class TrainingController extends Controller
 
         $stats['username'] = $user->name;
         $stats['trainings'] = Training::where('user_id', Auth::id())->count();
-        if (Auth::id() == 1) {
-            $stats['total'] += 550000;
-            $stats['trainings'] += 28;
-            $stats['training_days'] = $stats['trainings'] + 1;
 
-        }
         return $stats;
     }
 }
