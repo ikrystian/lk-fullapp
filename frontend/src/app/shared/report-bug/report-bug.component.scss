@@ -1,0 +1,8 @@
+.bug-modal {
+  max-width: 98vw !important;
+
+  &__textarea {
+    display: block;
+    width: 100%;
+  }
+}

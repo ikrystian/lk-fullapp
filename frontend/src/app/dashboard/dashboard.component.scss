@@ -44,6 +44,7 @@
   background-color: var(--primary-color);
 
   button,
+  &__button,
   &__toggle {
     width: 100%;
     height: 58px;
@@ -60,6 +61,7 @@
       width: 42px;
       border-radius: 50%;
     }
+
     .mat-slide-toggle {
       margin-bottom: 0.25rem;
     }
@@ -67,6 +69,14 @@
     .mat-icon {
       margin-bottom: 0.25rem;
       color: var(--accent-color);
+    }
+
+    &--bug {
+      color: var(--font-color) !important;
+
+      .mat-icon {
+        color: var(--font-color) !important;
+      }
     }
 
     span {

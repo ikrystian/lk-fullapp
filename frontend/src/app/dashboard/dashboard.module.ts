@@ -43,6 +43,7 @@ import { TrainingListModalComponent } from './training-list-modal/training-list-
 import { ExercisePreviewComponent } from './exercise-preview/exercise-preview.component';
 import { ChartsModule } from 'ng2-charts';
 import { SettingsComponent } from './settings/settings.component';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 @NgModule({
   declarations: [
@@ -96,6 +97,7 @@ import { SettingsComponent } from './settings/settings.component';
     MatSidenavModule,
     TranslateModule,
     ChartsModule,
+    TextFieldModule
   ],
   providers: [
     {provide: MatDialogRef, useValue: {}},

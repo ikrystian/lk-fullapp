@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {TranslateService} from '@ngx-translate/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatDrawer } from '@angular/material/sidenav';
+import { MatDialog } from '@angular/material/dialog';
+import { ReportBugComponent } from '../shared/report-bug/report-bug.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +34,8 @@ export class DashboardComponent implements OnInit {
     public authenticationStateService: AuthenticationStateService,
     private tokenAuthService: TokenAuthService,
     public router: Router,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    public matDialog: MatDialog
   ) {
     translate.addLangs(['pl', 'en']);
     translate.setDefaultLang('pl');
@@ -61,7 +64,9 @@ export class DashboardComponent implements OnInit {
       Math.abs(event.deltaX) > 40 ? this.drawer.toggle() : '';
     }
 
-
+    openReportBugModal(): void {
+      this.matDialog.open(ReportBugComponent, {panelClass: ['open-bug-modal', 'popup']});
+    }
 
   logout(): void {
     this.authenticationStateService.setAuthState(false);
