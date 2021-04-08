@@ -1,9 +1,9 @@
 <nav>
-  <button *ngIf="avatar" class="profile-button" matRipple title="profile - work in progress">
+  <button class="profile-button" matRipple title="profile - work in progress">
     <img [src]="avatar" alt="">
   </button>
   <div>
-    <button routerLink="/" matRipple title="home">
+    <button (click)="goToHome()" matRipple title="home">
       <mat-icon>home</mat-icon>
     </button>
 

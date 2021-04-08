@@ -53,6 +53,12 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
     this.getAvatar();
   }
 
+  goToHome(): void {
+    this.router.navigate(['/']);
+    (this.showStats) ? this.showStats = false : '';
+    this.notify.emit(this.showStats);
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
