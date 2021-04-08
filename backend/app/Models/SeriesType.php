@@ -12,13 +12,18 @@ class SeriesType extends Model
         'name',
         'multiplier',
         'body_part_id',
-        'imageurl'
+        'imageurl',
+        'exercise_type_id'
     ];
 
     protected $with = ['bodyPart'];
 
     public function exercise() {
         return $this->hasMany(Exercise::class);
+    }
+
+    public function exerciseType() {
+        return $this->belongsTo(ExerciseType::class, 'exercise_type_id', 'id');
     }
 
     public function bodyPart() {

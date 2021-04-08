@@ -77,7 +77,8 @@ export class ExerciseComponent implements OnChanges {
       weight: [],
       oneField: [],
       multiplier: [],
-      training_id: [this.trainingId]
+      training_id: [this.trainingId],
+      exercise_type_id: [this.exercise?.exercise_type_id]
     });
 
   }
@@ -117,6 +118,7 @@ export class ExerciseComponent implements OnChanges {
     series.training_id = this.trainingId;
     series.multiplier = this.exercise.multiplier;
     series.bodyPartId = this.exercise.body_part_id;
+    series.exercise_type_id = parseInt(this.exercise.exercise_type_id, 0);
     series.id = Date.now();
 
     this.series.unshift(series);

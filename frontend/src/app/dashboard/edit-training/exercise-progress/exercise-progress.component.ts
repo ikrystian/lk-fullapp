@@ -46,8 +46,8 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnChanges(): void {
+    console.log(this.data);
     this.updateProgressBar();
-
   }
 
   updateProgressBar(): void {
@@ -55,7 +55,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     this.trainingTotal = 0;
     this.bodyPartTotal = 0;
 
-    if (!this.data.exerciseId || this.data.exerciseId === 0) {
+    if (!this.data?.exercise?.id || this.data?.exercise?.id === 0) {
       return;
     }
 
@@ -63,7 +63,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
 
     if (series.length !== 0) {
 
-      const currentBodyPartSeries = series.filter(el => el.bodyPartId === this.data.bodyPartId);
+      const currentBodyPartSeries = series.filter(el => el.bodyPartId === this.data.exercise.body_part_id);
       currentBodyPartSeries.forEach(el => {
         this.bodyPartTotal += el.weight * el.reps * el.multiplier;
       });
@@ -72,7 +72,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
         this.trainingTotal += el.weight * el.reps * el.multiplier;
       });
 
-      const currentExercise = series.filter(el => el.series_type_id === this.data.exerciseId);
+      const currentExercise = series.filter(el => el.series_type_id === this.data.exercise.id);
       if (currentExercise.length === 0) {
         this.progress = 0;
       }
@@ -80,18 +80,19 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
       currentExercise.forEach(el => {
         this.currentTotal += el.weight * el.reps * el.multiplier;
       });
+
+      console.log(this.currentTotal, this.trainingTotal, this.bodyPartTotal);
+
     }
 
-    if (this.data.exerciseId !== this.exercise) {
+    if (this.data.exercise.id !== this.exercise) {
       this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
         this.totalForSeries = res;
         this.progress = (this.currentTotal / res.lastTraining) * 100;
-
-      }, (error) => {
-        console.log(error);
+      }, () => {
         this.totalForSeries = this.defaultData;
       });
-      this.exercise = this.data.exerciseId;
+      this.exercise = this.data.exercise.id;
     } else {
       this.progress = (this.currentTotal / this.totalForSeries.lastTraining) * 100;
     }
@@ -108,7 +109,6 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     this.dialog.open(RecordComponent, {panelClass: 'record-modal'});
     currentRecordExercises.push(exerciseId);
     localStorage.setItem('records', JSON.stringify(currentRecordExercises));
-    console.log(currentRecordExercises);
   }
 }
 

@@ -39,6 +39,7 @@ class ExerciseTypeController extends Controller
         $exerciseType->name = $request->data['name'];
         $exerciseType->multiplier = $request->data['multiplier'];
         $exerciseType->body_part_id = $request->data['body_part'];
+        $exerciseType->exercise_type_id = $request->data['exercise_type'];
         $exerciseType->save();
 
         return $exerciseType->toJson();

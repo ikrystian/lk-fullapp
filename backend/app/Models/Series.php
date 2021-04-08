@@ -14,11 +14,14 @@ class Series extends Model
         'user_id',
         'series_type_id',
         'reps',
-        'weight'
+        'weight',
+        'exercise_type_id'
     ];
 
     protected $with = ['type'];
-
+    public function exerciseType() {
+        return $this->belongsTo(ExerciseType::class, 'exercise_type_id', 'id');
+    }
     public function type() {
         return $this->belongsTo(SeriesType::class, 'series_type_id', 'id');
     }

@@ -49,6 +49,7 @@ class TrainingController extends Controller
             $exercise->series_type_id = '1';
             $exercise->reps = $singleSeries['reps'];
             $exercise->weight = $singleSeries['weight'];
+            $exercise->exercise_type_id = $singleSeries['exercise_type_id'];
             $exercise->body_part_id = $singleSeries['bodyPartId'];
             $exercise->save();
         }
@@ -155,21 +156,6 @@ class TrainingController extends Controller
         $activity->save();
 
         return $training->toJson();
-    }
-
-
-    public function addSeries(Request $request)
-    {
-        $exercise = new Series;
-        $exercise->training_id = $request['training_id'];
-        $exercise->user_id = Auth::id();
-        $exercise->series_type_id = $request['series_type_id'];
-        $exercise->body_part_id = $request['bodyPartId'];
-        $exercise->reps = $request['reps'];
-        $exercise->weight = $request['weight'];
-        $exercise->save();
-        $exercise->id;
-        return $exercise->toJson();
     }
 
     public function getByDate($date)

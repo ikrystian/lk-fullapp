@@ -16,7 +16,7 @@ export class TrainingsService {
   constructor(private http: HttpClient) {
   }
 
-  updateProgress(): void  {
+  updateProgress(): void {
     this.messageSource.next(true);
   }
 
@@ -45,7 +45,7 @@ export class TrainingsService {
   }
 
   getLastExerciseSum(data): any {
-      return this.http.get(`${this.API_URL}/exercises/getTotalInSeries/${data.exerciseId}/${data.trainingId}/${data.bodyPartId}`);
+    return this.http.get(`${this.API_URL}/exercises/getTotalInSeries/${data.exercise.id}/${data.trainingId}/${data.bodyPartId}`);
   }
 
   createExerciseType = (data) => {

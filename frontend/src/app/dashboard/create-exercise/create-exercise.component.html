@@ -15,6 +15,16 @@
     </mat-form-field>
 
     <mat-form-field class="full-width-input">
+      <mat-label>Rodzja ćwiczenia</mat-label>
+      <select matNativeControl required formControlName="exercise_type">
+        <option value="1">ćwiczenie siłowe</option>
+        <option value="2">Ćwiczenie wytrzymałościowe (na powtórzenia)</option>
+        <option value="3">Ćwiczenie wytrzymałościowe (na czas)</option>
+        <option value="4">Interwały</option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field class="full-width-input">
       <mat-label>{{ 'MULTIPLIER' | translate }}</mat-label>
       <select matNativeControl required formControlName="multiplier">
         <option value="1">1</option>
