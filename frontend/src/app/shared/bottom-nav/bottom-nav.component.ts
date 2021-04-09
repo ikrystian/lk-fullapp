@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 import { ProfileService } from '../profile.service';
 import { Subscription } from 'rxjs';
 import { JwtService } from '../jwt.service';
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-bottom-nav',
@@ -65,7 +66,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
 
   getAvatar(): void {
     this.profileService.getUserAvatar().subscribe(res => {
-      this.avatar = '/backend/public/' + res.avatar;
+      this.avatar = environment.UPLOADED_ASSETS_URL + '/backend/public/' + res.avatar;
     });
   }
 
