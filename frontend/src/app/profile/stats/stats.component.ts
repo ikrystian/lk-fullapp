@@ -29,7 +29,7 @@ export class StatsComponent implements OnInit {
 
   getAvatar(): void {
     this.profileService.getUserAvatar().subscribe(res => {
-      this.avatar = '/backend/public/' + res.avatar;
+      this.avatar = environment.UPLOADED_ASSETS_URL + '/backend/public/' + res.avatar;
     });
   }
 
