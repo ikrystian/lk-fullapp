@@ -1,1 +1,27 @@
-<p>run-exercise works!</p>
+<form class="form" action="">
+  <div class="form__group">
+    <label for="time">Czas</label>
+    <input type="time" id="time" class="form__input" name="time">
+  </div>
+
+  <div class="form__group">
+    <label for="distance">Dystans</label>
+    <input type="number" name="distance" id="distance" class="form__input" placeholder="km">
+  </div>
+
+  <div class="form__group">
+    <label>Pogoda</label>
+    <input type="radio" name="weather" value="1"> Słonecznie
+    <input type="radio" name="weather" value="2"> Deszczowo
+    <input type="radio" name="weather" value="3"> Nakurwia piorunami
+    <input type="radio" name="weather" value="3"> Pizga lodem
+  </div>
+
+  <footer class="form__footer">
+    <button mat-button>Zapisz bieg</button>
+  </footer>
+
+</form>
+<section class="run-component">
+
+</section>

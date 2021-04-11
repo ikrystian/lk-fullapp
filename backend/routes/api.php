@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\ExerciseTypeController;
 use App\Http\Controllers\MetaController;
+use App\Http\Controllers\RunController;
 use App\Http\Controllers\TrainingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,7 @@ Route::group([
 Route::group([
     'middleware' => 'api',
 ], function ($router) {
+    Route::post('/training/add-run/', [RunController::class, 'store']);
     Route::get('/getuseravatar', [TrainingController::class, 'getUserAvatar']);
     Route::get('/activities', [ActivityController::class, 'getByUserId']);
     Route::get('/exercises/getTotalInSeries/{exerciseId}/{currentTrainingId}/{bodyPartId}', [TrainingController::class, 'getLastExerciseSum']);
