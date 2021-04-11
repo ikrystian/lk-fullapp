@@ -12,7 +12,7 @@ class RunController extends Controller
     {
         $run = new Run();
         $run->user_id = Auth::id();
-        $run->training_id = $request['training_id'];
+        $run->training_id = $request['trainingId'];
         $run->distance = $request['distance'];
         $run->time = $request['time'];
         $run->weather = $request['weather'];

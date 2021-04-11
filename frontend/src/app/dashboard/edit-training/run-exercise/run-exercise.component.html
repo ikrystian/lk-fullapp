@@ -1,25 +1,26 @@
-<form class="form" action="">
+<form class="form add-run" [formGroup]="runForm" (ngSubmit)="addRun()">
   <div class="form__group">
-    <label for="time">Czas</label>
-    <input type="time" id="time" class="form__input" name="time">
+    <label for="time">Czas (w sekundach oO)</label>
+    <input type="number" id="time" class="form__input" name="time" formControlName="time">
   </div>
 
   <div class="form__group">
     <label for="distance">Dystans</label>
-    <input type="number" name="distance" id="distance" class="form__input" placeholder="km">
+    <input type="number" name="distance" id="distance" class="form__input" formControlName="distance" placeholder="km">
   </div>
 
   <div class="form__group">
-    <label>Pogoda</label>
-    <input type="radio" name="weather" value="1"> Słonecznie
-    <input type="radio" name="weather" value="2"> Deszczowo
-    <input type="radio" name="weather" value="3"> Nakurwia piorunami
-    <input type="radio" name="weather" value="3"> Pizga lodem
+    <label for="weather">Pogoda</label>
+    <select name="" id="weather" formArrayName="weather">
+      <option value="1">Słonecznie</option>
+    </select>
   </div>
 
-  <footer class="form__footer">
-    <button mat-button>Zapisz bieg</button>
+  <footer class="form__footer add-run__footer">
+    <button mat-button color="primary" >Zapisz bieg</button>
   </footer>
+
+  <img style="display: block; max-width: 100%;" src="assets/images/run.gif" alt="">
 
 </form>
 <section class="run-component">

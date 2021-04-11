@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Series } from '../models/series';
+import { Run } from '../models/run';
 
 @Injectable({
   providedIn: 'root'
@@ -101,5 +102,9 @@ export class TrainingsService {
 
   getStats(): any {
     return this.http.get(`${this.API_URL}/stats`);
+  }
+
+  addRun(data: Run): any {
+    return this.http.post<Run>(`${this.API_URL}/training/add-run`, data);
   }
 }
