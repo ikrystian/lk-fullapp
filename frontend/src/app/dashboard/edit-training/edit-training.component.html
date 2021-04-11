@@ -78,15 +78,19 @@
           </ng-container>
 
           <ng-container *ngSwitchCase="2">
-            Ćwiczenie wytrzymałościowe (na powtórzenia)
+            Ćwiczenie wytrzymałościowe (serie i powtórzenia)
           </ng-container>
 
           <ng-container *ngSwitchCase="3">
-            Ćwiczenie wytrzymałościowe (na czas)
+            Ćwiczenie wytrzymałościowe (serie i czas czas)
           </ng-container>
 
           <ng-container *ngSwitchCase="4">
             Interwały
+          </ng-container>
+
+          <ng-container *ngSwitchCase="5">
+            <app-run-exercise></app-run-exercise>
           </ng-container>
 
           <ng-container *ngSwitchDefault>Brak widoku dla podanego typu ćwiczenia - zgłoś błąd</ng-container>
