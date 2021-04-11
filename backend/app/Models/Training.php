@@ -19,10 +19,14 @@ class Training extends Model
         'archive_training'
     ];
 
-    protected $with = ['exercises'];
+    protected $with = ['exercises', 'runs'];
 
     public function exercises() {
         return $this->hasMany(Series::class);
+    }
+
+    public function runs() {
+        return $this->hasMany(Run::class);
     }
 
 }
