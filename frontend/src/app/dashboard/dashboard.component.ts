@@ -65,7 +65,8 @@ export class DashboardComponent implements OnInit {
     }
 
     openReportBugModal(): void {
-      this.matDialog.open(ReportBugComponent, {panelClass: ['open-bug-modal', 'popup']});
+      this.drawer.close();
+      this.matDialog.open(ReportBugComponent, {panelClass: ['bug-modal', 'popup']});
     }
 
   logout(): void {
