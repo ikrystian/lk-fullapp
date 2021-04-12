@@ -45,6 +45,7 @@ import { ChartsModule } from 'ng2-charts';
 import { SettingsComponent } from './settings/settings.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { RunExerciseComponent } from './edit-training/run-exercise/run-exercise.component';
+import { RunsComponent } from './runs/runs.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { RunExerciseComponent } from './edit-training/run-exercise/run-exercise.
     ExercisePreviewComponent,
     SettingsComponent,
     RunExerciseComponent,
+    RunsComponent,
   ],
   imports: [
     CommonModule,
