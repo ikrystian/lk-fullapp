@@ -2,18 +2,18 @@
 
   <mat-tab label="{{ 'RUNS' | translate }}">
     <div class="training-list-tabs__tab-content">
-     <app-runs></app-runs>
+     <app-runs class="training-list-tabs__tab-component"></app-runs>
     </div>
   </mat-tab>
 
   <mat-tab label="{{ 'LIST' | translate }} ({{ trainings.length }})">
     <div class="training-list-tabs__tab-content">
-      <app-training-list [trainings]="trainings"></app-training-list>
+      <app-training-list  class="training-list-tabs__tab-component" [trainings]="trainings"></app-training-list>
     </div>
   </mat-tab>
 
   <mat-tab [label]="'CALENDAR' | translate">
-    <app-calendar [trainings]="trainings"></app-calendar>
+    <app-calendar  class="training-list-tabs__tab-component" [trainings]="trainings"></app-calendar>
   </mat-tab>
 
 </mat-tab-group>
