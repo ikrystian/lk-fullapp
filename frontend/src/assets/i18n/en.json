@@ -30,5 +30,6 @@
   "LOG_IN" : "Log in'",
   "USERNAME" : "Username",
   "PASSWORD" : "Password",
-  "REGISTER" : "Register"
+  "REGISTER" : "Register",
+  "RUNS" : "Runs"
 }

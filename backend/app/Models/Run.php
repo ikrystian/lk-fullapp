@@ -17,5 +17,13 @@ class Run extends Model
         'weather'
     ];
 
+    protected $with = ['training'];
+
+    public function training() {
+        return $this->belongsTo(Training::class, 'training_id', 'id');
+    }
+
+
+
 
 }

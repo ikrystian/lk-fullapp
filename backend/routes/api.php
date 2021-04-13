@@ -35,6 +35,7 @@ Route::group([
 Route::group([
     'middleware' => 'api',
 ], function ($router) {
+    Route::get('/get-runs', [RunController::class, 'index']);
     Route::post('/training/add-run/', [RunController::class, 'store']);
     Route::get('/getuseravatar', [TrainingController::class, 'getUserAvatar']);
     Route::get('/activities', [ActivityController::class, 'getByUserId']);

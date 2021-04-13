@@ -30,5 +30,6 @@
   "LOG_IN" : "Zaloguj",
   "USERNAME" : "Nazwa użytkownika",
   "PASSWORD" : "Hasło",
-  "REGISTER" : "Zarejestruj się"
+  "REGISTER" : "Zarejestruj się",
+  "RUNS" : "Biegi"
 }

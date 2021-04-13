@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class RunController extends Controller
 {
+    public function index() {
+        return Run::all()->toJson();
+    }
+
     public function store(Request $request)
     {
         $run = new Run();

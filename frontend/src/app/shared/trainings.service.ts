@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Series } from '../models/series';
 import { Run } from '../models/run';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -106,5 +107,9 @@ export class TrainingsService {
 
   addRun(data: Run): any {
     return this.http.post<Run>(`${this.API_URL}/training/add-run`, data);
+  }
+
+  getRuns(): Observable<Run[]> {
+    return this.http.get<Run[]>(`${this.API_URL}/get-runs`);
   }
 }
