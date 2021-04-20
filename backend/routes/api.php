@@ -6,6 +6,7 @@ use App\Http\Controllers\ExerciseTypeController;
 use App\Http\Controllers\MetaController;
 use App\Http\Controllers\RunController;
 use App\Http\Controllers\TrainingController;
+use App\Models\Coords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,10 @@ Route::group([
 Route::group([
     'middleware' => 'api',
 ], function ($router) {
+    Route::get('coords', function() {
+        return Coords::all()->toJson();
+    });
+    Route::post('/add-coords', [TrainingController::class, 'coords']);
     Route::get('/get-runs', [RunController::class, 'index']);
     Route::post('/training/add-run/', [RunController::class, 'store']);
     Route::get('/getuseravatar', [TrainingController::class, 'getUserAvatar']);
@@ -57,4 +62,5 @@ Route::group([
     Route::resource('/trainings', TrainingController::class);
     Route::resource('/exercises', ExerciseController::class);
     Route::resource('/exercises-types', ExerciseTypeController::class);
+
 });

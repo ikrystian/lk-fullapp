@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TrainingResource;
 use App\Models\Activity;
+use App\Models\Coords;
 use App\Models\Meta;
 use App\Models\Series;
 use App\Models\Training;
@@ -55,6 +56,17 @@ class TrainingController extends Controller
         }
 
         return response()->json('added');
+    }
+
+    public function coords(Request $request) {
+
+        $coords = new Coords();
+        $coords->user_id = Auth::id();
+        $coords->run_id = 66;
+        $coords->lat = $request['lat'];
+        $coords->lng = $request['lng'];
+        $coords->save();
+
     }
 
     public function getLastExerciseSum($exerciseId, $currentTrainingId, $bodyPartID)

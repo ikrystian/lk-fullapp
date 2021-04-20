@@ -31,7 +31,7 @@ import {
   from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 import { RecordComponent } from './shared/record/record.component';
 import { ReportBugComponent } from './shared/report-bug/report-bug.component';
 
@@ -76,7 +76,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     NgPipesModule,
     HammerModule,
     MatDatepickerModule,
-    ChartsModule,
+    // ChartsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'pl',
       loader: {

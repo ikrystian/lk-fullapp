@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\JwtAuthController;
 use App\Http\Controllers\TrainingController;
+use App\Models\Coords;
 use Carbon\Carbon;
 use Faker\Provider\Image;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +38,8 @@ Route::get('/a', function() {
 
     $diff_in_minutes = $to->diffInMinutes($from);
     print_r($diff_in_minutes); // Output: 20
+});
+
+Route::get('coords', function() {
+    return Coords::all()->toJson();
 });

@@ -41,12 +41,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { TranslateModule } from '@ngx-translate/core';
 import { TrainingListModalComponent } from './training-list-modal/training-list-modal.component';
 import { ExercisePreviewComponent } from './exercise-preview/exercise-preview.component';
-import { ChartsModule } from 'ng2-charts';
 import { SettingsComponent } from './settings/settings.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { RunExerciseComponent } from './edit-training/run-exercise/run-exercise.component';
 import { RunsComponent } from './runs/runs.component';
 import { IntervalsComponent } from './intervals/intervals.component';
+import { MapComponent } from './map/map.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { IntervalsComponent } from './intervals/intervals.component';
     RunExerciseComponent,
     RunsComponent,
     IntervalsComponent,
+    MapComponent,
   ],
   imports: [
     CommonModule,
@@ -102,8 +104,10 @@ import { IntervalsComponent } from './intervals/intervals.component';
     MatSelectModule,
     MatSidenavModule,
     TranslateModule,
-    ChartsModule,
-    TextFieldModule
+    TextFieldModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA-Vk8BB1fHqdV4c-lLjqy_pYpYtodoKfE'
+    })
   ],
   providers: [
     {provide: MatDialogRef, useValue: {}},

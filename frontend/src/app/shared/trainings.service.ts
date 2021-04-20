@@ -113,4 +113,13 @@ export class TrainingsService {
   getRuns(): Observable<Run[]> {
     return this.http.get<Run[]>(`${this.API_URL}/get-runs`);
   }
+
+  addCoords(data): any {
+    return this.http.post(`${this.API_URL}/add-coords`, data);
+  }
+
+  getCoords(): any {
+    return this.http.get(`${this.API_URL}/coords`);
+  }
+
 }

@@ -1,3 +1,5 @@
+<button (click)="startRun()">Zacznij bieg</button>
+<button (click)="stopRun()">Zakończ bieg</button>
 <form class="form add-run" [formGroup]="runForm" (ngSubmit)="addRun()">
   <div class="form__group">
     <label for="time">Czas (w sekundach oO)</label>

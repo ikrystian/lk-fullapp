@@ -8,6 +8,7 @@ import { TrainingsComponent } from './trainings/trainings.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { StatsComponent } from '../profile/stats/stats.component';
 import { SettingsComponent } from './settings/settings.component';
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       {path: 'training/:id/edit/:exerciseId', component: EditTrainingComponent},
       {path: 'settings', component: SettingsComponent},
       {path: 'stats', component: StatsComponent},
+      {path: 'map', component: MapComponent}
     ]
   },
   {path: 'profile', component: ProfileComponent},
