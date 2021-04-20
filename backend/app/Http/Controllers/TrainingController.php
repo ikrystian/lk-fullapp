@@ -137,8 +137,6 @@ class TrainingController extends Controller
         $training->user_id = Auth::id();
         $training->training_date = Carbon::now()->toDateString();
         $training->name = Carbon::now()->toDateString() . ' - ' . Carbon::now()->locale('pl')->dayName;
-        // !todo remove archive training - it will be unused soon
-        $training->archive_training = 0;
         $training->start = Carbon::now();
         $training->save();
         $meta = new Meta();

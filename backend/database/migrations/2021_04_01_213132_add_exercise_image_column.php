@@ -13,8 +13,8 @@ class AddExerciseImageColumn extends Migration
      */
     public function up()
     {
-        Schema::table('exercise_types', function (Blueprint $table) {
-            $table->string('imageurl')->nullable();
+        Schema::table('
+        ', function (Blueprint $table) {
         });
     }
 

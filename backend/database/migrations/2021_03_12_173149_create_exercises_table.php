@@ -13,7 +13,7 @@ class CreateExercisesTable extends Migration
      */
     public function up()
     {
-        Schema::create('exercises', function (Blueprint $table) {
+        Schema::create('series', function (Blueprint $table) {
             $table->id();
             $table->foreignId('training_id');
             $table->foreignId('user_id');

@@ -16,7 +16,6 @@ class Training extends Model
         'start',
         'end',
         'total',
-        'archive_training'
     ];
 
     protected $with = ['exercises', 'runs'];

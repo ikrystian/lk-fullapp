@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddmultiplierColumn extends Migration
+class CreateExerciseTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddmultiplierColumn extends Migration
      */
     public function up()
     {
-        Schema::table('exercise_types', function (Blueprint $table) {
-            $table->integer('multiplier')->default(1);
+        Schema::create('exercise_types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +27,6 @@ class AddmultiplierColumn extends Migration
      */
     public function down()
     {
-        Schema::dropColumn('multiplier');
+        Schema::dropIfExists('exercise_types');
     }
 }

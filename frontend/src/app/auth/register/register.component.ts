@@ -38,7 +38,7 @@ export class RegisterComponent {
       },
       () => {
         this.signupForm.reset();
-        this.router.navigate(['signin']);
+        this.router.navigate(['auth/login']);
       }
     );
   }

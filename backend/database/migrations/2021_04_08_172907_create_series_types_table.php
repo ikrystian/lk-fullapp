@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExerciseTypeColumnForSeriesType extends Migration
+class CreateSeriesTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class CreateExerciseTypeColumnForSeriesType extends Migration
      */
     public function up()
     {
-        Schema::table('series_types', function (Blueprint $table) {
+        Schema::create('series_types', function (Blueprint $table) {
+            $table->id();
             $table->string('exercise_type_id')->default(1);
+            $table->string('imageurl')->nullable();
+            $table->foreignId('body_part_id')->default(0);
+            $table->integer('multiplier')->default(1);
+            $table->string('name', 255);
+            $table->timestamps();
         });
     }
 
@@ -25,6 +31,6 @@ class CreateExerciseTypeColumnForSeriesType extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('exercise_type_column_for_series_type');
+        Schema::dropIfExists('exercises_types');
     }
 }

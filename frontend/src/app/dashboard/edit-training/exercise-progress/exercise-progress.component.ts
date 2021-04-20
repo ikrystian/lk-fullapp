@@ -46,7 +46,6 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnChanges(): void {
-    console.log(this.data);
     this.updateProgressBar();
   }
 
@@ -80,9 +79,6 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
       currentExercise.forEach(el => {
         this.currentTotal += el.weight * el.reps * el.multiplier;
       });
-
-      console.log(this.currentTotal, this.trainingTotal, this.bodyPartTotal);
-
     }
 
     if (this.data.exercise.id !== this.exercise) {

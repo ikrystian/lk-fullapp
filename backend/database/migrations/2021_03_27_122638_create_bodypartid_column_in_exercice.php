@@ -13,7 +13,7 @@ class CreateBodypartidColumnInExercice extends Migration
      */
     public function up()
     {
-        Schema::table('exercises', function (Blueprint $table) {
+        Schema::table('series', function (Blueprint $table) {
             $table->foreignId('body_part_id')->default(0);
         });
     }
