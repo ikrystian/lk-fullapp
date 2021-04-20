@@ -76,7 +76,7 @@ export class ExerciseComponent implements OnChanges {
       oneField: [],
       multiplier: [],
       training_id: [this.trainingId],
-      exercise_type_id: [this.exercise?.exercise_type_id]
+      exercise_type_id: [parseInt(this.exercise?.exercise_type_id, 0)]
     });
 
   }

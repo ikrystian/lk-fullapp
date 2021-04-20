@@ -46,6 +46,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { RunExerciseComponent } from './edit-training/run-exercise/run-exercise.component';
 import { RunsComponent } from './runs/runs.component';
+import { IntervalsComponent } from './intervals/intervals.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { RunsComponent } from './runs/runs.component';
     SettingsComponent,
     RunExerciseComponent,
     RunsComponent,
+    IntervalsComponent,
   ],
   imports: [
     CommonModule,

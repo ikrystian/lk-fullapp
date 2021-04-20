@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Progress } from '../../../models/progress';
 import { MatDialog } from '@angular/material/dialog';
 import { RecordComponent } from '../../../shared/record/record.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
 
   totalForSeries: Progress = this.defaultData;
 
-  constructor(public trainingsService: TrainingsService, public dialog: MatDialog) {
+  constructor(public trainingsService: TrainingsService, public dialog: MatDialog, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -85,7 +86,9 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
       this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
         this.totalForSeries = res;
         this.progress = (this.currentTotal / res.lastTraining) * 100;
-      }, () => {
+      }, (error) => {
+        this.snackBar.open(error.statusText, 'ok');
+        console.log(error);
         this.totalForSeries = this.defaultData;
       });
       this.exercise = this.data.exercise.id;
