@@ -1,24 +1,36 @@
 <mat-tab-group *ngIf="trainings" class="training-list-tabs">
 
-  <mat-tab label="Dashboard" >
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Dashboard
+    </ng-template>
     <div class="training-list-tabs__tab-component">
       Dashbord main page
     </div>
   </mat-tab>
 
-  <mat-tab label="{{ 'RUNS' | translate }}">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Biegi
+    </ng-template>
     <div class="training-list-tabs__tab-content">
      <app-runs class="training-list-tabs__tab-component"></app-runs>
     </div>
   </mat-tab>
 
-  <mat-tab label="{{ 'LIST' | translate }} ({{ trainings.length }})">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Lista
+    </ng-template>
     <div class="training-list-tabs__tab-content">
       <app-training-list  class="training-list-tabs__tab-component" [trainings]="trainings"></app-training-list>
     </div>
   </mat-tab>
 
-  <mat-tab [label]="'CALENDAR' | translate">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Kalendarz
+    </ng-template>
     <app-calendar  class="training-list-tabs__tab-component" [trainings]="trainings"></app-calendar>
   </mat-tab>
 

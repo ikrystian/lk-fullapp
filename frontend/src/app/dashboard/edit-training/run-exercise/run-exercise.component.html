@@ -1,4 +1,5 @@
 <form class="form add-run" [formGroup]="runForm" (ngSubmit)="addRun()">
+  <button class="lock-screen" (click)="lockScreen()">Lock screen</button>
   <div class="form__group">
     <label for="time">Czas (w sekundach oO)</label>
     <input type="number" id="time" class="form__input" name="time" formControlName="time">

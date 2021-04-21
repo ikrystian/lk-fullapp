@@ -18,6 +18,7 @@ export class RunExerciseComponent implements OnInit {
   trainingId: number;
   coords = [];
   sending = false;
+  lock;
   subscription: Subscription;
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +28,10 @@ export class RunExerciseComponent implements OnInit {
     private geolocation: GeolocationService,
   ) {
     this.trainingId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 0);
+  }
+
+  lockScreen(): void {
+
   }
 
   ngOnInit(): void {
@@ -40,7 +45,7 @@ export class RunExerciseComponent implements OnInit {
 
   startRun(): void {
     this.sending = true;
-    const source = interval(3000);
+    const source = interval(5000);
     const example = source.pipe(take(1), repeat());
     this.subscription = example.subscribe(x => {
       this.geolocation.subscribe(data => {
