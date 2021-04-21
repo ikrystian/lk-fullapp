@@ -1,5 +1,3 @@
-<button (click)="startRun()">Zacznij bieg</button>
-<button (click)="stopRun()">Zakończ bieg</button>
 <form class="form add-run" [formGroup]="runForm" (ngSubmit)="addRun()">
   <div class="form__group">
     <label for="time">Czas (w sekundach oO)</label>
@@ -22,9 +20,16 @@
     <button mat-button color="primary" >Zapisz bieg</button>
   </footer>
 
-  <img style="display: block; max-width: 100%;" src="assets/images/run.gif" alt="">
+  <img class="add-run__image" src="assets/images/run.gif" alt="">
+
 
 </form>
+<div class="add-run__footer">
+  <button (click)="startRun()" *ngIf="!sending" mat-button color="primary"><mat-icon>location_on</mat-icon>Turn on gps</button>
+  <button (click)="stopRun()" *ngIf="sending"  mat-button color="secondary"><mat-icon>location_off</mat-icon>Turn off gps</button>
+  <a routerLink="/dashboard/map" mat-raised-button><mat-icon>explore</mat-icon>map</a>
+</div>
+
 <section class="run-component">
 
 </section>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TrainingsService } from '../../../shared/trainings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,12 +10,14 @@ import { repeat, take } from 'rxjs/operators';
 @Component({
   selector: 'app-run-exercise',
   templateUrl: './run-exercise.component.html',
-  styleUrls: ['./run-exercise.component.scss']
+  styleUrls: ['./run-exercise.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class RunExerciseComponent implements OnInit {
   runForm: FormGroup;
   trainingId: number;
   coords = [];
+  sending = false;
   subscription: Subscription;
   constructor(
     private formBuilder: FormBuilder,
@@ -33,9 +35,11 @@ export class RunExerciseComponent implements OnInit {
 
   stopRun(): void {
     this.subscription.unsubscribe();
+    this.sending = false;
   }
 
   startRun(): void {
+    this.sending = true;
     const source = interval(3000);
     const example = source.pipe(take(1), repeat());
     this.subscription = example.subscribe(x => {

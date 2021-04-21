@@ -34,6 +34,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // import { ChartsModule } from 'ng2-charts';
 import { RecordComponent } from './shared/record/record.component';
 import { ReportBugComponent } from './shared/report-bug/report-bug.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -76,6 +77,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     NgPipesModule,
     HammerModule,
     MatDatepickerModule,
+    FontAwesomeModule,
     // ChartsModule,
     TranslateModule.forRoot({
       defaultLanguage: 'pl',
