@@ -1,5 +1,11 @@
 <mat-tab-group *ngIf="trainings" class="training-list-tabs">
 
+  <mat-tab label="Dashboard" >
+    <div class="training-list-tabs__tab-component">
+      Dashbord main page
+    </div>
+  </mat-tab>
+
   <mat-tab label="{{ 'RUNS' | translate }}">
     <div class="training-list-tabs__tab-content">
      <app-runs class="training-list-tabs__tab-component"></app-runs>

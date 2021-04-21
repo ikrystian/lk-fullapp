@@ -1,0 +1,8 @@
+<agm-map style="display: block; height: calc(100vh - 58px)" [latitude]="lat" [longitude]="lng"  [zoom]="15">
+  <agm-polyline [visible]="true" [strokeWeight]="3" [strokeColor]="'#07b57a'">
+    <agm-polyline-point
+      *ngFor="let coordinate of latlng; let i=index"
+      [latitude]="coordinate[0]"
+      [longitude]="coordinate[1]"></agm-polyline-point>
+  </agm-polyline>
+</agm-map>

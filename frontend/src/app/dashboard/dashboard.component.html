@@ -44,11 +44,11 @@
     </nav>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="main-content" (swipe)="onSwipe($event)">
+    <div class="main-content">
       <app-stats [ngClass]="{'displayed' : showStats }"></app-stats>
       <router-outlet></router-outlet>
     </div>
-    <app-bottom-nav (notify)="toggleStatsSection($event)">
+    <app-bottom-nav (notify)="toggleStatsSection($event)"  (swipe)="onSwipe($event)">
       <button class="dashboard__menu-button" (click)="drawer.toggle()" matRipple>
         <mat-icon>menu</mat-icon>
       </button>

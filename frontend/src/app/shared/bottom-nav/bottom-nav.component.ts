@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 import { ProfileService } from '../profile.service';
 import { Subscription } from 'rxjs';
 import { JwtService } from '../jwt.service';
-import {environment} from "../../../environments/environment";
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-bottom-nav',
