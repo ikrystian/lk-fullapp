@@ -62,7 +62,6 @@ class TrainingController extends Controller
 
         $coords = new Coords();
         $coords->user_id = Auth::id();
-        $coords->run_id = 66;
         $coords->lat = $request['lat'];
         $coords->lng = $request['lng'];
         $coords->save();
@@ -72,8 +71,9 @@ class TrainingController extends Controller
     public function getLastExerciseSum($exerciseId, $currentTrainingId, $bodyPartID)
     {
         $trainingId = Series::where('series_type_id', $exerciseId)
-            ->where('training_id', '!=', $currentTrainingId)
+            ->where('training_id', '!=', $curreOPntTrainingId)
             ->where('user_id', Auth::id())
+            ->latest()
             ->first('training_id');
 
         $exercises = Series::where('training_id', $trainingId->training_id)->where('series_type_id', $exerciseId)->get();

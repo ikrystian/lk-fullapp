@@ -3,12 +3,26 @@
     display: flex;
     justify-content: flex-end;
     margin-bottom: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+
+    > div {
+      input {
+        max-width: 100%;
+      }
+    }
   }
 
   &__image {
     display: block;
     max-width: 100%;
     margin-bottom: 1rem;
+    margin-top: -70px;
   }
 
   &__footer {

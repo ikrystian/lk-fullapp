@@ -115,6 +115,7 @@ export class EditTrainingComponent implements OnInit {
       console.log(data);
       this.trainingService.finishTraining(id).subscribe(() => {
         this.exerciseService.clearLocalSeries();
+        localStorage.removeItem('records');
         this.router.navigate([`/dashboard/training/${id}`]);
       });
     });
@@ -123,6 +124,7 @@ export class EditTrainingComponent implements OnInit {
   changeExercise(): void {
     this.bodyPartId = this.selectedOption.body_part_id;
     this.trainingService.updateProgress();
+    console.log(this.selectedOption);
   }
 
   changeTrainingName(event: any): void {

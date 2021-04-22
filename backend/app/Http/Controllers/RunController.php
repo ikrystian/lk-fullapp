@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Run;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class RunController extends Controller
     {
         $run = new Run();
         $run->user_id = Auth::id();
-        $run->training_id = $request['trainingId'];
+        $run->date = Carbon::now()->toDateString();
         $run->distance = $request['distance'];
         $run->time = $request['time'];
         $run->weather = $request['weather'];

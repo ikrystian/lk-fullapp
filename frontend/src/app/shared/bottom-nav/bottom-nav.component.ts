@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   Output,
-  EventEmitter, OnChanges, OnDestroy
+  EventEmitter, OnChanges, OnDestroy, ViewEncapsulation
 } from '@angular/core';
 import { TrainingsService } from '../trainings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -83,6 +83,10 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
       }
       this.createTraining();
     });
+  }
+
+  addRun(): void {
+    console.log(`add run`);
   }
 
   createTraining(): void {

@@ -18,14 +18,10 @@ class Training extends Model
         'total',
     ];
 
-    protected $with = ['exercises', 'runs'];
+    protected $with = ['exercises'];
 
     public function exercises() {
         return $this->hasMany(Series::class);
-    }
-
-    public function runs() {
-        return $this->hasMany(Run::class);
     }
 
 }

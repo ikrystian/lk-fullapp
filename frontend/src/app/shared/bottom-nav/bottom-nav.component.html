@@ -11,9 +11,22 @@
       <mat-icon>assessment</mat-icon>
     </button>
 
-    <button (click)="addTraining()" matRipple title="add training">
+    <button [matMenuTriggerFor]="menu" matRipple title="add training">
       <mat-icon>add_box</mat-icon>
     </button>
+    <mat-menu #menu="matMenu" class="add-dropdown-menu">
+
+      <button mat-menu-item (click)="addTraining()">
+        <mat-icon>add_box</mat-icon>
+        <span>Add training</span>
+      </button>
+
+      <button mat-menu-item routerLink="/dashboard/new-run">
+        <mat-icon>add_box</mat-icon>
+        <span>Add run</span>
+      </button>
+
+    </mat-menu>
 
   <ng-content></ng-content>
   </div>

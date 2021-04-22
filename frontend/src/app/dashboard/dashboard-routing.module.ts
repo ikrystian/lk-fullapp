@@ -9,6 +9,7 @@ import { ProfileComponent } from '../profile/profile.component';
 import { StatsComponent } from '../profile/stats/stats.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MapComponent } from './map/map.component';
+import { RunExerciseComponent } from './run-exercise/run-exercise.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
       {path: 'training/:id/edit/:exerciseId', component: EditTrainingComponent},
       {path: 'settings', component: SettingsComponent},
       {path: 'stats', component: StatsComponent},
-      {path: 'map', component: MapComponent}
+      {path: 'map', component: MapComponent},
+      {path: 'new-run', component: RunExerciseComponent}
     ]
   },
   {path: 'profile', component: ProfileComponent},

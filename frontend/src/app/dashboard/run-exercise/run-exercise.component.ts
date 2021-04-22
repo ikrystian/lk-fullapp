@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { TrainingsService } from '../../../shared/trainings.service';
+import { TrainingsService } from '../../shared/trainings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { interval, Subscription } from 'rxjs';
 import { repeat, take } from 'rxjs/operators';
-
 @Component({
   selector: 'app-run-exercise',
   templateUrl: './run-exercise.component.html',
@@ -15,7 +14,7 @@ import { repeat, take } from 'rxjs/operators';
 })
 export class RunExerciseComponent implements OnInit {
   runForm: FormGroup;
-  trainingId: number;
+  trainingId: 0;
   coords = [];
   sending = false;
   lock;
@@ -27,11 +26,11 @@ export class RunExerciseComponent implements OnInit {
     private snackBar: MatSnackBar,
     private geolocation: GeolocationService,
   ) {
-    this.trainingId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 0);
+
   }
 
   lockScreen(): void {
-
+    // here will be lock screen func, in someday
   }
 
   ngOnInit(): void {
@@ -59,10 +58,9 @@ export class RunExerciseComponent implements OnInit {
 
   createRunForm(): void {
     this.runForm = this.formBuilder.group({
-      trainingId: this.trainingId,
       distance: new FormControl(''),
       time: new FormControl(''),
-      weather: new FormControl('1')
+      weather: 1
     });
   }
 

@@ -11,19 +11,9 @@ class Run extends Model
 
     protected $fillable = [
         'user_id',
-        'training_id',
+        'date',
         'distance',
         'time',
         'weather'
     ];
-
-    protected $with = ['training'];
-
-    public function training() {
-        return $this->belongsTo(Training::class, 'training_id', 'id');
-    }
-
-
-
-
 }

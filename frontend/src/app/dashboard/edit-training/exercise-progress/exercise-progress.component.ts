@@ -84,20 +84,24 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
 
     if (this.data.exercise.id !== this.exercise) {
       this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
+
+        console.log(res);
+
         this.totalForSeries = res;
         this.progress = (this.currentTotal / res.lastTraining) * 100;
       }, (error) => {
         this.snackBar.open(error.statusText, 'ok');
-        console.log(error);
         this.totalForSeries = this.defaultData;
       });
       this.exercise = this.data.exercise.id;
     } else {
       this.progress = (this.currentTotal / this.totalForSeries.lastTraining) * 100;
+
     }
     if (this.progress > 100 && this.totalForSeries.lastTraining) {
       this.openRecordModal(this.exercise);
     }
+
   }
 
   openRecordModal(exerciseId: string | number): any {

@@ -43,11 +43,11 @@ import { TrainingListModalComponent } from './training-list-modal/training-list-
 import { ExercisePreviewComponent } from './exercise-preview/exercise-preview.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { RunExerciseComponent } from './edit-training/run-exercise/run-exercise.component';
 import { RunsComponent } from './runs/runs.component';
 import { IntervalsComponent } from './intervals/intervals.component';
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
+import { RunExerciseComponent } from './run-exercise/run-exercise.component';
 
 @NgModule({
   declarations: [

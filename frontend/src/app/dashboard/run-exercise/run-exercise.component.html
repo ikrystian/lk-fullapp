@@ -1,0 +1,43 @@
+<img class="add-run__image" src="assets/images/run.gif" alt="">
+
+<div class="add-run__footer">
+  <button (click)="startRun()" *ngIf="!sending" mat-button color="primary">
+    <mat-icon>location_on</mat-icon>
+    Turn on gps
+  </button>
+  <button (click)="stopRun()" *ngIf="sending" mat-button color="secondary">
+    <mat-icon>location_off</mat-icon>
+    Turn off gps
+  </button>
+  <a routerLink="/dashboard/map" mat-button color="primary">
+    <mat-icon>explore</mat-icon>
+    map</a>
+</div>
+
+<form class="form add-run" [formGroup]="runForm" (ngSubmit)="addRun()">
+  <div class="add-run__data">
+    <mat-form-field class="form__group">
+      <mat-label>Czas (w sekundach xD)</mat-label>
+      <input matInput type="number" id="time" class="form__input" name="time" formControlName="time">
+
+    </mat-form-field>
+
+  <mat-form-field class="form__group">
+
+    <mat-label>Dystans (w metrach xD)</mat-label>
+    <input matInput type="number" name="distance" id="distance" class="form__input" formControlName="distance" placeholder="km">
+  </mat-form-field>
+
+  </div>
+
+  <footer class="form__footer add-run__footer">
+    <span></span>
+    <button mat-raised-button color="primary">Zapisz bieg</button>
+  </footer>
+
+</form>
+
+
+<section class="run-component">
+
+</section>
