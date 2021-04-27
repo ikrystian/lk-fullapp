@@ -28,8 +28,9 @@ export class CreateExerciseComponent implements OnInit {
 
     this.exerciseForm = this.formBuilder.group({
       name: [],
+      imageUrl: [],
       multiplier: [1],
-      body_part: [1],
+      body_part: [],
       exercise_type: [1]
     });
   }
