@@ -48,6 +48,7 @@ import { IntervalsComponent } from './intervals/intervals.component';
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { RunExerciseComponent } from './run-exercise/run-exercise.component';
+import { ChooseTrainingTypeComponent } from './choose-training-type/choose-training-type.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { RunExerciseComponent } from './run-exercise/run-exercise.component';
     RunsComponent,
     IntervalsComponent,
     MapComponent,
+    ChooseTrainingTypeComponent,
   ],
   imports: [
     CommonModule,

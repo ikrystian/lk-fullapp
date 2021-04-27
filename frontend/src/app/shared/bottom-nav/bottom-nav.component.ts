@@ -13,6 +13,8 @@ import { ProfileService } from '../profile.service';
 import { Subscription } from 'rxjs';
 import { JwtService } from '../jwt.service';
 import { environment } from '../../../environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { ChooseTrainingTypeComponent } from '../../dashboard/choose-training-type/choose-training-type.component';
 
 @Component({
   selector: 'app-bottom-nav',
@@ -36,7 +38,8 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
     public router: Router,
     private geolocation: GeolocationService,
     public profileService: ProfileService,
-    public jwtService: JwtService
+    public jwtService: JwtService,
+    public dialog: MatDialog
   ) {
     this.geolocation.subscribe(position => {
       this.userPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
@@ -81,7 +84,8 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
         alert('Można mieć tylko jeden niezakończony trening');
         return false;
       }
-      this.createTraining();
+      this.dialog.open(ChooseTrainingTypeComponent);
+      // this.createTraining();
     });
   }
 
