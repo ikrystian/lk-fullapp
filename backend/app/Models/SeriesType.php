@@ -10,6 +10,7 @@ class SeriesType extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'user_id',
         'multiplier',
         'body_part_id',
         'imageurl',

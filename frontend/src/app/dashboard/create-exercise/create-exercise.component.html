@@ -2,7 +2,7 @@
   <section class="popup__content">
     <mat-form-field class="full-width-input">
       <mat-label>{{ 'EXERCISE_NAME' | translate }}</mat-label>
-      <input matInput placeholder="np. Martwy ciąg" required formControlName="name">
+      <input matInput placeholder="np. Martwy ciąg" required formControlName="name" autofocus>
     </mat-form-field>
 
     <mat-form-field class="full-width-input">
@@ -27,6 +27,7 @@
     <mat-form-field class="full-width-input">
       <mat-label>{{ 'MULTIPLIER' | translate }}</mat-label>
       <select matNativeControl required formControlName="multiplier">
+        <option value="0">0</option>
         <option value="1">1</option>
         <option value="2">2</option>
       </select>
