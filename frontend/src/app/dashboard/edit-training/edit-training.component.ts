@@ -106,6 +106,10 @@ export class EditTrainingComponent implements OnInit {
     });
   }
 
+  markAsFav(exercise: any): void {
+    console.log(exercise);
+  }
+
   finishWorkout(id): boolean {
     if (!confirm('Na pewno chcesz zakończyć trening? Jego edycja później będzie niemożliwa')) {
       return false;

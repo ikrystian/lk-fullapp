@@ -29,6 +29,10 @@
       <mat-icon>add</mat-icon>
       <span>{{ 'ADD_EXERCISE' | translate }}</span>
     </button>
+    <button *ngIf="selectedOption" mat-menu-item (click)="markAsFav(selectedOption.id)">
+      <mat-icon>favorite</mat-icon>
+      <span>Oznacz ćwiczenie jako ulubione</span>
+    </button>
     <mat-divider></mat-divider>
     <button mat-menu-item class="warn" (click)="removeTraining(training.id)">
       <mat-icon>delete</mat-icon>
