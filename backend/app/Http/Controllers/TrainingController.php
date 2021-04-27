@@ -172,7 +172,6 @@ class TrainingController extends Controller
     {
         $trainings = Training::where('training_date', $date)
             ->where('user_id', Auth::id())
-            ->with('series')
             ->orderBy('id', 'desc')
             ->get();
         return TrainingResource::collection($trainings);

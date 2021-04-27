@@ -1,5 +1,5 @@
 <ul *ngIf="runs">
   <li *ngFor="let run of runs">
-    {{ run.id }} {{run.distance}}km {{run.time}}sec
+    {{run.distance / 1000}}km {{run.time}}sec
   </li>
 </ul>
