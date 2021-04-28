@@ -70,7 +70,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
 
   getAvatar(): void {
     this.profileService.getUserAvatar().subscribe(res => {
-      this.avatar = environment.UPLOADED_ASSETS_URL + '/backend/public/' + res.avatar;
+      this.avatar = environment.UPLOADED_ASSETS_URL + res.avatar;
     });
   }
 
