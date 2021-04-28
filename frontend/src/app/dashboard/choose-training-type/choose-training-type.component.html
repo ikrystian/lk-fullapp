@@ -1,0 +1,18 @@
+
+<header class="modal__header">
+  <h1 class="modal__title">Wybierz typ treningu</h1>
+</header>
+
+<section class="modal__content">
+  <mat-form-field apperance="fill" style="width: 100%;">
+    <mat-label>Typ treningu</mat-label>
+    <select name="" id="" matNativeControl required>
+      <option value="">Nowy trening</option>
+    </select>
+  </mat-form-field>
+</section>
+
+<footer class="modal__footer">
+  <button mat-raised-button mat-dialog-close>Anuluj</button>
+  <button mat-raised-button color="primary" (click)="closeDialog()">Wybierz</button>
+</footer>

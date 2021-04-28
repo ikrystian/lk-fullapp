@@ -31,6 +31,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   showStats = false;
   avatar: any;
   profile;
+
   constructor(
     public trainingService: TrainingsService,
     private location: Location,
@@ -46,7 +47,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.getAvatar();
     this.subscription = this.profileService.currentMessage.subscribe(() => {
       this.getAvatar();
@@ -84,8 +85,14 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
         alert('Można mieć tylko jeden niezakończony trening');
         return false;
       }
-      this.dialog.open(ChooseTrainingTypeComponent);
-      // this.createTraining();
+      const trainingTypeDialog = this.dialog.open(ChooseTrainingTypeComponent, {panelClass: ['modal', 'modal--choose-training-type']});
+
+      trainingTypeDialog.afterClosed().subscribe((resFromDialog) => {
+        console.log(resFromDialog);
+        if (resFromDialog.type === 1) {
+          this.createTraining();
+        }
+      });
     });
   }
 
