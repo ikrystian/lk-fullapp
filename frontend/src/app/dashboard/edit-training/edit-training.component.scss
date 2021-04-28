@@ -24,11 +24,15 @@
     color: var(--font-color);
     border: 0;
     text-transform: capitalize;
+    position: relative;
+    z-index: 5;
   }
 
   .select--full {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    position: relative;
+    z-index: 4;
   }
 }
 

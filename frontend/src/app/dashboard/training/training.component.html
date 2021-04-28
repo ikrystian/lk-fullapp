@@ -20,49 +20,49 @@
     </div>
 
     <div>
-      <p><mat-icon>query_builder</mat-icon>Start: <span>{{training.start | slice: 11}}</span></p>
-      <p *ngIf="training.end"><mat-icon>query_builder</mat-icon>Koniec: <span>{{training.end | slice: 11}}</span></p>
+      {{ training.name }}
+      <hr>
+      {{ training.start }} - {{ training.end }}
     </div>
 
-    <section class="short-summary" *ngIf="training.end">
-      Lacznie na tym treningu: {{ training.total }}kg
-    </section>
-
-    <div>
-<!--      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"-->
-<!--              [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)"-->
-<!--              (chartClick)="chartClicked($event)"></canvas>-->
-    </div>
-
-    <table mat-table [dataSource]="dataSource" class="block-table table-striped">
+    <table mat-table
+           [dataSource]="dataSource" multiTemplateDataRows
+           class="mat-elevation-z8">
 
       <ng-container matColumnDef="name">
-        <td mat-footer-cell *matFooterCellDef></td>
+        <th mat-header-cell *matHeaderCellDef> Nazwa </th>
         <td mat-cell *matCellDef="let element"> {{element.type.name}} </td>
-        <th mat-header-cell *matHeaderCellDef> N</th>
-      </ng-container>
-
-      <ng-container matColumnDef="weight">
-        <td mat-footer-cell *matFooterCellDef></td>
-        <td mat-cell *matCellDef="let element"> {{element.weight}} x </td>
-        <th mat-header-cell *matHeaderCellDef> C</th>
       </ng-container>
 
       <ng-container matColumnDef="reps">
-        <td mat-footer-cell *matFooterCellDef></td>
+        <th mat-header-cell *matHeaderCellDef> Reps </th>
         <td mat-cell *matCellDef="let element"> {{element.reps}} </td>
-        <th mat-header-cell *matHeaderCellDef> P</th>
+      </ng-container>
+
+      <ng-container matColumnDef="weight">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
       </ng-container>
 
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr class="{{ row }}" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="example-element-detail"
+               [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            {{element.type.name}}
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+          class="example-element-row"
+          [class.example-expanded-row]="expandedElement === element"
+          (click)="expandedElement = expandedElement === element ? null : element">
+      </tr>
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
 
-    <div class="training-component__description">
-
-  </div>
   </div>
 </ng-container>
 

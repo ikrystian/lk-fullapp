@@ -1,36 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TrainingsService } from '../../shared/trainings.service';
 import { environment } from '../../../environments/environment';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-training',
   templateUrl: './training.component.html',
   styleUrls: [
     './training.component.scss',
-     '../../../assets/styles/components/quick-menu.component.scss'
+    '../../../assets/styles/components/quick-menu.component.scss'
+  ],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
   ],
 })
 export class TrainingComponent {
   training: any;
-  displayedColumns: string[] = ['name', 'weight', 'reps'];
-  dataSource;
   ASSETS_URL = environment.UPLOADED_ASSETS_URL;
-
-  // public barChartOptions: ChartOptions = {
-  //   responsive: true,
-  //   scales: { xAxes: [{}], yAxes: [{}] },
-  // };
-  // public barChartLabels: Label[] = ['1', '2', '3', '4', '5', '6', '7'];
-  // public barChartType: ChartType = 'bar';
-  // public barChartLegend = true;
-  //
-  // public barChartData: ChartDataSets[] = [
-  //   { data: [65, 59, 80, 81, 56, 55], label: 'Poprzedni trening' },
-  //   { data: [28, 48, 40, 19, 86, 27, 90], label: 'Obecny trening' }
-  // ];
+  dataSource;
+  columnsToDisplay = ['name', 'reps', 'weight'];
+  expandedElement;
 
   constructor(
     public trainingService: TrainingsService,
@@ -42,6 +38,7 @@ export class TrainingComponent {
 
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
+      console.log(this.training);
       this.dataSource = res.exercises;
     });
   }
