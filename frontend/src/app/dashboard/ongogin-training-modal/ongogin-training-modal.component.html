@@ -1,0 +1,10 @@
+Masz jeden niezkończony trening<br>
+
+{{ training.name }}<br>
+<br>{{ training.start }}
+<p>Co chcesz z nim zrobić?</p>
+<footer class="custom-actions-footer">
+  <button class="custom-actions-footer__button" mat-raised-button mat-dialog-close [mat-dialog-close]="1">Zakończ trening i utwórz nowy</button>
+  <button class="custom-actions-footer__button" mat-raised-button mat-dialog-close [mat-dialog-close]="2">Przejdź do treningu</button>
+  <button class="custom-actions-footer__button" mat-raised-button mat-dialog-close>Anuluj</button>
+</footer>

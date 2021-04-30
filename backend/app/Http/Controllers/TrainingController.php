@@ -38,7 +38,7 @@ class TrainingController extends Controller
     }
 
     public function checkOpenedTraining() {
-        return Training::where('end', null)->where('user_id', Auth::id())->count();
+        return Training::where('end', null)->where('user_id', Auth::id())->get();
     }
 
     public function sync(Request $request) {
