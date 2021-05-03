@@ -31,10 +31,11 @@ export class RegisterComponent {
   onSubmit(): void {
     this.jwtService.signUp(this.signupForm.value).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
       },
       error => {
-        this.err = error.error;
+        this.err = JSON.parse(error.error);
+        console.log(this.err);
       },
       () => {
         this.signupForm.reset();

@@ -1,41 +1,44 @@
+<form class="auth-page__form" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
+  <h1 class="auth-page__title">{{ 'LOG_IN_TO' | translate }}<strong>LENIWEJ KLUSKI</strong></h1>
 
-    <form class="auth-page__form" [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-      <h1 class="auth-page__title">{{ 'LOG_IN_TO' | translate }}<strong>LENIWEJ KLUSKI</strong></h1>
+  <div class="form-group">
+    <div *ngIf="err?.error" class="alert alert-danger mt-3">
+      {{ err?.error }}
+    </div>
 
-      <div class="form-group">
-        <div *ngIf="err?.error" class="alert alert-danger mt-3">
-          {{ err?.error }}
-        </div>
+    <mat-form-field class="auth-page__form-field">
+      <mat-label>{{ 'USERNAME' | translate }} (email)</mat-label>
+      <input type="email" matInput placeholder="Login (email)" autofocus formControlName="email">
 
-        <mat-form-field class="auth-page__form-field">
-          <mat-label>{{ 'USERNAME' | translate }} (email)</mat-label>
-          <input type="email" matInput placeholder="Login (email)" autofocus formControlName="email">
-          <mat-error *ngIf="err?.email">
-            {{ err?.email }}
-          </mat-error>
-        </mat-form-field>
-      </div>
+    </mat-form-field>
+    <div class="auth-page__form-field-error" *ngIf="err?.email">
+      {{ err?.email }}
+    </div>
+  </div>
 
-      <div class="form-group">
+  <div class="form-group">
 
-        <mat-form-field class="auth-page__form-field">
-          <mat-label>{{ 'PASSWORD' | translate }}</mat-label>
-          <input [type]=" showPassword ? 'text' : 'password'" matInput [placeholder]="'PASSWORD' | translate" formControlName="password">
-          <button type="button" class="auth-page__toggle-password-button" (click)="togglePassword()">
-          <mat-icon matSuffix>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
-          <mat-error *ngIf="err?.password">
-            {{ err?.password }}
-          </mat-error>
-        </mat-form-field>
+    <mat-form-field class="auth-page__form-field">
+      <mat-label>{{ 'PASSWORD' | translate }}</mat-label>
+      <input [type]=" showPassword ? 'text' : 'password'" matInput [placeholder]="'PASSWORD' | translate"
+             formControlName="password">
+      <button type="button" class="auth-page__toggle-password-button" (click)="togglePassword()">
+        <mat-icon matSuffix>{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
 
-      </div>
-      <footer class="auth-page__form-footer">
-        <button mat-button mat-raised-button color="primary" type="submit" [disabled]="signinForm.invalid">{{ 'LOG_IN' | translate }}</button>
-        <a class="auth-page__forgot-password" routerLink="/auth/forgot-password">Przypomnij hasło</a>
+    </mat-form-field>
+    <div class="auth-page__form-field-error" *ngIf="err?.password">
+      {{ err?.password }}
+    </div>
+  </div>
+  <footer class="auth-page__form-footer">
+    <button mat-button mat-raised-button color="primary" type="submit"
+            [disabled]="signinForm.invalid">{{ 'LOG_IN' | translate }}</button>
+    <a class="auth-page__forgot-password" routerLink="/auth/forgot-password">Przypomnij hasło</a>
 
-      </footer>
-    </form>
+  </footer>
+</form>
 
-    <p class="auth-page__register-slogan"><span>Nie chcesz być dalej leniwą kluską?</span><a routerLink="/auth/register">Zarejestruj się!</a></p>
+<p class="auth-page__register-slogan"><span>Nie chcesz być dalej leniwą kluską?</span><a routerLink="/auth/register">Zarejestruj
+  się!</a></p>
 

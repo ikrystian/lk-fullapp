@@ -5,40 +5,41 @@
     <mat-form-field class="auth-page__form-field">
       <mat-label>Nazwa użytkownika</mat-label>
       <input type="text" matInput placeholder="Login" autofocus formControlName="name">
-      <mat-error *ngIf="err?.name">
-        {{ err?.name }}
-      </mat-error>
     </mat-form-field>
+
+    <div class="auth-page__form-field-error" *ngIf="err?.name">
+      {{ err?.name }}
+    </div>
   </div>
 
   <div class="form-group">
     <mat-form-field class="auth-page__form-field">
       <mat-label>E-mail</mat-label>
       <input type="email" matInput placeholder="Login" formControlName="email" required>
-      <mat-error *ngIf="err?.email">
-        {{ err?.email }}
-      </mat-error>
     </mat-form-field>
+    <div class="auth-page__form-field-error" *ngIf="err?.email">
+      {{ err.email }}
+    </div>
   </div>
 
   <div class="form-group">
     <mat-form-field class="auth-page__form-field">
       <mat-label>Hasło</mat-label>
       <input type="password" matInput placeholder="*****" formControlName="password" required>
-      <mat-error *ngIf="err?.password">
-        {{ err?.password }}
-      </mat-error>
     </mat-form-field>
+    <div class="auth-page__form-field-error" *ngIf="err?.password">
+      {{ err?.password }}
+    </div>
   </div>
 
   <div class="form-group">
     <mat-form-field class="auth-page__form-field">
       <mat-label>Powtórz hasło</mat-label>
       <input type="password" matInput placeholder="*****" formControlName="password_confirmation" required>
-      <mat-error *ngIf="err?.password_confirmation">
-        {{ err?.password_confirmation }}
-      </mat-error>
     </mat-form-field>
+    <div class="auth-page__form-field-error" *ngIf="err?.password_confirmation">
+      {{ err?.password_confirmation }}
+    </div>
   </div>
 
   <footer class="auth-page__form-footer">
