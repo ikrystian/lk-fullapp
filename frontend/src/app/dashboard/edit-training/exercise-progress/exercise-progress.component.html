@@ -11,15 +11,16 @@
       <span>Partia mięśniowa: {{bodyPartTotal | round: 0}}kg</span>
     </button>
   </div>
-
-  <div class="progress__values">
-    <span class="progress__start-value">0</span>
-    <span class="progress__current-value">{{ currentTotal | round: 2 }}kg</span>
-    <span class="progress__end-value">{{ totalForSeries['lastTraining'] | round: 2 }}kg</span>
-  </div>
-  <div class="progress">
-    <div class="progress__bar" [ngClass]="{'progress__bar--finished' : progress >= 100 }"
-         [style.width.%]="progress">
+  <ng-container *ngIf="totalForSeries['lastTraining']">
+    <div class="progress__values">
+      <span class="progress__start-value">0</span>
+      <span class="progress__current-value">{{ currentTotal | round: 2 }}kg</span>
+      <span class="progress__end-value">{{ totalForSeries['lastTraining'] | round: 2 }}kg</span>
     </div>
-  </div>
+    <div class="progress">
+      <div class="progress__bar" [ngClass]="{'progress__bar--finished' : progress >= 100 }"
+           [style.width.%]="progress">
+      </div>
+    </div>
+  </ng-container>
 </ng-container>

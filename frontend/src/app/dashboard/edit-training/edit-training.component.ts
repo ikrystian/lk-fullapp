@@ -108,7 +108,7 @@ export class EditTrainingComponent implements OnInit {
 
   markAsFav(exercise: any): void {
     console.log(exercise);
-  }
+  };
 
   finishWorkout(id): boolean {
     if (!confirm('Na pewno chcesz zakończyć trening? Jego edycja później będzie niemożliwa')) {
@@ -116,7 +116,6 @@ export class EditTrainingComponent implements OnInit {
     }
     const data = this.exerciseService.setLocalSeries();
     this.trainingService.sync(data).subscribe(() => {
-      console.log(data);
       this.trainingService.finishTraining(id).subscribe(() => {
         this.exerciseService.clearLocalSeries();
         localStorage.removeItem('records');

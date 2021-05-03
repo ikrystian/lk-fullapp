@@ -71,12 +71,16 @@ class TrainingController extends Controller
 
     public function getLastExerciseSum($exerciseId)
     {
-        $currentTrainingId = Training::latest()->first('id');
+
+        $currentTrainingId = Training::latest()->findOrFail('id');
+
         $trainingId = Series::where('series_type_id', $exerciseId)
             ->where('training_id', '!=', $currentTrainingId)
             ->where('user_id', Auth::id())
             ->latest()
             ->first('training_id');
+
+
 
         $exercises = Series::where('training_id', $trainingId->training_id)->where('series_type_id', $exerciseId)->get();
         $lastTraining = $exercises->map(function ($item) {

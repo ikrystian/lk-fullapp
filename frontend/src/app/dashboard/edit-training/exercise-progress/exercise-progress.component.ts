@@ -64,6 +64,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     if (series.length !== 0) {
 
       const currentBodyPartSeries = series.filter(el => el.bodyPartId === this.data.exercise.body_part_id);
+      // do multiplier or not, this is a question
       currentBodyPartSeries.forEach(el => {
         this.bodyPartTotal += el.weight * el.reps * el.multiplier;
       });
@@ -84,9 +85,6 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
 
     if (this.data.exercise.id !== this.exercise) {
       this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
-
-        console.log(res);
-
         this.totalForSeries = res;
         this.progress = (this.currentTotal / res.lastTraining) * 100;
       }, (error) => {
