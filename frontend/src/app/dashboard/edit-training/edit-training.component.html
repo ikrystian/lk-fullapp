@@ -105,6 +105,6 @@
   </div>
   <ng-container *ngIf="selectedOption">
     <app-exercise-progress *ngIf="selectedOption.exercise_type_id != 5"
-                           [data]="{trainingId: training.id, exercise: selectedOption}"></app-exercise-progress>
+                           [data]="{exercise: selectedOption}"></app-exercise-progress>
   </ng-container>
 </ng-container>

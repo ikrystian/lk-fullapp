@@ -44,7 +44,7 @@ Route::group([
     Route::post('/training/add-run/', [RunController::class, 'store']);
     Route::get('/getuseravatar', [TrainingController::class, 'getUserAvatar']);
     Route::get('/activities', [ActivityController::class, 'getByUserId']);
-    Route::get('/exercises/getTotalInSeries/{exerciseId}/{currentTrainingId}/{bodyPartId}', [TrainingController::class, 'getLastExerciseSum']);
+    Route::get('/exercises/getTotalInSeries/{exerciseId}', [TrainingController::class, 'getLastExerciseSum']);
     Route::post('/trainings/add-image/{trainingId}', [TrainingController::class, 'storeImage']);
     Route::post('/user/add-image/', [TrainingController::class, 'userImage']);
     Route::get('/training/total/{trainingId}', [ExerciseController::class, 'total']);

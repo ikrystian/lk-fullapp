@@ -47,7 +47,8 @@ class TrainingController extends Controller
             $exercise = new Series;
             $exercise->training_id = $singleSeries['training_id'];
             $exercise->user_id = Auth::id();
-            $exercise->series_type_id = '1';
+            $exercise->multiplier = $singleSeries['multiplier'];
+            $exercise->series_type_id = $singleSeries['series_type_id'];
             $exercise->reps = $singleSeries['reps'];
             $exercise->weight = $singleSeries['weight'];
             $exercise->exercise_type_id = $singleSeries['exercise_type_id'];
@@ -68,8 +69,9 @@ class TrainingController extends Controller
 
     }
 
-    public function getLastExerciseSum($exerciseId, $currentTrainingId, $bodyPartID)
+    public function getLastExerciseSum($exerciseId)
     {
+        $currentTrainingId = Training::latest()->first('id');
         $trainingId = Series::where('series_type_id', $exerciseId)
             ->where('training_id', '!=', $currentTrainingId)
             ->where('user_id', Auth::id())
@@ -79,7 +81,7 @@ class TrainingController extends Controller
         $exercises = Series::where('training_id', $trainingId->training_id)->where('series_type_id', $exerciseId)->get();
         $lastTraining = $exercises->map(function ($item) {
             $data = $item;
-            $data['total'] = $item->weight * $item->reps * $item->type->multiplier;
+            $data['total'] = $item->weight * $item->reps;
             return $data;
         });
 
