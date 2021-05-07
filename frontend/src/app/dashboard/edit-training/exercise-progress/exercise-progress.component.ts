@@ -64,13 +64,12 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     if (series.length !== 0) {
 
       const currentBodyPartSeries = series.filter(el => el.bodyPartId === this.data.exercise.body_part_id);
-      // do multiplier or not, this is a question
       currentBodyPartSeries.forEach(el => {
-        this.bodyPartTotal += el.weight * el.reps * el.multiplier;
+        this.bodyPartTotal += el.weight * el.reps;
       });
 
       series.forEach(el => {
-        this.trainingTotal += el.weight * el.reps * el.multiplier;
+        this.trainingTotal += el.weight * el.reps;
       });
 
       const currentExercise = series.filter(el => el.series_type_id === this.data.exercise.id);
@@ -79,7 +78,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
       }
 
       currentExercise.forEach(el => {
-        this.currentTotal += el.weight * el.reps * el.multiplier;
+        this.currentTotal += el.weight * el.reps;
       });
     }
 

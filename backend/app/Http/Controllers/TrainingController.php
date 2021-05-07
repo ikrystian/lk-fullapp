@@ -47,7 +47,6 @@ class TrainingController extends Controller
             $exercise = new Series;
             $exercise->training_id = $singleSeries['training_id'];
             $exercise->user_id = Auth::id();
-            $exercise->multiplier = $singleSeries['multiplier'];
             $exercise->series_type_id = $singleSeries['series_type_id'];
             $exercise->reps = $singleSeries['reps'];
             $exercise->weight = $singleSeries['weight'];
@@ -72,15 +71,13 @@ class TrainingController extends Controller
     public function getLastExerciseSum($exerciseId)
     {
 
-        $currentTrainingId = Training::latest()->findOrFail('id');
+        $currentTrainingId = Training::latest()->first('id')->id;
 
         $trainingId = Series::where('series_type_id', $exerciseId)
             ->where('training_id', '!=', $currentTrainingId)
             ->where('user_id', Auth::id())
             ->latest()
             ->first('training_id');
-
-
 
         $exercises = Series::where('training_id', $trainingId->training_id)->where('series_type_id', $exerciseId)->get();
         $lastTraining = $exercises->map(function ($item) {
@@ -192,6 +189,7 @@ class TrainingController extends Controller
     public function show($id)
     {
         $training = Training::find($id);
+        $training->time = Carbon::parse($training->end)->diffInMinutes(Carbon::parse($training->start));
         return $training;
     }
 
@@ -285,5 +283,10 @@ class TrainingController extends Controller
         $stats['trainings'] = Training::where('user_id', Auth::id())->count();
 
         return $stats;
+    }
+
+    public function getUniqueSeriesByTrainingId($trainingId) {
+        $series = DB::table('series')->where('training_id', $trainingId)->get();
+        return $series;
     }
 }

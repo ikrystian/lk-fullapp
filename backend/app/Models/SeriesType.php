@@ -11,7 +11,6 @@ class SeriesType extends Model
     protected $fillable = [
         'name',
         'user_id',
-        'multiplier',
         'body_part_id',
         'imageurl',
         'exercise_type_id'
