@@ -282,6 +282,10 @@ class TrainingController extends Controller
         $stats['username'] = $user->name;
         $stats['trainings'] = Training::where('user_id', Auth::id())->count();
 
+        $runs = DB::table('runs')->where('user_id', Auth::id());
+        $stats['runMeters'] = $runs->sum('distance');
+        $stats['runSeconds'] = $runs->sum('time');
+
         return $stats;
     }
 
