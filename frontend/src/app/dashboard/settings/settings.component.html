@@ -1,7 +1,19 @@
 <div class="standard-page">
-  <div class="choose-profile-photo">
-    <input type="file" id="file"  (change)="onFileChange($event)">
-    <button (click)="onUpload()" color="primary" mat-raised-button>Zapisz</button>
+  <div class="choose-profile-photo setting-form-section">
+    <label for="">User profile photo</label>
+    <input type="file" id="file" (change)="onFileChange($event)">
+    <div class="setting-form-section__footer">
+      <button (click)="onUpload()" color="primary" mat-raised-button>Zapisz</button>
+    </div>
+  </div>
+
+  <div class="set-weight setting-form-section" *ngIf="userWeight">
+
+    <label for="">User weight</label>
+    <input type="number" class="" [(ngModel)]="userWeight" name="user-weight">
+    <div class="setting-form-section__footer">
+      <button (click)="saveWeight()" color="primary" mat-raised-button>Zapisz</button>
+    </div>
   </div>
 
 

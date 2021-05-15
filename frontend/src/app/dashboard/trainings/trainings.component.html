@@ -13,6 +13,15 @@
 
   <mat-tab>
     <ng-template mat-tab-label>
+      Biegi
+    </ng-template>
+    <div class="training-list-tabs__tab-content">
+      <app-runs class="training-list-tabs__tab-component"></app-runs>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
       Kalendarz
     </ng-template>
     <app-calendar  class="training-list-tabs__tab-component" [trainings]="trainings"></app-calendar>
@@ -25,14 +34,7 @@
     <button routerLink="">Dodaj predefiniowany trening</button>
   </mat-tab>
 
-  <mat-tab>
-    <ng-template mat-tab-label>
-      Biegi
-    </ng-template>
-    <div class="training-list-tabs__tab-content">
-      <app-runs class="training-list-tabs__tab-component"></app-runs>
-    </div>
-  </mat-tab>
+
 
   <!--  <mat-tab>-->
   <!--    <ng-template mat-tab-label>-->

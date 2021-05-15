@@ -1,0 +1,12 @@
+<ng-container *ngIf="run">
+  <button mat-icon-button class="quick-menu" [matMenuTriggerFor]="menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <mat-divider></mat-divider>
+    <button mat-menu-item class="warn" (click)="removeRun(run.id)">
+      <mat-icon>delete</mat-icon>
+      <span>{{ 'REMOVE_TRAINING' | translate }}</span>
+    </button>
+  </mat-menu>
+</ng-container>

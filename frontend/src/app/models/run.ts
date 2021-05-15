@@ -5,4 +5,5 @@ export class Run {
   distance: number;
   time: number;
   weather: number;
+  date: string;
 }

@@ -10,13 +10,18 @@ import { TrainingsService } from '../../shared/trainings.service';
 
 export class RunsComponent implements OnInit {
   runs: Run[];
+  total;
 
   constructor(private trainingService: TrainingsService) { }
 
   ngOnInit(): void {
     this.trainingService.getRuns().subscribe(res => {
-      console.log(res);
       this.runs = res;
+    });
+
+    this.trainingService.getStats().subscribe(res => {
+      this.total = res;
+      console.log(this.total);
     });
   }
 

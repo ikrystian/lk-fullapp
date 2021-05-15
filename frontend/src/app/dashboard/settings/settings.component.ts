@@ -11,15 +11,29 @@ import { environment } from '../../../environments/environment';
 })
 export class SettingsComponent implements OnInit {
   selectedFile: File;
+  userWeight: number;
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar, private profileService: ProfileService) {
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    private profileService: ProfileService) {
   }
 
   ngOnInit(): void {
+    this.profileService.getWeight().subscribe(res => {
+      this.userWeight = res.data.meta_value;
+    });
   }
 
   onFileChange(event): void {
     this.selectedFile = event.target.files[0];
+  }
+
+  saveWeight(): void {
+    this.profileService.setWeight({data: this.userWeight}).subscribe(res => {
+      this.snackBar.open(res.message, res.success);
+
+    });
   }
 
   onUpload(): void {

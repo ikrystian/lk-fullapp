@@ -1,0 +1,10 @@
+.setting-form-section {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

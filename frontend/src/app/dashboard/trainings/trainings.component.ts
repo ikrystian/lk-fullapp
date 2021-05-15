@@ -12,6 +12,8 @@ import { TrainingsService } from '../../shared/trainings.service';
 
 export class TrainingsComponent implements OnInit {
   trainings;
+  links = ['First', 'Second', 'Third'];
+  activeLink = this.links[0];
 
   constructor(
     private trainingsService: TrainingsService) {
@@ -21,6 +23,7 @@ export class TrainingsComponent implements OnInit {
     this.trainingsService.getTrainings().subscribe((res: any) => {
       this.trainings = res.data;
     });
+
   }
 
 }

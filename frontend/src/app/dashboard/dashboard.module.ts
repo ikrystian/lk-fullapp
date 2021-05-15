@@ -50,6 +50,7 @@ import { AgmCoreModule } from '@agm/core';
 import { RunExerciseComponent } from './run-exercise/run-exercise.component';
 import { ChooseTrainingTypeComponent } from './choose-training-type/choose-training-type.component';
 import { OngoginTrainingModalComponent } from './ongogin-training-modal/ongogin-training-modal.component';
+import { RunDetailsComponent } from './run-details/run-details.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { OngoginTrainingModalComponent } from './ongogin-training-modal/ongogin-
     MapComponent,
     ChooseTrainingTypeComponent,
     OngoginTrainingModalComponent,
+    RunDetailsComponent,
   ],
   imports: [
     CommonModule,

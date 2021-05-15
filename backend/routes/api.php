@@ -41,9 +41,13 @@ Route::group([
     });
     Route::get('/getuniqueseries/{trainingId}', [TrainingController::class, 'getUniqueSeriesByTrainingId']);
     Route::post('/add-coords', [TrainingController::class, 'coords']);
+    Route::get('/run/{id}', [RunController::class, 'getRun']);
+    Route::get('/get-user-meta/{value}', [TrainingController::class, 'userUserMeta']);
     Route::get('/get-runs', [RunController::class, 'index']);
     Route::post('/training/add-run/', [RunController::class, 'store']);
+    Route::post('/remove-run/', [RunController::class, 'destroy']);
     Route::get('/getuseravatar', [TrainingController::class, 'getUserAvatar']);
+    Route::post('/set-weight', [TrainingController::class, 'setWeight']);
     Route::get('/activities', [ActivityController::class, 'getByUserId']);
     Route::get('/exercises/getTotalInSeries/{exerciseId}', [TrainingController::class, 'getLastExerciseSum']);
     Route::post('/trainings/add-image/{trainingId}', [TrainingController::class, 'storeImage']);

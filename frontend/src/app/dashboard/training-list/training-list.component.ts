@@ -8,12 +8,16 @@ import { TrainingsService } from '../../shared/trainings.service';
   encapsulation: ViewEncapsulation.None
 })
 export class TrainingListComponent implements OnInit {
-  @Input() trainings;
-
-  constructor(public trainingService: TrainingsService) {
+  // @Input() trainings;
+  trainings;
+  constructor(
+    public trainingService: TrainingsService
+  ) {
   }
 
   ngOnInit(): void {
-
+    this.trainingService.getTrainings().subscribe((res: any) => {
+      this.trainings = res.data;
+    });
   }
 }

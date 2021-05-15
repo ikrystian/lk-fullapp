@@ -101,9 +101,38 @@ class TrainingController extends Controller
         //
     }
 
+    public function userUserMeta($value) {
+
+        $meta = DB::table('metas')
+            ->where('connection_name', 'user')
+            ->where('connection_value', Auth::id())
+            ->where('meta_name', $value)
+            ->orderBy('id', 'DESC')
+            ->first('meta_value');
+
+        return response()->json([
+            "data" => $meta
+        ]);
+
+    }
+
     public function getUserAvatar() {
         $avatar = User::find(Auth::id())->profileimage;
         return response()->json(['avatar' => $avatar]);
+    }
+
+    public function setWeight(Request $request) {
+        $meta = new Meta();
+        $meta->connection_name = 'user';
+        $meta->connection_value = Auth::id();
+        $meta->meta_name = 'weight';
+        $meta->meta_value = $request->data;
+        $meta->save();
+
+        return response()->json([
+            "success" => true,
+            "message" => "Weight saved successfully",
+        ]);
     }
 
     public function storeImage($trainingId, Request $request)

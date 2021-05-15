@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Run;
+use App\Models\Series;
+use App\Models\Training;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +14,10 @@ class RunController extends Controller
 {
     public function index() {
         return DB::table('runs')->where('user_id', Auth::id())->latest()->get();
+    }
+
+    public function getRun($id) {
+        return Run::find($id);
     }
 
     public function store(Request $request)
@@ -26,4 +32,11 @@ class RunController extends Controller
 
         return $run->toJson();
     }
+
+    public function destroy(Request $request)
+    {
+        Run::destroy($request[0]);
+        return response()->json('removed', 200);
+    }
+
 }

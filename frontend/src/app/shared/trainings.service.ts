@@ -121,4 +121,12 @@ export class TrainingsService {
     return this.http.get(`${this.API_URL}/coords`);
   }
 
+  getRun(id: number): any {
+    return this.http.get(`${this.API_URL}/run/${id}`);
+  }
+
+  removeRun(id: number): any {
+    return this.http.post(`${this.API_URL}/remove-run/`, id);
+  }
+
 }

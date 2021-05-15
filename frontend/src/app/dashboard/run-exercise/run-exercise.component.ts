@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TrainingsService } from '../../shared/trainings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GeolocationService } from '@ng-web-apis/geolocation';
@@ -24,6 +24,7 @@ export class RunExerciseComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private trainingService: TrainingsService,
     private snackBar: MatSnackBar,
+    private router: Router,
     private geolocation: GeolocationService,
   ) {
 
@@ -69,9 +70,10 @@ export class RunExerciseComponent implements OnInit {
     this.runForm.value.weather = parseInt(this.runForm.value.weather, 0);
     this.runForm.value.coords = this.coords;
 
-    this.trainingService.addRun(data).subscribe(() => {
+    this.trainingService.addRun(data).subscribe((res) => {
       this.runForm.reset();
-      this.snackBar.open('Bieg został dodany do treningu', '🏃');
+      this.snackBar.open('Bieg został utworzony', '🏃');
+      this.router.navigate([`/dashboard/run/${res.id}`]);
     });
   }
 }

@@ -1,5 +1,24 @@
-<ul *ngIf="runs">
-  <li *ngFor="let run of runs">
-    {{run.distance / 1000}}km {{run.time}}sec
+<div class="run-total" *ngIf="total">
+  <img src="/assets/images/earth.png" alt="">
+  <div>
+    Przebiegłeś<br><strong>{{ total.runMeters / 40000000 }}</strong> długości ziemi
+  </div>
+</div>
+<ul *ngIf="runs" class="run-list">
+  <li class="run-list__item" *ngFor="let run of runs">
+    <a class="run-list__link" routerLink="/dashboard/run/{{run.id}}">
+      <img src="https://i.pravatar.cc/48" alt="" class="run-list__image">
+      <div class="run-simple-stats">
+        <div class="run-simple-stats__item">
+          <span class="run-simple-stats__value">{{ run.date }}</span>
+        </div>
+        <div class="run-simple-stats__item">
+          <span class="run-simple-stats__value">{{run.distance / 1000}}km</span>
+        </div>
+        <div class="run-simple-stats__item">
+          <span class="run-simple-stats__value">{{run.time / 60 | round:2}}min</span>
+        </div>
+      </div>
+    </a>
   </li>
 </ul>
