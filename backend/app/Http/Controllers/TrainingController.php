@@ -224,6 +224,7 @@ class TrainingController extends Controller
 
     public function getExercisesByTrainingId($trainingId) {
         $exercises = Series::where('training_id', $trainingId)
+            ->orderBy('id', 'DESC')
             ->get();
 
         $exercises->map(function($exercise) use ($trainingId) {

@@ -21,7 +21,7 @@ class Training extends Model
     protected $with = ['exercises'];
 
     public function exercises() {
-        return $this->hasMany(Series::class);
+        return $this->hasMany(Series::class)->orderBy('id', 'DESC');
     }
 
 }

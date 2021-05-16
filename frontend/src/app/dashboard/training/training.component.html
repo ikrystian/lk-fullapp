@@ -46,7 +46,13 @@
         <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
           <div class="example-element-detail"
                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-            {{element.type.name}}
+            <ul class="single-exercise-details">
+              <ng-container *ngFor="let el of training.exercises">
+              <li *ngIf="element.series_type_id == el.type.id">
+                {{ el.reps }} x {{ el.weight }}kg
+              </li>
+              </ng-container>
+            </ul>
           </div>
         </td>
       </ng-container>
