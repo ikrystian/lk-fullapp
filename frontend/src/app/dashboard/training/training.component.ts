@@ -25,7 +25,7 @@ export class TrainingComponent {
   training: any;
   ASSETS_URL = environment.UPLOADED_ASSETS_URL;
   dataSource;
-  columnsToDisplay = ['name', 'reps', 'weight'];
+  columnsToDisplay = ['name', 'total'];
   expandedElement;
 
   constructor(
@@ -38,8 +38,11 @@ export class TrainingComponent {
 
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
-      console.log(res);
-      this.dataSource = res.exercises;
+      // this.dataSource = res.exercises;
+    });
+
+    this.trainingService.getExercisesByTrainingId(id).subscribe(res => {
+      this.dataSource = res;
     });
   }
 

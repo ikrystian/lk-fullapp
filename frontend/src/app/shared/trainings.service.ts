@@ -30,6 +30,10 @@ export class TrainingsService {
     return this.http.get(`${this.API_URL}/trainings/${id}`);
   }
 
+  getExercisesByTrainingId(id: any): any {
+    return this.http.get(`${this.API_URL}/get-exercises-by-training/${id}`);
+  }
+
   checkOpenedTraining(): any {
     return this.http.get(`${this.API_URL}/check-opened-training`);
   }

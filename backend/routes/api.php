@@ -39,6 +39,11 @@ Route::group([
     Route::get('coords', function() {
         return Coords::all()->toJson();
     });
+
+    Route::get('/get-exercises-by-training/{trainingId}', [TrainingController::class, 'getExercisesByTrainingId']);
+    Route::get('/lorem/{seriesTypeId}/{trainingId}', [TrainingController::class, 'getTotalInSeriesWeightOnTraining']);
+
+
     Route::get('/getuniqueseries/{trainingId}', [TrainingController::class, 'getUniqueSeriesByTrainingId']);
     Route::post('/add-coords', [TrainingController::class, 'coords']);
     Route::get('/run/{id}', [RunController::class, 'getRun']);

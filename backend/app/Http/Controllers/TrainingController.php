@@ -222,6 +222,30 @@ class TrainingController extends Controller
         return $training;
     }
 
+    public function getExercisesByTrainingId($trainingId) {
+        $exercises = Series::where('training_id', $trainingId)
+            ->get();
+
+        $exercises->map(function($exercise) use ($trainingId) {
+            $exercise->total = $this->getTotalInSeriesWeightOnTraining($exercise->series_type_id, $trainingId);
+        });
+
+        return $exercises->unique('series_type_id')->values()->all();
+    }
+
+    public function getTotalInSeriesWeightOnTraining($seriesTypeId, $trainingId) {
+        $series = Series::where('training_id', $trainingId)
+            ->where('series_type_id', $seriesTypeId)
+            ->get();
+
+        $total = 0;
+        foreach ($series as $singleSeries) {
+            $total += $singleSeries->weight * $singleSeries->reps;
+        }
+
+        return $total;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
