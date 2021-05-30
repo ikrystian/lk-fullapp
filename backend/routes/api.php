@@ -6,6 +6,7 @@ use App\Http\Controllers\ExerciseTypeController;
 use App\Http\Controllers\MetaController;
 use App\Http\Controllers\RunController;
 use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\UserController;
 use App\Models\Coords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,8 +43,6 @@ Route::group([
 
     Route::get('/get-exercises-by-training/{trainingId}', [TrainingController::class, 'getExercisesByTrainingId']);
     Route::get('/lorem/{seriesTypeId}/{trainingId}', [TrainingController::class, 'getTotalInSeriesWeightOnTraining']);
-
-
     Route::get('/getuniqueseries/{trainingId}', [TrainingController::class, 'getUniqueSeriesByTrainingId']);
     Route::post('/add-coords', [TrainingController::class, 'coords']);
     Route::get('/run/{id}', [RunController::class, 'getRun']);
@@ -72,5 +71,7 @@ Route::group([
     Route::resource('/trainings', TrainingController::class);
     Route::resource('/exercises', ExerciseController::class);
     Route::resource('/exercises-types', ExerciseTypeController::class);
+
+    Route::get('/user/latest-images/{userId}', [UserController::class, 'getLatestUserImages']);
 
 });

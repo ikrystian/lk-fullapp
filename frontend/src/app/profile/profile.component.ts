@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(public profileService: ProfileService) {
     this.profileService.getActivitiesByUserId().subscribe(data => {
+      console.log(data);
     });
   }
 
