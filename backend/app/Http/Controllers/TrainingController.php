@@ -13,6 +13,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class TrainingController extends Controller
 {
@@ -135,22 +137,77 @@ class TrainingController extends Controller
         ]);
     }
 
-    public function storeImage($trainingId, Request $request)
-    {
-        if ($files = $request->file('file')) {
-            $file = $request->file->store('public');
-            $document = Training::findOrFail($trainingId);
-            $document->user_image = explode('/', $file)[1];
-            $document->save();
+//    public function storeImage($trainingId, Request $request)
+//    {
+//        if ($files = $request->file('file')) {
+//            $file = $request->file->store('public');
+//            $document = Training::findOrFail($trainingId);
+//            $document->user_image = explode('/', $file)[1];
+//            $document->save();
+//
+//            return response()->json([
+//                "success" => true,
+//                "message" => "File successfully uploaded",
+//                "file" => $file
+//            ]);
+//
+//        }
+//    }
 
-            return response()->json([
-                "success" => true,
-                "message" => "File successfully uploaded",
-                "file" => $file
-            ]);
+    public function upload($trainingId, Request $request) {
+        $this->validate($request, [
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
 
-        }
+        $this->storeImage($request, $trainingId);
     }
+
+    public function storeImage($request, $trainingId) {
+        // Get file from request
+        $file = $request->file('file');
+
+        // Get filename with extension
+        $filenameWithExt = $file->getClientOriginalName();
+
+        // Get file path
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+
+        // Remove unwanted characters
+        $filename = preg_replace("/[^A-Za-z0-9 ]/", '', $filename);
+        $filename = preg_replace("/\s+/", '-', $filename);
+
+        // Get the original image extension
+        $extension = $file->getClientOriginalExtension();
+
+        $file->store('public/images');
+        $imageName =  explode('.jpg',explode('/', $request->file->store('public/images'))[2])[0];
+        $this->resizeImage($file, $imageName.'_600.'.$extension, 600);
+        $this->resizeImage($file, $imageName.'_120.'.$extension, 120);
+
+        $training = Training::findOrFail($trainingId);
+        $training->user_image = $imageName;
+        $training->save();
+
+        return true;
+    }
+
+    public function resizeImage($file, $fileNameToStore, $size) {
+        $resize = Image::make($file)->resize($size, null, function ($constraint) {
+            $constraint->aspectRatio();
+        })->encode('jpg');
+
+        $hash = md5($resize->__toString());
+
+        $image = $hash."jpg";
+        $save = Storage::put("public/images/$fileNameToStore", $resize->__toString());
+        if(!$save) {
+            return false;
+        }
+
+        return true;
+    }
+
+
 
     public function userImage(Request $request) {
 

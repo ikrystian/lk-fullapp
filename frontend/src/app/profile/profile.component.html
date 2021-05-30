@@ -1,8 +1,16 @@
 <div class="profile-component" >
   <h2>{{ 'YOUR_PROFILE' | translate }}</h2>
 
-      <div>
 
-      </div>
+  <ng-container *ngIf="userImages">
+    <h3>Ostatnio dodane zdjęcia z treningów</h3>
+    <ul class="user-short-gallery" >
+        <li *ngFor="let image of userImages">
+          <a [href]="assetsUrl +  'images/' + image.user_image + '_600.jpg'">
+            <img [src]="assetsUrl +  'images/' + image.user_image + '_120.jpg'" alt="">
+          </a>
+        </li>
+      </ul>
+  </ng-container>
 
 </div>

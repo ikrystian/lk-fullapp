@@ -10,3 +10,23 @@
     margin-bottom: 0;
   }
 }
+
+
+.user-short-gallery {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    display: block;
+  }
+
+  img {
+    display: block;
+    object-fit: cover;
+    max-width: 100%;
+  }
+}

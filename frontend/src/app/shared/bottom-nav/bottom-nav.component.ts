@@ -33,6 +33,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   showStats = false;
   avatar: any;
   profile;
+  assetsUrl;
 
   constructor(
     public trainingService: TrainingsService,
@@ -45,6 +46,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
     public jwtService: JwtService,
     public dialog: MatDialog
   ) {
+    this.assetsUrl  = environment.UPLOADED_ASSETS_URL;
     this.geolocation.subscribe(position => {
       this.userPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
     });

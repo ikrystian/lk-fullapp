@@ -54,7 +54,7 @@ Route::group([
     Route::post('/set-weight', [TrainingController::class, 'setWeight']);
     Route::get('/activities', [ActivityController::class, 'getByUserId']);
     Route::get('/exercises/getTotalInSeries/{exerciseId}', [TrainingController::class, 'getLastExerciseSum']);
-    Route::post('/trainings/add-image/{trainingId}', [TrainingController::class, 'storeImage']);
+    Route::post('/trainings/add-image/{trainingId}', [TrainingController::class, 'upload']);
     Route::post('/user/add-image/', [TrainingController::class, 'userImage']);
     Route::get('/training/total/{trainingId}', [ExerciseController::class, 'total']);
     Route::post('/meta/add', [MetaController::class, 'store']);

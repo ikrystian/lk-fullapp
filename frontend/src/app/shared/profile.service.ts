@@ -23,6 +23,10 @@ export class ProfileService {
     return this.http.get(`${this.API_URL}/activities`);
   }
 
+  getLatestImages(userId): any {
+    return this.http.get(`${this.API_URL}/user/latest-images/${userId}`);
+  }
+
   getUserAvatar(): any {
     return this.http.get(`${this.API_URL}/getuseravatar`);
   }
