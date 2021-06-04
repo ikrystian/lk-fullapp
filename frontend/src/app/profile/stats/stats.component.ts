@@ -17,6 +17,7 @@ export class StatsComponent implements OnInit {
   constructor(public trainingService: TrainingsService, public profileService: ProfileService) {
     this.trainingService.getStats().subscribe(res => {
       this.stats = res;
+      console.log(res);
     });
   }
 

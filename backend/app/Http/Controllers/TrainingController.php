@@ -30,7 +30,7 @@ class TrainingController extends Controller
 
             if ($training->end) {
                 $to = Carbon::createFromFormat('Y-m-d H:i:s', $training->start);
-                $from = Carbon::createFromFormat('Y-m-d H:i:s',$training->end);
+                $from = Carbon::createFromFormat('Y-m-d H:i:s', $training->end);
                 $diff_in_minutes = $to->diffInMinutes($from);
                 $training['time'] = $diff_in_minutes;
             }
@@ -39,13 +39,34 @@ class TrainingController extends Controller
         return TrainingResource::collection($trainings);
     }
 
-    public function checkOpenedTraining() {
+    public function getTrainingHours($userId)
+    {
+        $trainings = Training::where('user_id', $userId)->get();
+        $time = 0;
+        $trainings->map(function ($training) {
+            if ($training->end) {
+                $to = Carbon::createFromFormat('Y-m-d H:i:s', $training->start);
+                $from = Carbon::createFromFormat('Y-m-d H:i:s', $training->end);
+                $diff_in_minutes = $to->diffInMinutes($from);
+                $training['time'] = $diff_in_minutes;
+            }
+        });
+
+        foreach ($trainings as $training) {
+           $time += $training['time'];
+        }
+        return $time / 60;
+    }
+
+    public function checkOpenedTraining()
+    {
         return Training::where('end', null)->where('user_id', Auth::id())->get();
     }
 
-    public function sync(Request $request) {
-        $series =  $request->data;
-        foreach($series as $singleSeries) {
+    public function sync(Request $request)
+    {
+        $series = $request->data;
+        foreach ($series as $singleSeries) {
             $exercise = new Series;
             $exercise->training_id = $singleSeries['training_id'];
             $exercise->user_id = Auth::id();
@@ -60,7 +81,8 @@ class TrainingController extends Controller
         return response()->json('added');
     }
 
-    public function coords(Request $request) {
+    public function coords(Request $request)
+    {
 
         $coords = new Coords();
         $coords->user_id = Auth::id();
@@ -103,7 +125,8 @@ class TrainingController extends Controller
         //
     }
 
-    public function userUserMeta($value) {
+    public function userUserMeta($value)
+    {
 
         $meta = DB::table('metas')
             ->where('connection_name', 'user')
@@ -118,12 +141,14 @@ class TrainingController extends Controller
 
     }
 
-    public function getUserAvatar() {
+    public function getUserAvatar()
+    {
         $avatar = User::find(Auth::id())->profileimage;
         return response()->json(['avatar' => $avatar]);
     }
 
-    public function setWeight(Request $request) {
+    public function setWeight(Request $request)
+    {
         $meta = new Meta();
         $meta->connection_name = 'user';
         $meta->connection_value = Auth::id();
@@ -137,7 +162,8 @@ class TrainingController extends Controller
         ]);
     }
 
-    public function upload($trainingId, Request $request) {
+    public function upload($trainingId, Request $request)
+    {
         $this->validate($request, [
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
@@ -145,7 +171,8 @@ class TrainingController extends Controller
         $this->storeImage($request, $trainingId);
     }
 
-    public function storeImage($request, $trainingId) {
+    public function storeImage($request, $trainingId)
+    {
         // Get file from request
         $file = $request->file('file');
 
@@ -163,9 +190,9 @@ class TrainingController extends Controller
         $extension = $file->getClientOriginalExtension();
 
         $file->store('public/images');
-        $imageName =  explode('.jpg',explode('/', $request->file->store('public/images'))[2])[0];
-        $this->resizeImage($file, $imageName.'_600.'.$extension, 600);
-        $this->resizeImage($file, $imageName.'_120.'.$extension, 120);
+        $imageName = explode('.jpg', explode('/', $request->file->store('public/images'))[2])[0];
+        $this->resizeImage($file, $imageName . '_600.' . $extension, 600);
+        $this->resizeImage($file, $imageName . '_120.' . $extension, 120);
 
         $training = Training::findOrFail($trainingId);
         $training->user_image = $imageName;
@@ -174,39 +201,45 @@ class TrainingController extends Controller
         return true;
     }
 
-    public function resizeImage($file, $fileNameToStore, $size) {
+    /**
+     * @param $file
+     * @param $fileNameToStore
+     * @param $size
+     * @return bool
+     */
+    public function resizeImage($file, $fileNameToStore, $size)
+    {
         $resize = Image::make($file)->rotate(-90)->resize($size, null, function ($constraint) {
             $constraint->aspectRatio();
         })->encode('jpg');
 
-        $hash = md5($resize->__toString());
-
-        $image = $hash."jpg";
         $save = Storage::put("public/images/$fileNameToStore", $resize->__toString());
-        if(!$save) {
-            return false;
+        if (!$save) {
+            return true;
         }
 
-        return true;
+
     }
 
 
+    public function userImage(Request $request)
+    {
 
-    public function userImage(Request $request) {
-
-        if ($files = $request->file('file')) {
-            $file = $request->file->store('public');
-            $document = User::find(1);
-            $document->profileimage = explode('/', $file)[1];
-            $document->save();
-
-            return response()->json([
-                "success" => true,
-                "message" => "File successfully uploaded",
-                "file" => $file
-            ]);
-
+        if (!$request->file('file')) {
+            return false;
         }
+
+        $file = $request->file->store('public');
+        $document = User::find(1);
+        $document->profileimage = explode('/', $file)[1];
+        $document->save();
+
+        return response()->json([
+            "success" => true,
+            "message" => "File successfully uploaded",
+            "file" => $file
+        ]);
+
     }
 
     /**
@@ -262,19 +295,21 @@ class TrainingController extends Controller
         return $training;
     }
 
-    public function getExercisesByTrainingId($trainingId) {
+    public function getExercisesByTrainingId($trainingId)
+    {
         $exercises = Series::where('training_id', $trainingId)
             ->orderBy('id', 'DESC')
             ->get();
 
-        $exercises->map(function($exercise) use ($trainingId) {
+        $exercises->map(function ($exercise) use ($trainingId) {
             $exercise->total = $this->getTotalInSeriesWeightOnTraining($exercise->series_type_id, $trainingId);
         });
 
         return $exercises->unique('series_type_id')->values()->all();
     }
 
-    public function getTotalInSeriesWeightOnTraining($seriesTypeId, $trainingId) {
+    public function getTotalInSeriesWeightOnTraining($seriesTypeId, $trainingId)
+    {
         $series = Series::where('training_id', $trainingId)
             ->where('series_type_id', $seriesTypeId)
             ->get();
@@ -285,17 +320,6 @@ class TrainingController extends Controller
         }
 
         return $total;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     public function changeName(Request $request)
@@ -343,22 +367,10 @@ class TrainingController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -367,7 +379,8 @@ class TrainingController extends Controller
         return response()->json('removed', 200);
     }
 
-    public function stats() {
+    public function stats()
+    {
 
         $user = User::find(Auth::id());
         $stats = [];
@@ -379,11 +392,12 @@ class TrainingController extends Controller
         $runs = DB::table('runs')->where('user_id', Auth::id());
         $stats['runMeters'] = $runs->sum('distance');
         $stats['runSeconds'] = $runs->sum('time');
-
+        $stats['hours'] = $this->getTrainingHours(Auth::id());
         return $stats;
     }
 
-    public function getUniqueSeriesByTrainingId($trainingId) {
+    public function getUniqueSeriesByTrainingId($trainingId)
+    {
         $series = DB::table('series')->where('training_id', $trainingId)->get();
         return $series;
     }
