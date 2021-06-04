@@ -137,23 +137,6 @@ class TrainingController extends Controller
         ]);
     }
 
-//    public function storeImage($trainingId, Request $request)
-//    {
-//        if ($files = $request->file('file')) {
-//            $file = $request->file->store('public');
-//            $document = Training::findOrFail($trainingId);
-//            $document->user_image = explode('/', $file)[1];
-//            $document->save();
-//
-//            return response()->json([
-//                "success" => true,
-//                "message" => "File successfully uploaded",
-//                "file" => $file
-//            ]);
-//
-//        }
-//    }
-
     public function upload($trainingId, Request $request) {
         $this->validate($request, [
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg',
@@ -192,7 +175,7 @@ class TrainingController extends Controller
     }
 
     public function resizeImage($file, $fileNameToStore, $size) {
-        $resize = Image::make($file)->resize($size, null, function ($constraint) {
+        $resize = Image::make($file)->rotate(-90)->resize($size, null, function ($constraint) {
             $constraint->aspectRatio();
         })->encode('jpg');
 
