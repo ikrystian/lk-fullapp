@@ -6,4 +6,5 @@ export class Run {
   time: number;
   weather: number;
   date: string;
+  type: number;
 }

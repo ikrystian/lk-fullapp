@@ -17,6 +17,13 @@
 <form class="form add-run" [formGroup]="runForm" (ngSubmit)="addRun()">
   <div class="add-run__data">
     <mat-form-field class="form__group">
+      <mat-label>Typ</mat-label>
+      <select matNativeControl formControlName="type"  name="" id="">
+        <option value="0">Bieg</option>
+        <option value="1">Jazda rowerem</option>
+      </select>
+    </mat-form-field>
+    <mat-form-field class="form__group">
       <mat-label>Czas (w sekundach xD)</mat-label>
       <input matInput type="number" id="time" class="form__input" name="time" formControlName="time">
 

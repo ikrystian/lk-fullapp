@@ -8,7 +8,6 @@ import { TrainingsService } from '../../shared/trainings.service';
   encapsulation: ViewEncapsulation.None
 })
 export class TrainingListComponent implements OnInit {
-  // @Input() trainings;
   trainings;
   constructor(
     public trainingService: TrainingsService

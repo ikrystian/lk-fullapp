@@ -28,6 +28,7 @@ class RunController extends Controller
         $run->distance = $request['distance'];
         $run->time = $request['time'];
         $run->weather = $request['weather'];
+        $run->type = $request['type'];
         $run->save();
 
         return $run->toJson();

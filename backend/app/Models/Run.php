@@ -14,6 +14,7 @@ class Run extends Model
         'date',
         'distance',
         'time',
-        'weather'
+        'weather',
+        'type'
     ];
 }

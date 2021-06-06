@@ -1,19 +1,17 @@
 <mat-tab-group *ngIf="trainings" class="training-list-tabs">
 
-
-
   <mat-tab>
     <ng-template mat-tab-label>
       Lista
     </ng-template>
     <div class="training-list-tabs__tab-content">
-      <app-training-list  class="training-list-tabs__tab-component" [trainings]="trainings"></app-training-list>
+      <app-training-list  class="training-list-tabs__tab-component"></app-training-list>
     </div>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label>
-      Biegi
+      Aktywność dystansowa
     </ng-template>
     <div class="training-list-tabs__tab-content">
       <app-runs class="training-list-tabs__tab-component"></app-runs>

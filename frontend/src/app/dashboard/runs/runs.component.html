@@ -1,14 +1,19 @@
 <div class="run-total" *ngIf="total">
   <img src="/assets/images/earth.png" alt="">
   <div>
-    Przebiegłeś<br><strong>{{ total.runMeters / 40000000 }}</strong> długości ziemi
+    Przemierzyłeś<br><strong>{{ total.runMeters / 40000000 }}</strong> długości ziemi
   </div>
 </div>
 <ul *ngIf="runs" class="run-list">
   <li class="run-list__item" *ngFor="let run of runs">
     <a class="run-list__link" routerLink="/dashboard/run/{{run.id}}">
-      <img src="https://i.pravatar.cc/48" alt="" class="run-list__image">
+      <img src="https://pbs.twimg.com/profile_images/518904478985367555/OcioJN5l_400x400.jpeg" *ngIf="run.type == 1" alt="" class="run-list__image">
+      <img src="https://www.stylist.co.uk/images/app/uploads/2020/07/08115906/how-to-run-faster-crop-1594206002-878x878.jpeg" *ngIf="run.type == 0" alt="" class="run-list__image">
       <div class="run-simple-stats">
+        <div class="run-simple-stats__item">
+          <span class="run-simple-stats__value" *ngIf="run.type == 0">Run</span>
+          <span class="run-simple-stats__value" *ngIf="run.type == 1">Ride</span>
+        </div>
         <div class="run-simple-stats__item">
           <span class="run-simple-stats__value">{{ run.date }}</span>
         </div>

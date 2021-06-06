@@ -61,7 +61,8 @@ export class RunExerciseComponent implements OnInit {
     this.runForm = this.formBuilder.group({
       distance: new FormControl(''),
       time: new FormControl(''),
-      weather: 1
+      weather: 1,
+      type: 0
     });
   }
 
@@ -73,7 +74,8 @@ export class RunExerciseComponent implements OnInit {
     this.trainingService.addRun(data).subscribe((res) => {
       this.runForm.reset();
       this.snackBar.open('Bieg został utworzony', '🏃');
-      this.router.navigate([`/dashboard/run/${res.id}`]);
+      this.router.navigate([`/dashboard/training-list/list`]);
+      // this.router.navigate([`/dashboard/run/${res.id}`]);
     });
   }
 }
