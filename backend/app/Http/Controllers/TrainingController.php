@@ -53,7 +53,7 @@ class TrainingController extends Controller
         });
 
         foreach ($trainings as $training) {
-           $time += $training['time'];
+            $time += $training['time'];
         }
         return $time / 60;
     }
@@ -217,8 +217,6 @@ class TrainingController extends Controller
         if (!$save) {
             return true;
         }
-
-
     }
 
 
@@ -379,6 +377,27 @@ class TrainingController extends Controller
         return response()->json('removed', 200);
     }
 
+    public function streak($userId)
+    {
+        $days = [];
+        $trainings = Training::where('user_id', $userId)->latest()->get('training_date');
+
+        if ($trainings->isEmpty()) {
+            return 0;
+        }
+
+        foreach ($trainings as $training) {
+            array_push($days, $training->training_date);
+        }
+
+        $streak = 1;
+        while (in_array(Carbon::createFromFormat('Y-m-d', $days[0])->subDays($streak)->format('Y-m-d'), $days)) {
+            $streak++;
+        }
+
+        return $streak;
+    }
+
     public function stats()
     {
 
@@ -393,6 +412,8 @@ class TrainingController extends Controller
         $stats['runMeters'] = $runs->sum('distance');
         $stats['runSeconds'] = $runs->sum('time');
         $stats['hours'] = $this->getTrainingHours(Auth::id());
+        $stats['streak'] = $this->streak(Auth::id());
+
         return $stats;
     }
 

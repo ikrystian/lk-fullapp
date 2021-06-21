@@ -40,6 +40,8 @@ Route::get('/a', function() {
     print_r($diff_in_minutes); // Output: 20
 });
 
+Route::get('streak', [TrainingController::class, 'streak']);
+
 Route::get('coords', function() {
     return Coords::all()->toJson();
 });
