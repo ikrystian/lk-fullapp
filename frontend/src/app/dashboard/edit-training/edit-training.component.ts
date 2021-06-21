@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Location} from '@angular/common';
 
-import { TrainingsService } from '../../shared/trainings.service';
-import { CreateExerciseComponent } from '../create-exercise/create-exercise.component';
-import { AuthenticationStateService } from '../../shared/authentication-state.service';
-import { TokenAuthService } from '../../shared/token-auth.service';
+import {TrainingsService} from '../../shared/trainings.service';
+import {CreateExerciseComponent} from '../create-exercise/create-exercise.component';
+import {AuthenticationStateService} from '../../shared/authentication-state.service';
+import {TokenAuthService} from '../../shared/token-auth.service';
 import * as moment from 'moment';
-import { Training } from '../../training';
-import { ExercisePreviewComponent } from '../exercise-preview/exercise-preview.component';
-import { ExerciseService } from '../../shared/exercise-service.service';
+import {Training} from '../../training';
+import {ExercisePreviewComponent} from '../exercise-preview/exercise-preview.component';
+import {ExerciseService} from '../../shared/exercise-service.service';
 
 // !todo - handle errors from servers
 // !todo - change setinterval to rxsj
@@ -111,6 +111,12 @@ export class EditTrainingComponent implements OnInit {
   }
 
   finishWorkout(id): boolean {
+    console.log(this.training);
+    if (!this.training.user_image) {
+      alert('Nie możesz zakońćzyć treningu bez dodania zdjęcia');
+      this.showUploadImageForm = true;
+      return false;
+    }
     if (!confirm('Na pewno chcesz zakończyć trening? Jego edycja później będzie niemożliwa')) {
       return false;
     }

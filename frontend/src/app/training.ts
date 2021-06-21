@@ -7,4 +7,5 @@ export interface Training {
   start: string;
   end: string;
   total: number;
+  user_image: string;
 }
