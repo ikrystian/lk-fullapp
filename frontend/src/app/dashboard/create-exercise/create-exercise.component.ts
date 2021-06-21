@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { TrainingsService } from '../../shared/trainings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -28,7 +28,7 @@ export class CreateExerciseComponent implements OnInit {
 
     this.exerciseForm = this.formBuilder.group({
       name: [],
-      imageUrl: [],
+      imageUrl: [''],
       multiplier: [1],
       body_part: [],
       exercise_type: [1]
