@@ -169,6 +169,7 @@ class TrainingController extends Controller
         ]);
 
         $this->storeImage($request, $trainingId);
+
     }
 
     public function storeImage($request, $trainingId)
@@ -198,7 +199,7 @@ class TrainingController extends Controller
         $training->user_image = $imageName;
         $training->save();
 
-        return true;
+        return $training;
     }
 
     /**

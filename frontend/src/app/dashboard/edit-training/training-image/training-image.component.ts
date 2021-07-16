@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
-import { TrainingsService } from '../../../shared/trainings.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { environment } from '../../../../environments/environment';
+import {Component, Input} from '@angular/core';
+import {FormBuilder, Validators} from '@angular/forms';
+import {TrainingsService} from '../../../shared/trainings.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-training-image',
@@ -26,6 +26,7 @@ export class TrainingImageComponent {
     private http: HttpClient,
     private router: Router,
     private snackBar: MatSnackBar) {
+
   }
 
   postForm(): void {
@@ -33,7 +34,8 @@ export class TrainingImageComponent {
     formData.append('file', this.file);
 
     this.http.post(`${environment.API_URL}/trainings/add-image/${this.training.id}`, formData).subscribe(
-      () => {
+      (data) => {
+        console.log(data);
         const snackBar = this.snackBar.open('Zdjęcie zostało zaktualizowane.', 'zobacz');
         snackBar.onAction().subscribe(() => {
           this.router.navigate([`/dashboard/training/${this.training.id}`]);

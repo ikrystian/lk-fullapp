@@ -8,4 +8,5 @@ export interface Training {
   end: string;
   total: number;
   user_image: string;
+  ended: boolean;
 }

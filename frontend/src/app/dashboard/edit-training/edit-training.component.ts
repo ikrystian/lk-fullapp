@@ -110,22 +110,26 @@ export class EditTrainingComponent implements OnInit {
     console.log(exercise);
   }
 
-  finishWorkout(id): boolean {
-    console.log(this.training);
-    if (!this.training.user_image) {
-      alert('Nie możesz zakońćzyć treningu bez dodania zdjęcia');
-      this.showUploadImageForm = true;
-      return false;
-    }
-    if (!confirm('Na pewno chcesz zakończyć trening? Jego edycja później będzie niemożliwa')) {
-      return false;
-    }
-    const data = this.exerciseService.setLocalSeries();
-    this.trainingService.sync(data).subscribe(() => {
-      this.trainingService.finishTraining(id).subscribe(() => {
-        this.exerciseService.clearLocalSeries();
-        localStorage.removeItem('records');
-        this.router.navigate([`/dashboard/training/${id}`]);
+  finishWorkout(id): any {
+    let userImage;
+    this.trainingService.getTraining(id).subscribe(res => {
+      userImage = res.user_image;
+
+      if (!userImage) {
+        alert('Nie możesz zakońćzyć treningu bez dodania zdjęcia');
+        this.showUploadImageForm = true;
+        return false;
+      }
+      if (!confirm('Na pewno chcesz zakończyć trening? Jego edycja później będzie niemożliwa')) {
+        return false;
+      }
+      const data = this.exerciseService.setLocalSeries();
+      this.trainingService.sync(data).subscribe(() => {
+        this.trainingService.finishTraining(id).subscribe(() => {
+          this.exerciseService.clearLocalSeries();
+          localStorage.removeItem('records');
+          this.router.navigate([`/dashboard/training/${id}`]);
+        });
       });
     });
   }

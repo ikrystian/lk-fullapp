@@ -105,7 +105,7 @@ export class ExerciseComponent implements OnChanges {
 
   onSubmit(): void {
     const series = this.exerciseForm.value;
-    const respField = this.addSeriesForm.nativeElement.reps;
+    const weightField = this.addSeriesForm.nativeElement.weight;
     const oneField = this.addSeriesForm.nativeElement.oneField;
 
     series.reps = series.reps || this.reps;
@@ -123,9 +123,8 @@ export class ExerciseComponent implements OnChanges {
     this.exerciseService.removeLocalSeries(series);
     this.sortSeries(this.series);
 
-    (this.oneField) ? oneField.focus() : respField.focus();
+    (this.oneField) ? oneField.focus() : weightField.focus();
     this.trainingService.updateProgress();
-    this.exerciseForm.reset();
     this.isFormInvalid = true;
   }
 
