@@ -33,5 +33,14 @@
       margin-right: 0.5rem;
     }
   }
+
+  &__input {
+    text-align: right !important;
+    -moz-appearance: textfield;
+  }
+
+  .mat-form-field-suffix {
+    margin-left: 0.5rem;
+  }
 }
 

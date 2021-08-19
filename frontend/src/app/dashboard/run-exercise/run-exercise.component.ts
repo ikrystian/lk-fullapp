@@ -71,11 +71,13 @@ export class RunExerciseComponent implements OnInit {
     this.runForm.value.weather = parseInt(this.runForm.value.weather, 0);
     this.runForm.value.coords = this.coords;
 
-    this.trainingService.addRun(data).subscribe((res) => {
-      this.runForm.reset();
-      this.snackBar.open('Bieg został utworzony', '🏃');
-      this.router.navigate([`/dashboard/training-list/list`]);
-      // this.router.navigate([`/dashboard/run/${res.id}`]);
-    });
+    console.log(data);
+
+    // this.trainingService.addRun(data).subscribe((res) => {
+    //   this.runForm.reset();
+    //   this.snackBar.open('Bieg został utworzony', '🏃');
+    //   this.router.navigate([`/dashboard/training-list/list`]);
+    //   // this.router.navigate([`/dashboard/run/${res.id}`]);
+    // });
   }
 }

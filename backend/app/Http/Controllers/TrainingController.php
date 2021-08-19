@@ -92,6 +92,24 @@ class TrainingController extends Controller
 
     }
 
+    public function getAverageInExercise($exerciseId)
+    {
+
+        $series = Series::where('series_type_id', $exerciseId)->where('user_id', Auth::id());
+        $series_array = $series->get()->toArray();
+        $training__count = $series->get()->unique('training_id')->count();
+        if($training__count == 0) {
+            return 0;
+        }
+        $total =  array_reduce($series_array, function($carry, $item) {
+            $carry += $item['reps'] * $item['weight'];
+            return $carry;
+        }, 0);
+
+        // !todo change it to average sum
+        return ['lastTraining' => round($total / $training__count)];
+    }
+
     public function getLastExerciseSum($exerciseId)
     {
 

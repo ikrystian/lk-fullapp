@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {TrainingsService} from '../../../shared/trainings.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -29,13 +29,14 @@ export class TrainingImageComponent {
 
   }
 
+
   postForm(): void {
     const formData = new FormData();
     formData.append('file', this.file);
 
     this.http.post(`${environment.API_URL}/trainings/add-image/${this.training.id}`, formData).subscribe(
       (data) => {
-        console.log(data);
+        this.training = data;
         const snackBar = this.snackBar.open('Zdjęcie zostało zaktualizowane.', 'zobacz');
         snackBar.onAction().subscribe(() => {
           this.router.navigate([`/dashboard/training/${this.training.id}`]);

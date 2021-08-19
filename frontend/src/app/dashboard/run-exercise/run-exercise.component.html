@@ -18,28 +18,29 @@
   <div class="add-run__data">
     <mat-form-field class="form__group">
       <mat-label>Typ</mat-label>
-      <select matNativeControl formControlName="type"  name="" id="">
+      <select matNativeControl formControlName="type" name="" id="">
         <option value="0">Bieg</option>
         <option value="1">Jazda rowerem</option>
       </select>
     </mat-form-field>
-    <mat-form-field class="form__group">
-      <mat-label>Czas (w sekundach xD)</mat-label>
-      <input matInput type="number" id="time" class="form__input" name="time" formControlName="time">
+      <mat-form-field class="form__group">
+        <mat-label>Czas</mat-label>
+        <input matInput type="number" id="time" class="add-run__input form__input" name="time" formControlName="time" required>
+        <span matSuffix>sekund!</span>
+      </mat-form-field>
 
-    </mat-form-field>
+      <mat-form-field class="form__group">
 
-  <mat-form-field class="form__group">
-
-    <mat-label>Dystans (w metrach xD)</mat-label>
-    <input matInput type="number" name="distance" id="distance" class="form__input" formControlName="distance" placeholder="km">
-  </mat-form-field>
-
+        <mat-label>Dystans</mat-label>
+        <input matInput type="number" name="distance" id="distance" class="add-run__input form__input"
+               formControlName="distance" required>
+        <span matSuffix>km</span>
+      </mat-form-field>
   </div>
 
   <footer class="form__footer add-run__footer">
     <span></span>
-    <button mat-raised-button color="primary">Zapisz bieg</button>
+    <button mat-raised-button color="primary" [disabled]="!runForm.valid">Zapisz</button>
   </footer>
 
 </form>

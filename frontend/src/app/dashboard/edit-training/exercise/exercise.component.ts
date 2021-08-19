@@ -117,8 +117,9 @@ export class ExerciseComponent implements OnChanges {
     series.multiplier = this.exercise.multiplier;
     series.bodyPartId = this.exercise.body_part_id;
     series.exercise_type_id = parseInt(this.exercise.exercise_type_id, 0);
-    series.id = Date.now();
+    series.id = Math.random();
 
+    console.log(series);
     this.series.unshift(series);
     this.exerciseService.removeLocalSeries(series);
     this.sortSeries(this.series);
@@ -126,6 +127,7 @@ export class ExerciseComponent implements OnChanges {
     (this.oneField) ? oneField.focus() : weightField.focus();
     this.trainingService.updateProgress();
     this.isFormInvalid = true;
+    this.exerciseForm.reset();
   }
 
   sortSeries(series: Series[]): void {
@@ -141,6 +143,7 @@ export class ExerciseComponent implements OnChanges {
   }
 
   removeExercise(series: Series): any {
+    console.log(series);
     if (!confirm('Na pewno chcesz usunąć serię? Akcja jest nieodwracalna')) {
       return false;
     }

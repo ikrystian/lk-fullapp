@@ -22,10 +22,11 @@ class RunController extends Controller
 
     public function store(Request $request)
     {
+
         $run = new Run();
         $run->user_id = Auth::id();
         $run->date = Carbon::now()->toDateString();
-        $run->distance = $request['distance'];
+        $run->distance = $request['distance'] * 1000;
         $run->time = $request['time'];
         $run->weather = $request['weather'];
         $run->type = $request['type'];

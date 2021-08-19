@@ -111,18 +111,17 @@ export class EditTrainingComponent implements OnInit {
   }
 
   finishWorkout(id): any {
-    let userImage;
     this.trainingService.getTraining(id).subscribe(res => {
-      userImage = res.user_image;
-
-      if (!userImage) {
-        alert('Nie możesz zakońćzyć treningu bez dodania zdjęcia');
+      if (res.user_image === null) {
+        this.snackBar.open('Nie możesz zakońćzyć treningu bez dodania zdjęcia', 'ok');
         this.showUploadImageForm = true;
         return false;
       }
+
       if (!confirm('Na pewno chcesz zakończyć trening? Jego edycja później będzie niemożliwa')) {
         return false;
       }
+
       const data = this.exerciseService.setLocalSeries();
       this.trainingService.sync(data).subscribe(() => {
         this.trainingService.finishTraining(id).subscribe(() => {

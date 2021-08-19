@@ -54,6 +54,10 @@ export class TrainingsService {
     return this.http.get(`${this.API_URL}/exercises/getTotalInSeries/${data.exercise.id}`);
   }
 
+  getAverageInTraining(data): any {
+    return this.http.get(`${this.API_URL}/exercises/averageInExercise/${data.exercise.id}`);
+  }
+
   createExerciseType = (data) => {
     return this.http.post(`${this.API_URL}/exercises-types`, {data});
   }

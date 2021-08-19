@@ -83,7 +83,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     if (this.data.exercise.id !== this.exercise) {
-      this.trainingsService.getLastExerciseSum(this.data).subscribe(res => {
+      this.trainingsService.getAverageInTraining(this.data).subscribe(res => {
         this.totalForSeries = res;
         this.progress = (this.currentTotal / res.lastTraining) * 100;
       }, (error) => {
