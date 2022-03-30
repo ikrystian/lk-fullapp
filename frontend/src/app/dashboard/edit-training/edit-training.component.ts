@@ -36,6 +36,7 @@ export class EditTrainingComponent implements OnInit {
   showChangeNameForm = false;
   name: string;
   timer;
+  exercisesHistory = [];
 
   constructor(
     public trainingService: TrainingsService,
@@ -53,6 +54,11 @@ export class EditTrainingComponent implements OnInit {
       this.training = res;
       this.updateTime(this.training.start);
     });
+  }
+
+  goToLastExercise(): void {
+    this.selectedOption = this.exercisesHistory[1];
+    this.exercisesHistory.reverse();
   }
 
   updateTime(from): void {
@@ -136,7 +142,11 @@ export class EditTrainingComponent implements OnInit {
   changeExercise(): void {
     this.bodyPartId = this.selectedOption.body_part_id;
     this.trainingService.updateProgress();
-    console.log(this.selectedOption);
+    this.exercisesHistory.unshift(this.selectedOption);
+    if (this.exercisesHistory.length > 2) {
+      this.exercisesHistory.pop();
+    }
+    console.log(this.exercisesHistory);
   }
 
   changeTrainingName(event: any): void {

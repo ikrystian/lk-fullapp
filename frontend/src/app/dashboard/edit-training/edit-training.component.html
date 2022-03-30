@@ -71,9 +71,12 @@
             </option>
           </select>
         </mat-form-field>
-        <button (click)="showExercise(selectedOption)" *ngIf="selectedOption?.imageurl">
-          <mat-icon>visibility</mat-icon>
+        <button (click)="goToLastExercise()" *ngIf="exercisesHistory.length > 1">
+          <mat-icon>history</mat-icon>
         </button>
+<!--        <button (click)="showExercise(selectedOption)" *ngIf="selectedOption?.imageurl">-->
+<!--          <mat-icon>visibility</mat-icon>-->
+<!--        </button>-->
       </div>
       <div *ngIf="selectedOption">
         <ng-container [ngSwitch]="selectedOption.exercise_type_id">
