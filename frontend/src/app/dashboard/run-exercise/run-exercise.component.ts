@@ -83,12 +83,12 @@ export class RunExerciseComponent implements OnInit {
       type: data.type,
       weather: parseInt(data.weather, 0),
       coords: data.coords,
-    }
+    };
 
     this.trainingService.addRun(finalData).subscribe((res) => {
       this.runForm.reset();
-      this.snackBar.open('Bieg został utworzony', '🏃');
-      this.router.navigate([`/dashboard/training-list/list`]);
+      this.snackBar.open('Cwiczenie zostało dodane', '🏃');
+      this.router.navigate([`/dashboard/training-list/list?activeTab=1`]);
     });
   }
 }

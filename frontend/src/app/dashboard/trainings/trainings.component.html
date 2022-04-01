@@ -1,46 +1,58 @@
-<mat-tab-group *ngIf="trainings" class="training-list-tabs">
-
+<mat-tab-group *ngIf="trainings" class="training-list-tabs" [selectedIndex]="activeTab">
+<!--  <mat-tab>-->
+<!--    <ng-template mat-tab-label>-->
+<!--      Dashboard-->
+<!--    </ng-template>-->
+<!--    <ng-template matTabContent>-->
+<!--    <div class="training-list-tabs__tab-component">-->
+<!--      Dashbord-->
+<!--    </div>-->
+<!--    </ng-template>-->
+<!--  </mat-tab>-->
   <mat-tab>
     <ng-template mat-tab-label>
       Lista
     </ng-template>
-    <div class="training-list-tabs__tab-content">
-      <app-training-list  class="training-list-tabs__tab-component"></app-training-list>
-    </div>
+    <ng-template matTabContent>
+      <div class="training-list-tabs__tab-content">
+        <app-training-list class="training-list-tabs__tab-component"></app-training-list>
+      </div>
+    </ng-template>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label>
       Aktywność dystansowa
     </ng-template>
-    <div class="training-list-tabs__tab-content">
-      <app-runs class="training-list-tabs__tab-component"></app-runs>
-    </div>
+    <ng-template matTabContent>
+
+      <div class="training-list-tabs__tab-content">
+        <app-runs class="training-list-tabs__tab-component"></app-runs>
+      </div>
+    </ng-template>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label>
       Kalendarz
     </ng-template>
-    <app-calendar  class="training-list-tabs__tab-component" [trainings]="trainings"></app-calendar>
+    <ng-template matTabContent>
+
+      <app-calendar class="training-list-tabs__tab-component" [trainings]="trainings"></app-calendar>
+    </ng-template>
   </mat-tab>
 
   <mat-tab>
     <ng-template mat-tab-label>
       Twoje treningi
     </ng-template>
-    <button routerLink="">Dodaj predefiniowany trening</button>
+    <ng-template matTabContent>
+
+      <button routerLink="">Dodaj predefiniowany trening</button>
+    </ng-template>
   </mat-tab>
 
 
 
-  <!--  <mat-tab>-->
-  <!--    <ng-template mat-tab-label>-->
-  <!--      Dashboard-->
-  <!--    </ng-template>-->
-  <!--    <div class="training-list-tabs__tab-component">-->
-  <!--      Dashbord main page-->
-  <!--    </div>-->
-  <!--  </mat-tab>-->
 
 </mat-tab-group>
