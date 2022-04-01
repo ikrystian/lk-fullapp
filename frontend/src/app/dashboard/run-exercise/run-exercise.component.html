@@ -21,12 +21,17 @@
       <select matNativeControl formControlName="type" name="" id="">
         <option value="0">Bieg</option>
         <option value="1">Jazda rowerem</option>
+        <option value="2">Orbitrek</option>
       </select>
     </mat-form-field>
       <mat-form-field class="form__group">
-        <mat-label>Czas</mat-label>
-        <input matInput type="number" id="time" class="add-run__input form__input" name="time" formControlName="time" required>
-        <span matSuffix>sekund!</span>
+        <mat-label>Minut</mat-label>
+        <input matInput type="number" min="1" id="minutes" class="add-run__input form__input" name="minutes" formControlName="minutes" required>
+      </mat-form-field>
+
+      <mat-form-field class="form__group">
+        <mat-label>Sekund</mat-label>
+        <input matInput type="number" min="0" max="59" id="seconds" class="add-run__input form__input" name="seconds" formControlName="seconds" required>
       </mat-form-field>
 
       <mat-form-field class="form__group">

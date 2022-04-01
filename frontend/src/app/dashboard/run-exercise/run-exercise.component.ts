@@ -5,13 +5,15 @@ import { TrainingsService } from '../../shared/trainings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { interval, Subscription } from 'rxjs';
-import { repeat, take } from 'rxjs/operators';
+import { repeat, take, timestamp } from 'rxjs/operators';
+
 @Component({
   selector: 'app-run-exercise',
   templateUrl: './run-exercise.component.html',
   styleUrls: ['./run-exercise.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
+
 export class RunExerciseComponent implements OnInit {
   runForm: FormGroup;
   trainingId: 0;
@@ -60,24 +62,33 @@ export class RunExerciseComponent implements OnInit {
   createRunForm(): void {
     this.runForm = this.formBuilder.group({
       distance: new FormControl(''),
-      time: new FormControl(''),
+      minutes: new FormControl(''),
+      seconds: new FormControl(''),
       weather: 1,
-      type: 0
+      type: new FormControl(''),
     });
   }
 
   addRun(): any {
     const data = this.runForm.value;
-    this.runForm.value.weather = parseInt(this.runForm.value.weather, 0);
-    this.runForm.value.coords = this.coords;
+    if(data.seconds < 10) {
+      data.seconds = 0 + data.seconds;
 
-    console.log(data);
+    }
+    const finalData = {
+      id: Date.now(),
+      trainingId: Date.now(),
+      distance: data.distance,
+      time: (data.minutes * 60) + data.seconds,
+      type: data.type,
+      weather: parseInt(data.weather, 0),
+      coords: data.coords,
+    }
 
-    // this.trainingService.addRun(data).subscribe((res) => {
-    //   this.runForm.reset();
-    //   this.snackBar.open('Bieg został utworzony', '🏃');
-    //   this.router.navigate([`/dashboard/training-list/list`]);
-    //   // this.router.navigate([`/dashboard/run/${res.id}`]);
-    // });
+    this.trainingService.addRun(finalData).subscribe((res) => {
+      this.runForm.reset();
+      this.snackBar.open('Bieg został utworzony', '🏃');
+      this.router.navigate([`/dashboard/training-list/list`]);
+    });
   }
 }
