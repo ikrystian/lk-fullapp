@@ -51,7 +51,8 @@ import { RunExerciseComponent } from './run-exercise/run-exercise.component';
 import { ChooseTrainingTypeComponent } from './choose-training-type/choose-training-type.component';
 import { OngoginTrainingModalComponent } from './ongogin-training-modal/ongogin-training-modal.component';
 import { RunDetailsComponent } from './run-details/run-details.component';
-import {RestBarComponent} from "./edit-training/rest-bar/rest-bar.component";
+import {RestBarComponent} from './edit-training/rest-bar/rest-bar.component';
+import {UnderConstructionComponent} from '../shared/under-construction/under-construction.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import {RestBarComponent} from "./edit-training/rest-bar/rest-bar.component";
     ChooseTrainingTypeComponent,
     OngoginTrainingModalComponent,
     RunDetailsComponent,
-    RestBarComponent
+    RestBarComponent,
+    UnderConstructionComponent
   ],
     imports: [
         CommonModule,
