@@ -1,3 +1,5 @@
+<app-rest-bar [class.active]="restbar"></app-rest-bar>
+
 <div class="add-exercises">
   <div (tap)="onTap($event)">
     <form class="add-exercises__row" [formGroup]="exerciseForm" (ngSubmit)="onSubmit()"
@@ -15,7 +17,7 @@
 
         <div class="add-exercises__weight" [hidden]="oneField">
           <label for="weight" class="aria-hidden">Podniesiony ciężar</label>
-          <input type="number" id="weight" [placeholder]="'WEIGHT' | translate" [value]="weight" formControlName="weight" required>
+          <input type="number" id="weight" [placeholder]="'WEIGHT' | translate" [value]="weight" formControlName="weight" (keydown)="weightKeyUp($event)" required>
         </div>
 
         <div class="add-exercises__one-field" [hidden]="!oneField">

@@ -51,6 +51,7 @@ import { RunExerciseComponent } from './run-exercise/run-exercise.component';
 import { ChooseTrainingTypeComponent } from './choose-training-type/choose-training-type.component';
 import { OngoginTrainingModalComponent } from './ongogin-training-modal/ongogin-training-modal.component';
 import { RunDetailsComponent } from './run-details/run-details.component';
+import {RestBarComponent} from "./edit-training/rest-bar/rest-bar.component";
 
 @NgModule({
   declarations: [
@@ -78,43 +79,44 @@ import { RunDetailsComponent } from './run-details/run-details.component';
     ChooseTrainingTypeComponent,
     OngoginTrainingModalComponent,
     RunDetailsComponent,
+    RestBarComponent
   ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    MatIconModule,
-    MatNativeDateModule,
-    MatMomentDateModule,
-    MatButtonModule,
-    MatInputModule,
-    MatDialogModule,
-    MatMenuModule,
-    FormsModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatTableModule,
-    NgPipesModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatExpansionModule,
-    MatTabsModule,
-    MatTooltipModule,
-    MatBottomSheetModule,
-    MatListModule,
-    MatRippleModule,
-    MatDividerModule,
-    MatSlideToggleModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatSidenavModule,
-    TranslateModule,
-    TextFieldModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA-Vk8BB1fHqdV4c-lLjqy_pYpYtodoKfE'
-    })
-  ],
+    imports: [
+        CommonModule,
+        DashboardRoutingModule,
+        MatIconModule,
+        MatNativeDateModule,
+        MatMomentDateModule,
+        MatButtonModule,
+        MatInputModule,
+        MatDialogModule,
+        MatMenuModule,
+        FormsModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatTableModule,
+        NgPipesModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatExpansionModule,
+        MatTabsModule,
+        MatTooltipModule,
+        MatBottomSheetModule,
+        MatListModule,
+        MatRippleModule,
+        MatDividerModule,
+        MatSlideToggleModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatSidenavModule,
+        TranslateModule,
+        TextFieldModule,
+        AgmCoreModule.forRoot({
+            apiKey: 'AIzaSyA-Vk8BB1fHqdV4c-lLjqy_pYpYtodoKfE'
+        }),
+    ],
   providers: [
     {provide: MatDialogRef, useValue: {}},
     {provide: APP_INITIALIZER, useFactory: appInitializer, multi: true, deps: [JwtService]},

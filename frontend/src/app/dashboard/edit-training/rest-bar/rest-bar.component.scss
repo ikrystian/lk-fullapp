@@ -1,0 +1,22 @@
+:host{
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 2px;
+  background-color: #0099ff;
+  top: 48px;
+  width: 0;
+
+  &.active {
+    animation-name: width;
+    animation-timing-function: linear;
+    animation-duration: 45s;
+  }
+}
+
+
+@keyframes width {
+  from {width: 0;}
+  to {width: 100%;}
+}

@@ -28,6 +28,7 @@ const listAnimation = trigger('listAnimation', [
   ])
 ]);
 
+
 @Component({
   selector: 'app-exercise',
   templateUrl: './exercise.component.html',
@@ -38,12 +39,13 @@ const listAnimation = trigger('listAnimation', [
 export class ExerciseComponent implements OnChanges {
   exerciseForm: FormGroup;
   series: Series[];
-  oneField = localStorage.getItem('oneField') || false;
+  oneField = (localStorage.getItem('oneField') == 'true') || false;
   trainingId: number;
   reps: number;
   weight: number;
   isFormInvalid: boolean;
   isLBS = false;
+  restbar = false;
 
   @Input() exercise: any;
   @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
@@ -66,6 +68,14 @@ export class ExerciseComponent implements OnChanges {
     this.series = this.exerciseService.setLocalSeries();
     this.series = this.series.filter(el => el.series_type_id === this.exercise.id);
     this.sortSeries(this.series);
+  }
+
+  toggleRestBar(): void {
+    this.restbar = !this.restbar;
+    setTimeout(() => {
+      this.restbar = !this.restbar;
+      new Audio('/assets/sounds/notification.mp3').play();
+    }, 45000);
   }
 
   createSeriesForm(): void {
@@ -103,7 +113,15 @@ export class ExerciseComponent implements OnChanges {
     this.isFormInvalid = false;
   }
 
+  weightKeyUp(event): void {
+    if (event.key === 'Backspace' && event.target.value === '') {
+      event.preventDefault();
+      this.addSeriesForm.nativeElement.reps.focus();
+    }
+  }
+
   onSubmit(): void {
+    this.toggleRestBar();
     const series = this.exerciseForm.value;
     const weightField = this.addSeriesForm.nativeElement.weight;
     const oneField = this.addSeriesForm.nativeElement.oneField;
@@ -119,7 +137,6 @@ export class ExerciseComponent implements OnChanges {
     series.exercise_type_id = parseInt(this.exercise.exercise_type_id, 0);
     series.id = Math.random();
 
-    console.log(series);
     this.series.unshift(series);
     this.exerciseService.removeLocalSeries(series);
     this.sortSeries(this.series);
@@ -128,6 +145,12 @@ export class ExerciseComponent implements OnChanges {
     this.trainingService.updateProgress();
     this.isFormInvalid = true;
     this.exerciseForm.reset();
+    if (this.oneField) {
+      oneField.focus();
+    } else {
+      this.exerciseForm.controls.reps.setValue(series.reps);
+      weightField.focus();
+    }
   }
 
   sortSeries(series: Series[]): void {
