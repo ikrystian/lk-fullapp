@@ -3,6 +3,7 @@ import { TrainingsService } from '../../shared/trainings.service';
 import { ProfileService } from '../../shared/profile.service';
 import { environment } from '../../../environments/environment';
 import { Subscription } from 'rxjs';
+import {JwtService} from "../../shared/jwt.service";
 
 @Component({
   selector: 'app-stats',
@@ -14,7 +15,7 @@ export class StatsComponent implements OnInit {
   avatar: any;
   subscription: Subscription;
 
-  constructor(public trainingService: TrainingsService, public profileService: ProfileService) {
+  constructor(public trainingService: TrainingsService, public profileService: ProfileService, public jwtService: JwtService) {
     this.trainingService.getStats().subscribe(res => {
       this.stats = res;
       console.log(res);
@@ -29,8 +30,12 @@ export class StatsComponent implements OnInit {
   }
 
   getAvatar(): void {
-    this.profileService.getUserAvatar().subscribe(res => {
-      this.avatar = environment.UPLOADED_ASSETS_URL + res.avatar;
+    this.jwtService.profile().subscribe(res => {
+      if (res.profileimage === 'default-avatar.png') {
+        this.avatar = `https://ui-avatars.com/api/?name=${res.name}`;
+      } else {
+        this.avatar = environment.UPLOADED_ASSETS_URL + res.profileimage;
+      }
     });
   }
 

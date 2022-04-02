@@ -4,19 +4,19 @@ import {
   Output,
   EventEmitter, OnChanges, OnDestroy, ViewEncapsulation
 } from '@angular/core';
-import { TrainingsService } from '../trainings.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { GeolocationService } from '@ng-web-apis/geolocation';
-import { Location } from '@angular/common';
-import { ProfileService } from '../profile.service';
-import { Subscription } from 'rxjs';
-import { JwtService } from '../jwt.service';
-import { environment } from '../../../environments/environment';
-import { MatDialog } from '@angular/material/dialog';
-import { ChooseTrainingTypeComponent } from '../../dashboard/choose-training-type/choose-training-type.component';
-import { OngoginTrainingModalComponent } from '../../dashboard/ongogin-training-modal/ongogin-training-modal.component';
-import { ExerciseService } from '../exercise-service.service';
+import {TrainingsService} from '../trainings.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
+import {GeolocationService} from '@ng-web-apis/geolocation';
+import {Location} from '@angular/common';
+import {ProfileService} from '../profile.service';
+import {Subscription} from 'rxjs';
+import {JwtService} from '../jwt.service';
+import {environment} from '../../../environments/environment';
+import {MatDialog} from '@angular/material/dialog';
+import {ChooseTrainingTypeComponent} from '../../dashboard/choose-training-type/choose-training-type.component';
+import {OngoginTrainingModalComponent} from '../../dashboard/ongogin-training-modal/ongogin-training-modal.component';
+import {ExerciseService} from '../exercise-service.service';
 
 @Component({
   selector: 'app-bottom-nav',
@@ -46,7 +46,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
     public jwtService: JwtService,
     public dialog: MatDialog
   ) {
-    this.assetsUrl  = environment.UPLOADED_ASSETS_URL;
+    this.assetsUrl = environment.UPLOADED_ASSETS_URL;
     this.geolocation.subscribe(position => {
       this.userPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
     });
@@ -54,13 +54,9 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAvatar();
-    this.subscription = this.profileService.currentMessage.subscribe(() => {
-      this.getAvatar();
-    });
   }
 
   ngOnChanges(): void {
-    this.getAvatar();
   }
 
   goToHome(): void {
@@ -70,12 +66,15 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 
   getAvatar(): void {
-    this.profileService.getUserAvatar().subscribe(res => {
-      this.avatar = environment.UPLOADED_ASSETS_URL + res.avatar;
+    this.jwtService.profile().subscribe(res => {
+      if (res.profileimage === 'default-avatar.png') {
+        this.avatar = `https://ui-avatars.com/api/?name=${res.name}`;
+      } else {
+        this.avatar = environment.UPLOADED_ASSETS_URL + res.profileimage;
+      }
     });
   }
 
