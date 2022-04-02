@@ -11,8 +11,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import {TrainingsService} from '../../../shared/trainings.service';
 import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
-import { ExerciseService } from '../../../shared/exercise-service.service';
-import { Series } from '../../../models/series';
+import {ExerciseService} from '../../../shared/exercise-service.service';
+import {Series} from '../../../models/series';
 
 
 const listAnimation = trigger('listAnimation', [
@@ -39,7 +39,6 @@ const listAnimation = trigger('listAnimation', [
 export class ExerciseComponent implements OnChanges {
   exerciseForm: FormGroup;
   series: Series[];
-  oneField = (localStorage.getItem('oneField') == 'true') || false;
   trainingId: number;
   reps: number;
   weight: number;
@@ -70,20 +69,11 @@ export class ExerciseComponent implements OnChanges {
     this.sortSeries(this.series);
   }
 
-  toggleRestBar(): void {
-    this.restbar = !this.restbar;
-    setTimeout(() => {
-      this.restbar = !this.restbar;
-      new Audio('/assets/sounds/notification.mp3').play();
-    }, 45000);
-  }
-
   createSeriesForm(): void {
     this.exerciseForm = this.formBuilder.group({
       series_type_id: [this.exercise?.id],
       reps: [],
       weight: [],
-      oneField: [],
       multiplier: [],
       training_id: [this.trainingId],
       exercise_type_id: [parseInt(this.exercise?.exercise_type_id, 0)]
@@ -102,17 +92,6 @@ export class ExerciseComponent implements OnChanges {
     });
   }
 
-  oneFieldInputChanged(event): void {
-    const values = event.target.value.split('.');
-    if (values.length !== 2) {
-      return;
-    }
-
-    this.reps = parseInt(values[0], 0);
-    this.weight = parseInt(values[1], 0);
-    this.isFormInvalid = false;
-  }
-
   weightKeyUp(event): void {
     if (event.key === 'Backspace' && event.target.value === '') {
       event.preventDefault();
@@ -120,11 +99,20 @@ export class ExerciseComponent implements OnChanges {
     }
   }
 
+  toggleRestBar(): void {
+    this.restbar = true;
+    this.exerciseForm.disable();
+    setTimeout(() => {
+      this.restbar = false;
+      new Audio('/assets/sounds/notification.mp3').play();
+      this.exerciseForm.enable();
+    }, 30000);
+  }
+
   onSubmit(): void {
     this.toggleRestBar();
     const series = this.exerciseForm.value;
     const weightField = this.addSeriesForm.nativeElement.weight;
-    const oneField = this.addSeriesForm.nativeElement.oneField;
 
     series.reps = series.reps || this.reps;
     series.weight = series.weight || this.weight;
@@ -141,16 +129,11 @@ export class ExerciseComponent implements OnChanges {
     this.exerciseService.removeLocalSeries(series);
     this.sortSeries(this.series);
 
-    (this.oneField) ? oneField.focus() : weightField.focus();
     this.trainingService.updateProgress();
     this.isFormInvalid = true;
     this.exerciseForm.reset();
-    if (this.oneField) {
-      oneField.focus();
-    } else {
-      this.exerciseForm.controls.reps.setValue(series.reps);
-      weightField.focus();
-    }
+    weightField.focus();
+    this.exerciseForm.controls.reps.setValue(series.reps);
   }
 
   sortSeries(series: Series[]): void {
@@ -183,14 +166,5 @@ export class ExerciseComponent implements OnChanges {
     this.exerciseService.saveLocalSeries(localSeries);
     this.sortSeries(this.series);
     this.trainingService.updateProgress();
-  }
-
-  onTap(event): any {
-   return (event.tapCount === 3) ?  this.changeInputType() : '';
-  }
-
-  changeInputType(): void {
-    this.oneField = !this.oneField;
-    localStorage.setItem('oneField', this.oneField.toString());
   }
 }

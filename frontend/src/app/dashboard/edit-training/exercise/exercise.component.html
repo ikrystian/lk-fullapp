@@ -1,33 +1,25 @@
 <app-rest-bar [class.active]="restbar"></app-rest-bar>
 
 <div class="add-exercises">
-  <div (tap)="onTap($event)">
+  <div>
     <form class="add-exercises__row" [formGroup]="exerciseForm" (ngSubmit)="onSubmit()"
           #addSeriesForm>
       <div class="add-exercises__series">
         {{ series.length + 1 }}
       </div>
       <div class="add-exercises__exercise-data-input-component">
-        <div class="add-exercises__reps" [hidden]="oneField">
+        <div class="add-exercises__reps">
           <label for="reps" class="aria-hidden">Liczba powtórzeń</label>
           <input type="number" id="reps" name="reps" formControlName="reps" [value]="reps" [placeholder]="'REPS' | translate"
                  required
                  autofocus>
         </div>
 
-        <div class="add-exercises__weight" [hidden]="oneField">
+        <div class="add-exercises__weight">
           <label for="weight" class="aria-hidden">Podniesiony ciężar</label>
           <input type="number" id="weight" [placeholder]="'WEIGHT' | translate" [value]="weight" formControlName="weight" (keydown)="weightKeyUp($event)" required>
         </div>
 
-        <div class="add-exercises__one-field" [hidden]="!oneField">
-          <label for="oneField" class="aria-hidden">Liczba powtórzeń . Podniesiony ciężar</label>
-          <input type="number" (input)="oneFieldInputChanged($event)" [placeholder]="'REPS_DOT_WEIGHT' | translate"
-                 name="oneField"
-                 id="oneField"
-                 formControlName="oneField"
-                 autofocus>
-        </div>
         <button type="button" class="add-exercises__weight-type" (click)="isLBS = !isLBS">
           {{ isLBS ? 'LBS' : 'KG' }}
         </button>
@@ -55,7 +47,7 @@
         <span class="add-exercises__type-weight">kg</span>
       </div>
       <div class="add-exercises__action">
-        <button mat-button color="warn" type="button" (click)="removeExercise(oneSeries)">
+        <button mat-button color="warn" type="button" [disabled]="restbar" (click)="removeExercise(oneSeries)">
           <mat-icon>delete</mat-icon>
         </button>
       </div>
