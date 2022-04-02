@@ -48,7 +48,6 @@ export class ExerciseComponent implements OnChanges {
 
   @Input() exercise: any;
   @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
-  @ViewChild('addSeriesFormOne') addSeriesFormOne: ElementRef;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -106,13 +105,19 @@ export class ExerciseComponent implements OnChanges {
       this.restbar = false;
       new Audio('/assets/sounds/notification.mp3').play();
       this.exerciseForm.enable();
+      this.addSeriesForm.nativeElement.weight.focus();
     }, 30000);
   }
 
-  onSubmit(): void {
+  // tslint:disable-next-line:typedef
+  onSubmit() {
     this.toggleRestBar();
     const series = this.exerciseForm.value;
     const weightField = this.addSeriesForm.nativeElement.weight;
+
+    if (!series.reps || !series.weight) {
+      return false;
+    }
 
     series.reps = series.reps || this.reps;
     series.weight = series.weight || this.weight;
@@ -132,8 +137,8 @@ export class ExerciseComponent implements OnChanges {
     this.trainingService.updateProgress();
     this.isFormInvalid = true;
     this.exerciseForm.reset();
-    weightField.focus();
     this.exerciseForm.controls.reps.setValue(series.reps);
+    return;
   }
 
   sortSeries(series: Series[]): void {
