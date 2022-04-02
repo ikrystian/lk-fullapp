@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { TrainingsService } from '../../shared/trainings.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { GeolocationService } from '@ng-web-apis/geolocation';
-import { interval, Subscription } from 'rxjs';
-import { repeat, take, timestamp } from 'rxjs/operators';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TrainingsService} from '../../shared/trainings.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {GeolocationService} from '@ng-web-apis/geolocation';
+import {interval, Subscription} from 'rxjs';
+import {repeat, take, timestamp} from 'rxjs/operators';
 
 @Component({
   selector: 'app-run-exercise',
@@ -21,6 +21,7 @@ export class RunExerciseComponent implements OnInit {
   sending = false;
   lock;
   subscription: Subscription;
+
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
@@ -71,10 +72,10 @@ export class RunExerciseComponent implements OnInit {
 
   addRun(): any {
     const data = this.runForm.value;
-    if(data.seconds < 10) {
+    if (data.seconds < 10) {
       data.seconds = 0 + data.seconds;
-
     }
+
     const finalData = {
       id: Date.now(),
       trainingId: Date.now(),
@@ -88,7 +89,7 @@ export class RunExerciseComponent implements OnInit {
     this.trainingService.addRun(finalData).subscribe((res) => {
       this.runForm.reset();
       this.snackBar.open('Cwiczenie zostało dodane', '🏃');
-      this.router.navigate([`/dashboard/training-list/list?activeTab=1`]);
+      this.router.navigate([`/dashboard/training-list/list`], {queryParams: {activeTab: 1}});
     });
   }
 }

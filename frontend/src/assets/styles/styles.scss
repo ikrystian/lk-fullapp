@@ -1,13 +1,12 @@
-@use '~@angular/material' as mat;
 @import "~@angular/material/theming";
 @import 'helpers';
 @import 'material';
 
-@include mat.core();
-$angular-primary: mat.define-palette(mat.$blue-palette, 500, 100, 900);
-$angular-accent: mat.define-palette(mat.$teal-palette, A200, A100, A400);
-$angular-warn: mat.define-palette(mat.$red-palette);
-$angular-dark-theme: mat.define-dark-theme(
+@include mat-core();
+$angular-primary: mat-palette($mat-blue, 500, 100, 900);
+$angular-accent: mat-palette($mat-teal, A200, A100, A400);
+$angular-warn: mat-palette($mat-red);
+$angular-dark-theme: mat-dark-theme(
     (
       color: (
         primary: $angular-primary,
@@ -16,7 +15,7 @@ $angular-dark-theme: mat.define-dark-theme(
       ),
     )
 );
-$angular-light-theme: mat.define-light-theme(
+$angular-light-theme: mat-light-theme(
     (
       color: (
         primary: $angular-primary,
@@ -28,7 +27,7 @@ $angular-light-theme: mat.define-light-theme(
 
 body {
   &, &.theme-dark {
-    @include mat.all-component-themes($angular-dark-theme);
+    @include angular-material-theme($angular-dark-theme);
     --body-background-color: #222433;
     //--font-color: rgb(228, 230, 235);
     --font-color: rgba(255, 255, 255, 0.7);
@@ -39,7 +38,7 @@ body {
   }
 
   &.theme-light {
-    @include mat.all-component-themes($angular-light-theme);
+    @include angular-material-theme($angular-light-theme);
     --body-background-color: #fff;
     --font-color: #18191a;
     --popup-background-color: #dedede;
