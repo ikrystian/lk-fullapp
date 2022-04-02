@@ -22,7 +22,8 @@
 .dashboard-container {
   height: 100%;
 
-  app-bottom-nav button {
+  app-bottom-nav button,
+  app-bottom-nav a {
     width: 42px;
     height: 42px;
     border: 0;
@@ -44,6 +45,7 @@
   background-color: var(--primary-color);
 
   button,
+  a,
   &__button,
   &__toggle {
     width: 100%;
