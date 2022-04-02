@@ -82,28 +82,16 @@
 <!--          <mat-icon>visibility</mat-icon>-->
 <!--        </button>-->
       </div>
-      <div *ngIf="selectedOption">
-        <ng-container [ngSwitch]="selectedOption.exercise_type_id">
-          <ng-container *ngSwitchCase="1">
-            <app-exercise [exercise]="selectedOption"></app-exercise>
-          </ng-container>
-
-          <ng-container *ngSwitchCase="2">
-            <app-under-construction></app-under-construction>
-          </ng-container>
-
-          <ng-container *ngSwitchCase="3">
-            <app-under-construction></app-under-construction>
-          </ng-container>
-
+      <ng-container [ngSwitch]="selectedOption.exercise_type_id" *ngIf="selectedOption">
+          <app-exercise [exercise]="selectedOption"  *ngSwitchCase="1"></app-exercise>
+          <app-under-construction  *ngSwitchCase="2"></app-under-construction>
+          <app-under-construction  *ngSwitchCase="3"></app-under-construction>
           <ng-container *ngSwitchDefault>Brak widoku dla podanego typu ćwiczenia - zgłoś błąd</ng-container>
-        </ng-container>
-      </div>
+      </ng-container>
     </div>
 
   </div>
   <ng-container *ngIf="selectedOption">
-    <app-exercise-progress *ngIf="selectedOption.exercise_type_id != 5"
-                           [data]="{exercise: selectedOption}"></app-exercise-progress>
+    <app-exercise-progress [data]="{exercise: selectedOption}"></app-exercise-progress>
   </ng-container>
 </ng-container>
