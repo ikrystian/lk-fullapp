@@ -1,11 +1,9 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewEncapsulation } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TrainingsService} from '../../shared/trainings.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {GeolocationService} from '@ng-web-apis/geolocation';
-import {interval, Subscription} from 'rxjs';
-import {repeat, take, timestamp} from 'rxjs/operators';
+
 import { Run } from '../../models/run';
 
 @Component({
@@ -15,7 +13,7 @@ import { Run } from '../../models/run';
   encapsulation: ViewEncapsulation.None
 })
 
-export class RunExerciseComponent implements OnInit {
+export class RunExerciseComponent implements OnChanges {
   @Input() exercise: any;
   @Input() training: any;
   runForm: FormGroup;
@@ -32,7 +30,7 @@ export class RunExerciseComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.createRunForm();
     console.log(this.training);
     this.trainingService.getTrainingRun({trainingId: this.training.id, type: this.exercise.id}).subscribe(res => {
@@ -67,6 +65,7 @@ export class RunExerciseComponent implements OnInit {
     };
 
     this.trainingService.addRun(finalData).subscribe((res) => {
+      this.runs = res;
       this.runForm.reset();
       this.snackBar.open('Cwiczenie zostało dodane', '🏃');
     });

@@ -37,7 +37,7 @@ class RunController extends Controller
         $run->type = $request['type'];
         $run->save();
 
-        return $run->toJson();
+        return $this->getRunsForTraining($run->training_id, $run->type);
     }
 
     public function destroy(Request $request)
