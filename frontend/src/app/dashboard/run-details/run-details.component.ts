@@ -28,7 +28,6 @@ export class RunDetailsComponent implements OnInit {
     const id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 0);
     this.trainingService.getRun(id).subscribe(res => {
       this.run = res;
-      console.log(this.run);
     });
   }
 

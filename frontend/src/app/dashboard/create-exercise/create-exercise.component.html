@@ -1,4 +1,4 @@
-<form action="" [formGroup]="exerciseForm" (ngSubmit)="createExercise()">
+<form action="" [formGroup]="exerciseForm" (ngSubmit)="createExercise()" autocomplete="off">
   <section class="popup__content">
     <mat-form-field class="full-width-input">
       <mat-label>{{ 'EXERCISE_NAME' | translate }}</mat-label>

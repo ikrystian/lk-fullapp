@@ -61,8 +61,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
 
   goToHome(): void {
     this.router.navigate(['/']);
-    (this.showStats) ? this.showStats = false : '';
-    this.notify.emit(this.showStats);
+    this.notify.emit(false);
   }
 
   ngOnDestroy(): void {

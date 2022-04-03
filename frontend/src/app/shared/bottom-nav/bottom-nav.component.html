@@ -1,5 +1,6 @@
 <nav>
-  <button [routerLink]="['/profile/1']" routerLinkActive="router-link-active"  class="profile-button" matRipple title="profile - work in progress">
+  <button [routerLink]="['/profile/1']" routerLinkActive="router-link-active" class="profile-button" matRipple
+          title="profile - work in progress">
     <img [src]="avatar" alt="">
   </button>
   <div>
@@ -7,11 +8,11 @@
       <mat-icon>home</mat-icon>
     </button>
 
-    <button (click)="toggleStats()"  [ngClass]="{'active' : showStats  }" matRipple title="stats">
+    <button (click)="toggleStats()" [ngClass]="{'active' : showStats  }" matRipple title="stats">
       <mat-icon>assessment</mat-icon>
     </button>
 
-    <button [matMenuTriggerFor]="menu" matRipple title="add training">
+    <button [matMenuTriggerFor]="menu" matRipple title="add training" (click)="notify.emit(false); showStats = false;">
       <mat-icon>add_box</mat-icon>
     </button>
     <mat-menu #menu="matMenu" class="add-dropdown-menu">
@@ -26,6 +27,6 @@
         <span>Add run</span>
       </button>
     </mat-menu>
-  <ng-content></ng-content>
+    <ng-content></ng-content>
   </div>
 </nav>

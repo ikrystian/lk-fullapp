@@ -38,7 +38,7 @@ class ExerciseTypeController extends Controller
     {
         $exerciseType = new SeriesType;
         $exerciseType->name = $request->data['name'];
-        $exerciseType->user_id = 0;
+        $exerciseType->user_id = Auth::id();
         $exerciseType->body_part_id = $request->data['body_part'];
         $exerciseType->exercise_type_id = $request->data['exercise_type'];
         $exerciseType->imageurl = $request->data['imageUrl'];

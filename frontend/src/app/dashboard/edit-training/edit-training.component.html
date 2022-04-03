@@ -32,6 +32,15 @@
       <mat-icon>favorite</mat-icon>
       <span>Oznacz ćwiczenie jako ulubione</span>
     </button>
+    <button mat-menu-item [matMenuTriggerFor]="invertebrates">
+      <mat-icon>filter_list</mat-icon>
+      <span>Filtruj ćwiczenia</span>
+    </button>
+    <mat-menu #invertebrates="matMenu">
+      <button mat-menu-item>Pokaż wszystkie</button>
+      <button mat-menu-item>Pokaż tylko Twoje</button>
+      <button mat-menu-item>Pokaż tylko ulubione</button>
+    </mat-menu>
     <mat-divider></mat-divider>
     <button mat-menu-item class="warn" (click)="removeTraining(training.id)">
       <mat-icon>delete</mat-icon>
