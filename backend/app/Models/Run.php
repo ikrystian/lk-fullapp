@@ -13,6 +13,7 @@ class Run extends Model
         'user_id',
         'date',
         'distance',
+        'training_id',
         'time',
         'weather',
         'type'

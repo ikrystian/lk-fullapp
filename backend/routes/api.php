@@ -73,6 +73,8 @@ Route::group([
     Route::resource('/exercises', ExerciseController::class);
     Route::resource('/exercises-types', ExerciseTypeController::class);
 
+    Route::get('/get-runs/{trainingId}/{typeId}', [RunController::class, 'getRunsForTraining']);
+
     Route::get('/user/latest-images/{userId}', [UserController::class, 'getLatestUserImages']);
 
 });

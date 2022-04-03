@@ -18,8 +18,8 @@ export class StatsComponent implements OnInit {
   constructor(public trainingService: TrainingsService, public profileService: ProfileService, public jwtService: JwtService) {
     this.trainingService.getStats().subscribe(res => {
       this.stats = res;
-      console.log(res);
     });
+
   }
 
   ngOnInit(): void {

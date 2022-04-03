@@ -89,3 +89,20 @@
     text-align: center;
   }
 }
+
+.run-total {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+
+  > div {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+
+  img {
+    width: 80px;
+    margin-right: 0.5rem;
+  }
+}

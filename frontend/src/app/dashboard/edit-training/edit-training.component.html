@@ -48,7 +48,7 @@
     </button>
   </mat-menu>
 
-  <div class="standard-page edit-training" [ngClass]="{' edit-training--exercises': selectedOption?.exercise_type_id != 5}">
+  <div class="standard-page edit-training  edit-training--exercises">
     <div class="training-time" *ngIf="!training.end" [class.active]="showRestBar">
       <div class="training-time__wrapper">
         <span> {{ timer }}</span>
@@ -83,6 +83,7 @@
             <option *ngFor="let exercise of exerciseTypes" [ngValue]="exercise">
               {{exercise.name}}
             </option>
+
           </select>
         </mat-form-field>
         <button (click)="goToLastExercise()" *ngIf="exercisesHistory.length > 1">
@@ -95,13 +96,13 @@
       <ng-container [ngSwitch]="selectedOption.exercise_type_id" *ngIf="selectedOption">
           <app-exercise [exercise]="selectedOption" (restBarIndicator)="toggleRestIndicator($event)"  *ngSwitchCase="1"></app-exercise>
           <app-under-construction  *ngSwitchCase="2"></app-under-construction>
-          <app-under-construction  *ngSwitchCase="3"></app-under-construction>
+          <app-run-exercise *ngSwitchCase="3" [exercise]="selectedOption"  [training]="training"></app-run-exercise>
           <ng-container *ngSwitchDefault>Brak widoku dla podanego typu ćwiczenia - zgłoś błąd</ng-container>
       </ng-container>
     </div>
 
   </div>
-  <ng-container *ngIf="selectedOption">
+  <ng-container *ngIf="selectedOption && selectedOption.exercise_type_id !== 3">
     <app-exercise-progress [data]="{exercise: selectedOption}"></app-exercise-progress>
   </ng-container>
 </ng-container>

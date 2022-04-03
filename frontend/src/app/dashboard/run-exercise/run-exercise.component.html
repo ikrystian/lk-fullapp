@@ -1,59 +1,60 @@
-<img class="add-run__image" src="assets/images/run.gif" alt="">
+<div>
 
-<div class="add-run__footer">
-  <button (click)="startRun()" *ngIf="!sending" mat-button color="primary">
-    <mat-icon>location_on</mat-icon>
-    Turn on gps
-  </button>
-  <button (click)="stopRun()" *ngIf="sending" mat-button color="secondary">
-    <mat-icon>location_off</mat-icon>
-    Turn off gps
-  </button>
-  <a routerLink="/dashboard/map" mat-button color="primary">
-    <mat-icon>explore</mat-icon>
-    map</a>
-</div>
+  <form class="form add-run" [formGroup]="runForm" (ngSubmit)="addRun()">
+    <div class="add-run__data">
+      <div class="add-run__row">
+        <mat-form-field class="form__group">
+          <mat-label>Minut</mat-label>
+          <input matInput type="number" min="1" id="minutes" class="add-run__input form__input" name="minutes"
+                 formControlName="minutes" required>
+        </mat-form-field>
 
-<form class="form add-run" [formGroup]="runForm" (ngSubmit)="addRun()">
-  <div class="add-run__data">
-    <mat-form-field class="form__group">
-      <mat-label>Typ</mat-label>
-      <select matNativeControl formControlName="type" name="" id="">
-        <option value="0">Bieg</option>
-        <option value="1">Jazda rowerem</option>
-        <option value="2">Orbitrek</option>
-      </select>
-    </mat-form-field>
-    <div class="add-run__row">
+        <mat-form-field class="form__group">
+          <mat-label>Sekund</mat-label>
+          <input matInput type="number" min="0" max="59" id="seconds" class="add-run__input form__input" name="seconds"
+                 formControlName="seconds" required>
+        </mat-form-field>
+      </div>
       <mat-form-field class="form__group">
-        <mat-label>Minut</mat-label>
-        <input matInput type="number" min="1" id="minutes" class="add-run__input form__input" name="minutes"
-               formControlName="minutes" required>
-      </mat-form-field>
 
-      <mat-form-field class="form__group">
-        <mat-label>Sekund</mat-label>
-        <input matInput type="number" min="0" max="59" id="seconds" class="add-run__input form__input" name="seconds"
-               formControlName="seconds" required>
+        <mat-label>Dystans</mat-label>
+        <input matInput type="number" name="distance" id="distance" class="add-run__input form__input"
+               formControlName="distance" required>
+        <span matSuffix>km</span>
       </mat-form-field>
     </div>
-    <mat-form-field class="form__group">
 
-      <mat-label>Dystans</mat-label>
-      <input matInput type="number" name="distance" id="distance" class="add-run__input form__input"
-             formControlName="distance" required>
-      <span matSuffix>km</span>
-    </mat-form-field>
-  </div>
+    <footer class="form__footer add-run__footer">
+      <span></span>
+      <button mat-raised-button color="primary" [disabled]="!runForm.valid">Zapisz</button>
+    </footer>
 
-  <footer class="form__footer add-run__footer">
-    <span></span>
-    <button mat-raised-button color="primary" [disabled]="!runForm.valid">Zapisz</button>
-  </footer>
+  </form>
 
-</form>
+  <ul *ngIf="runs" class="run-list">
+    <li class="run-list__item" *ngFor="let run of runs">
+      <a class="run-list__link" routerLink="/dashboard/run/{{run.id}}">
+        <img src="https://pbs.twimg.com/profile_images/518904478985367555/OcioJN5l_400x400.jpeg" *ngIf="run.type == 197" alt="" class="run-list__image">
+        <img src="https://www.stylist.co.uk/images/app/uploads/2020/07/08115906/how-to-run-faster-crop-1594206002-878x878.jpeg" *ngIf="run.type == 196" alt="" class="run-list__image">
+        <img src="https://www.precor.com/sites/default/files/resource-center/062116_PRE_2373-6144x4096.jpg" *ngIf="run.type == 198" alt="" class="run-list__image">
+        <div class="run-simple-stats">
+          <div class="run-simple-stats__item">
+            <span class="run-simple-stats__value" *ngIf="run.type ==196">Run</span>
+            <span class="run-simple-stats__value" *ngIf="run.type == 197">Ride</span>
+            <span class="run-simple-stats__value" *ngIf="run.type == 198">Cross trainer</span>
+          </div>
+          <div class="run-simple-stats__item">
+            <span class="run-simple-stats__value">{{ run.date }}</span>
+          </div>
+          <div class="run-simple-stats__item">
+            <span class="run-simple-stats__value">{{run.distance / 1000}}km</span>
+          </div>
+          <div class="run-simple-stats__item">
+            <span class="run-simple-stats__value">{{run.time / 60 | round:2}}min</span>
+          </div>
+        </div>
+      </a>
+    </li>
+  </ul>
 
-
-<section class="run-component">
-
-</section>
+</div>

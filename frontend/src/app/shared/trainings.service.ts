@@ -121,6 +121,10 @@ export class TrainingsService {
     return this.http.get<Run[]>(`${this.API_URL}/get-runs`);
   }
 
+  getTrainingRun(data: any): any {
+    return this.http.get<Run[]>(`${this.API_URL}/get-runs/${data.trainingId}/${data.type}`);
+  }
+
   addCoords(data): any {
     return this.http.post(`${this.API_URL}/add-coords`, data);
   }
