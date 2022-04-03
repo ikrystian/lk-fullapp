@@ -37,6 +37,7 @@ export class EditTrainingComponent implements OnInit {
   name: string;
   timer;
   exercisesHistory = [];
+  showRestBar = false;
 
   constructor(
     public trainingService: TrainingsService,
@@ -54,6 +55,14 @@ export class EditTrainingComponent implements OnInit {
       this.training = res;
       this.updateTime(this.training.start);
     });
+  }
+
+  toggleRestIndicator(show: boolean): void {
+    this.showRestBar = show;
+    setTimeout(() => {
+      this.showRestBar = false;
+      new Audio('/assets/sounds/notification.mp3').play();
+    }, 30000);
   }
 
   goToLastExercise(): void {

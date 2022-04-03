@@ -1,8 +1,8 @@
 import {
   Component,
-  ElementRef,
+  ElementRef, EventEmitter,
   Input,
-  OnChanges,
+  OnChanges, Output,
   ViewChild,
 } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -37,6 +37,8 @@ const listAnimation = trigger('listAnimation', [
 })
 
 export class ExerciseComponent implements OnChanges {
+  @Output() restBarIndicator = new EventEmitter<boolean>();
+  @Input() exercise: any;
   exerciseForm: FormGroup;
   series: Series[];
   trainingId: number;
@@ -44,9 +46,7 @@ export class ExerciseComponent implements OnChanges {
   weight: number;
   isFormInvalid: boolean;
   isLBS = false;
-  restbar = false;
 
-  @Input() exercise: any;
   @ViewChild('addSeriesForm') addSeriesForm: ElementRef;
 
   constructor(
@@ -98,20 +98,9 @@ export class ExerciseComponent implements OnChanges {
     }
   }
 
-  toggleRestBar(): void {
-    this.restbar = true;
-    this.exerciseForm.disable();
-    setTimeout(() => {
-      this.restbar = false;
-      new Audio('/assets/sounds/notification.mp3').play();
-      this.exerciseForm.enable();
-      this.addSeriesForm.nativeElement.weight.focus();
-    }, 30000);
-  }
 
-  // tslint:disable-next-line:typedef
-  onSubmit() {
-    this.toggleRestBar();
+  onSubmit(): boolean {
+    this.restBarIndicator.emit(true);
     const series = this.exerciseForm.value;
     const weightField = this.addSeriesForm.nativeElement.weight;
 
@@ -138,7 +127,8 @@ export class ExerciseComponent implements OnChanges {
     this.isFormInvalid = true;
     this.exerciseForm.reset();
     this.exerciseForm.controls.reps.setValue(series.reps);
-    return;
+    weightField.focus();
+    return true;
   }
 
   sortSeries(series: Series[]): void {

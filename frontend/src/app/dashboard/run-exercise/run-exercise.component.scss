@@ -1,4 +1,12 @@
 .add-run {
+
+  &__row {
+    display: flex;
+    gap: 1rem;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
   &__footer {
     display: flex;
     justify-content: flex-end;
@@ -10,6 +18,7 @@
     display: flex;
     flex-direction: column;
     padding: 0.5rem;
+
 
     > div {
       input {

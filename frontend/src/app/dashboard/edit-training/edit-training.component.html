@@ -1,5 +1,4 @@
 <ng-container *ngIf="training">
-
   <button mat-icon-button class="quick-menu" [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
@@ -41,10 +40,12 @@
   </mat-menu>
 
   <div class="standard-page edit-training" [ngClass]="{' edit-training--exercises': selectedOption?.exercise_type_id != 5}">
-    <div class="training-time" *ngIf="!training.end">
-      <span> {{ timer }}</span>
+    <div class="training-time" *ngIf="!training.end" [class.active]="showRestBar">
+      <div class="training-time__wrapper">
+        <span> {{ timer }}</span>
+      </div>
     </div>
-
+    <div class="training-time__overlay" *ngIf="showRestBar"></div>
     <div>
       <app-training-image *ngIf="showUploadImageForm" [training]="training"></app-training-image>
       <mat-form-field class="full-width-input" *ngIf="showChangeNameForm">
@@ -64,10 +65,10 @@
         <mat-form-field class="select--full">
           <select matNativeControl required [placeholder]="'CHOOSE_EXERCISE_FROM_LIST_BELOW' | translate"
                   (change)="changeExercise()"
-                  [disabled]="exerciseTypes.length == 0"
+                  [disabled]="exerciseTypes && exerciseTypes.length == 0"
                   [(ngModel)]="selectedOption">
 
-            <option *ngIf="exerciseTypes.length == 0">
+            <option *ngIf="exerciseTypes && exerciseTypes.length == 0">
               Brak dodanych ćwiczeń
             </option>
             <option *ngFor="let exercise of exerciseTypes" [ngValue]="exercise">
@@ -83,7 +84,7 @@
 <!--        </button>-->
       </div>
       <ng-container [ngSwitch]="selectedOption.exercise_type_id" *ngIf="selectedOption">
-          <app-exercise [exercise]="selectedOption"  *ngSwitchCase="1"></app-exercise>
+          <app-exercise [exercise]="selectedOption" (restBarIndicator)="toggleRestIndicator($event)"  *ngSwitchCase="1"></app-exercise>
           <app-under-construction  *ngSwitchCase="2"></app-under-construction>
           <app-under-construction  *ngSwitchCase="3"></app-under-construction>
           <ng-container *ngSwitchDefault>Brak widoku dla podanego typu ćwiczenia - zgłoś błąd</ng-container>
