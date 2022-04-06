@@ -33,7 +33,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // import { ChartsModule } from 'ng2-charts';
 import { RecordComponent } from './shared/record/record.component';
-import { ReportBugComponent } from './shared/report-bug/report-bug.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 export function createTranslateLoader(http: HttpClient): any {
@@ -55,7 +54,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     ResetPasswordComponent,
     UpdatePasswordComponent,
     RecordComponent,
-    ReportBugComponent,
   ],
   imports: [
     BrowserModule,

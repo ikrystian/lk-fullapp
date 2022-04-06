@@ -8,7 +8,6 @@ import {TranslateService} from '@ngx-translate/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatDrawer } from '@angular/material/sidenav';
 import { MatDialog } from '@angular/material/dialog';
-import { ReportBugComponent } from '../shared/report-bug/report-bug.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -62,11 +61,6 @@ export class DashboardComponent implements OnInit {
 
     onSwipe(event): void {
       Math.abs(event.deltaX) > 40 ? this.drawer.toggle() : '';
-    }
-
-    openReportBugModal(): void {
-      this.drawer.close();
-      this.matDialog.open(ReportBugComponent, {panelClass: ['bug-modal', 'popup']});
     }
 
   logout(): void {
