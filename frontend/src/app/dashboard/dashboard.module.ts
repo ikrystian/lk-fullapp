@@ -48,8 +48,6 @@ import { IntervalsComponent } from './intervals/intervals.component';
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { RunExerciseComponent } from './run-exercise/run-exercise.component';
-import { ChooseTrainingTypeComponent } from './choose-training-type/choose-training-type.component';
-import { OngoginTrainingModalComponent } from './ongogin-training-modal/ongogin-training-modal.component';
 import { RunDetailsComponent } from './run-details/run-details.component';
 import {UnderConstructionComponent} from '../shared/under-construction/under-construction.component';
 
@@ -76,8 +74,6 @@ import {UnderConstructionComponent} from '../shared/under-construction/under-con
     RunsComponent,
     IntervalsComponent,
     MapComponent,
-    ChooseTrainingTypeComponent,
-    OngoginTrainingModalComponent,
     RunDetailsComponent,
     UnderConstructionComponent
   ],
