@@ -12,7 +12,7 @@
       <mat-icon>assessment</mat-icon>
     </button>
 
-    <button (click)="createTraining()" matRipple>
+    <button  [disabled]="disableAddTrainingButton"  (click)="createTraining( )"matRipple>
       <mat-icon>add_box</mat-icon>
     </button>
     <ng-content></ng-content>

@@ -4,16 +4,16 @@ import {
   Output,
   EventEmitter, OnChanges, OnDestroy
 } from '@angular/core';
-import {TrainingsService} from '../trainings.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {Router} from '@angular/router';
-import {GeolocationService} from '@ng-web-apis/geolocation';
-import {Location} from '@angular/common';
-import {ProfileService} from '../profile.service';
-import {JwtService} from '../jwt.service';
-import {environment} from '../../../environments/environment';
-import {MatDialog} from '@angular/material/dialog';
-import {ExerciseService} from '../exercise-service.service';
+import { TrainingsService } from '../trainings.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { GeolocationService } from '@ng-web-apis/geolocation';
+import { Location } from '@angular/common';
+import { ProfileService } from '../profile.service';
+import { JwtService } from '../jwt.service';
+import { environment } from '../../../environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { ExerciseService } from '../exercise-service.service';
 
 @Component({
   selector: 'app-bottom-nav',
@@ -30,6 +30,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   avatar: any;
   profile;
   assetsUrl;
+  disableAddTrainingButton;
 
   constructor(
     public trainingService: TrainingsService,
@@ -50,6 +51,14 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAvatar();
+
+    this.trainingService.checkOpenedTraining().subscribe((res) => {
+      if (res.length > 0) {
+        this.disableAddTrainingButton = true;
+      }
+      console.log(this.disableAddTrainingButton);
+    });
+
   }
 
   ngOnChanges(): void {
