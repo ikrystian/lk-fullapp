@@ -1,17 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Location} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
-import {TrainingsService} from '../../shared/trainings.service';
-import {CreateExerciseComponent} from '../create-exercise/create-exercise.component';
-import {AuthenticationStateService} from '../../shared/authentication-state.service';
-import {TokenAuthService} from '../../shared/token-auth.service';
+import { TrainingsService } from '../../shared/trainings.service';
+import { CreateExerciseComponent } from '../create-exercise/create-exercise.component';
+import { AuthenticationStateService } from '../../shared/authentication-state.service';
+import { TokenAuthService } from '../../shared/token-auth.service';
 import * as moment from 'moment';
-import {Training} from '../../training';
-import {ExercisePreviewComponent} from '../exercise-preview/exercise-preview.component';
-import {ExerciseService} from '../../shared/exercise-service.service';
+import { Training } from '../../training';
+import { ExercisePreviewComponent } from '../exercise-preview/exercise-preview.component';
+import { ExerciseService } from '../../shared/exercise-service.service';
 
 // !todo - handle errors from servers
 // !todo - change setinterval to rxsj
@@ -38,6 +38,7 @@ export class EditTrainingComponent implements OnInit {
   timer;
   exercisesHistory = [];
   showRestBar = false;
+  timeout;
 
   constructor(
     public trainingService: TrainingsService,
@@ -58,11 +59,12 @@ export class EditTrainingComponent implements OnInit {
   }
 
   toggleRestIndicator(show: boolean): void {
-    this.showRestBar = show;
+    this.showRestBar = true;
     setTimeout(() => {
       this.showRestBar = false;
       new Audio('/assets/sounds/notification.mp3').play();
     }, 30000);
+
   }
 
   goToLastExercise(): void {

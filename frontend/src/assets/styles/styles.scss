@@ -205,18 +205,18 @@ body {
     }
   }
 
-  &__overlay {
-    display: block;
-    position: fixed;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.3);
-    inset: 0;
-
-    + div {
-      position: relative;
-      z-index: 1
-    }
-  }
+  //&__overlay {
+  //  display: block;
+  //  position: fixed;
+  //  z-index: 2;
+  //  background-color: rgba(0, 0, 0, 0.3);
+  //  inset: 0;
+  //
+  //  + div {
+  //    position: relative;
+  //    z-index: 1
+  //  }
+  //}
 
   &__wrapper {
     position: absolute;
