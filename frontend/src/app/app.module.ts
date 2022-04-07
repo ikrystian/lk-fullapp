@@ -31,9 +31,10 @@ import {
   from '@angular/platform-browser';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-// import { ChartsModule } from 'ng2-charts';
 import { RecordComponent } from './shared/record/record.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CurrentExercisesModalComponent } from './dashboard/edit-training/current-exercises-modal/current-exercises-modal.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -54,6 +55,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     ResetPasswordComponent,
     UpdatePasswordComponent,
     RecordComponent,
+    CurrentExercisesModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,8 @@ export class MyHammerConfig extends HammerGestureConfig {
         deps: [HttpClient],
       }
     }),
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    MatRadioModule
   ],
 
   providers: [

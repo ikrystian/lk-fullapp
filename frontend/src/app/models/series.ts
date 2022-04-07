@@ -8,4 +8,5 @@ export interface Series {
   reps: number;
   training_id: number;
   weight: number;
+  name: string;
 }

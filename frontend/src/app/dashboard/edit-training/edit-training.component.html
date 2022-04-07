@@ -53,17 +53,16 @@
           <mat-icon>format_list_bulleted</mat-icon>
         </button>
         <mat-menu #exerciseMenu="matMenu">
-          <button mat-menu-item (click)="clearFilters()">Co trenujesz</button>
+          <button mat-menu-item (click)="clearFilters()">Pokaż wszystko</button>
           <ng-container *ngFor="let bodyPart of bodyParts">
             <button mat-menu-item (click)="filterExercises(bodyPart.id)">{{ bodyPart.name }}</button>
           </ng-container>
         </mat-menu>
-        <mat-form-field class="select--full">
-          <select matNativeControl required [placeholder]="'CHOOSE_EXERCISE_FROM_LIST_BELOW' | translate"
+        <mat-form-field class="select--full"  floatLabel="never">
+          <select autofocus matNativeControl required [placeholder]="'CHOOSE_EXERCISE_FROM_LIST_BELOW' | translate"
                   (change)="changeExercise()"
                   [disabled]="exerciseTypes && exerciseTypes.length == 0"
                   [(ngModel)]="selectedOption">
-
             <option *ngIf="exerciseTypes && exerciseTypes.length == 0">
               Brak dodanych ćwiczeń
             </option>
@@ -73,12 +72,9 @@
 
           </select>
         </mat-form-field>
-        <button (click)="goToLastExercise()" *ngIf="exercisesHistory.length > 1">
+        <button (click)="showCurrentExercisesModal()">
           <mat-icon>history</mat-icon>
         </button>
-<!--        <button (click)="showExercise(selectedOption)" *ngIf="selectedOption?.imageurl">-->
-<!--          <mat-icon>visibility</mat-icon>-->
-<!--        </button>-->
       </div>
       <ng-container [ngSwitch]="selectedOption.exercise_type_id" *ngIf="selectedOption">
           <app-exercise [exercise]="selectedOption" (restBarIndicator)="toggleRestIndicator($event)"  *ngSwitchCase="1"></app-exercise>

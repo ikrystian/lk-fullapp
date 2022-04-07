@@ -118,6 +118,7 @@ export class ExerciseComponent implements OnChanges {
     series.bodyPartId = this.exercise.body_part_id;
     series.exercise_type_id = parseInt(this.exercise.exercise_type_id, 0);
     series.id = Math.random();
+    series.name = this.exercise.name;
 
     this.series.unshift(series);
     this.exerciseService.removeLocalSeries(series);

@@ -1,0 +1,7 @@
+
+<mat-radio-group aria-label="Select an option" [(ngModel)]="currentItem">
+  <mat-radio-button *ngFor="let item of series" value="{{item.series_type_id}}" >{{item.name}}</mat-radio-button>
+</mat-radio-group>
+<footer>
+  <button (click)="chooseExercise()" [mat-dialog-close]="true">Wybierz</button>
+</footer>

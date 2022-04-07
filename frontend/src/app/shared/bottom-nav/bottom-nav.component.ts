@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   Output,
-  EventEmitter, OnChanges, OnDestroy
+  EventEmitter, OnChanges, OnDestroy, Input
 } from '@angular/core';
 import { TrainingsService } from '../trainings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -22,6 +22,7 @@ import { ExerciseService } from '../exercise-service.service';
 })
 export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   @Output() notify = new EventEmitter<any>();
+  @Input() disableAddTrainingButton = false;
   userPosition;
   length;
   training;
@@ -30,7 +31,6 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   avatar: any;
   profile;
   assetsUrl;
-  disableAddTrainingButton;
 
   constructor(
     public trainingService: TrainingsService,
@@ -90,6 +90,7 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   createTraining(): void {
     this.trainingService.addTraining(this.userPosition).subscribe(data => {
       this.training = data;
+      this.disableAddTrainingButton = true;
       this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
     });
   }
