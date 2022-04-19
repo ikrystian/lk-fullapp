@@ -95,6 +95,10 @@
     text-align: center;
     width: 90px;
     position: relative;
+
+    &--full {
+      width: 100%;
+    }
   }
 
   &__one-field {

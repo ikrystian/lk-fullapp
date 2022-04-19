@@ -78,14 +78,14 @@
       </div>
       <ng-container [ngSwitch]="selectedOption.exercise_type_id" *ngIf="selectedOption">
           <app-exercise [exercise]="selectedOption" (restBarIndicator)="toggleRestIndicator($event)"  *ngSwitchCase="1"></app-exercise>
-          <app-under-construction  *ngSwitchCase="2"></app-under-construction>
+          <app-exercise [exercise]="selectedOption" (restBarIndicator)="toggleRestIndicator($event)"  *ngSwitchCase="2"></app-exercise>
           <app-run-exercise *ngSwitchCase="3" [exercise]="selectedOption"  [training]="training"></app-run-exercise>
           <ng-container *ngSwitchDefault>Brak widoku dla podanego typu ćwiczenia - zgłoś błąd</ng-container>
       </ng-container>
     </div>
 
   </div>
-  <ng-container *ngIf="selectedOption && selectedOption.exercise_type_id !== 3">
+  <ng-container *ngIf="selectedOption && selectedOption.exercise_type_id !== 3 && selectedOption.exercise_type_id !== 2">
     <app-exercise-progress [data]="{exercise: selectedOption}"></app-exercise-progress>
   </ng-container>
 </ng-container>

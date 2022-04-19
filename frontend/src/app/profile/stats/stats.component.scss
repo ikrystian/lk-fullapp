@@ -67,6 +67,8 @@
   &__user-image {
     width: 84px;
     height: 84px;
+    min-width: 84px;
+    min-height: 84px;
     margin-right: 2rem;
     border-radius: 50%;
   }

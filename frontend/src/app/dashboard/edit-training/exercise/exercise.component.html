@@ -6,19 +6,19 @@
         {{ series.length + 1 }}
       </div>
       <div class="add-exercises__exercise-data-input-component">
-        <div class="add-exercises__reps">
+        <div class="add-exercises__reps" [ngClass]="{'add-exercises__reps--full': exercise.exercise_type_id == 2}">
           <label for="reps" class="aria-hidden">Liczba powtórzeń</label>
           <input type="number" id="reps" name="reps" formControlName="reps" [value]="reps" [placeholder]="'REPS' | translate"
                  required
                  autofocus>
         </div>
 
-        <div class="add-exercises__weight">
+        <div class="add-exercises__weight" *ngIf="exercise.exercise_type_id == 1">
           <label for="weight" class="aria-hidden">Podniesiony ciężar</label>
-          <input type="number" id="weight" [placeholder]="'WEIGHT' | translate" [value]="weight" formControlName="weight" (keydown)="weightKeyUp($event)" required>
+          <input type="number" id="weight" [placeholder]="'WEIGHT' | translate" [value]="weight" formControlName="weight" (keydown)="weightKeyUp($event)">
         </div>
 
-        <button type="button" class="add-exercises__weight-type" (click)="isLBS = !isLBS">
+        <button type="button" class="add-exercises__weight-type"  *ngIf="exercise.exercise_type_id == 1" (click)="isLBS = !isLBS">
           {{ isLBS ? 'LBS' : 'KG' }}
         </button>
       </div>
@@ -38,9 +38,10 @@
         {{ series.length - index  }}
       </div>
       <div class="add-exercises__reps">
+        <ng-container *ngIf="exercise.exercise_type_id == 2">Powtórzenia: </ng-container>
         {{ oneSeries.reps }}
       </div>
-      <div class="add-exercises__weight">
+      <div class="add-exercises__weight" *ngIf="exercise.exercise_type_id == 1">
         {{ oneSeries.weight | round: 1 }}
         <span class="add-exercises__type-weight">kg</span>
       </div>

@@ -58,7 +58,6 @@ export class ExerciseComponent implements OnChanges {
     private exerciseService: ExerciseService,
   ) {
     this.trainingId = parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 0);
-
     this.createSeriesForm();
   }
 
@@ -103,7 +102,9 @@ export class ExerciseComponent implements OnChanges {
     this.restBarIndicator.emit(true);
     const series = this.exerciseForm.value;
     const weightField = this.addSeriesForm.nativeElement.weight;
-
+    if(this.exercise.exercise_type_id == 2) {
+      series.weight = 1;
+    }
     if (!series.reps || !series.weight) {
       return false;
     }
