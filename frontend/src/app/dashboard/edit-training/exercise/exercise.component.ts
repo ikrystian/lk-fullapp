@@ -5,14 +5,14 @@ import {
   OnChanges, Output,
   ViewChild,
 } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {ActivatedRoute, Router} from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {TrainingsService} from '../../../shared/trainings.service';
-import {animate, query, stagger, style, transition, trigger} from '@angular/animations';
-import {ExerciseService} from '../../../shared/exercise-service.service';
-import {Series} from '../../../models/series';
+import { TrainingsService } from '../../../shared/trainings.service';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { ExerciseService } from '../../../shared/exercise-service.service';
+import { Series } from '../../../models/series';
 
 
 const listAnimation = trigger('listAnimation', [
@@ -97,12 +97,11 @@ export class ExerciseComponent implements OnChanges {
     }
   }
 
-
   onSubmit(): boolean {
     this.restBarIndicator.emit(true);
     const series = this.exerciseForm.value;
     const weightField = this.addSeriesForm.nativeElement.weight;
-    if(this.exercise.exercise_type_id == 2) {
+    if (this.exercise.exercise_type_id === 2) {
       series.weight = 1;
     }
     if (!series.reps || !series.weight) {
@@ -121,16 +120,18 @@ export class ExerciseComponent implements OnChanges {
     series.id = Math.random();
     series.name = this.exercise.name;
 
-    this.series.unshift(series);
-    this.exerciseService.removeLocalSeries(series);
-    this.sortSeries(this.series);
-
-    this.trainingService.updateProgress();
-    this.isFormInvalid = true;
-    this.exerciseForm.reset();
-    this.exerciseForm.controls.reps.setValue(series.reps);
-    weightField.focus();
-    return true;
+    this.exerciseService.addSeries(series).subscribe((response) => {
+      series.id = response.id;
+      this.series.unshift(series);
+      this.exerciseService.removeLocalSeries(series);
+      this.sortSeries(this.series);
+      this.trainingService.updateProgress();
+      this.isFormInvalid = true;
+      this.exerciseForm.reset();
+      this.exerciseForm.controls.reps.setValue(series.reps);
+      weightField.focus();
+      return true;
+    });
   }
 
   sortSeries(series: Series[]): void {
@@ -151,17 +152,23 @@ export class ExerciseComponent implements OnChanges {
       return false;
     }
 
-    this.snackBar.open('Seria została usunięta', 'OK');
-    this.series = this.series.filter((element) => {
-      return element !== series;
-    });
+    this.exerciseService.removeSeries(series).subscribe((data) => {
+      if (data !== 'removed') {
+        return false;
+      }
 
-    const localSeries = this.exerciseService.setLocalSeries().filter((element) => {
-      return element.id !== series.id;
-    });
+      this.series = this.series.filter((element) => {
+        return element !== series;
+      });
 
-    this.exerciseService.saveLocalSeries(localSeries);
-    this.sortSeries(this.series);
-    this.trainingService.updateProgress();
+      const localSeries = this.exerciseService.setLocalSeries().filter((element) => {
+        return element.id !== series.id;
+      });
+
+      this.exerciseService.saveLocalSeries(localSeries);
+      this.sortSeries(this.series);
+      this.trainingService.updateProgress();
+      this.snackBar.open('Seria została usunięta', 'OK');
+    });
   }
 }

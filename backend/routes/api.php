@@ -62,10 +62,16 @@ Route::group([
     Route::get('/stats', [TrainingController::class, 'stats']);
     Route::get('/get-body-parts', [ExerciseController::class, 'getBodyParts']);
     Route::get('/training/exercises/{trainingId}/{exerciseType}', [TrainingController::class, 'getSeries']);
+
+    Route::get('/training/series/{trainingId}', [TrainingController::class, 'getAllSeriesByTrainingId']);
+    Route::post('/remove-series', [TrainingController::class, 'removeSeries']);
     Route::post('/training/change-name', [TrainingController::class, 'changeName']);
     Route::post('/trainings/workout/save', [TrainingController::class, 'save']);
     Route::post('sync', [TrainingController::class, 'sync']);
     Route::post('/trainings/workout/finish', [TrainingController::class, 'end']);
+
+    Route::post('/training/series/add', [TrainingController::class, 'addSeries']);
+
     Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
     Route::get('/exercises/unique/{trainingId}', [TrainingController::class, 'getUniqueExercises']);
     Route::get('/check-opened-training', [TrainingController::class, 'checkOpenedTraining']);

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TrainingsService} from '../../shared/trainings.service';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
+import { ExerciseService } from '../../shared/exercise-service.service';
 
 @Component({
   selector: 'app-trainings',
@@ -21,6 +22,7 @@ export class TrainingsComponent implements OnInit {
   constructor(
     public trainingService: TrainingsService,
     public router: Router,
+    private exerciseService: ExerciseService,
     private trainingsService: TrainingsService,
     private geolocation: GeolocationService,
     private activatedRoute: ActivatedRoute) {
@@ -44,6 +46,7 @@ export class TrainingsComponent implements OnInit {
   createTraining(): void {
     this.trainingService.addTraining(this.userPosition).subscribe(data => {
       this.training = data;
+      this.exerciseService.clearLocalSeries();
       this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
     });
   }

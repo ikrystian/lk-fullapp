@@ -81,6 +81,22 @@ class TrainingController extends Controller
         return response()->json('added');
     }
 
+    public function addSeries(Request  $request) {
+        $series = $request;
+
+        $exercise = new Series;
+        $exercise->training_id = $series['training_id'];
+        $exercise->user_id = Auth::id();
+        $exercise->series_type_id = $series['series_type_id'];
+        $exercise->reps = $series['reps'];
+        $exercise->weight = $series['weight'];
+        $exercise->exercise_type_id = $series['exercise_type_id'];
+        $exercise->body_part_id = $series['bodyPartId'];
+        $exercise->save();
+
+        return response()->json($exercise, 200);
+    }
+
     public function coords(Request $request)
     {
 
@@ -339,6 +355,7 @@ class TrainingController extends Controller
         return $total;
     }
 
+
     public function changeName(Request $request)
     {
         $training = Training::findOrFail($request->id);
@@ -355,10 +372,24 @@ class TrainingController extends Controller
         return $exercises;
     }
 
+    public function getAllSeriesByTrainingId($trainingId) {
+        $exercises = DB::table('series')
+            ->where('training_id', $trainingId)
+            ->latest()->get();
+        return $exercises;
+    }
+
+    public function removeSeries(Request $request) {
+        $id = $request->series_type_id;
+        Series::findOrFail($id)->delete();
+        return response()->json('removed', 200);
+    }
+
     public function end(Request $request)
     {
         $total = 0;
         $exercises = Series::all()->where('training_id', $request->id);
+
         foreach ($exercises as $exercise) {
             $total += $exercise->weight * $exercise->reps * $exercise->type->multiplier;
         }

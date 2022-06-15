@@ -1,12 +1,11 @@
 <mat-accordion class="training-list">
-  <mat-expansion-panel *ngFor="let training of trainings">
+  <mat-expansion-panel *ngFor="let training of trainings; let index = index">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ training.name }}
+        {{ training.name }} {{ index }}
       </mat-panel-title>
       <mat-panel-description>
         <span class="training-list__status" [matTooltip]="'TRAINING_IS_NOT_FINISHED_YET' | translate">
-         <mat-icon class="training-list__status-icon">{{ !training.end ? 'hourglass_bottom' : '' }}</mat-icon>
         </span>
       </mat-panel-description>
     </mat-expansion-panel-header>
@@ -24,12 +23,12 @@
         </span>
       </div>
       <div class="training-list__buttons">
+
         <button mat-button color="primary" routerLink="/dashboard/training/{{ training.id }}">
         {{ 'DETAILS' | translate }}
         </button>
 
-        <button *ngIf="!training.end" mat-button color="primary" routerLink="/dashboard/training/{{ training.id }}/edit">
-
+        <button mat-button color="primary" routerLink="/dashboard/training/{{ training.id }}/edit"  *ngIf="index === 0">
           {{ 'EDIT' | translate }}
         </button>
       </div>
