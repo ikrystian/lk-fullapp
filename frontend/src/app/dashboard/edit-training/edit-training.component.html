@@ -55,7 +55,7 @@
           <mat-icon>format_list_bulleted</mat-icon>
         </button>
         <mat-menu #exerciseMenu="matMenu">
-          <button mat-menu-item (click)="clearFilters()">Pokaż wszystko</button>
+          <button mat-menu-item (click)="clearFilters()">Co ćwiczysz</button>
           <ng-container *ngFor="let bodyPart of bodyParts">
             <button mat-menu-item (click)="filterExercises(bodyPart.id)">{{ bodyPart.name }}</button>
           </ng-container>

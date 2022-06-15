@@ -17,7 +17,7 @@
   <div class="standard-page">
     <app-training-image [training]="training"></app-training-image>
     <table mat-table
-           *ngIf="dataSource"
+           *ngIf="dataSource && dataSource.length > 0"
            [dataSource]="dataSource" multiTemplateDataRows>
 
       <ng-container matColumnDef="name">

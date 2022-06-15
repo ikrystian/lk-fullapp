@@ -1,9 +1,9 @@
 <div class="add-exercises">
   <div>
-    <form class="add-exercises__row" [formGroup]="exerciseForm" (ngSubmit)="onSubmit()"
+    <form *ngIf="series" class="add-exercises__row" [formGroup]="exerciseForm" (ngSubmit)="onSubmit()"
           #addSeriesForm>
-      <div class="add-exercises__series">
-        {{ series.length + 1 }}
+      <div class="add-exercises__series"  *ngIf="series">
+        {{ series.length  + 1 }}
       </div>
       <div class="add-exercises__exercise-data-input-component">
         <div class="add-exercises__reps" [ngClass]="{'add-exercises__reps--full': exercise.exercise_type_id == 2}">
@@ -31,7 +31,7 @@
 
   </div>
 
-  <div *ngIf="series.length > 0; else noSeries" [@listAnimation]="series.length">
+  <div *ngIf="series && series.length > 0;" [@listAnimation]="series.length">
     <div class="add-exercises__row add-exercises__row--past" [class.add-exercises__row--best]="oneSeries.class"
          *ngFor="let oneSeries of series; let index = index">
       <div class="add-exercises__series">
@@ -54,13 +54,12 @@
   </div>
 
 </div>
-<ng-template #noSeries>
-  <div class="empty-results">
+  <div class="empty-results" v *ngIf="series && series.length == 0;">
     <img src="/assets/images/panda.png" alt="">
     <p>
       <mat-icon>report_problem</mat-icon>
       <span>JAK TO BRAK DODANYCH SERII ?!</span>
     </p>
   </div>
-</ng-template>
+
 

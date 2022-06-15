@@ -67,7 +67,6 @@ export class ExerciseComponent implements OnChanges {
       this.series = this.series.filter(el => el.series_type_id === this.exercise.id);
       this.sortSeries(this.series);
     });
-
   }
 
   createSeriesForm(): void {

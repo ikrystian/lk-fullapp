@@ -8,7 +8,6 @@
     <button class="progress__total-2"
             #tooltip2="matTooltip" (click)="tooltip2.toggle()" matTooltipPosition="above"
             matTooltip="ciężar na obecnie ćwiczoną partię">
-      <span>Partia mięśniowa: {{bodyPartTotal | round: 0}}</span>
     </button>
   </div>
   <ng-container *ngIf="totalForSeries['lastTraining']">

@@ -31,7 +31,7 @@ export class TrainingImageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    console.log('lorem');
   }
 
   postForm(): void {

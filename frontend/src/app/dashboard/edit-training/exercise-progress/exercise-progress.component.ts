@@ -54,7 +54,7 @@ export class ExerciseProgressComponent implements OnChanges, OnInit, OnDestroy {
     this.currentTotal = 0;
     this.trainingTotal = 0;
     this.bodyPartTotal = 0;
-
+    console.info('asd');
     if (!this.data?.exercise?.id || this.data?.exercise?.id === 0) {
       return;
     }
