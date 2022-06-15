@@ -46,9 +46,11 @@ export class TrainingsComponent implements OnInit {
   }
 
   createTraining(lastTrainingId: number): void {
+    console.log(lastTrainingId);
     this.trainingService.finishTraining(lastTrainingId).subscribe(data => {
       console.log(data);
       this.trainingService.addTraining(this.userPosition).subscribe(response => {
+        console.log(response);
         this.training = response;
         this.exerciseService.clearLocalSeries();
         this.router.navigate([`dashboard/training/${this.training.id}/edit`]);

@@ -1,20 +1,21 @@
-import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {TrainingsService} from '../../../shared/trainings.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {environment} from '../../../../environments/environment';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { TrainingsService } from '../../../shared/trainings.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-training-image',
   templateUrl: './training-image.component.html',
   styleUrls: ['./training-image.component.scss']
 })
-export class TrainingImageComponent {
+export class TrainingImageComponent implements OnInit {
   @Input() training: any;
   selectedFile: File = null;
   file;
+  ASSETS_URL = environment.UPLOADED_ASSETS_URL;
   labelText = 'Kliknij aby wybrać zdjęcie';
   form = this.fb.group({
     file: [null, Validators.required]
@@ -29,6 +30,9 @@ export class TrainingImageComponent {
 
   }
 
+  ngOnInit(): void {
+
+  }
 
   postForm(): void {
     const formData = new FormData();

@@ -50,6 +50,7 @@ import { AgmCoreModule } from '@agm/core';
 import { RunExerciseComponent } from './run-exercise/run-exercise.component';
 import { RunDetailsComponent } from './run-details/run-details.component';
 import {UnderConstructionComponent} from '../shared/under-construction/under-construction.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -112,6 +113,7 @@ import {UnderConstructionComponent} from '../shared/under-construction/under-con
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyA-Vk8BB1fHqdV4c-lLjqy_pYpYtodoKfE'
         }),
+        MatProgressSpinnerModule,
     ],
   providers: [
     {provide: MatDialogRef, useValue: {}},

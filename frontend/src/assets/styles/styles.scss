@@ -72,9 +72,9 @@ body {
 }
 
 .standard-page {
-  padding: 1rem 0.5rem calc(88px + 0.5rem) 0.5rem;
-  height: 100%;
-
+  padding: 0.5rem;
+  max-height: calc(100% - 58px);
+  overflow: auto;
 }
 
 .loader-bar {

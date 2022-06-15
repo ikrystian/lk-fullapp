@@ -12,7 +12,7 @@
             <div class="dashboard-section__image">
               <img src="/assets/images/dashboard.png" alt="">
             </div>
-            <ng-container *ngIf="trainings[0].id && trainings[0].end != null">
+            <ng-container *ngIf="trainings[0].end === null">
 
               <a routerLink="/dashboard/training/{{ trainings[0].id }}/edit" mat-stroked-button color="primary">przejdź
                 do ({{ trainings[0].name }})</a>

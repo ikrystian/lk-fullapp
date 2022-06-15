@@ -1,7 +1,14 @@
-<form class="add-training-image-form" action="" enctype="multipart/form-data" [formGroup]="form"
+<ng-container *ngIf="training">
+<div class="user-image-container" tabindex="1" *ngIf="training.user_image">
+  <img [src]="ASSETS_URL + 'images/'  + training.user_image + '_600.jpg'" alt="">
+  <span class="user-image-container__name">{{training.name}}</span>
+</div>
+
+<form *ngIf="!training.user_image" class="add-training-image-form" action="" enctype="multipart/form-data" [formGroup]="form"
       (ngSubmit)="postForm()">
   <input type="file" class="add-training-image-form__input" id="file" formControlName="file" accept="image/*"
          (change)="onFileChange($event)">
   <label for="file">{{ labelText }}</label>
   <button type="submit" mat-button>{{ 'SAVE' | translate }}</button>
 </form>
+</ng-container>
