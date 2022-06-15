@@ -18,10 +18,14 @@ export class CurrentExercisesModalComponent implements OnInit {
     public exerciseService: ExerciseService,
     public dialogRef: MatDialogRef<CurrentExercisesModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
-    this.series = this.exerciseService.setLocalSeries();
+    const s = this.exerciseService.setLocalSeries();
+    this.series = s.filter((element, index) => {
+      return s.indexOf(element) === index;
+    });
   }
 
   chooseExercise(): void {

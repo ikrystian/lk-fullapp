@@ -1,12 +1,11 @@
 <div class="stats" *ngIf="stats">
   <header class="stats__header">
-    <img class="stats__user-image" *ngIf="avatar" [src]="avatar" alt="{{ stats.username }}">
     <h1>Gratuacje, <strong>{{ stats.username }}</strong>&nbsp;!</h1>
   </header>
   <h2>Udało Ci się podnieść</h2>
   <h2><strong> {{ stats.total / 1000 | round : 2 }} ton !</strong></h2>
   <h3>(to tyle co {{ stats.total / 1000 / 35 | round }} czołgów T55 💪)</h3>
-  <h3>w trakcie<br>{{ stats.trainings }} treningów ({{stats.hours | round:2}} godzin)</h3>
+  <h3>w trakcie<br>{{ stats.trainings }} treningów</h3>
   <h3>oraz przebiec</h3>
   <h3>{{ stats.runMeters / 1000}}km w {{stats.runSeconds / 3600 | round:2}}godzin</h3>
   <div class="run-total">

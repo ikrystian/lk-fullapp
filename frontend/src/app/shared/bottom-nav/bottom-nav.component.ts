@@ -22,12 +22,10 @@ import { ExerciseService } from '../exercise-service.service';
 })
 export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
   @Output() notify = new EventEmitter<any>();
-  @Input() disableAddTrainingButton = false;
   userPosition;
   length;
   training;
   trainings: any;
-  showStats = false;
   avatar: any;
   profile;
   assetsUrl;
@@ -51,14 +49,6 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAvatar();
-
-    this.trainingService.checkOpenedTraining().subscribe((res) => {
-      if (res.length > 0) {
-        this.disableAddTrainingButton = true;
-      }
-      console.log(this.disableAddTrainingButton);
-    });
-
   }
 
   ngOnChanges(): void {
@@ -79,19 +69,6 @@ export class BottomNavComponent implements OnChanges, OnInit, OnDestroy {
       } else {
         this.avatar = environment.UPLOADED_ASSETS_URL + res.profileimage;
       }
-    });
-  }
-
-  toggleStats(): void {
-    this.showStats = !this.showStats;
-    this.notify.emit(this.showStats);
-  }
-
-  createTraining(): void {
-    this.trainingService.addTraining(this.userPosition).subscribe(data => {
-      this.training = data;
-      this.disableAddTrainingButton = true;
-      this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
     });
   }
 }

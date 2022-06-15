@@ -1,21 +1,40 @@
 <mat-tab-group *ngIf="trainings" class="training-list-tabs" [selectedIndex]="activeTab">
-<!--  <mat-tab>-->
-<!--    <ng-template mat-tab-label>-->
-<!--      Dashboard-->
-<!--    </ng-template>-->
-<!--    <ng-template matTabContent>-->
-<!--    <div class="training-list-tabs__tab-component">-->
-<!--      Dashbord-->
-<!--    </div>-->
-<!--    </ng-template>-->
-<!--  </mat-tab>-->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Dashboard
+    </ng-template>
+    <ng-template matTabContent>
+      <div class="training-list-tabs__tab-component">
+        <div class="dashboard-section">
+          <strong>Dobrze Cie widzieć!</strong>
+          <img src="/assets/images/dashboard.png" alt="">
+          <button (click)="createTraining()" mat-stroked-button color="primary">Utwórz nowy trening</button>
+          <ng-container *ngIf="trainings[0].id">
+            <span>lub</span>
+            <a routerLink="/dashboard/training/{{ trainings[0].id }}/edit" mat-stroked-button color="primary">przejdź do
+              ostatniego ({{ trainings[0].name }})</a>
+          </ng-container>
+        </div>
+      </div>
+    </ng-template>
+  </mat-tab>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      Stats
+    </ng-template>
+    <ng-template matTabContent>
+      <div class="training-list-tabs__tab-content">
+        <app-stats></app-stats>
+      </div>
+    </ng-template>
+  </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
       Lista
     </ng-template>
     <ng-template matTabContent>
       <div class="training-list-tabs__tab-content">
-        <app-training-list class="training-list-tabs__tab-component"></app-training-list>
+        <app-training-list [trainings]="trainings" class="training-list-tabs__tab-component"></app-training-list>
       </div>
     </ng-template>
   </mat-tab>
@@ -42,17 +61,15 @@
     </ng-template>
   </mat-tab>
 
-<!--  <mat-tab>-->
-<!--    <ng-template mat-tab-label>-->
-<!--      Twoje treningi-->
-<!--    </ng-template>-->
-<!--    <ng-template matTabContent>-->
+  <!--  <mat-tab>-->
+  <!--    <ng-template mat-tab-label>-->
+  <!--      Twoje treningi-->
+  <!--    </ng-template>-->
+  <!--    <ng-template matTabContent>-->
 
-<!--      <button routerLink="">Dodaj predefiniowany trening</button>-->
-<!--    </ng-template>-->
-<!--  </mat-tab>-->
-
-
+  <!--      <button routerLink="">Dodaj predefiniowany trening</button>-->
+  <!--    </ng-template>-->
+  <!--  </mat-tab>-->
 
 
 </mat-tab-group>

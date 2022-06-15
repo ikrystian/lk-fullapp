@@ -7,14 +7,6 @@
     <button (click)="goToHome()" matRipple title="home">
       <mat-icon>home</mat-icon>
     </button>
-
-    <button (click)="toggleStats()" [ngClass]="{'active' : showStats  }" matRipple title="stats">
-      <mat-icon>assessment</mat-icon>
-    </button>
-
-    <button  [disabled]="disableAddTrainingButton"  (click)="createTraining( )"matRipple>
-      <mat-icon>add_box</mat-icon>
-    </button>
     <ng-content></ng-content>
   </div>
 </nav>

@@ -59,7 +59,7 @@ export class EditTrainingComponent implements OnInit {
   }
 
   toggleRestIndicator(show: boolean): void {
-    this.showRestBar = true;
+    this.showRestBar = false;
     setTimeout(() => {
       this.showRestBar = false;
       new Audio('/assets/sounds/notification.mp3').play();

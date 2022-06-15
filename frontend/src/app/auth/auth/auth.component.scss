@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   color: #fff;
   background-color: #242134;
 
@@ -16,19 +17,6 @@
     strong {
       white-space: nowrap;
       font-weight: 500 !important;
-    }
-  }
-
-  picture {
-    height: 40vh;
-    display: block;
-    background: url('/assets/images/auth-bg.jpeg') center no-repeat;
-    background-size: cover;
-
-    img {
-      display: block;
-      object-fit: cover;
-
     }
   }
 
@@ -54,7 +42,6 @@
     border-radius: 2rem 2rem 0 0;
     position: relative;
     padding: 2rem;
-    margin-top: -5rem;
     overflow: hidden;
   }
 

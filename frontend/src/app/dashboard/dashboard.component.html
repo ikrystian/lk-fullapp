@@ -50,7 +50,6 @@
   </mat-drawer>
   <mat-drawer-content>
     <div class="main-content">
-      <app-stats [ngClass]="{'displayed' : showStats }"></app-stats>
       <router-outlet></router-outlet>
     </div>
     <app-bottom-nav (notify)="toggleStatsSection($event)"  (swipe)="onSwipe($event)">
