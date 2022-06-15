@@ -71,9 +71,12 @@ export class TrainingsService {
     return this.http.post(`${this.API_URL}/trainings/workout/save`, data);
   }
 
-  finishTraining(id: any): any {
-    const data = {id};
-    return this.http.post(`${this.API_URL}/trainings/workout/finish`, data);
+  finishTraining(id: number): any {
+    return this.http.post(`${this.API_URL}/trainings/workout/finish`, id);
+  }
+
+  getSeriesByTrainingId(trainingId: number): any {
+    return this.http.get(`${this.API_URL}/training/series/${trainingId}`);
   }
 
   addSeries(series): any {

@@ -62,9 +62,12 @@ export class ExerciseComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    this.series = this.exerciseService.setLocalSeries();
-    this.series = this.series.filter(el => el.series_type_id === this.exercise.id);
-    this.sortSeries(this.series);
+    this.trainingService.getSeriesByTrainingId(this.trainingId).subscribe(res => {
+      this.series = res;
+      this.series = this.series.filter(el => el.series_type_id === this.exercise.id);
+      this.sortSeries(this.series);
+    });
+
   }
 
   createSeriesForm(): void {
@@ -122,8 +125,8 @@ export class ExerciseComponent implements OnChanges {
 
     this.exerciseService.addSeries(series).subscribe((response) => {
       series.id = response.id;
-      this.series.unshift(series);
-      this.exerciseService.removeLocalSeries(series);
+      this.series.unshift(response);
+      this.exerciseService.removeLocalSeries(response);
       this.sortSeries(this.series);
       this.trainingService.updateProgress();
       this.isFormInvalid = true;

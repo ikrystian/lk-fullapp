@@ -3,6 +3,7 @@ import {TrainingsService} from '../../shared/trainings.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { ExerciseService } from '../../shared/exercise-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-trainings',
@@ -24,6 +25,7 @@ export class TrainingsComponent implements OnInit {
     public router: Router,
     private exerciseService: ExerciseService,
     private trainingsService: TrainingsService,
+    private snackBar: MatSnackBar,
     private geolocation: GeolocationService,
     private activatedRoute: ActivatedRoute) {
     this.geolocation.subscribe(position => {
@@ -43,11 +45,15 @@ export class TrainingsComponent implements OnInit {
 
   }
 
-  createTraining(): void {
-    this.trainingService.addTraining(this.userPosition).subscribe(data => {
-      this.training = data;
-      this.exerciseService.clearLocalSeries();
-      this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
+  createTraining(lastTrainingId: number): void {
+    this.trainingService.finishTraining(lastTrainingId).subscribe(data => {
+      console.log(data);
+      this.trainingService.addTraining(this.userPosition).subscribe(response => {
+        this.training = response;
+        this.exerciseService.clearLocalSeries();
+        this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
+        this.snackBar.open(`Trening ${data.name} został zakończony`);
+      });
     });
   }
 

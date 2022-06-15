@@ -114,17 +114,6 @@ export class EditTrainingComponent implements OnInit {
     this.showUploadImageForm = !this.showUploadImageForm;
   }
 
-  saveWorkout(id): void {
-    this.trainingService.saveTraining(id).subscribe(() => {
-      this.snackBar.open('Trening został zapisany', 'ok');
-    });
-    const data = this.exerciseService.setLocalSeries();
-    this.trainingService.sync(data).subscribe(() => {
-      this.snackBar.open('Dane zostały wysłane', 'ok');
-      this.exerciseService.clearLocalSeries();
-    });
-  }
-
   markAsFav(exercise: any): void {
     console.log(exercise);
   }
@@ -146,25 +135,10 @@ export class EditTrainingComponent implements OnInit {
   }
 
   finishWorkout(id): any {
-    this.trainingService.getTraining(id).subscribe(res => {
-      if (res.user_image === null) {
-        this.snackBar.open('Nie możesz zakońćzyć treningu bez dodania zdjęcia', 'ok');
-        this.showUploadImageForm = true;
-        return false;
-      }
-
-      if (!confirm('Na pewno chcesz zakończyć trening? Jego edycja później będzie niemożliwa')) {
-        return false;
-      }
-
-      const data = this.exerciseService.setLocalSeries();
-      this.trainingService.sync(data).subscribe(() => {
-        this.trainingService.finishTraining(id).subscribe(() => {
-          this.exerciseService.clearLocalSeries();
-          localStorage.removeItem('records');
-          this.router.navigate([`/dashboard/training/${id}`]);
-        });
-      });
+    this.trainingService.finishTraining(id).subscribe(data => {
+      this.exerciseService.clearLocalSeries();
+      this.router.navigate([`dashboard/training/${id}`]);
+      this.snackBar.open(`Trening ${data.name} został zakończony`);
     });
   }
 

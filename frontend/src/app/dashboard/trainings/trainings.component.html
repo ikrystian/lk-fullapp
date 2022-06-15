@@ -12,14 +12,13 @@
             <div class="dashboard-section__image">
               <img src="/assets/images/dashboard.png" alt="">
             </div>
-            <ng-container *ngIf="trainings[0].id">
+            <ng-container *ngIf="trainings[0].id && trainings[0].end != null">
 
               <a routerLink="/dashboard/training/{{ trainings[0].id }}/edit" mat-stroked-button color="primary">przejdź
-                do
-                treningu ({{ trainings[0].name }})</a>
-            </ng-container>
+                do ({{ trainings[0].name }})</a>
             <span>lub</span>
-            <button (click)="createTraining()" mat-stroked-button color="primary">Utwórz nowy</button>
+            </ng-container>
+            <button (click)="createTraining(trainings[0].id)" mat-stroked-button color="primary">Utwórz nowy trening</button>
           </div>
         </div>
       </div>

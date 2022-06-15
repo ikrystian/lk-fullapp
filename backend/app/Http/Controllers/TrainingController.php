@@ -359,13 +359,14 @@ class TrainingController extends Controller
     public function end(Request $request)
     {
         $total = 0;
-        $exercises = Series::all()->where('training_id', $request->id);
+        $id = $request[0];
+        $exercises = Series::all()->where('training_id', $id);
 
         foreach ($exercises as $exercise) {
             $total += $exercise->weight * $exercise->reps * $exercise->type->multiplier;
         }
 
-        $training = Training::findOrFail($request->id);
+        $training = Training::findOrFail($id);
         $training->end = Carbon::now();
         $training->total = $total;
         $training->save();
