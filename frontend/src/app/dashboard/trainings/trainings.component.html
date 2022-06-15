@@ -1,26 +1,33 @@
-<mat-tab-group *ngIf="trainings" class="training-list-tabs" [selectedIndex]="activeTab">
+<mat-tab-group headerPosition="below" mat-stretch-tabs *ngIf="trainings" class="training-list-tabs"
+               [selectedIndex]="activeTab">
   <mat-tab>
     <ng-template mat-tab-label>
-      Dashboard
+      <mat-icon>space_dashboard</mat-icon>
     </ng-template>
     <ng-template matTabContent>
-      <div class="training-list-tabs__tab-component">
-        <div class="dashboard-section">
-          <strong>Dobrze Cie widzieć!</strong>
-          <img src="/assets/images/dashboard.png" alt="">
-          <button (click)="createTraining()" mat-stroked-button color="primary">Utwórz nowy trening</button>
-          <ng-container *ngIf="trainings[0].id">
+      <div class="training-list-tabs__tab-content">
+        <div class="training-list-tabs__tab-component">
+          <div class="dashboard-section">
+            <strong>Dobrze Cie widzieć!</strong>
+            <div class="dashboard-section__image">
+              <img src="/assets/images/dashboard.png" alt="">
+            </div>
+            <ng-container *ngIf="trainings[0].id">
+
+              <a routerLink="/dashboard/training/{{ trainings[0].id }}/edit" mat-stroked-button color="primary">przejdź
+                do
+                treningu ({{ trainings[0].name }})</a>
+            </ng-container>
             <span>lub</span>
-            <a routerLink="/dashboard/training/{{ trainings[0].id }}/edit" mat-stroked-button color="primary">przejdź do
-              ostatniego ({{ trainings[0].name }})</a>
-          </ng-container>
+            <button (click)="createTraining()" mat-stroked-button color="primary">Utwórz nowy</button>
+          </div>
         </div>
       </div>
     </ng-template>
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      Stats
+      <mat-icon>query_stats</mat-icon>
     </ng-template>
     <ng-template matTabContent>
       <div class="training-list-tabs__tab-content">
@@ -30,7 +37,7 @@
   </mat-tab>
   <mat-tab>
     <ng-template mat-tab-label>
-      Lista
+      <mat-icon>view_list</mat-icon>
     </ng-template>
     <ng-template matTabContent>
       <div class="training-list-tabs__tab-content">
@@ -41,7 +48,7 @@
 
   <mat-tab>
     <ng-template mat-tab-label>
-      Aktywność dystansowa
+      <mat-icon>directions_run</mat-icon>
     </ng-template>
     <ng-template matTabContent>
 
@@ -53,11 +60,12 @@
 
   <mat-tab>
     <ng-template mat-tab-label>
-      Kalendarz
+      <mat-icon>calendar_today</mat-icon>
     </ng-template>
     <ng-template matTabContent>
-
-      <app-calendar class="training-list-tabs__tab-component" [trainings]="trainings"></app-calendar>
+      <div class="training-list-tabs__tab-content">
+        <app-calendar class="training-list-tabs__tab-component" [trainings]="trainings"></app-calendar>
+      </div>
     </ng-template>
   </mat-tab>
 

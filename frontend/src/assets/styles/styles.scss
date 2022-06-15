@@ -153,12 +153,11 @@ body {
   border-radius: 0.5rem;
   overflow: hidden;
   margin-bottom: 2rem;
-  width: 340px;
-  max-width: 100%;
+  width: 100%;
 
   img {
     display: block;
-    max-width: 100%;
+    max-width: 240px;
     margin-inline: auto;
   }
 
@@ -289,4 +288,8 @@ input:-webkit-autofill:active {
   &.active .mat-calendar-body-today {
     border-color: var(--accent-color) !important;
   }
+}
+
+strong {
+  font-weight: 500;
 }
