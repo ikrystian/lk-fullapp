@@ -37,7 +37,6 @@ export class EditTrainingComponent implements OnInit {
   showChangeNameForm = false;
   name: string;
   timer;
-  showRestBar = false;
 
   constructor(
     public trainingService: TrainingsService,
@@ -59,9 +58,7 @@ export class EditTrainingComponent implements OnInit {
   }
 
   toggleRestIndicator(show: boolean): void {
-    this.showRestBar = false;
     setTimeout(() => {
-      this.showRestBar = false;
       new Audio('/assets/sounds/notification.mp3').play();
     }, 30000);
   }
@@ -81,14 +78,24 @@ export class EditTrainingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.trainingService.getExercisesTypes().subscribe(types => {
-      this.exerciseTypes = types;
-      this.allExerciseTypes = types;
-    });
+    if (!localStorage.getItem('bodyParts')) {
+      this.trainingService.getBodyParts().subscribe(bodyParts => {
+        localStorage.setItem('bodyParts', JSON.stringify(bodyParts));
+        this.bodyParts = bodyParts;
+      });
+    }
+    this.bodyParts = JSON.parse(localStorage.getItem('bodyParts'));
 
-    this.trainingService.getBodyParts().subscribe(bodyParts => {
-      this.bodyParts = bodyParts;
-    });
+    if (!localStorage.getItem('types')) {
+      this.trainingService.getExercisesTypes().subscribe(types => {
+        localStorage.setItem('types', JSON.stringify(types));
+        this.exerciseTypes = types;
+        this.allExerciseTypes = this.exerciseTypes;
+      });
+    }
+
+    this.exerciseTypes = JSON.parse(localStorage.getItem('types'));
+    this.allExerciseTypes = this.exerciseTypes;
   }
 
 
@@ -210,7 +217,5 @@ export class EditTrainingComponent implements OnInit {
         this.exerciseTypes = this.allExerciseTypes;
       }
     });
-
-
   }
 }
