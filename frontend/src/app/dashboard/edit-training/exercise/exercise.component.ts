@@ -147,7 +147,6 @@ export class ExerciseComponent implements OnChanges {
   }
 
   removeExercise(series: Series): any {
-    console.log(series);
     if (!confirm('Na pewno chcesz usunąć serię? Akcja jest nieodwracalna')) {
       return false;
     }

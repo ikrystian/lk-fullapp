@@ -26,36 +26,7 @@ class TrainingController extends Controller
     public function index()
     {
         $trainings = Training::where('user_id', Auth::id())->latest()->get();
-        $trainings->map(function ($training) {
-
-            if ($training->end) {
-                $to = Carbon::createFromFormat('Y-m-d H:i:s', $training->start);
-                $from = Carbon::createFromFormat('Y-m-d H:i:s', $training->end);
-                $diff_in_minutes = $to->diffInMinutes($from);
-                $training['time'] = $diff_in_minutes;
-            }
-        });
-
         return TrainingResource::collection($trainings);
-    }
-
-    public function getTrainingHours($userId)
-    {
-        $trainings = Training::where('user_id', $userId)->get();
-        $time = 0;
-        $trainings->map(function ($training) {
-            if ($training->end) {
-                $to = Carbon::createFromFormat('Y-m-d H:i:s', $training->start);
-                $from = Carbon::createFromFormat('Y-m-d H:i:s', $training->end);
-                $diff_in_minutes = $to->diffInMinutes($from);
-                $training['time'] = $diff_in_minutes;
-            }
-        });
-
-        foreach ($trainings as $training) {
-            $time += $training['time'];
-        }
-        return $time / 60;
     }
 
     public function checkOpenedTraining()
@@ -461,7 +432,6 @@ class TrainingController extends Controller
         $runs = DB::table('runs')->where('user_id', Auth::id());
         $stats['runMeters'] = $runs->sum('distance');
         $stats['runSeconds'] = $runs->sum('time');
-        $stats['hours'] = $this->getTrainingHours(Auth::id());
         $stats['streak'] = $this->streak(Auth::id());
 
         return $stats;
