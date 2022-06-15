@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from '../shared/profile.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../environments/environment';
-
+import { Location } from '@angular/common'
 
 export class User {
   id: number;
@@ -18,13 +18,12 @@ export class User {
   encapsulation: ViewEncapsulation.None
 })
 export class ProfileComponent implements OnInit {
-
   user: User;
   trainings: any;
   userImages: any;
   assetsUrl;
 
-  constructor(public profileService: ProfileService, private activatedRoute: ActivatedRoute) {
+  constructor(public profileService: ProfileService, private location: Location, private activatedRoute: ActivatedRoute) {
     this.assetsUrl  = environment.UPLOADED_ASSETS_URL;
 
     this.profileService.getActivitiesByUserId().subscribe(data => {
@@ -32,6 +31,7 @@ export class ProfileComponent implements OnInit {
     });
     const userId = this.activatedRoute.snapshot.paramMap.get('id');
     this.profileService.getLatestImages(userId).subscribe(data => {
+
       this.userImages = data;
       console.log(this.userImages);
     });
@@ -40,5 +40,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  back(): void {
+    this.location.back();
+  }
 
 }

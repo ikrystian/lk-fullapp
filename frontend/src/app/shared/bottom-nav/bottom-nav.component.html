@@ -1,5 +1,5 @@
 <nav>
-  <button [routerLink]="['/profile/1']" routerLinkActive="router-link-active" class="profile-button" matRipple
+  <button [routerLink]="['/profile/' + this.profile?.id]" routerLinkActive="router-link-active" class="profile-button" matRipple
           title="profile - work in progress">
     <img [src]="avatar" alt="">
   </button>

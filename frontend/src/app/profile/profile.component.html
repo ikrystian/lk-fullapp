@@ -1,4 +1,22 @@
+<a mat-icon-button (click)="back()">
+  <mat-icon>arrow_back</mat-icon>
+</a>
 <div class="profile-component" >
+
+  <header class="profile-component__header">
+    <div class="profile-component__image">
+      <img src="https://i.pravatar.cc/124" alt="">
+    </div>
+    <div class="profile-component__summary">
+      <h2>Krystian</h2>
+      <ul class="profile-component__stats">
+        <li><span>Treningi</span><strong>12</strong></li>
+        <li><span>KM</span><strong>12</strong></li>
+        <li><span>Followers</span><strong>12</strong></li>
+      </ul>
+    </div>
+  </header>
+<div class="profile-component__details">
   <h2>{{ 'YOUR_PROFILE' | translate }}</h2>
 
 
@@ -12,5 +30,5 @@
         </li>
       </ul>
   </ng-container>
-
+</div>
 </div>
