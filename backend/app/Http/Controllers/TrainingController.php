@@ -351,7 +351,7 @@ class TrainingController extends Controller
     }
 
     public function removeSeries(Request $request) {
-        $id = $request->series_type_id;
+        $id = $request->id;
         Series::findOrFail($id)->delete();
         return response()->json('removed', 200);
     }
