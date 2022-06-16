@@ -4,13 +4,18 @@
     Przemierzyłeś<br><strong>{{ total.runMeters / 40000000 }}</strong> długości ziemi
   </div>
 </div>
-<ul *ngIf="runs" class="run-list">
+<ul *ngIf="runs  && runs.length > 0" class="run-list">
   <li class="run-list__item" *ngFor="let run of runs">
     <a class="run-list__link" routerLink="/dashboard/run/{{run.id}}">
-      <img src="https://pbs.twimg.com/profile_images/518904478985367555/OcioJN5l_400x400.jpeg" *ngIf="run.type == 197" alt="" class="run-list__image">
-      <img src="https://www.stylist.co.uk/images/app/uploads/2020/07/08115906/how-to-run-faster-crop-1594206002-878x878.jpeg" *ngIf="run.type == 196" alt="" class="run-list__image">
-      <img src="https://www.precor.com/sites/default/files/resource-center/062116_PRE_2373-6144x4096.jpg" *ngIf="run.type == 198" alt="" class="run-list__image">
-      <img src="https://www.sim-swim.com/wp-content/uploads/2018/01/cropped-nuoto-e1514889945715.jpg" *ngIf="run.type == 199" alt="" class="run-list__image">
+      <img src="https://pbs.twimg.com/profile_images/518904478985367555/OcioJN5l_400x400.jpeg" *ngIf="run.type == 197"
+           alt="" class="run-list__image">
+      <img
+        src="https://www.stylist.co.uk/images/app/uploads/2020/07/08115906/how-to-run-faster-crop-1594206002-878x878.jpeg"
+        *ngIf="run.type == 196" alt="" class="run-list__image">
+      <img src="https://www.precor.com/sites/default/files/resource-center/062116_PRE_2373-6144x4096.jpg"
+           *ngIf="run.type == 198" alt="" class="run-list__image">
+      <img src="https://www.sim-swim.com/wp-content/uploads/2018/01/cropped-nuoto-e1514889945715.jpg"
+           *ngIf="run.type == 199" alt="" class="run-list__image">
       <div class="run-simple-stats">
         <div class="run-simple-stats__item">
           <span class="run-simple-stats__value" *ngIf="run.type == 196">Run</span>
@@ -31,3 +36,8 @@
     </a>
   </li>
 </ul>
+
+<div *ngIf="runs && runs.length == 0" style="text-align: center;">
+  W Twoich treningach nie dodałeś jeszcze żadnej aktywności dystansowej takiej jak orbitrek,pływanie, bieganie czy
+  rower. Zrób to a wszystkie informacje będą archiwizowane w tym miejscu
+</div>

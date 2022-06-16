@@ -64,11 +64,14 @@ export class EditTrainingComponent implements OnInit {
   }
 
   updateTime(from): void {
-    const start = moment(new Date(from), );
+    const start = moment(new Date(from));
+    const now = moment(new Date());
+    console.log(start);
+    console.log(now);
     setInterval(() => {
       const elapsedTime = moment(new Date()).diff(start);
       const time = moment.duration(elapsedTime);
-      const hrs = ('0' + (time.hours() - 2)).slice(-2);
+      const hrs = ('0' + (time.hours())).slice(-2);
       const min = ('0' + time.minutes()).slice(-2);
       const secs = ('0' + time.seconds()).slice(-2);
       this.timer = `${hrs}:${min}:${secs}`;
