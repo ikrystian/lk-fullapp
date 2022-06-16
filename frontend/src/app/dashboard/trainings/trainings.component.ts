@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {TrainingsService} from '../../shared/trainings.service';
+import { Component, OnInit } from '@angular/core';
+import { TrainingsService } from '../../shared/trainings.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { ExerciseService } from '../../shared/exercise-service.service';
@@ -45,17 +45,25 @@ export class TrainingsComponent implements OnInit {
 
   }
 
+  createEmptyTraining(): void {
+    this.trainingService.addTraining(this.userPosition).subscribe(response => {
+      this.training = response;
+      this.exerciseService.clearLocalSeries();
+      this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
+    });
+  }
+
   createTraining(lastTrainingId: number): void {
     console.log(lastTrainingId);
+    if (lastTrainingId === 0) {
+      this.createEmptyTraining();
+      this.snackBar.open(`Twój pierwszy trening został rozpoczęty!`);
+      return;
+    }
+
     this.trainingService.finishTraining(lastTrainingId).subscribe(data => {
-      console.log(data);
-      this.trainingService.addTraining(this.userPosition).subscribe(response => {
-        console.log(response);
-        this.training = response;
-        this.exerciseService.clearLocalSeries();
-        this.router.navigate([`dashboard/training/${this.training.id}/edit`]);
-        this.snackBar.open(`Trening ${data.name} został zakończony`);
-      });
+      this.createEmptyTraining();
+      this.snackBar.open(`Trening ${data.name} został zakończony`);
     });
   }
 

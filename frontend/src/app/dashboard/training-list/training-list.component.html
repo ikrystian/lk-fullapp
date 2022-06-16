@@ -1,4 +1,4 @@
-<mat-accordion class="training-list">
+<mat-accordion class="training-list" *ngIf="trainings && trainings.length > 0">
 
   <mat-expansion-panel *ngFor="let training of trainings; let index = index">
     <mat-expansion-panel-header>
@@ -37,3 +37,7 @@
 
   </mat-expansion-panel>
 </mat-accordion>
+
+<div *ngIf="trainings && trainings.length === 0">
+  <p style="text-align: center;">W tym miejscu znajdzie się lista wszystkich Twoich treningów, <strong>jak tylko je dodasz 🤣</strong></p>
+</div>

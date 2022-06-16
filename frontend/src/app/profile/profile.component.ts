@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from '../shared/profile.service';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 
 export class User {
   id: number;
@@ -31,7 +31,6 @@ export class ProfileComponent implements OnInit {
     });
     const userId = this.activatedRoute.snapshot.paramMap.get('id');
     this.profileService.getLatestImages(userId).subscribe(data => {
-
       this.userImages = data;
       console.log(this.userImages);
     });

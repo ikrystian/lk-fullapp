@@ -1,4 +1,4 @@
-<div class="stats" *ngIf="stats">
+<div class="stats" *ngIf="stats && stats.trainings > 0">
   <header class="stats__header">
     <h1>Gratuacje, <strong>{{ stats.username }}</strong>&nbsp;!</h1>
   </header>
@@ -15,4 +15,10 @@
     </div>
   </div>
   <h3>Ostatni streak: {{ stats.streak }} dni</h3>
+</div>
+
+<div class="stats" *ngIf="stats && stats.trainings == 0">
+  <p class="empty-results">
+    Dodaj i zakończ swój pierwszy trening a w tym miejscu pojawi się jego podsumowanie
+  </p>
 </div>

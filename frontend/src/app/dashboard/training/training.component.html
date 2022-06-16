@@ -57,6 +57,10 @@
       <mat-spinner [diameter]="32"></mat-spinner>
     </div>
 
+    <div *ngIf="dataSource && dataSource.length === 0" style="text-align: center">
+      Nie dodałeś jeszcze żadnych serii w treningu <strong>{{ training.name }}</strong>. Jeżeli to zrobisz w tym miejscu pojawi się ich podsumowanie ❤️
+    </div>
+
   </div>
 </ng-container>
 

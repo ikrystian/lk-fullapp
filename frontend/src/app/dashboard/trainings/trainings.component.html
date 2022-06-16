@@ -12,20 +12,31 @@
             <div class="dashboard-section__image">
               <img src="/assets/images/dashboard.png" alt="">
             </div>
-            <ng-container *ngIf="trainings[0].end === null">
+            <ng-container *ngIf="trainings.length > 0 && trainings[0].end === null">
 
               <a routerLink="/dashboard/training/{{ trainings[0].id }}/edit" mat-stroked-button color="primary">przejdź
                 do ({{ trainings[0].name }})</a>
               <span>lub</span>
             </ng-container>
-            <button (click)="createTraining(trainings[0].id)" mat-stroked-button color="primary">Utwórz nowy trening
+
+            <section  *ngIf="trainings.length === 0" class="empty-trainings">
+              <p>Troche tu pusto co nie?</p>
+              <p>Dodaj swój pierwszy trening a wszystko sie zmieni 😍</p>
+              <p>Dodatkowo zachęcam do zerknięcia w ustawienia (kiedyś będą działać)</p>
+            </section>
+
+            <button (click)="createTraining(trainings[0]?.id || 0)" mat-stroked-button color="primary">Utwórz nowy
+              trening
             </button>
+
+
+
           </div>
         </div>
       </div>
     </ng-template>
   </mat-tab>
-  <mat-tab>
+  <mat-tab *ngIf="trainings.length > 0">
     <ng-template mat-tab-label>
       <mat-icon>query_stats</mat-icon>
     </ng-template>
@@ -35,7 +46,7 @@
       </div>
     </ng-template>
   </mat-tab>
-  <mat-tab>
+  <mat-tab *ngIf="trainings.length > 0">
     <ng-template mat-tab-label>
       <mat-icon>view_list</mat-icon>
     </ng-template>
@@ -46,7 +57,7 @@
     </ng-template>
   </mat-tab>
 
-  <mat-tab>
+  <mat-tab *ngIf="trainings.length > 0">
     <ng-template mat-tab-label>
       <mat-icon>directions_run</mat-icon>
     </ng-template>
@@ -58,7 +69,7 @@
     </ng-template>
   </mat-tab>
 
-  <mat-tab>
+  <mat-tab *ngIf="trainings.length > 0">
     <ng-template mat-tab-label>
       <mat-icon>calendar_today</mat-icon>
     </ng-template>
