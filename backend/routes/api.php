@@ -51,6 +51,7 @@ Route::group([
     Route::post('/training/add-run/', [RunController::class, 'store']);
     Route::post('/remove-run/', [RunController::class, 'destroy']);
     Route::get('/getuseravatar', [TrainingController::class, 'getUserAvatar']);
+    Route::get('/getuseravatar/{id}', [TrainingController::class, 'getUserAvatarById']);
     Route::post('/set-weight', [TrainingController::class, 'setWeight']);
     Route::get('/activities', [ActivityController::class, 'getByUserId']);
     Route::get('/exercises/getTotalInSeries/{exerciseId}', [TrainingController::class, 'getLastExerciseSum']);
@@ -82,5 +83,7 @@ Route::group([
     Route::get('/get-runs/{trainingId}/{typeId}', [RunController::class, 'getRunsForTraining']);
 
     Route::get('/user/latest-images/{userId}', [UserController::class, 'getLatestUserImages']);
+
+    Route::get('/profileInfo/{userId}',[TrainingController::class, 'getBasicProfileInfo'] );
 
 });

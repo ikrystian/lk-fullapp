@@ -152,6 +152,12 @@ class TrainingController extends Controller
         return response()->json(['avatar' => $avatar]);
     }
 
+    public function getUserAvatarById($id)
+    {
+        $avatar = User::findOrFail($id)->profileimage;
+        return response()->json(['avatar' => $avatar]);
+    }
+
     public function setWeight(Request $request)
     {
         $meta = new Meta();
@@ -442,5 +448,10 @@ class TrainingController extends Controller
     {
         $series = DB::table('series')->where('training_id', $trainingId)->get();
         return $series;
+    }
+
+    public function getBasicProfileInfo($userId) {
+        $user = DB::table('users')->where('id', $userId)->get()[0];
+        return $user;
     }
 }

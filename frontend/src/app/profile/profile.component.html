@@ -1,34 +1,32 @@
 <a mat-icon-button (click)="back()">
   <mat-icon>arrow_back</mat-icon>
 </a>
-<div class="profile-component" >
+<div class="profile-component" *ngIf="profile">
 
   <header class="profile-component__header">
-    <div class="profile-component__image">
-      <img src="https://i.pravatar.cc/124" alt="">
+    <div class="profile-component__image" style="background-color: pink">
+      <img src="{{ profile.avatar }}" alt="">
     </div>
     <div class="profile-component__summary">
-      <h2>Krystian</h2>
-      <ul class="profile-component__stats">
-        <li><span>Treningi</span><strong>12</strong></li>
-        <li><span>KM</span><strong>12</strong></li>
-        <li><span>Followers</span><strong>12</strong></li>
-      </ul>
+      <h2>{{profile.name}}</h2>
+<!--      <ul class="profile-component__stats" *ngIf="stats">-->
+<!--        <li><span>Treningi</span><strong>{{ stats.trainings  }}</strong></li>-->
+<!--        <li><span>KM</span><strong>{{stats.runMeters / 1000 }}km</strong></li>-->
+<!--        <li><span>Followers</span><strong>0</strong></li>-->
+<!--      </ul>-->
     </div>
   </header>
-<div class="profile-component__details">
-  <h2>{{ 'YOUR_PROFILE' | translate }}</h2>
-
-
-  <ng-container *ngIf="userImages">
-    <h3>Ostatnio dodane zdjęcia z treningów</h3>
-    <ul class="user-short-gallery" >
-        <li *ngFor="let image of userImages">
-          <a [href]="assetsUrl +  'images/' + image.user_image + '_600.jpg'">
-            <img [src]="assetsUrl +  'images/' + image.user_image + '_120.jpg'" alt="">
-          </a>
-        </li>
-      </ul>
-  </ng-container>
-</div>
+<!--  <div class="profile-component__details">-->
+<!--    <h2>{{ 'YOUR_PROFILE' | translate }}</h2>-->
+<!--    <ng-container *ngIf="userImages">-->
+<!--      <h3>Ostatnio dodane zdjęcia z treningów</h3>-->
+<!--      <ul class="user-short-gallery">-->
+<!--        <li *ngFor="let image of userImages">-->
+<!--          <a [href]="assetsUrl +  'images/' + image.user_image + '_600.jpg'">-->
+<!--            <img [src]="assetsUrl +  'images/' + image.user_image + '_120.jpg'" alt="">-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </ng-container>-->
+<!--  </div>-->
 </div>

@@ -31,6 +31,14 @@ export class ProfileService {
     return this.http.get(`${this.API_URL}/getuseravatar`);
   }
 
+  getUserAvatarById(id: string): any {
+    return this.http.get(`${this.API_URL}/getuseravatar/${id}`);
+  }
+
+  getProfileInfoById(id: string): any {
+    return this.http.get(`${this.API_URL}/profileInfo/${id}`);
+  }
+
   setWeight(weight): any {
     return this.http.post(`${this.API_URL}/set-weight`, weight);
   }
