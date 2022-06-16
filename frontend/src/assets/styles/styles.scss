@@ -2,6 +2,8 @@
 @import 'helpers';
 @import 'material';
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,500&display=swap');
+
 @include mat-core();
 $angular-primary: mat-palette($mat-blue, 500, 100, 900);
 $angular-accent: mat-palette($mat-teal, A200, A100, A400);

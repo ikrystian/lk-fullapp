@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   color: #fff;
-  background-color: #242134;
+  background-color: #5b4c87;
 
   &__title {
     margin-top: 0;
@@ -38,8 +38,6 @@
   }
 
   &__form {
-    background-color: #242134;
-    border-radius: 2rem 2rem 0 0;
     position: relative;
     padding: 2rem;
     overflow: hidden;
@@ -81,5 +79,35 @@
       padding-left: 2rem;
       padding-right: 2rem;
     }
+  }
+}
+
+.login-page {
+  &__banner {
+    height: 30vh;
+    margin: 1rem;
+    overflow: hidden;
+    border-radius: 1rem;
+
+    img {
+      display: block;
+      widtth: 100%;
+      object-fit: cover;
+    }
+  }
+  h1, h2  {
+    font-family: 'Roboto Flex', sans-serif !important;
+    color: #443762;
+    text-transform: uppercase;
+    text-align: left;
+    letter-spacing: 1px;
+    font-size: 2.5rem;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+
   }
 }
