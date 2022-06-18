@@ -42,6 +42,9 @@ export class CreateExerciseComponent implements OnInit {
   createExercise = () => {
     this.trainingService.createExerciseType(this.exerciseForm.value).subscribe(exercise => {
       if (exercise) {
+        let exercises = JSON.parse(localStorage.getItem('types'));
+        exercises.push(exercise);
+        localStorage.setItem('types', JSON.stringify(exercises));
         this.openSnackBar('Cwiczenie zostało utworzone', '💪');
         this.dialogRef.close(exercise);
       }
