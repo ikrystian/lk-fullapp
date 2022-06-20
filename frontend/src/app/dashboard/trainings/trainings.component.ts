@@ -18,6 +18,7 @@ export class TrainingsComponent implements OnInit {
   trainings;
   userPosition;
   training;
+  links = ['/dash', '/list'];
   activeTab = 0;
 
   constructor(
