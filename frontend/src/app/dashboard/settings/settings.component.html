@@ -16,10 +16,11 @@
     </div>
   </div>
 
-
-  <div class="set-body-parts">
-
-  </div>
+  <p>Pokazuj progres w stosunku do</p>
+  <mat-radio-group aria-label="Select an option">
+    <mat-radio-button (change)="setProgress($event)" value="0" [checked]="profile?.progress == 0">średniej wszystkich treningów</mat-radio-button>
+    <mat-radio-button (change)="setProgress($event)" value="1" [checked]="profile?.progress == 1">ostatniego treningu</mat-radio-button>
+  </mat-radio-group>
 
 </div>
 

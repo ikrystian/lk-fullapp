@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfileService } from '../../shared/profile.service';
 import { environment } from '../../../environments/environment';
+import { JwtService } from '../../shared/jwt.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,16 +13,22 @@ import { environment } from '../../../environments/environment';
 export class SettingsComponent implements OnInit {
   selectedFile: File;
   userWeight: number;
+  profile;
 
   constructor(
     private http: HttpClient,
     private snackBar: MatSnackBar,
+    private jwtService: JwtService,
     private profileService: ProfileService) {
   }
 
   ngOnInit(): void {
     this.profileService.getWeight().subscribe(res => {
       this.userWeight = res.data.meta_value;
+    });
+
+    this.jwtService.profile().subscribe(res => {
+      this.profile = res;
     });
   }
 
@@ -42,6 +49,16 @@ export class SettingsComponent implements OnInit {
     this.http.post(`${environment.API_URL}/user/add-image`, uploadData).subscribe(event => {
       this.profileService.updateProgress();
       this.snackBar.open('Zdjęcie zostało zaktualizowane', '👌');
+    });
+  }
+
+  setProgress(e: any): void {
+    this.profileService.updateProgressSettings({value: e.value}).subscribe(res => {
+      if (!res) {
+        return false;
+      }
+
+      this.snackBar.open('Ustawienia zostały zapisane');
     });
   }
 

@@ -51,6 +51,7 @@ import { RunExerciseComponent } from './run-exercise/run-exercise.component';
 import { RunDetailsComponent } from './run-details/run-details.component';
 import {UnderConstructionComponent} from '../shared/under-construction/under-construction.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatSidenavModule,
     TranslateModule,
     TextFieldModule,
+    MatRadioModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA-Vk8BB1fHqdV4c-lLjqy_pYpYtodoKfE'
     }),

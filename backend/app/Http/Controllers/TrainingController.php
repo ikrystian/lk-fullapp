@@ -93,8 +93,29 @@ class TrainingController extends Controller
             return $carry;
         }, 0);
 
-        // !todo change it to average sum
-        return ['lastTraining' => round($total / $training__count)];
+        $exerciseSetting = User::find(Auth::id())['progress'];
+        if($exerciseSetting == 0) {
+            return ['lastTraining' => round($total / $training__count)];
+        }
+
+        $currentTrainingId = Training::latest()->first('id')->id;
+
+        $trainingId = Series::where('series_type_id', $exerciseId)
+            ->where('training_id', '!=', $currentTrainingId)
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->first('training_id');
+
+        $exercises = Series::where('training_id', $trainingId->training_id)->where('series_type_id', $exerciseId)->get();
+        $lastTraining = $exercises->map(function ($item) {
+            $data = $item;
+            $data['total'] = $item->weight * $item->reps;
+            return $data;
+        });
+
+        return [
+            'lastTraining' => $lastTraining->sum('total')
+        ];
     }
 
     public function getLastExerciseSum($exerciseId)

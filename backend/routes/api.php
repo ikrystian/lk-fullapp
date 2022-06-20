@@ -73,6 +73,8 @@ Route::group([
 
     Route::post('/training/series/add', [TrainingController::class, 'addSeries']);
 
+    Route::post('/set-progress', [UserController::class, 'changeProgressSetting']);
+
     Route::get('/trainings/day/{date}', [TrainingController::class, 'getByDate']);
     Route::get('/exercises/unique/{trainingId}', [TrainingController::class, 'getUniqueExercises']);
     Route::get('/check-opened-training', [TrainingController::class, 'checkOpenedTraining']);

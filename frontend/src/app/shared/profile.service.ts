@@ -46,4 +46,8 @@ export class ProfileService {
   getWeight(): any {
     return this.http.get(`${this.API_URL}/get-user-meta/weight`);
   }
+
+  updateProgressSettings(val): any {
+    return this.http.post(`${this.API_URL}/set-progress`, val);
+  }
 }
