@@ -15,7 +15,7 @@
 
 
   <div class="standard-page">
-    <app-training-image [training]="training"></app-training-image>
+    <app-training-image [training]="training" *ngIf="training.end == null"></app-training-image>
     <table mat-table
            *ngIf="dataSource && dataSource.length > 0"
            [dataSource]="dataSource" multiTemplateDataRows>
@@ -58,7 +58,7 @@
     </div>
 
     <div *ngIf="dataSource && dataSource.length === 0" style="text-align: center">
-      Nie dodałeś jeszcze żadnych serii w treningu <strong>{{ training.name }}</strong>. Jeżeli to zrobisz w tym miejscu pojawi się ich podsumowanie ❤️
+      Nie dodałeś żadnych serii w treningu <strong>{{ training.name }}</strong>.️
     </div>
 
   </div>

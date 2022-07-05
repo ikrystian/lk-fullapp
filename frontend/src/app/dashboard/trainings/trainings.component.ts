@@ -5,7 +5,7 @@ import { GeolocationService } from '@ng-web-apis/geolocation';
 import { ExerciseService } from '../../shared/exercise-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TimeagoIntl } from 'ngx-timeago';
-import {strings as englishStrings} from 'ngx-timeago/language-strings/pl';
+import { strings as englishStrings } from 'ngx-timeago/language-strings/pl';
 import * as moment from 'moment';
 
 @Component({
@@ -24,6 +24,7 @@ export class TrainingsComponent implements OnInit {
   links = ['/dash', '/list'];
   activeTab = 0;
   timeAgo;
+
   constructor(
     public trainingService: TrainingsService,
     public router: Router,
@@ -32,7 +33,6 @@ export class TrainingsComponent implements OnInit {
     private snackBar: MatSnackBar,
     private geolocation: GeolocationService,
     private activatedRoute: ActivatedRoute,
-
     intl: TimeagoIntl) {
     this.geolocation.subscribe(position => {
       this.userPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
@@ -45,7 +45,7 @@ export class TrainingsComponent implements OnInit {
   ngOnInit(): void {
     this.trainingsService.getTrainings().subscribe((res: any) => {
       this.trainings = res.data;
-      this.trainings[0].ago =  moment(new Date(this.trainings[0].start.replace(/-/g, "/"))).format('X')
+      this.trainings[0].ago = moment(new Date(this.trainings[0].start.replace(/-/g, "/"))).format('X')
     });
 
     const activeTab = this.activatedRoute.snapshot.queryParamMap.get('activeTab');
@@ -64,17 +64,22 @@ export class TrainingsComponent implements OnInit {
   }
 
   createTraining(lastTrainingId: number): void {
-    console.log(lastTrainingId);
     if (lastTrainingId === 0) {
       this.createEmptyTraining();
       this.snackBar.open(`Twój pierwszy trening został rozpoczęty!`);
       return;
     }
 
-    this.trainingService.finishTraining(lastTrainingId).subscribe(data => {
+    this.trainingService.getTraining(lastTrainingId).subscribe(data => {
+      if (data.end == null) {
+        this.snackBar.open(`Trening ${data.name} został zakończony`);
+      } else {
+        this.snackBar.open(`Nowy trening został rozpoczęty`);
+      }
+
       this.createEmptyTraining();
-      this.snackBar.open(`Trening ${data.name} został zakończony`);
     });
+
   }
 
 }
