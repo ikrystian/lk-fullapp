@@ -52,6 +52,11 @@ import { RunDetailsComponent } from './run-details/run-details.component';
 import {UnderConstructionComponent} from '../shared/under-construction/under-construction.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
+import { TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter, TimeagoModule } from 'ngx-timeago';
+
+export class MyIntl extends TimeagoIntl {
+// do extra stuff here...
+}
 
 @NgModule({
   declarations: [
@@ -112,6 +117,10 @@ import { MatRadioModule } from '@angular/material/radio';
     TranslateModule,
     TextFieldModule,
     MatRadioModule,
+    TimeagoModule.forRoot({
+      intl: { provide: TimeagoIntl, useClass: MyIntl },
+      formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
+    }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA-Vk8BB1fHqdV4c-lLjqy_pYpYtodoKfE'
     }),

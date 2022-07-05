@@ -4,6 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { ExerciseService } from '../../shared/exercise-service.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TimeagoIntl } from 'ngx-timeago';
+import {strings as englishStrings} from 'ngx-timeago/language-strings/pl';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-trainings',
@@ -20,7 +23,7 @@ export class TrainingsComponent implements OnInit {
   training;
   links = ['/dash', '/list'];
   activeTab = 0;
-
+  timeAgo;
   constructor(
     public trainingService: TrainingsService,
     public router: Router,
@@ -28,15 +31,21 @@ export class TrainingsComponent implements OnInit {
     private trainingsService: TrainingsService,
     private snackBar: MatSnackBar,
     private geolocation: GeolocationService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+
+    intl: TimeagoIntl) {
     this.geolocation.subscribe(position => {
       this.userPosition = {latitude: position.coords.latitude, longitude: position.coords.longitude};
     });
+
+    intl.strings = englishStrings;
+    intl.changes.next();
   }
 
   ngOnInit(): void {
     this.trainingsService.getTrainings().subscribe((res: any) => {
       this.trainings = res.data;
+      this.trainings[0].ago =  moment(new Date(this.trainings[0].start.replace(/-/g, "/"))).format('X')
     });
 
     const activeTab = this.activatedRoute.snapshot.queryParamMap.get('activeTab');

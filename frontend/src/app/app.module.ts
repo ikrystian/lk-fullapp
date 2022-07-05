@@ -35,6 +35,7 @@ import { RecordComponent } from './shared/record/record.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CurrentExercisesModalComponent } from './dashboard/edit-training/current-exercises-modal/current-exercises-modal.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { TimeagoModule } from 'ngx-timeago';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -79,6 +80,7 @@ export class MyHammerConfig extends HammerGestureConfig {
     MatDatepickerModule,
     FontAwesomeModule,
     // ChartsModule,
+    TimeagoModule.forRoot(),
     TranslateModule.forRoot({
       defaultLanguage: 'pl',
       loader: {
