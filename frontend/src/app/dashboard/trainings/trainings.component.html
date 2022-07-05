@@ -12,12 +12,16 @@
             <div class="dashboard-section__image">
               <img src="/assets/images/dashboard.png" alt="">
             </div>
-            <ng-container *ngIf="trainings.length > 0 && trainings[0].end === null">
-
+            <ng-container *ngIf="trainings.length > 0">
+              <ng-container *ngIf="trainings[0].end === null">
               <a routerLink="/dashboard/training/{{ trainings[0].id }}/edit" mat-stroked-button color="primary">przejdź
                 do ({{ trainings[0].name }})</a>
               <small style="top: -0.8rem; position: relative;">Utworzony {{ trainings[0].start | timeago:live}}</small>
               <span>lub</span>
+              </ng-container>
+              <ng-container *ngIf="trainings[0].end !== null">
+               <small>Ostatni trening zakończyłeś <strong>{{ trainings[0].end | timeago:live}}</strong></small>
+              </ng-container>
             </ng-container>
 
             <section  *ngIf="trainings.length === 0" class="empty-trainings">

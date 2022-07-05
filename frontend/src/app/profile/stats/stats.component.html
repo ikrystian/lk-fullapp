@@ -4,17 +4,11 @@
   </header>
   <h2>Udało Ci się podnieść</h2>
   <h2><strong> {{ stats.total / 1000 | round : 2 }} ton !</strong></h2>
-  <h3>(to tyle co {{ stats.total / 1000 / 35 | round }} czołgów T55 💪)</h3>
+  <h3>to tyle co {{ stats.total / 1000 / 35 | round }} czołgów T55 💪</h3>
   <h3>w trakcie<br>{{ stats.trainings }} treningów</h3>
   <h3>oraz przebiec</h3>
   <h3>{{ stats.runMeters / 1000}}km w {{stats.runSeconds / 3600 | round:2}}godzin</h3>
-  <h3>czyli {{stats.runMeters / 9 | round: 2 }} długości czołgu T55 </h3>
-  <div class="run-total">
-    <img src="/assets/images/earth.png" alt="">
-    <div>
-      Przemierzyłeś<br><strong>{{ stats.runMeters / 40000000 }}</strong> długości ziemi
-    </div>
-  </div>
+  <h3>czyli <strong>{{ stats.runMeters / 40000000 }}</strong> długości ziemi</h3>
   <h3>Ostatni streak: {{ stats.streak }} dni</h3>
 </div>
 
