@@ -14,7 +14,7 @@ import { TrainingListModalComponent } from '../training-list-modal/training-list
   encapsulation: ViewEncapsulation.None
 })
 export class CalendarComponent implements OnInit {
-  @Input() trainings;
+  trainings;
   direction = '';
   selectedDate: any;
 
@@ -22,10 +22,15 @@ export class CalendarComponent implements OnInit {
     private router: Router,
     public trainingService: TrainingsService,
     private bottomSheet: MatBottomSheet,
+    public trainingsService: TrainingsService,
     public dialog: MatDialog) {
+      this.trainingsService.getTrainings().subscribe((res: any) => {
+        this.trainings = res.data;
+      });
   }
 
   ngOnInit(): void {
+
   }
 
   onSelect = event => {

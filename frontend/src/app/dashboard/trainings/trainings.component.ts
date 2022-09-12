@@ -21,10 +21,12 @@ export class TrainingsComponent implements OnInit {
   trainings;
   userPosition;
   training;
-  links = ['/dash', '/list'];
+  links = ['/list'];
   activeTab = 0;
   timeAgo;
-
+  tempDate;
+  lastTraining;
+  
   constructor(
     public trainingService: TrainingsService,
     public router: Router,
@@ -39,13 +41,13 @@ export class TrainingsComponent implements OnInit {
     });
 
     intl.strings = englishStrings;
-    intl.changes.next();
+    intl.changes.next();    
   }
 
   ngOnInit(): void {
-    this.trainingsService.getTrainings().subscribe((res: any) => {
-      this.trainings = res.data;
-      this.trainings[0].ago = moment(new Date(this.trainings[0].start.replace(/-/g, "/"))).format('X')
+    this.trainingsService.getLastTraining().subscribe((res: any) => {
+      this.training = res;
+      this.training.ago = moment(new Date(this.training.start.replace(/-/g, "/"))).format('X');
     });
 
     const activeTab = this.activatedRoute.snapshot.queryParamMap.get('activeTab');

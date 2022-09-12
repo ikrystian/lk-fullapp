@@ -11,22 +11,11 @@ import { SettingsComponent } from './settings/settings.component';
 import { MapComponent } from './map/map.component';
 import { RunExerciseComponent } from './run-exercise/run-exercise.component';
 import { RunDetailsComponent } from './run-details/run-details.component';
-import { TrainingListComponent } from './training-list/training-list.component';
-import { RunsComponent } from './runs/runs.component';
-import { CalendarComponent } from './calendar/calendar.component';
 
 const routes: Routes = [
   {
     path: '', component: DashboardComponent, children: [
-      {path: '', redirectTo: 'training-list', pathMatch: 'full'},
-      {
-        path: 'training-list', component: TrainingsComponent, children: [
-          {path: '', redirectTo: 'list', pathMatch: 'full'},
-          {path: 'list', component: TrainingListComponent},
-          {path: 'runs', component: RunsComponent},
-          {path: 'calendar', component: CalendarComponent}
-        ]
-      },
+      {path: '', component: TrainingsComponent, pathMatch: 'full'},
       {path: 'training/:id', component: TrainingComponent},
       {path: 'training/:id/edit', component: EditTrainingComponent},
       {path: 'training/:id/edit/:exerciseId', component: EditTrainingComponent},

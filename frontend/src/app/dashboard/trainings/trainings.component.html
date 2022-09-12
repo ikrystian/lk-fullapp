@@ -1,4 +1,4 @@
-<mat-tab-group headerPosition="below" mat-stretch-tabs *ngIf="trainings" class="training-list-tabs"
+<mat-tab-group headerPosition="below" mat-stretch-tabs *ngIf="training" class="training-list-tabs"
                [selectedIndex]="activeTab">
   <mat-tab>
     <ng-template mat-tab-label>
@@ -12,36 +12,36 @@
             <div class="dashboard-section__image">
               <img src="/assets/images/dashboard.png" alt="">
             </div>
-            <ng-container *ngIf="trainings.length > 0">
-              <ng-container *ngIf="trainings[0].end === null">
-              <a routerLink="/dashboard/training/{{ trainings[0].id }}/edit" mat-stroked-button color="primary">przejdź
-                do ({{ trainings[0].name }})</a>
-              <small style="top: -0.8rem; position: relative;">Utworzony {{ trainings[0].start | timeago:live}}</small>
+            <ng-container *ngIf="training">
+              <ng-container *ngIf="training.end === null">
+              <a routerLink="/dashboard/training/{{ training.id }}/edit" mat-stroked-button color="primary">przejdź
+                do ({{ training.name }})</a>
+              <small style="top: -0.8rem; position: relative;">Utworzony {{ training.start | timeago:live}}</small>
+
+
               <span>lub</span>
               </ng-container>
-              <ng-container *ngIf="trainings[0].end !== null">
-               <small>Ostatni trening zakończyłeś <strong>{{ trainings[0].end | timeago:live}}</strong></small>
+              <ng-container *ngIf="training.end !== null">
+               <small>Ostatni trening zakończyłeś <strong>{{ training.end | timeago:live}}</strong></small>
+
               </ng-container>
             </ng-container>
 
-            <section  *ngIf="trainings.length === 0" class="empty-trainings">
+            <section  *ngIf="!training" class="empty-trainings">
               <p>Troche tu pusto co nie?</p>
               <p>Dodaj swój pierwszy trening a wszystko sie zmieni 😍</p>
               <p>Dodatkowo zachęcam do zerknięcia w ustawienia (kiedyś będą działać)</p>
             </section>
 
-            <button (click)="createTraining(trainings[0]?.id || 0)" mat-stroked-button color="primary">Utwórz nowy
+            <button (click)="createTraining(training?.id || 0)" mat-stroked-button color="primary">Utwórz nowy
               trening
             </button>
-
-
-
           </div>
         </div>
       </div>
     </ng-template>
   </mat-tab>
-  <mat-tab *ngIf="trainings.length > 0">
+  <mat-tab *ngIf="training">
     <ng-template mat-tab-label>
       <mat-icon>query_stats</mat-icon>
     </ng-template>
@@ -51,18 +51,18 @@
       </div>
     </ng-template>
   </mat-tab>
-  <mat-tab *ngIf="trainings.length > 0">
+  <mat-tab *ngIf="training">
     <ng-template mat-tab-label>
       <mat-icon>view_list</mat-icon>
     </ng-template>
     <ng-template matTabContent>
       <div class="training-list-tabs__tab-content">
-        <app-training-list [trainings]="trainings" class="training-list-tabs__tab-component"></app-training-list>
+        <app-training-list class="training-list-tabs__tab-component"></app-training-list>
       </div>
     </ng-template>
   </mat-tab>
 
-  <mat-tab *ngIf="trainings.length > 0">
+  <mat-tab *ngIf="training">
     <ng-template mat-tab-label>
       <mat-icon>directions_run</mat-icon>
     </ng-template>
@@ -74,7 +74,7 @@
     </ng-template>
   </mat-tab>
 
-  <mat-tab *ngIf="trainings.length > 0">
+  <mat-tab *ngIf="training">
     <ng-template mat-tab-label>
       <mat-icon>calendar_today</mat-icon>
     </ng-template>

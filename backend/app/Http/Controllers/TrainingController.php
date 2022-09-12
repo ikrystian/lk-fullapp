@@ -79,6 +79,10 @@ class TrainingController extends Controller
 
     }
 
+    public function getLastTraining() {
+        return Training::where('user_id', Auth::id())->latest()->first();
+    }
+
     public function getAverageInExercise($exerciseId)
     {
 
