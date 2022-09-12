@@ -46,7 +46,6 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { RunsComponent } from './runs/runs.component';
 import { IntervalsComponent } from './intervals/intervals.component';
 import { MapComponent } from './map/map.component';
-import { AgmCoreModule } from '@agm/core';
 import { RunExerciseComponent } from './run-exercise/run-exercise.component';
 import { RunDetailsComponent } from './run-details/run-details.component';
 import {UnderConstructionComponent} from '../shared/under-construction/under-construction.component';
@@ -120,9 +119,6 @@ export class MyIntl extends TimeagoIntl {
     TimeagoModule.forRoot({
       intl: { provide: TimeagoIntl, useClass: MyIntl },
       formatter: { provide: TimeagoFormatter, useClass: TimeagoCustomFormatter },
-    }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA-Vk8BB1fHqdV4c-lLjqy_pYpYtodoKfE'
     }),
     MatProgressSpinnerModule,
   ],
