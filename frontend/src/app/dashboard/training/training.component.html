@@ -13,9 +13,8 @@
     </button>
   </mat-menu>
 
-
   <div class="standard-page">
-    <app-training-image [training]="training" *ngIf="training.end == null"></app-training-image>
+    <app-training-image [training]="training"></app-training-image>
     <table mat-table
            *ngIf="dataSource && dataSource.length > 0"
            [dataSource]="dataSource" multiTemplateDataRows>

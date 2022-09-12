@@ -11,6 +11,7 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './training-image.component.html',
   styleUrls: ['./training-image.component.scss']
 })
+
 export class TrainingImageComponent implements OnInit {
   @Input() training: any;
   selectedFile: File = null;
@@ -22,7 +23,6 @@ export class TrainingImageComponent implements OnInit {
   });
 
   constructor(
-    private trainingsService: TrainingsService,
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
@@ -31,7 +31,6 @@ export class TrainingImageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('lorem');
   }
 
   postForm(): void {
