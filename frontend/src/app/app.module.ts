@@ -32,7 +32,6 @@ import {
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { RecordComponent } from './shared/record/record.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CurrentExercisesModalComponent } from './dashboard/edit-training/current-exercises-modal/current-exercises-modal.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { TimeagoModule } from 'ngx-timeago';
@@ -78,8 +77,6 @@ export class MyHammerConfig extends HammerGestureConfig {
     NgPipesModule,
     HammerModule,
     MatDatepickerModule,
-    FontAwesomeModule,
-    // ChartsModule,
     TimeagoModule.forRoot(),
     TranslateModule.forRoot({
       defaultLanguage: 'pl',
