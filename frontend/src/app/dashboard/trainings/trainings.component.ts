@@ -47,7 +47,10 @@ export class TrainingsComponent implements OnInit {
   ngOnInit(): void {
     this.trainingsService.getLastTraining().subscribe((res: any) => {
       this.training = res;
-      this.training.ago = moment(new Date(this.training.start.replace(/-/g, "/"))).format('X');
+      console.log(res);
+      if(res && res.start) {
+        this.training.ago = moment(new Date(this.training.start.replace(/-/g, "/"))).format('X');
+      }
     });
 
     const activeTab = this.activatedRoute.snapshot.queryParamMap.get('activeTab');

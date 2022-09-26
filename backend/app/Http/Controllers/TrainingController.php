@@ -327,6 +327,8 @@ class TrainingController extends Controller
     {
         $training = Training::find($id);
         $training->time = Carbon::parse($training->end)->diffInMinutes(Carbon::parse($training->start));
+
+        $training->runs = DB::table('runs')->where('training_id', $id)->get();;
         return $training;
     }
 

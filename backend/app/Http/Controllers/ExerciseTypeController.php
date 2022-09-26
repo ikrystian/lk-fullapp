@@ -15,7 +15,7 @@ class ExerciseTypeController extends Controller
      */
     public function index()
     {
-        return SeriesType::where('user_id', 0)->where('archived', 0)->orWhere('user_id', Auth::id())->orderBy('name', 'ASC')->get()->toArray();
+        return SeriesType::where('archived', 0)->where('user_id', 0)->orWhere('user_id', Auth::id())->orderBy('name', 'ASC')->get()->toArray();
     }
 
     /**

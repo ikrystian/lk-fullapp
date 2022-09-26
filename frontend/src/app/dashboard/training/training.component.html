@@ -52,6 +52,17 @@
       </tr>
       <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
+
+    <div *ngIf="training" class="runs">
+      <div style="margin-bottom: 1.5rem; margin-top: 2rem;" class="runs__title">Aktywność dystansowa</div>
+      <ul>
+        <li *ngFor="let run of training.runs">
+          Orbitrek {{run.distance / 1000}}km w {{ run.time / 60 }}min
+        </li>
+      </ul>
+
+
+    </div>
     <div class="loading" *ngIf="!dataSource">
       <mat-spinner [diameter]="32"></mat-spinner>
     </div>

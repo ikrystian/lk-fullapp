@@ -38,12 +38,13 @@ export class TrainingComponent {
 
     this.trainingService.getTraining(id).subscribe((res: any) => {
       this.training = res;
+      console.log(res.runs);
       // this.dataSource = res.exercises;
     });
 
     this.trainingService.getExercisesByTrainingId(id).subscribe(res => {
       this.dataSource = res;
-      console.log(res);
+      // console.log(res);
     });
   }
 
