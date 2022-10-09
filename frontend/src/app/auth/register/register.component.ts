@@ -30,12 +30,11 @@ export class RegisterComponent {
 
   onSubmit(): void {
     this.jwtService.signUp(this.signupForm.value).subscribe(
-      res => {
-        // console.log(res);
+      response => {
+        console.log(response.message)
       },
       error => {
         this.err = JSON.parse(error.error);
-        console.log(this.err);
       },
       () => {
         this.signupForm.reset();

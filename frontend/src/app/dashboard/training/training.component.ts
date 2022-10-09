@@ -44,7 +44,6 @@ export class TrainingComponent {
 
     this.trainingService.getExercisesByTrainingId(id).subscribe(res => {
       this.dataSource = res;
-      // console.log(res);
     });
   }
 

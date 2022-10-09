@@ -80,7 +80,6 @@ export class ProfileComponent implements OnInit {
     });
     // this.jwtService.profile().subscribe(res => {
     //   this.profile = res;
-    //   console.log(this.profile);
     //   if (res.profileimage === 'default-avatar.png') {
     //     this.avatar = `https://ui-avatars.com/api/?name=${res.name}`;
     //   } else {

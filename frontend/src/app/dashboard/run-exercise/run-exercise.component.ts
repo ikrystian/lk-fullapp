@@ -32,7 +32,6 @@ export class RunExerciseComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.createRunForm();
-    console.log(this.training);
     this.trainingService.getTrainingRun({trainingId: this.training.id, type: this.exercise.id}).subscribe(res => {
       this.runs = res;
     });

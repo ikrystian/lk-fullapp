@@ -66,8 +66,6 @@ export class EditTrainingComponent implements OnInit {
   updateTime(from): void {
     const start = moment(new Date(from.replace(/-/g, "/")));
     const now = moment(new Date());
-    console.log(start);
-    console.log(now);
     setInterval(() => {
       const elapsedTime = moment(new Date()).diff(start);
       const time = moment.duration(elapsedTime);

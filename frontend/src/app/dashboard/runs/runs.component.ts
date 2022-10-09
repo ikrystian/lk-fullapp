@@ -17,7 +17,6 @@ export class RunsComponent implements OnInit {
   ngOnInit(): void {
     this.trainingService.getRuns().subscribe(res => {
       this.runs = res;
-      console.log(this.runs)
     });
 
     this.trainingService.getStats().subscribe(res => {

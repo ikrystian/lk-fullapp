@@ -74,10 +74,12 @@
 
           </select>
         </mat-form-field>
-        <button (click)="showCurrentExercisesModal()">
-          <mat-icon>history</mat-icon>
-        </button>
       </div>
+
+      <div class="save-info-training" *ngIf="!selectedOption" (click)="finishWorkout(training.id)">
+        <button mat-raised-button color="primary">Chcę tylko oznaczyć obecność na treningu</button>
+      </div>
+
       <ng-container [ngSwitch]="selectedOption.exercise_type_id" *ngIf="selectedOption">
         <app-exercise [exercise]="selectedOption" (restBarIndicator)="toggleRestIndicator($event)"
                       *ngSwitchCase="1"></app-exercise>

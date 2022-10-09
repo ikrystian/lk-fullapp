@@ -20,7 +20,6 @@ export class MapComponent implements OnInit {
       res.forEach(el => {
         this.latlng.push([parseFloat(el.lat), parseFloat(el.lng)]);
       });
-      console.log(this.latlng);
     });
   }
 }
